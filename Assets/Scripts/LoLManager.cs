@@ -54,6 +54,8 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
 
     private bool mPaused;
 
+    private string mLangCode;
+
     public string gameID { get { return _gameID; } }
 
     public int progressMax { get { return _progressMax; } }
@@ -277,7 +279,7 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
 
         // Mock the platform-to-game messages when in the Unity editor.
 #if UNITY_EDITOR
-        //LoadMockData();
+        LoadMockData();
 #endif
 
         // Then, tell the platform the game is ready.
@@ -327,12 +329,10 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
 
     // Use language to populate UI
     void HandleLanguageDefs(string json) {
-        //JSONNode langDefs = JSON.Parse(json);
-
-        // Example of accessing language strings
-        // Debug.Log(langDefs);
-        // Debug.Log(langDefs["welcome"]);        
+        LoLLocalize.instance.Load(mLangCode, json);
     }
 
-
+    void LoadMockData() {
+        mLangCode = "en";
+    }
 }

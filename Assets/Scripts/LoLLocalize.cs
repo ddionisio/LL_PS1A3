@@ -6,12 +6,18 @@ using UnityEngine;
 using SimpleJSON;
 
 public class LoLLocalize : Localize {
+    public static new LoLLocalize instance {
+        get {
+            return (LoLLocalize)Localize.instance;
+        }
+    }
+
 #if UNITY_EDITOR
     public string debugLanguageCode = "en";
     public string debugLanguageRef = "language.json";
 #endif
-
-    private Dictionary<string, Data> mEntries;
+        
+    private Dictionary<string, LocalizeData> mEntries;
 
     private string mCurLang;
 
@@ -32,15 +38,17 @@ public class LoLLocalize : Localize {
 
         JSONNode langDefs = JSON.Parse(json);
 
-        mEntries = new Dictionary<string, Data>(langDefs.Count);
+        mEntries = new Dictionary<string, LocalizeData>(langDefs.Count);
         
         foreach(var item in langDefs.Children) {
             string key = item.ToString();
 
-            Data dat = new Data(item.Value, new string[0]);
+            LocalizeData dat = new LocalizeData(item.Value, new string[0]);
 
             mEntries.Add(key, dat);
         }
+
+        Refresh();
     }
 
     public override bool Exists(string key) {
@@ -84,9 +92,9 @@ public class LoLLocalize : Localize {
         //Language is not changed via language for LoL, use Load
     }
 
-    protected override bool TryGetData(string key, out Data data) {
+    protected override bool TryGetData(string key, out LocalizeData data) {
         if(mEntries == null) {
-            data = new Data();
+            data = new LocalizeData();
             return false;
         }
 

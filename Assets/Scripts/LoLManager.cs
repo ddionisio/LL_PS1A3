@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
+
+using SimpleJSON;
 
 using LoLSDK;
 
@@ -41,6 +44,9 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
     public const string settingsMusicVolumeKey = "mv";
     public const string settingsSoundVolumeKey = "sv";
     public const string settingsFadeVolumeKey = "fv";
+
+    private const string questionsJSONFilePath = "questions.json";
+    private const string startGameJSONFilePath = "startGame.json";
 
     public delegate void OnChanged(LoLManager mgr, int delta);
     public delegate void OnCallback(LoLManager mgr);
@@ -332,7 +338,40 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
         LoLLocalize.instance.Load(mLangCode, json);
     }
 
+#if UNITY_EDITOR
     void LoadMockData() {
-        mLangCode = "en";
+        mLangCode = LoLLocalize.instance.debugLanguageRef;
+
+        //apply start data
+        string startDataFilePath = Path.Combine(Application.streamingAssetsPath, startGameJSONFilePath);
+        if(File.Exists(startDataFilePath)) {
+            string startDataAsJSON = File.ReadAllText(startDataFilePath);
+            JSONNode startGamePayload = JSON.Parse(startDataAsJSON);
+            // Capture the language code from the start payload. Use this to switch fontss
+            mLangCode = startGamePayload["languageCode"];
+            HandleStartGame(startDataAsJSON);
+        }
+        //
+
+        //apply language
+        string langFilePath = LoLLocalize.instance.debugLanguagePath;
+        if(File.Exists(langFilePath)) {
+            string json = File.ReadAllText(langFilePath);
+
+            JSONNode langDefs = JSON.Parse(json);
+
+            HandleLanguageDefs(langDefs[mLangCode].ToString());
+        }
+        //
+
+        //apply questions
+        string questionsFilePath = Path.Combine(Application.streamingAssetsPath, questionsJSONFilePath);
+        if(File.Exists(questionsFilePath)) {
+            string questionsDataAsJson = File.ReadAllText(questionsFilePath);
+            MultipleChoiceQuestionList qs = MultipleChoiceQuestionList.CreateFromJSON(questionsDataAsJson);
+            HandleQuestions(qs);
+        }
+        //
     }
+#endif
 }

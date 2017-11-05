@@ -58,10 +58,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4671955830798524}
   - component: {fileID: 114468768111179502}
-  - component: {fileID: 114533818717579500}
-  - component: {fileID: 114899861758381054}
-  - component: {fileID: 114527110436941454}
-  - component: {fileID: 114291669829362120}
   m_Layer: 0
   m_Name: settings
   m_TagString: Untagged
@@ -220,18 +216,6 @@ MonoBehaviour:
   target: 0
   targetTexture: {fileID: 0}
   color: {r: 0, g: 0, b: 0, a: 1}
---- !u!114 &114291669829362120
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1172642649438876}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f701895bb39968b44b5f2a98d929b913, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  userData: {fileID: 0}
 --- !u!114 &114468768111179502
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -248,30 +232,6 @@ MonoBehaviour:
   loadOnStart: 1
   autoSave: 1
   _prefKey: us
---- !u!114 &114527110436941454
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1172642649438876}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f45ccf11491a3a248aedb32852e116ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  userData: {fileID: 0}
---- !u!114 &114533818717579500
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1172642649438876}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9fea65cecb960d4395a4abcbbeb8691, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  userData: {fileID: 0}
 --- !u!114 &114582526695810506
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -283,7 +243,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 171e62604d7a65147ae7a0fcf435cf0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mode: 0
+  _mode: 1
   levelString: level
   stackEnable: 0
 --- !u!114 &114634992760407854
@@ -297,8 +257,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87fb8513bc1fdca4093271558954743a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  actionConfig: {fileID: 0}
-  config: {fileID: 0}
+  actionConfig: {fileID: 4900000, guid: 9e96634c27674564fb59dedb0aa69173, type: 3}
+  config: {fileID: 4900000, guid: 68cca0cfa67fd664cb7e257ab586c194, type: 3}
 --- !u!114 &114781030823432642
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -312,22 +272,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   debugLanguageCode: en
   debugLanguageRef: language.json
---- !u!114 &114899861758381054
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1172642649438876}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ced883888f417c49bd343cb949748aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  userData: {fileID: 0}
-  defaultWidth: 0
-  defaultHeight: 0
-  defaultRefreshRate: 0
-  defaultFullscreen: 0
 --- !u!114 &114936811060178804
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -340,7 +284,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gameID: com.daviddionisio.LoLGame
-  _progressMax: 0
+  _progressMax: 8
 --- !u!114 &114953364615316322
 MonoBehaviour:
   m_ObjectHideFlags: 1

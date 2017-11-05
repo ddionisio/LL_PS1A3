@@ -17,3 +17,23 @@ MonoBehaviour:
     fVal: 0
     sVal: 
     oVal: {fileID: 1524937243652118, guid: 84edc9a52c60ca74ca2ac627050c0ec5, type: 2}
+  - _key: input.textAction
+    iVal: 0
+    fVal: 0
+    sVal: 
+    oVal: {fileID: 4900000, guid: 9e96634c27674564fb59dedb0aa69173, type: 3}
+  - _key: input.scriptFolder
+    iVal: 0
+    fVal: 0
+    sVal: D:/Lab/Legends of Learning/LL_PS1A3/Assets/Scripts
+    oVal: {fileID: 0}
+  - _key: input.scriptGenerate
+    iVal: 0
+    fVal: 0
+    sVal: 
+    oVal: {fileID: 0}
+  - _key: input.textBind
+    iVal: 0
+    fVal: 0
+    sVal: 
+    oVal: {fileID: 4900000, guid: 68cca0cfa67fd664cb7e257ab586c194, type: 3}

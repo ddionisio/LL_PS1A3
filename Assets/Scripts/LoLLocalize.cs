@@ -15,6 +15,8 @@ public class LoLLocalize : Localize {
 #if UNITY_EDITOR
     public string debugLanguageCode = "en";
     public string debugLanguageRef = "language.json";
+
+    public string debugLanguagePath { get { return System.IO.Path.Combine(Application.streamingAssetsPath, debugLanguageRef); } }
 #endif
         
     private Dictionary<string, LocalizeData> mEntries;
@@ -106,7 +108,7 @@ public class LoLLocalize : Localize {
         if(string.IsNullOrEmpty(debugLanguageRef))
             return;
 
-        string filepath = System.IO.Path.Combine(Application.streamingAssetsPath, debugLanguageRef);
+        string filepath = debugLanguagePath;
 
         string json = System.IO.File.ReadAllText(filepath);
 

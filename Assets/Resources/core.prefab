@@ -41,6 +41,7 @@ GameObject:
   - component: {fileID: 114634992760407854}
   - component: {fileID: 114170125182284090}
   - component: {fileID: 114133423949325756}
+  - component: {fileID: 114936811060178804}
   m_Layer: 0
   m_Name: core
   m_TagString: Untagged
@@ -76,7 +77,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4717669834950116}
-  - component: {fileID: 114110466615964804}
+  - component: {fileID: 114781030823432642}
   m_Layer: 0
   m_Name: localize
   m_TagString: Untagged
@@ -139,18 +140,6 @@ Transform:
   m_Father: {fileID: 4805067299488070}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114110466615964804
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1524937243652118}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07ab9c01a9fdd8547be1d41e77f43f20, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tables: []
 --- !u!114 &114130428617912724
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -310,6 +299,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actionConfig: {fileID: 0}
   config: {fileID: 0}
+--- !u!114 &114781030823432642
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1524937243652118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d286a99e5b78f94ea9989d35c7a2094, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  debugLanguageCode: en
+  debugLanguageRef: language.json
 --- !u!114 &114899861758381054
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -326,6 +328,19 @@ MonoBehaviour:
   defaultHeight: 0
   defaultRefreshRate: 0
   defaultFullscreen: 0
+--- !u!114 &114936811060178804
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1150101790038914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c3e463886da8b54d882c0a188e52ec0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gameID: com.daviddionisio.LoLGame
+  _progressMax: 0
 --- !u!114 &114953364615316322
 MonoBehaviour:
   m_ObjectHideFlags: 1

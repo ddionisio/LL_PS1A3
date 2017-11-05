@@ -11,4 +11,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02e816eb91420c24eaa00e21e2de5998, type: 3}
   m_Name: m8config
   m_EditorClassIdentifier: 
-  _values: []
+  _values:
+  - _key: localizeSelector
+    iVal: 0
+    fVal: 0
+    sVal: 
+    oVal: {fileID: 1524937243652118, guid: 84edc9a52c60ca74ca2ac627050c0ec5, type: 2}

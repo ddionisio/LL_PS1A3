@@ -21,6 +21,11 @@ public class EntityHero : M8.EntityBase {
 
     protected override void OnDestroy() {
         //dealloc here
+        if(mMoveCtrl) {
+            mMoveCtrl.collisionEnterCallback -= OnMoveCollisionEnter;
+            mMoveCtrl.triggerEnterCallback -= OnMoveTriggerEnter;
+            mMoveCtrl.triggerExitCallback -= OnMoveTriggerExit;
+        }
 
         base.OnDestroy();
     }
@@ -30,6 +35,10 @@ public class EntityHero : M8.EntityBase {
 
         //initialize data/variables
         mMoveCtrl = GetComponentInChildren<EntityHeroMoveController>();
+
+        mMoveCtrl.collisionEnterCallback += OnMoveCollisionEnter;
+        mMoveCtrl.triggerEnterCallback += OnMoveTriggerEnter;
+        mMoveCtrl.triggerExitCallback += OnMoveTriggerExit;
     }
 
     // Use this for one-time initialization
@@ -37,5 +46,19 @@ public class EntityHero : M8.EntityBase {
         base.Start();
 
         //initialize variables from other sources (for communicating with managers, etc.)
+    }
+
+    void OnMoveCollisionEnter(EntityHeroMoveController ctrl, Collision2D coll) {
+        //check if it's a side collision
+        if(!ctrl.isSlopSlide && (ctrl.collisionFlags & CollisionFlags.Sides) != CollisionFlags.None)
+            ctrl.moveHorizontal *= -1.0f;
+    }
+
+    void OnMoveTriggerEnter(EntityHeroMoveController ctrl, Collider2D coll) {
+
+    }
+
+    void OnMoveTriggerExit(EntityHeroMoveController ctrl, Collider2D coll) {
+
     }
 }

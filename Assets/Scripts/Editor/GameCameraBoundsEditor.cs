@@ -5,16 +5,16 @@ using UnityEditor;
 
 using UnityEditor.IMGUI.Controls;
 
-[CustomEditor(typeof(GameCameraBounds))]
+[CustomEditor(typeof(GameMapData))]
 public class GameCameraBoundsEditor : Editor {
     BoxBoundsHandle mBoxHandle = new BoxBoundsHandle();
 
     void OnSceneGUI() {
-        var dat = target as GameCameraBounds;
+        var dat = target as GameMapData;
         if(dat == null)
             return;
 
-        using(new Handles.DrawingScope(GameCameraBounds.editBoundsColor)) {
+        using(new Handles.DrawingScope(GameMapData.editBoundsColor)) {
             mBoxHandle.axes = PrimitiveBoundsHandle.Axes.X | PrimitiveBoundsHandle.Axes.Y;
 
             Bounds b = dat.bounds;

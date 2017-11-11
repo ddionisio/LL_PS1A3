@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4107714557431918}
   - component: {fileID: 58923154600619428}
+  - component: {fileID: 114819879315042514}
   m_Layer: 12
   m_Name: playerTouch
   m_TagString: Untagged
@@ -186,7 +187,7 @@ MonoBehaviour:
   airMaxSpeed: 2
   airDrag: 0.015
   groundDrag: 5
-  standDrag: 50
+  standDrag: 60
   standDragLayer:
     serializedVersion: 2
     m_Bits: 1025
@@ -194,6 +195,18 @@ MonoBehaviour:
   aboveLimit: 145
   slideLimit: 80
   slideDisable: 0
+--- !u!114 &114819879315042514
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1260123913759336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 726435019fcd99e47be096338041895f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hero: {fileID: 114223203368350082}
 --- !u!212 &212033823879627562
 SpriteRenderer:
   m_ObjectHideFlags: 1

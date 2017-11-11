@@ -10,10 +10,10 @@ public class GameCamera : M8.SingletonBehaviour<GameCamera> {
 
     public Vector2 position { get { return transform.position; } }
     
-    public GameCameraBounds cameraBounds {
+    public GameMapData cameraBounds {
         get {
-            if(GameCameraBounds.isInstantiated)
-                return GameCameraBounds.instance;
+            if(GameMapData.isInstantiated)
+                return GameMapData.instance;
 
             return null;
         }

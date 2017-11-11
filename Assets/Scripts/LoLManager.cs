@@ -305,21 +305,19 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
         // Either GameState.Paused or GameState.Resumed
         switch(gameState) {
             case GameState.Paused:
-                /*if(M8.UIModal.Manager.instance) {
-                    if(!M8.UIModal.Manager.instance.ModalIsInStack(pauseModal))
-                        M8.UIModal.Manager.instance.ModalOpen(pauseModal);
-                }
-                else*/
                 if(!mPaused) {
                     mPaused = true;
-                    M8.SceneManager.instance.Pause();
+
+                    if(M8.UIModal.Manager.isInstantiated) {
+                        if(!M8.UIModal.Manager.instance.ModalIsInStack(pauseModal))
+                            M8.UIModal.Manager.instance.ModalOpen(pauseModal);
+                    }
                 }
                 break;
 
             case GameState.Resumed:
                 if(mPaused) {
                     mPaused = false;
-                    M8.SceneManager.instance.Resume();
                 }
                 break;
         }

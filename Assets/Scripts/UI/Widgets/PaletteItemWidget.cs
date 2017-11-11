@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class PaletteItemWidget : MonoBehaviour, M8.IPoolSpawn, M8.IPoolDespawn {
     public const string paramBlockInfo = "blockInf";
+    public const string paramShowIntro = "showIntro";
 
     public Image blockImage;
     public Text blockNameText;
@@ -23,17 +24,20 @@ public class PaletteItemWidget : MonoBehaviour, M8.IPoolSpawn, M8.IPoolDespawn {
                 //do animation thing
 
                 //activate edit mode
+                GameMapController.instance.mode = GameMapController.Mode.Edit;
+                GameMapController.instance.blockNameActive = mBlockName;
             }
             else {
                 //do animation thing
 
                 //deactivate edit mode
+                GameMapController.instance.mode = GameMapController.Mode.Play;
             }
         }
     }
-
-    private void UpdateCount(int amount) {
-        blockCountText.text = amount.ToString("D2");
+        
+    void OnDestroy() {
+        CleanUpCallbacks();
     }
 
     void OnPaletteUpdate(string blockName, int amount, int delta) {
@@ -47,10 +51,18 @@ public class PaletteItemWidget : MonoBehaviour, M8.IPoolSpawn, M8.IPoolDespawn {
         }
     }
 
+    void OnBlockActiveChange(string newBlockName, string prevBlockName) {
+        //deselect if we were the previous block, and there is no new block active
+        if(string.IsNullOrEmpty(newBlockName) && prevBlockName == mBlockName)
+            Select(false);
+    }
+
     void M8.IPoolSpawn.OnSpawned(M8.GenericParams parms) {
-        GameMapData.instance.paletteUpdateCallback += OnPaletteUpdate;
+        GameMapController.instance.paletteUpdateCallback += OnPaletteUpdate;
+        GameMapController.instance.blockActiveChangeCallback += OnBlockActiveChange;
 
         BlockInfo blockInf = parms.GetValue<BlockInfo>(paramBlockInfo);
+        bool showIntro = parms.GetValue<bool>(paramShowIntro);
 
         mBlockName = blockInf.name;
 
@@ -59,10 +71,26 @@ public class PaletteItemWidget : MonoBehaviour, M8.IPoolSpawn, M8.IPoolDespawn {
 
         blockImage.sprite = blockInf.icon;
 
-        UpdateCount(GameMapData.instance.PaletteCount(mBlockName));
+        UpdateCount(GameMapController.instance.PaletteCount(mBlockName));
+
+        //show intro?
+        if(showIntro) {
+            //animation
+        }
     }
 
     void M8.IPoolDespawn.OnDespawned() {
-        GameMapData.instance.paletteUpdateCallback -= OnPaletteUpdate;
+        CleanUpCallbacks();
+    }
+
+    private void UpdateCount(int amount) {
+        blockCountText.text = amount.ToString("D2");
+    }
+
+    private void CleanUpCallbacks() {
+        if(GameMapController.isInstantiated) {
+            GameMapController.instance.paletteUpdateCallback -= OnPaletteUpdate;
+            GameMapController.instance.blockActiveChangeCallback -= OnBlockActiveChange;
+        }
     }
 }

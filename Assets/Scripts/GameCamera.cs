@@ -10,15 +10,6 @@ public class GameCamera : M8.SingletonBehaviour<GameCamera> {
 
     public Vector2 position { get { return transform.position; } }
     
-    public GameMapData cameraBounds {
-        get {
-            if(GameMapData.isInstantiated)
-                return GameMapData.instance;
-
-            return null;
-        }
-    }
-
     public Bounds cameraViewBounds { get { return mCamViewBounds; } }
 
     public bool isMoving { get { return mMoveToRout != null; } }
@@ -31,17 +22,19 @@ public class GameCamera : M8.SingletonBehaviour<GameCamera> {
     public void MoveTo(Vector2 dest) {
         StopMoveTo();
 
+        var mapData = GameMapController.instance.mapData;
+
         //clamp
-        if(cameraBounds)
-            dest = cameraBounds.Clamp(dest, mCamViewBounds.extents);
+        dest = mapData.Clamp(dest, mCamViewBounds.extents);
 
         mMoveToRout = StartCoroutine(DoMoveTo(dest));
     }
 
     public void SetPosition(Vector2 pos) {
+        var mapData = GameMapController.instance.mapData;
+
         //clamp
-        if(cameraBounds)
-            pos = cameraBounds.Clamp(pos, mCamViewBounds.extents);
+        pos = mapData.Clamp(pos, mCamViewBounds.extents);
 
         transform.position = pos;
     }

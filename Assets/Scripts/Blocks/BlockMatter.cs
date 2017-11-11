@@ -30,23 +30,25 @@ public class BlockMatter : Block {
 
     public override void EditStart(Vector2 pos) {
         mEditStartPos = pos;
-        mEditStartCell = GameMapData.instance.GetCellIndex(mEditStartPos);
+        mEditStartCell = GameMapController.instance.mapData.GetCellIndex(mEditStartPos);
 
         //initialize dimension as 1x1
         EditUpdate(pos);
     }
 
     public override void EditUpdate(Vector2 pos) {
+        var mapData = GameMapController.instance.mapData;
+
         var cellSize = GameData.instance.blockSize;
 
         //update dimensions
-        CellIndex curCell = GameMapData.instance.GetCellIndex(pos);
+        CellIndex curCell = mapData.GetCellIndex(pos);
 
         CellIndex minCell = new CellIndex() { row = Mathf.Min(curCell.row, mEditStartCell.row), col = Mathf.Min(curCell.col, mEditStartCell.col) };
         CellIndex maxCell = new CellIndex() { row = Mathf.Max(curCell.row, mEditStartCell.row), col = Mathf.Max(curCell.col, mEditStartCell.col) };
 
-        Vector2 min = GameMapData.instance.GetPositionFromCell(minCell);
-        Vector2 max = GameMapData.instance.GetPositionFromCell(maxCell); max += cellSize;
+        Vector2 min = mapData.GetPositionFromCell(minCell);
+        Vector2 max = mapData.GetPositionFromCell(maxCell); max += cellSize;
         Vector2 size = new Vector2(max.x - min.x, max.y - min.y);
         Vector2 center = Vector2.Lerp(min, max, 0.5f);
 
@@ -116,7 +118,7 @@ public class BlockMatter : Block {
 
         //check pallete count
         //check overlap
-        if(matterCount > GameMapData.instance.PaletteCount(blockName)) {
+        if(matterCount > GameMapController.instance.PaletteCount(blockName)) {
             var collider = Physics2D.OverlapBox(transform.position, mColl.size, 0f, GameData.instance.blockInvalidMask);
 
             mEditIsValid = collider == null;

@@ -26,7 +26,7 @@ public class GameData : M8.SingletonBehaviour<GameData> {
         //generate block references
         mBlockInfos = new Dictionary<string, BlockInfo>(blocks.Length);
         for(int i = 0; i < blocks.Length; i++) {
-            mBlockInfos.Add(blocks[i].prefab.name, blocks[i]);
+            mBlockInfos.Add(blocks[i].name, blocks[i]);
         }
     }
 }

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using M8;
 using UnityEngine;
-using SimpleJSON;
+using fastJSON;
 
 public class LoLLocalize : Localize {
     public static new LoLLocalize instance {
@@ -38,14 +38,15 @@ public class LoLLocalize : Localize {
     public void Load(string langCode, string json) {
         mCurLang = langCode;
 
-        JSONNode langDefs = JSON.Parse(json);
-
-        mEntries = new Dictionary<string, LocalizeData>(langDefs.Count);
+        var defs = JSON.Parse(json) as Dictionary<string, object>;
         
-        foreach(var item in langDefs.Children) {
-            string key = item.ToString();
+        mEntries = new Dictionary<string, LocalizeData>(defs.Count);
+        
+        foreach(var item in defs) {
+            string key = item.Key;
+            string val = item.Value.ToString();
 
-            LocalizeData dat = new LocalizeData(item.Value, new string[0]);
+            LocalizeData dat = new LocalizeData(val, new string[0]);
 
             mEntries.Add(key, dat);
         }
@@ -74,6 +75,18 @@ public class LoLLocalize : Localize {
         keyColl.CopyTo(keys, 0);
 
         return keys;
+    }
+
+    public override void Unload() {
+        mEntries = null;
+    }
+
+    public override bool IsLanguageFile(string filepath) {
+#if UNITY_EDITOR
+        return filepath.Contains(debugLanguageRef);
+#else
+        return false;
+#endif
     }
 
     public override int GetLanguageIndex(string lang) {
@@ -112,9 +125,9 @@ public class LoLLocalize : Localize {
 
         string json = System.IO.File.ReadAllText(filepath);
 
-        JSONNode langDefs = JSON.Parse(json);
+        var defs = JSON.Parse(json) as Dictionary<string, object>;
 
-        Load(debugLanguageCode, langDefs[debugLanguageCode].ToString());
+        Load(debugLanguageCode, JSON.ToJSON(defs[debugLanguageCode]));
     }
 #endif
 }

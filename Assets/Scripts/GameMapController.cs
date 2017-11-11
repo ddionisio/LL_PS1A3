@@ -80,6 +80,14 @@ public class GameMapController : M8.SingletonBehaviour<GameMapController> {
             paletteUpdateCallback(blockName, amount, delta);
     }
 
+    IEnumerator Start() {
+        yield return new WaitForSeconds(0.1f);
+
+        //show game HUD elements
+        if(HUD.instance) {
+            HUD.instance.palettePanel.Show(true);
+        }
+    }
 
     protected override void OnInstanceInit() {
         mMapData = GetComponent<GameMapData>();
@@ -106,7 +114,9 @@ public class GameMapController : M8.SingletonBehaviour<GameMapController> {
             M8.SceneManager.instance.Resume();
         }
 
-        //make sure to hide HUD
-        HUD.instance.palettePanel.Show(false);
+        //make sure to hide game HUD elements
+        if(HUD.instance) {
+            HUD.instance.palettePanel.Show(false);
+        }
     }
 }

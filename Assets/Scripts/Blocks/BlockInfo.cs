@@ -7,11 +7,14 @@ public class BlockInfo {
     public const string poolGroup = "blockPool";
     public const string blockSpawnToTag = "blockSpawnTo";
 
+    [Header("Data")]
     public string name;
-
     public Block prefab;
 
+    [Header("Info")]
     public Sprite icon;
+    [M8.Localize]
+    public string nameDisplayRef;
 
     private M8.GenericParams mParms = new M8.GenericParams();
 

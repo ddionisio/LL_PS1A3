@@ -248,6 +248,7 @@ MonoBehaviour:
   - name: wood
     prefab: {fileID: 114700719415644552, guid: 2ad4651cb6046cb45943ff9df0065b3c, type: 2}
     icon: {fileID: 21300000, guid: a4ed55aee31de774eb8221a065ae0b52, type: 3}
+    nameDisplayRef: blockWoodName
   blockSize: {x: 1, y: 1}
   blockInvalidMask:
     serializedVersion: 2

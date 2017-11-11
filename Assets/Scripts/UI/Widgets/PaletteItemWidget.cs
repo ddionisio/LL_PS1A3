@@ -2,14 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using System;
 
-public class PaletteItemWidget : MonoBehaviour, M8.IPoolSpawn, M8.IPoolDespawn {
+public class PaletteItemWidget : MonoBehaviour, M8.IPoolSpawn, M8.IPoolDespawn, IPointerClickHandler {
     public const string paramBlockInfo = "blockInf";
     public const string paramShowIntro = "showIntro";
 
     public Image blockImage;
     public Text blockNameText;
     public Text blockCountText;
+    public GameObject selectActiveGO;
 
     public string blockName { get { return mBlockName; } }
 
@@ -23,6 +26,9 @@ public class PaletteItemWidget : MonoBehaviour, M8.IPoolSpawn, M8.IPoolDespawn {
             if(mIsSelected) {
                 //do animation thing
 
+                if(selectActiveGO)
+                    selectActiveGO.SetActive(true);
+
                 //activate edit mode
                 GameMapController.instance.mode = GameMapController.Mode.Edit;
                 GameMapController.instance.blockNameActive = mBlockName;
@@ -30,12 +36,15 @@ public class PaletteItemWidget : MonoBehaviour, M8.IPoolSpawn, M8.IPoolDespawn {
             else {
                 //do animation thing
 
+                if(selectActiveGO)
+                    selectActiveGO.SetActive(false);
+
                 //deactivate edit mode
                 GameMapController.instance.mode = GameMapController.Mode.Play;
             }
         }
     }
-        
+    
     void OnDestroy() {
         CleanUpCallbacks();
     }
@@ -64,14 +73,21 @@ public class PaletteItemWidget : MonoBehaviour, M8.IPoolSpawn, M8.IPoolDespawn {
         BlockInfo blockInf = parms.GetValue<BlockInfo>(paramBlockInfo);
         bool showIntro = parms.GetValue<bool>(paramShowIntro);
 
+        //setup data
         mBlockName = blockInf.name;
 
+        //setup state
+        mIsSelected = false;
+
         //setup display
-        blockNameText.text = M8.Localize.Get(blockInf.name);
+        blockNameText.text = M8.Localize.Get(blockInf.nameDisplayRef);
 
         blockImage.sprite = blockInf.icon;
 
         UpdateCount(GameMapController.instance.PaletteCount(mBlockName));
+
+        if(selectActiveGO)
+            selectActiveGO.SetActive(false);
 
         //show intro?
         if(showIntro) {
@@ -81,6 +97,10 @@ public class PaletteItemWidget : MonoBehaviour, M8.IPoolSpawn, M8.IPoolDespawn {
 
     void M8.IPoolDespawn.OnDespawned() {
         CleanUpCallbacks();
+    }
+
+    void IPointerClickHandler.OnPointerClick(PointerEventData eventData) {
+        Select(!mIsSelected);
     }
 
     private void UpdateCount(int amount) {

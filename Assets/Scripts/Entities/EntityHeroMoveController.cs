@@ -79,6 +79,8 @@ public class EntityHeroMoveController : MonoBehaviour {
     protected Rigidbody2D mBody;
     protected Collider2D mColl;
 
+    public Rigidbody2D body { get { return mBody; } }
+
     public float moveVertical { get { return mCurMoveAxis.y; } set { mCurMoveAxis.y = value; } }
     public float moveHorizontal { get { return mCurMoveAxis.x; } set { mCurMoveAxis.x = value; } }
 
@@ -253,13 +255,8 @@ public class EntityHeroMoveController : MonoBehaviour {
         mBody.velocity = dirHolder.localToWorldMatrix.MultiplyVector(mLocalVelocity);
     }
 
-    protected void ClearCollFlags() {
-        mCollFlags = 0;
-    }
-
-    CollisionFlags GenCollFlag(Vector2 up, ContactPoint2D contact) {
-
-        float dot = Vector2.Dot(up, contact.normal);
+    public CollisionFlags GetCollisionFlag(Vector2 up, Vector2 normal) {
+        float dot = Vector2.Dot(up, normal);
 
         //Debug.Log("dot: " + dot);
         //Debug.Log("deg: " + (Mathf.Acos(dot)*Mathf.Rad2Deg));
@@ -270,6 +267,14 @@ public class EntityHeroMoveController : MonoBehaviour {
             return CollisionFlags.Above;
 
         return CollisionFlags.Sides;
+    }
+
+    protected void ClearCollFlags() {
+        mCollFlags = 0;
+    }
+
+    CollisionFlags GenCollFlag(Vector2 up, ContactPoint2D contact) {
+        return GetCollisionFlag(up, contact.normal);
     }
 
     private const float _nCompareApprox = 0.01f;
@@ -522,7 +527,11 @@ public class EntityHeroMoveController : MonoBehaviour {
             for(int i = 0; i < mColls.Count; i++) {
                 CollideInfo inf = mColls[i];
                 if(inf.flag == CollisionFlags.Below) {
-                    moveDelta = M8.MathUtil.Slide(moveDelta, inf.normal);
+                    Vector2 moveDeltaX = new Vector2(moveDelta.x, 0f);
+                    moveDeltaX = M8.MathUtil.Slide(moveDeltaX, inf.normal);
+
+                    moveDelta = new Vector2(moveDeltaX.x, moveDeltaX.y + moveDelta.y);
+
                     mCurMoveDir = moveDelta.normalized;
                     break;
                 }

@@ -19,8 +19,9 @@ public class EntityHero : M8.EntityBase {
     public LayerMask solidCheckMask;
     public LayerMask harmCheckMask;
 
-    public float groundCheckForwardDist = 0.25f;
+    public float groundCheckForwardDist = 0.3f; //add radius
     public float groundCheckLastJumpDelay = 2f;
+    public float groundCheckDownDist = 3.1f; //add radius
 
     public EntityHeroMoveController moveCtrl { get { return mMoveCtrl; } }
 
@@ -33,17 +34,7 @@ public class EntityHero : M8.EntityBase {
 
                 mMoveState = value;
 
-                switch(mMoveState) {
-                    case MoveState.Stop:
-                        mMoveCtrl.moveHorizontal = 0f;
-                        break;
-                    case MoveState.Left:
-                        mMoveCtrl.moveHorizontal = -1f;
-                        break;
-                    case MoveState.Right:
-                        mMoveCtrl.moveHorizontal = 1f;
-                        break;
-                }
+                RefreshMoveState();
             }
         }
     }
@@ -53,9 +44,9 @@ public class EntityHero : M8.EntityBase {
     public bool isJumping { get { return mJumpRout != null; } }
     
     /// <summary>
-    /// Elapsed time since we finished jumping
+    /// time since we finished jumping
     /// </summary>
-    public float jumpFinishElapsed { get { return Time.fixedTime - mJumpEndLastTime; } }
+    public float lastJumpTime { get { return mJumpEndLastTime; } }
 
     private EntityHeroMoveController mMoveCtrl;
 
@@ -63,6 +54,8 @@ public class EntityHero : M8.EntityBase {
     private MoveState mMoveStatePrev;
 
     private float mJumpEndLastTime;
+
+    private Collider2D mGroundLastWallChecked;
 
     private Coroutine mJumpRout;
 
@@ -89,6 +82,8 @@ public class EntityHero : M8.EntityBase {
             StopCoroutine(mJumpRout);
             mJumpRout = null;
         }
+
+        mGroundLastWallChecked = null;
 
         //reset stuff here
         mMoveCtrl.ResetCollision();
@@ -136,14 +131,18 @@ public class EntityHero : M8.EntityBase {
     }
 
     void FixedUpdate() {
-        //ground
-        if(mMoveCtrl.isGrounded)
-            GroundUpdate();
+        //not moving forward?
+        if(mMoveCtrl.moveHorizontal == 0f) {
+            //landed, check if we need to resume moving according to move state
+            if(mMoveCtrl.isGrounded)
+                RefreshMoveState();
+        }
         else if(mMoveCtrl.isSlopSlide) {
             //TODO
         }
-        else
-            AirUpdate();
+        //ground
+        else if(mMoveCtrl.isGrounded)
+            GroundUpdate();
     }
 
     void GroundUpdate() {
@@ -158,9 +157,10 @@ public class EntityHero : M8.EntityBase {
         //check forward to see if there's an obstacle
         Vector2 up = mMoveCtrl.dirHolder.up;
         Vector2 dir = new Vector2(Mathf.Sign(mMoveCtrl.moveHorizontal), 0f);
+        float forwardDist = mMoveCtrl.radius + groundCheckForwardDist;
 
         RaycastHit2D hit;
-        if(mMoveCtrl.CheckCast(radiusCheckOfs, dir, out hit, mMoveCtrl.radius + groundCheckForwardDist, solidCheckMask | harmCheckMask)) {
+        if(mMoveCtrl.CheckCast(radiusCheckOfs, dir, out hit, forwardDist, solidCheckMask | harmCheckMask)) {
             //check if it's harm's way
             if(((1 << hit.transform.gameObject.layer) & harmCheckMask) != 0) {
                 //move the opposite direction
@@ -170,8 +170,10 @@ public class EntityHero : M8.EntityBase {
                 //check if it's a wall
                 var collFlag = mMoveCtrl.GetCollisionFlag(up, hit.normal);
                 if(collFlag == CollisionFlags.Sides) {
-                    //only jump if we haven't jumped in a while
-                    if(jumpFinishElapsed >= groundCheckLastJumpDelay) {
+                    //only jump if it's a new collision
+                    if(mGroundLastWallChecked != hit.collider) {
+                        mGroundLastWallChecked = hit.collider;
+
                         //jump!
                         Jump();
                     }
@@ -191,12 +193,27 @@ public class EntityHero : M8.EntityBase {
                 }
             }
         }
+        else {
+            //check below
+            Vector2 pos = transform.position;
+            Vector2 down = -up;
+            pos += dir * forwardDist;
+
+            var hitDown = Physics2D.Raycast(pos, down, mMoveCtrl.radius + groundCheckDownDist, solidCheckMask | harmCheckMask);
+            if(hitDown.collider) {
+                //check if it's harm's way
+                if(((1 << hitDown.collider.gameObject.layer) & harmCheckMask) != 0) {
+                    //try jumping, that's a good trick
+                    Jump();
+                }
+            }
+            else {
+                //nothing hit, jump!
+                Jump();
+            }
+        }
     }
-
-    void AirUpdate() {
-
-    }
-
+    
     IEnumerator DoJump() {
         var wait = new WaitForFixedUpdate();
 
@@ -235,5 +252,19 @@ public class EntityHero : M8.EntityBase {
 
     void OnMoveTriggerExit(EntityHeroMoveController ctrl, Collider2D coll) {
 
+    }
+
+    private void RefreshMoveState() {
+        switch(mMoveState) {
+            case MoveState.Stop:
+                mMoveCtrl.moveHorizontal = 0f;
+                break;
+            case MoveState.Left:
+                mMoveCtrl.moveHorizontal = -1f;
+                break;
+            case MoveState.Right:
+                mMoveCtrl.moveHorizontal = 1f;
+                break;
+        }
     }
 }

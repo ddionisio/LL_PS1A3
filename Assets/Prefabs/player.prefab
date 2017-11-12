@@ -177,6 +177,7 @@ MonoBehaviour:
     m_Bits: 0
   groundCheckForwardDist: 0.2
   groundCheckLastJumpDelay: 2
+  groundCheckDownDist: 3.1
 --- !u!114 &114678482555374804
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -191,7 +192,7 @@ MonoBehaviour:
   dirHolder: {fileID: 0}
   speedCap: 0
   moveForce: 30
-  moveAirForce: 20
+  moveAirForce: 60
   moveMaxSpeed: 1.2
   slopSlideForce: 60
   airMaxSpeed: 2

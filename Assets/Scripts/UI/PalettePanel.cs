@@ -30,10 +30,12 @@ public class PalettePanel : MonoBehaviour {
 
                 //TODO: animation
 
-                GameMapController.instance.paletteUpdateCallback += OnPaletteUpdate;
+                GameMapController.instance.paletteUpdateCallback += OnGamePaletteUpdate;
+                GameMapController.instance.modeChangeCallback += OnGameModeChange;
             }
             else {
-                GameMapController.instance.paletteUpdateCallback -= OnPaletteUpdate;
+                GameMapController.instance.paletteUpdateCallback -= OnGamePaletteUpdate;
+                GameMapController.instance.modeChangeCallback -= OnGameModeChange;
 
                 //TODO: animation, then clear and hide
 
@@ -48,16 +50,47 @@ public class PalettePanel : MonoBehaviour {
         }
     }
 
+    public void ToggleEdit() {
+        switch(GameMapController.instance.mode) {
+            case GameMapController.Mode.Play:
+                GameMapController.instance.mode = GameMapController.Mode.Edit;
+                break;
+
+            case GameMapController.Mode.Edit:
+                GameMapController.instance.blockNameActive = "";
+                GameMapController.instance.mode = GameMapController.Mode.Play;
+                break;
+        }
+    }
+    
     void AddNewBlock(BlockInfo blockInfo, bool showIntro) {
         var parms = new M8.GenericParams();
         parms[PaletteItemWidget.paramBlockInfo] = blockInfo;
         parms[PaletteItemWidget.paramShowIntro] = showIntro;
 
         PaletteItemWidget widget = widgetPool.Spawn<PaletteItemWidget>(blockInfo.name, widgetContainer, parms);
+
+        widget.releaseCallback += OnWidgetRelease;
+
         mActiveWidgets.Add(widget);
     }
 
-    void OnPaletteUpdate(string blockName, int amount, int delta) {
+    void OnGameModeChange(GameMapController.Mode mode) {
+        switch(mode) {
+            case GameMapController.Mode.Play:
+                //play edit mode exit
+                break;
+
+            case GameMapController.Mode.Edit:
+                //play edit mode enter
+                break;
+        }
+    }
+
+    void OnGamePaletteUpdate(string blockName, int amount, int delta) {
+        if(amount == 0) //active palette item should remove itself
+            return;
+
         //allocate new widget?
         int widgetInd = -1;
         for(int i = 0; i < mActiveWidgets.Count; i++) {
@@ -71,5 +104,11 @@ public class PalettePanel : MonoBehaviour {
             var blockInfo = GameData.instance.GetBlockInfo(blockName);
             AddNewBlock(blockInfo, true);
         }
+    }
+
+    void OnWidgetRelease(PaletteItemWidget widget) {
+        widget.releaseCallback -= OnWidgetRelease;
+
+        mActiveWidgets.Remove(widget);
     }
 }

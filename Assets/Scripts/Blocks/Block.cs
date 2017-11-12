@@ -35,6 +35,8 @@ public abstract class Block : M8.EntityBase {
 
     public abstract int matterCount { get; }
 
+    public abstract Collider2D mainCollider { get; }
+
     public string blockName { get { return mBlockName; } }
 
     public Mode mode {
@@ -42,10 +44,16 @@ public abstract class Block : M8.EntityBase {
         set {
             if(mCurMode != value) {
                 mCurMode = value;
+
                 ApplyMode();
+
+                if(modeChangedCallback != null)
+                    modeChangedCallback(this);
             }
         }
     }
+
+    public event System.Action<Block> modeChangedCallback;
 
     private string mBlockName;
     private Mode mCurMode = Mode.None;

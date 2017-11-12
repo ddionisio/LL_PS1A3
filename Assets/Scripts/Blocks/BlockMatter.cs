@@ -5,6 +5,8 @@ using M8;
 using UnityEngine;
 
 public class BlockMatter : Block {
+    public const float overlapThreshold = 0.1f;
+
     [Header("Matter")]
 
     [Range(0f, 1f)]
@@ -15,6 +17,8 @@ public class BlockMatter : Block {
     public override Type type { get { return Type.Matter; } }
 
     public override int matterCount { get { return mCellSize.row * mCellSize.col; } }
+
+    public override Collider2D mainCollider { get { return mColl; } }
 
     private SpriteRenderer mSpriteRender;
     private Rigidbody2D mBody;
@@ -99,8 +103,14 @@ public class BlockMatter : Block {
     protected override void OnSpawned(GenericParams parms) {
         //default values
         mCellSize = new CellIndex(1, 1);
+        mBody.velocity = Vector2.zero;
+        mBody.angularVelocity = 0f;
 
         base.OnSpawned(parms);
+    }
+
+    protected override void OnDespawned() {
+        
     }
 
     protected override void Awake() {
@@ -112,14 +122,16 @@ public class BlockMatter : Block {
 
         mSpriteDefaultColor = mSpriteRender.color;
     }
-
+    
     private void UpdatePlacementValid() {        
         mEditIsValid = false;
 
         //check pallete count
         //check overlap
-        if(matterCount > GameMapController.instance.PaletteCount(blockName)) {
-            var collider = Physics2D.OverlapBox(transform.position, mColl.size, 0f, GameData.instance.blockInvalidMask);
+        if(matterCount <= GameMapController.instance.PaletteCount(blockName)) {
+            var checkSize = new Vector2(mColl.size.x - overlapThreshold, mColl.size.y - overlapThreshold);
+
+            var collider = Physics2D.OverlapBox(transform.position, checkSize, 0f, GameData.instance.blockInvalidMask);
 
             mEditIsValid = collider == null;
         }
@@ -131,10 +143,10 @@ public class BlockMatter : Block {
         float alpha = mode == Mode.Ghost ? ghostAlpha : mSpriteDefaultColor.a;
 
         if(valid) {
-            mSpriteRender.color = new Color(invalidColor.r, invalidColor.g, invalidColor.g, alpha);
+            mSpriteRender.color = new Color(mSpriteDefaultColor.r, mSpriteDefaultColor.g, mSpriteDefaultColor.g, alpha);
         }
         else {
-            mSpriteRender.color = new Color(mSpriteDefaultColor.r, mSpriteDefaultColor.g, mSpriteDefaultColor.g, alpha);
+            mSpriteRender.color = new Color(invalidColor.r, invalidColor.g, invalidColor.g, alpha);
         }
     }
 }

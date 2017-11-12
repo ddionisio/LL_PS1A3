@@ -10,10 +10,8 @@ public class GameData : M8.SingletonBehaviour<GameData> {
     public BlockInfo[] blocks;
     public Vector2 blockSize = new Vector2(1f, 1f);
     public LayerMask blockInvalidMask;
-
-    [Header("Gameplay")]
-    public float gatherDelay = 1.5f;
-
+    public float blockPickupDelay = 1.5f;
+    
     private Dictionary<string, BlockInfo> mBlockInfos;
 
     public BlockInfo GetBlockInfo(string blockName) {

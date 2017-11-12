@@ -29,8 +29,8 @@ public class GameMapData : MonoBehaviour {
         pos -= (Vector2)bounds.min;
 
         return new CellIndex(
-            Mathf.RoundToInt(pos.y / cellSize.y),
-            Mathf.RoundToInt(pos.x / cellSize.x));
+            Mathf.FloorToInt(pos.y / cellSize.y),
+            Mathf.FloorToInt(pos.x / cellSize.x));
     }
 
     public Vector2 GetPositionFromCell(CellIndex cell) {

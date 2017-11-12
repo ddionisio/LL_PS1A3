@@ -80,14 +80,13 @@ public class GameInput : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, 
             if(mBlockGhost.EditIsPlacementValid()) {
                 //deploy and reduce palette block
                 mBlockGhost.mode = Block.Mode.Solid;
+
                 GameMapController.instance.PaletteChange(mBlockGhost.blockName, -mBlockGhost.matterCount);
 
-                //return to play
-                GameMapController.instance.blockNameActive = "";
-                GameMapController.instance.mode = GameMapController.Mode.Play;
+                mBlockGhost = null;
             }
-
-            BlockGhostRelease();
+            else
+                BlockGhostRelease();
         }
     }
 

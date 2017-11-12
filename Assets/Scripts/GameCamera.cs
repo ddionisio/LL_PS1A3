@@ -10,6 +10,9 @@ public class GameCamera : M8.SingletonBehaviour<GameCamera> {
 
     public Vector2 position { get { return transform.position; } }
     
+    /// <summary>
+    /// Local space
+    /// </summary>
     public Bounds cameraViewBounds { get { return mCamViewBounds; } }
 
     public bool isMoving { get { return mMoveToRout != null; } }

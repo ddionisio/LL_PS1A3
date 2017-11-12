@@ -111,7 +111,8 @@ public class GameMapController : M8.SingletonBehaviour<GameMapController> {
 
     protected override void OnInstanceDeinit() {
         if(mMode == Mode.Edit) {
-            M8.SceneManager.instance.Resume();
+            if(M8.SceneManager.instance)
+                M8.SceneManager.instance.Resume();
         }
 
         //make sure to hide game HUD elements

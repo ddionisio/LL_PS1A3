@@ -46,6 +46,6 @@ public class BlockInfo {
         mParms[Block.paramName] = name;
         mParms[Block.paramMode] = mode;
 
-        return M8.PoolController.SpawnFromGroup<Block>(poolGroup, name, name, mBlockSpawnTo, Vector3.zero, Quaternion.identity, mParms);
+        return M8.PoolController.SpawnFromGroup<Block>(poolGroup, name, name, blockSpawnTo, Vector3.zero, Quaternion.identity, mParms);
     }
 }

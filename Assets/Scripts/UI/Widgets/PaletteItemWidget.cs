@@ -16,35 +16,12 @@ public class PaletteItemWidget : MonoBehaviour, M8.IPoolSpawn, M8.IPoolDespawn, 
 
     public string blockName { get { return mBlockName; } }
 
+    public bool isSelected { get { return GameMapController.instance.blockNameActive == mBlockName; } }
+
+    public event Action<PaletteItemWidget> releaseCallback;
+
     private string mBlockName;
-    private bool mIsSelected;
-        
-    public void Select(bool aSelect) {
-        if(mIsSelected != aSelect) {
-            mIsSelected = aSelect;
 
-            if(mIsSelected) {
-                //do animation thing
-
-                if(selectActiveGO)
-                    selectActiveGO.SetActive(true);
-
-                //activate edit mode
-                GameMapController.instance.mode = GameMapController.Mode.Edit;
-                GameMapController.instance.blockNameActive = mBlockName;
-            }
-            else {
-                //do animation thing
-
-                if(selectActiveGO)
-                    selectActiveGO.SetActive(false);
-
-                //deactivate edit mode
-                GameMapController.instance.mode = GameMapController.Mode.Play;
-            }
-        }
-    }
-    
     void OnDestroy() {
         CleanUpCallbacks();
     }
@@ -61,11 +38,14 @@ public class PaletteItemWidget : MonoBehaviour, M8.IPoolSpawn, M8.IPoolDespawn, 
     }
 
     void OnBlockActiveChange(string newBlockName, string prevBlockName) {
+        //select if we are the new block
+        if(mBlockName == newBlockName)
+            ApplySelected(true);
         //deselect if we were the previous block, and there is no new block active
-        if(string.IsNullOrEmpty(newBlockName) && prevBlockName == mBlockName)
-            Select(false);
+        else if(mBlockName == prevBlockName)
+            ApplySelected(false);
     }
-
+        
     void M8.IPoolSpawn.OnSpawned(M8.GenericParams parms) {
         GameMapController.instance.paletteUpdateCallback += OnPaletteUpdate;
         GameMapController.instance.blockActiveChangeCallback += OnBlockActiveChange;
@@ -77,7 +57,6 @@ public class PaletteItemWidget : MonoBehaviour, M8.IPoolSpawn, M8.IPoolDespawn, 
         mBlockName = blockInf.name;
 
         //setup state
-        mIsSelected = false;
 
         //setup display
         blockNameText.text = M8.Localize.Get(blockInf.nameDisplayRef);
@@ -86,8 +65,7 @@ public class PaletteItemWidget : MonoBehaviour, M8.IPoolSpawn, M8.IPoolDespawn, 
 
         UpdateCount(GameMapController.instance.PaletteCount(mBlockName));
 
-        if(selectActiveGO)
-            selectActiveGO.SetActive(false);
+        ApplySelected(isSelected);
 
         //show intro?
         if(showIntro) {
@@ -97,10 +75,34 @@ public class PaletteItemWidget : MonoBehaviour, M8.IPoolSpawn, M8.IPoolDespawn, 
 
     void M8.IPoolDespawn.OnDespawned() {
         CleanUpCallbacks();
+
+        if(releaseCallback != null)
+            releaseCallback(this);
     }
 
     void IPointerClickHandler.OnPointerClick(PointerEventData eventData) {
-        Select(!mIsSelected);
+        //toggle select
+        if(isSelected)
+            GameMapController.instance.blockNameActive = "";
+        else
+            GameMapController.instance.blockNameActive = mBlockName;
+    }
+
+    private void ApplySelected(bool select) {
+        //select if we are the new block
+        if(select) {
+            //do animation thing
+
+            if(selectActiveGO)
+                selectActiveGO.SetActive(true);
+        }
+        //deselect if we were the previous block, and there is no new block active
+        else {
+            //do animation thing
+
+            if(selectActiveGO)
+                selectActiveGO.SetActive(false);
+        }
     }
 
     private void UpdateCount(int amount) {

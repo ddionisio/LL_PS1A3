@@ -96,16 +96,22 @@ public class EntityHero : M8.EntityBase {
 
         switch((EntityState)state) {
             case EntityState.Spawn:
+                mStateRout = StartCoroutine(DoSpawn());
                 break;
+
             case EntityState.Normal:
                 mMoveStatePrev = defaultLastMove;
 
                 touchActive = true;
                 physicsActive = true;
                 break;
+
             case EntityState.Dead:
+                mStateRout = StartCoroutine(DoDead());
                 break;
+
             case EntityState.Victory:
+                mStateRout = StartCoroutine(DoVictory());
                 break;
         }
 

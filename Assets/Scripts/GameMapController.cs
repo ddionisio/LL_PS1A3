@@ -101,6 +101,7 @@ public class GameMapController : M8.SingletonBehaviour<GameMapController> {
         HUD.instance.HideAll();
 
         //show victory modal
+        M8.UIModal.Manager.instance.ModalOpen(Modals.victory);
     }
 
     IEnumerator Start() {
@@ -109,6 +110,8 @@ public class GameMapController : M8.SingletonBehaviour<GameMapController> {
         //show game HUD elements
         if(HUD.instance) {
             HUD.instance.palettePanel.Show(true);
+
+            HUD.instance.retryButtonRoot.SetActive(true);
         }
     }
 

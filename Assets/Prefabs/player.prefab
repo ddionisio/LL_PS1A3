@@ -167,6 +167,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activateOnStart: 1
   activator: {fileID: 0}
+  touchGO: {fileID: 1260123913759336}
   jumpImpulse: 10
   jumpCancelImpulse: 5
   solidCheckMask:

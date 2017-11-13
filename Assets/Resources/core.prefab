@@ -247,6 +247,8 @@ MonoBehaviour:
   scenes:
   - name: test
     path: Assets/Scenes/test.unity
+  - name: test
+    path: Assets/Scenes/test.unity
   endScene:
     name: 
     path: 
@@ -316,6 +318,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gameID: com.daviddionisio.LoLGame
   _progressMax: 8
+  _pauseModal: 
 --- !u!114 &114953364615316322
 MonoBehaviour:
   m_ObjectHideFlags: 1

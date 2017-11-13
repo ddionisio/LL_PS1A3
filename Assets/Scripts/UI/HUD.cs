@@ -15,10 +15,13 @@ public class HUD : M8.SingletonBehaviour<HUD> {
     [Header("Screen HUDs")]
     public PalettePanel palettePanel;
     public PaletteItemDragWidget paletteItemDrag;
+    public GameObject retryButtonRoot;
 
     public void HideAll() {
         HUD.instance.blockMatterExpandPanel.Cancel();
         HUD.instance.palettePanel.Show(false);
+
+        retryButtonRoot.SetActive(false);
     }
 
     protected override void OnInstanceInit() {
@@ -27,5 +30,7 @@ public class HUD : M8.SingletonBehaviour<HUD> {
 
         palettePanel.gameObject.SetActive(false);
         paletteItemDrag.gameObject.SetActive(false);
+
+        retryButtonRoot.SetActive(false);
     }
 }

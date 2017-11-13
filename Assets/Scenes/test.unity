@@ -368,11 +368,6 @@ Mesh:
   m_BakedConvexCollisionMesh: 
   m_BakedTriangleCollisionMesh: 
   m_MeshOptimized: 0
---- !u!1 &151121787 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1260123913759336, guid: 1e97a4c37558d454aaf3cd55caa68c86,
-    type: 2}
-  m_PrefabInternal: {fileID: 163840622}
 --- !u!1001 &163840622
 Prefab:
   m_ObjectHideFlags: 0
@@ -412,11 +407,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 114223203368350082, guid: 1e97a4c37558d454aaf3cd55caa68c86,
-        type: 2}
-      propertyPath: touchGO
-      value: 
-      objectReference: {fileID: 151121787}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1e97a4c37558d454aaf3cd55caa68c86, type: 2}
   m_IsPrefabParent: 0

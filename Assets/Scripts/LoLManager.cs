@@ -36,9 +36,7 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
             }
         }
     }
-
-    public const string pauseModal = "options";
-
+        
     public const string userDataSettingsKey = "settings";
 
     public const string settingsMusicVolumeKey = "mv";
@@ -55,6 +53,8 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
     string _gameID = "com.daviddionisio.LoLGame";
     [SerializeField]
     int _progressMax;
+    [SerializeField]
+    string _pauseModal;
 
     private int mCurProgress;
 
@@ -316,16 +316,23 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
                 if(!mPaused) {
                     mPaused = true;
 
-                    if(M8.UIModal.Manager.isInstantiated) {
-                        if(!M8.UIModal.Manager.instance.ModalIsInStack(pauseModal))
-                            M8.UIModal.Manager.instance.ModalOpen(pauseModal);
+                    if(!string.IsNullOrEmpty(_pauseModal)) {
+                        if(M8.UIModal.Manager.isInstantiated) {
+                            if(!M8.UIModal.Manager.instance.ModalIsInStack(_pauseModal))
+                                M8.UIModal.Manager.instance.ModalOpen(_pauseModal);
+                        }
                     }
+                    else
+                        M8.SceneManager.instance.Pause();
                 }
                 break;
 
             case GameState.Resumed:
                 if(mPaused) {
                     mPaused = false;
+
+                    if(string.IsNullOrEmpty(_pauseModal))
+                        M8.SceneManager.instance.Resume();
                 }
                 break;
         }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EntityHero : M8.EntityBase {
+    public const MoveState defaultLastMove = MoveState.Right;
     public const float radiusCheckOfs = 0.2f;
 
     public enum MoveState {
@@ -10,6 +11,9 @@ public class EntityHero : M8.EntityBase {
         Left,
         Right
     }
+
+    [Header("Components")]
+    public GameObject touchGO;
 
     [Header("Data")]
     public float jumpImpulse = 5f;
@@ -57,7 +61,10 @@ public class EntityHero : M8.EntityBase {
 
     private Collider2D mGroundLastWallChecked;
 
+    private Vector2 mStartPos;
+
     private Coroutine mJumpRout;
+    private Coroutine mStateRout;
 
     public void Jump() {
         if(mJumpRout == null)
@@ -77,28 +84,60 @@ public class EntityHero : M8.EntityBase {
         }
     }
 
+    protected override void StateChanged() {
+        moveState = MoveState.Stop;
+
+        JumpCancel();
+
+        ClearStateRout();
+
+        bool touchActive = false;
+        bool physicsActive = false;
+
+        switch((EntityState)state) {
+            case EntityState.Spawn:
+                break;
+            case EntityState.Normal:
+                mMoveStatePrev = defaultLastMove;
+
+                touchActive = true;
+                physicsActive = true;
+                break;
+            case EntityState.Dead:
+                break;
+            case EntityState.Victory:
+                break;
+        }
+
+        touchGO.SetActive(touchActive);
+        mMoveCtrl.body.simulated = physicsActive;
+    }
+
     protected override void OnDespawned() {
         if(mJumpRout != null) {
             StopCoroutine(mJumpRout);
             mJumpRout = null;
         }
 
-        mGroundLastWallChecked = null;
+        ClearStateRout();
 
+        mGroundLastWallChecked = null;
+        
         //reset stuff here
         mMoveCtrl.ResetCollision();
     }
 
     protected override void OnSpawned(M8.GenericParams parms) {
         //initial states
-        mMoveStatePrev = MoveState.Right; //TODO: could be set by the map
+        mMoveStatePrev = defaultLastMove; //TODO: could be set by the map
         mMoveState = MoveState.Stop;
 
         mJumpEndLastTime = 0f;
 
         //populate data/state for ai, player control, etc.
 
-        //start ai, player control, etc        
+        //start ai, player control, etc
+        state = (int)EntityState.Spawn;
     }
 
     protected override void OnDestroy() {
@@ -121,6 +160,8 @@ public class EntityHero : M8.EntityBase {
         mMoveCtrl.collisionEnterCallback += OnMoveCollisionEnter;
         mMoveCtrl.triggerEnterCallback += OnMoveTriggerEnter;
         mMoveCtrl.triggerExitCallback += OnMoveTriggerExit;
+
+        mStartPos = transform.position;
     }
 
     // Use this for one-time initialization
@@ -131,18 +172,21 @@ public class EntityHero : M8.EntityBase {
     }
 
     void FixedUpdate() {
-        //not moving forward?
-        if(mMoveCtrl.moveHorizontal == 0f) {
-            //landed, check if we need to resume moving according to move state
-            if(mMoveCtrl.isGrounded)
-                RefreshMoveState();
+        //AI during Normal
+        if(state == (int)EntityState.Normal) {
+            //not moving forward?
+            if(mMoveCtrl.moveHorizontal == 0f) {
+                //landed, check if we need to resume moving according to move state
+                if(mMoveCtrl.isGrounded)
+                    RefreshMoveState();
+            }
+            else if(mMoveCtrl.isSlopSlide) {
+                //TODO
+            }
+            //ground
+            else if(mMoveCtrl.isGrounded)
+                GroundUpdate();
         }
-        else if(mMoveCtrl.isSlopSlide) {
-            //TODO
-        }
-        //ground
-        else if(mMoveCtrl.isGrounded)
-            GroundUpdate();
     }
 
     void GroundUpdate() {
@@ -244,6 +288,31 @@ public class EntityHero : M8.EntityBase {
         mJumpRout = null;
     }
 
+    IEnumerator DoSpawn() {
+        //animations and stuff
+
+        yield return null;
+
+        state = (int)EntityState.Normal;
+    }
+
+    IEnumerator DoDead() {
+        //animations and stuff
+
+        yield return null;
+
+        //return to start position
+        transform.position = mStartPos;
+
+        state = (int)EntityState.Normal;
+    }
+
+    IEnumerator DoVictory() {
+        //animations and stuff
+
+        yield return null;
+    }
+
     void OnMoveCollisionEnter(EntityHeroMoveController ctrl, Collision2D coll) {
         //check if it's a side collision
         //if(!ctrl.isSlopSlide && (ctrl.collisionFlags & CollisionFlags.Sides) != CollisionFlags.None)
@@ -269,6 +338,13 @@ public class EntityHero : M8.EntityBase {
             case MoveState.Right:
                 mMoveCtrl.moveHorizontal = 1f;
                 break;
+        }
+    }
+
+    private void ClearStateRout() {
+        if(mStateRout != null) {
+            StopCoroutine(mStateRout);
+            mStateRout = null;
         }
     }
 }

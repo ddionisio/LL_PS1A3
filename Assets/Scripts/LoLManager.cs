@@ -64,7 +64,9 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
 
     public string gameID { get { return _gameID; } }
 
-    public int progressMax { get { return _progressMax; } }
+    public bool isReady { get { return mIsReady; } }
+
+    public int progressMax { get { return _progressMax; } set { _progressMax = value; } }
 
     public int curProgress { get { return mCurProgress; } }
 
@@ -126,6 +128,8 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
     private int mCurQuestionIndex;
 
     private string mLastSoundBackgroundPath;
+
+    private bool mIsReady;
 
     public void PlaySound(string path, bool background, bool loop) {
         if(background && !string.IsNullOrEmpty(mLastSoundBackgroundPath)) {
@@ -257,6 +261,8 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
     }
 
     void Start() {
+        mIsReady = false;
+
         // Create the WebGL (or mock) object
 #if UNITY_EDITOR
         ILOLSDK webGL = new LoLSDK.MockWebGL();
@@ -295,6 +301,8 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
     // Start the game here
     void HandleStartGame(string json) {
         //SharedState.StartGameData = JSON.Parse(json);
+
+        mIsReady = true;
 
         if(startCallback != null)
             startCallback(this);

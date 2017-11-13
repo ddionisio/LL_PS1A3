@@ -9,16 +9,16 @@ public class UIScreenAttachToWorld : MonoBehaviour {
 
     private Camera mCam;
 
-    void OnEnable() {
-        mCam = cameraAttach != null ? cameraAttach : Camera.main;
-    }
-
-    void Update () {
+    public void Update() {
         Vector2 pos = GetWorldPosition();
 
         transform.position = mCam.WorldToScreenPoint(pos);
-	}
+    }
 
+    void OnEnable() {
+        mCam = cameraAttach != null ? cameraAttach : Camera.main;
+    }
+        
     private Vector2 GetWorldPosition() {
         if(!worldAttach)
             return position;

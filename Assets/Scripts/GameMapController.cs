@@ -44,6 +44,17 @@ public class GameMapController : M8.SingletonBehaviour<GameMapController> {
         }
     }
 
+    public EntityHero player {
+        get {
+            if(!mPlayer) {
+                var playerGO = GameObject.FindGameObjectWithTag("Player");
+                mPlayer = playerGO.GetComponent<EntityHero>();
+            }
+
+            return mPlayer;
+        }
+    }
+
     public event System.Action<string, int, int> paletteUpdateCallback; //block name, new amount, delta
     public event System.Action<Mode> modeChangeCallback;
     public event System.Action<string, string> blockActiveChangeCallback; //new block, previous block
@@ -55,6 +66,8 @@ public class GameMapController : M8.SingletonBehaviour<GameMapController> {
     private string mBlockNameActive;
 
     private GameMapData mMapData;
+
+    private EntityHero mPlayer;
     
     public int PaletteCount(string blockName) {
         int count;
@@ -78,6 +91,16 @@ public class GameMapController : M8.SingletonBehaviour<GameMapController> {
 
         if(paletteUpdateCallback != null)
             paletteUpdateCallback(blockName, amount, delta);
+    }
+
+    public void Victory() {
+        player.state = (int)EntityState.Victory;
+
+        mode = Mode.Play; //just in case
+
+        HUD.instance.HideAll();
+
+        //show victory modal
     }
 
     IEnumerator Start() {
@@ -105,7 +128,12 @@ public class GameMapController : M8.SingletonBehaviour<GameMapController> {
 
             //generate pool
             var blockInfo = GameData.instance.GetBlockInfo(paletteItem.blockName);
-            blockInfo.GeneratePool(transform, mMapData.blockPoolStartCapacity, mMapData.blockPoolMaxCapacity);
+
+            int poolCapacity = paletteItem.amount + paletteItem.capacityAdd;
+            if(poolCapacity <= 0)
+                poolCapacity = mapData.paletteDefaultPoolCapacity;
+
+            blockInfo.GeneratePool(transform, poolCapacity, poolCapacity);
         }
     }
 
@@ -116,8 +144,7 @@ public class GameMapController : M8.SingletonBehaviour<GameMapController> {
         }
 
         //make sure to hide game HUD elements
-        if(HUD.instance) {
-            HUD.instance.palettePanel.Show(false);
-        }
+        if(HUD.instance)
+            HUD.instance.HideAll();
     }
 }

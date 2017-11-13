@@ -5,6 +5,7 @@ using UnityEngine;
 /// <summary>
 /// General access to UI related to HUD
 /// </summary>
+[M8.PrefabFromResource("UI")]
 public class HUD : M8.SingletonBehaviour<HUD> {
     public RectTransform root;
 
@@ -14,6 +15,11 @@ public class HUD : M8.SingletonBehaviour<HUD> {
     [Header("Screen HUDs")]
     public PalettePanel palettePanel;
     public PaletteItemDragWidget paletteItemDrag;
+
+    public void HideAll() {
+        HUD.instance.blockMatterExpandPanel.Cancel();
+        HUD.instance.palettePanel.Show(false);
+    }
 
     protected override void OnInstanceInit() {
         //default turned off

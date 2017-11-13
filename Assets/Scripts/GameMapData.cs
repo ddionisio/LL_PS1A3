@@ -9,18 +9,20 @@ public class GameMapData : MonoBehaviour {
     public struct PaletteData {
         public string blockName;
         public int amount;
+        public int capacityAdd; //pool will be generated with amount + capacityAdd
     }
 
     [SerializeField]
     Bounds _bounds;
-
-    public int blockPoolStartCapacity;
-    public int blockPoolMaxCapacity;
-
+    
     [SerializeField]
     PaletteData[] _initialPalette;
+
+    [SerializeField]
+    int _paletteDefaultPoolCapacity = 8;
     
     public PaletteData[] initialPalette { get { return _initialPalette; } }
+    public int paletteDefaultPoolCapacity { get { return _paletteDefaultPoolCapacity; } }
     public Bounds bounds { get { return _bounds; } set { _bounds = value; } }
         
     public CellIndex GetCellIndex(Vector2 pos) {

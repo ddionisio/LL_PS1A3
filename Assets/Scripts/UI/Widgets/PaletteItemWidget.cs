@@ -131,6 +131,11 @@ public class PaletteItemWidget : MonoBehaviour, M8.IPoolSpawn, M8.IPoolDespawn, 
             HUD.instance.paletteItemDrag.transform.position = eventData.position;
         }
 
+        //check to see if block interface is active, if so, clear it out and release the block ghost
+        if(HUD.instance.blockMatterExpandPanel.isActive) {
+            HUD.instance.blockMatterExpandPanel.Cancel();
+        }
+
         //setup block ghost
         if(!mBlockGhost) {
             var gameCam = GameCamera.instance;

@@ -19,7 +19,7 @@ TagManager:
   - Solid
   - SolidTrigger
   - Touch
-  - 
+  - Harm
   - 
   - 
   - 
@@ -41,7 +41,4 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: WorldUI
-    uniqueID: 727652153
     locked: 0

@@ -244,6 +244,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf4e518394ff78a45a7f7c95995cb0cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scenes:
+  - name: test
+    path: Assets/Scenes/test.unity
+  endScene:
+    name: 
+    path: 
   blocks:
   - name: wood
     prefab: {fileID: 114700719415644552, guid: 2ad4651cb6046cb45943ff9df0065b3c, type: 2}
@@ -253,7 +259,7 @@ MonoBehaviour:
   blockInvalidMask:
     serializedVersion: 2
     m_Bits: 1281
-  gatherDelay: 1.5
+  blockPickupDelay: 1.5
 --- !u!114 &114582526695810506
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -265,6 +271,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 171e62604d7a65147ae7a0fcf435cf0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rootScene:
+    name: _Init
+    path: Assets/Scenes/_Init.unity
   _mode: 1
   levelString: level
   stackEnable: 0

@@ -16,6 +16,10 @@ public class BlockMatterExpandPanel : MonoBehaviour, IBeginDragHandler, IDragHan
     [Header("Arrows")]
     public BlockMatterExpandWidget[] arrows;
 
+    public bool isActive { get { return gameObject.activeSelf; } }
+
+    public Block block { get { return mBlock; } }
+
     private RectTransform mTrans;
     private UIScreenAttachToWorld mWorldAttach;
     private Block mBlock;
@@ -42,8 +46,10 @@ public class BlockMatterExpandPanel : MonoBehaviour, IBeginDragHandler, IDragHan
     public void Hide() {
         gameObject.SetActive(false);
 
-        if(mBlock != null)
+        if(mBlock != null) {
             ClearBlock();
+            mBlock = null;
+        }
     }
 
     public void Deploy() {
@@ -54,12 +60,12 @@ public class BlockMatterExpandPanel : MonoBehaviour, IBeginDragHandler, IDragHan
     }
 
     public void Cancel() {
+        var _block = mBlock;
+
         Hide();
 
-        if(mBlock) {
-            M8.PoolController.ReleaseAuto(mBlock.gameObject);
-            mBlock = null;
-        }
+        if(_block)
+            M8.PoolController.ReleaseAuto(_block.gameObject);
     }
 
     void Awake() {
@@ -166,8 +172,10 @@ public class BlockMatterExpandPanel : MonoBehaviour, IBeginDragHandler, IDragHan
         else
             ShowExpand(false);
 
-        if(mWorldAttach)
+        if(mWorldAttach) {
             mWorldAttach.worldAttach = mBlock.mainCollider ? mBlock.mainCollider.transform : mBlock.transform;
+            mWorldAttach.Update();
+        }
     }
 
     private void ClearBlock() {

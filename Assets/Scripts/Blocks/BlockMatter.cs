@@ -16,9 +16,18 @@ public class BlockMatter : Block {
 
     public override Type type { get { return Type.Matter; } }
 
-    public override int matterCount { get { return mCellSize.row * mCellSize.col; } }
-
+    public override CellIndex cellSize { get { return mCellSize; } }
+    
     public override Collider2D mainCollider { get { return mColl; } }
+
+    public override Bounds editBounds {
+        get {
+            var center = mColl.transform.position;
+            var size = mColl.size;
+
+            return new Bounds(center, size);
+        }
+    }
 
     private SpriteRenderer mSpriteRender;
     private Rigidbody2D mBody;
@@ -32,45 +41,72 @@ public class BlockMatter : Block {
     private CellIndex mEditStartCell;
     private bool mEditIsValid;
 
+    public override bool EditIsExpandable() {
+        return true;
+    }
+
     public override void EditStart(Vector2 pos) {
         mEditStartPos = pos;
         mEditStartCell = GameMapController.instance.mapData.GetCellIndex(mEditStartPos);
 
         //initialize dimension as 1x1
-        EditUpdate(pos);
+        EditDragUpdate(pos);
     }
 
-    public override void EditUpdate(Vector2 pos) {
+    public override void EditDragUpdate(Vector2 pos) {
         var mapData = GameMapController.instance.mapData;
-
-        var cellSize = GameData.instance.blockSize;
-
+        
         //update dimensions
         CellIndex curCell = mapData.GetCellIndex(pos);
 
         CellIndex minCell = new CellIndex() { row = Mathf.Min(curCell.row, mEditStartCell.row), col = Mathf.Min(curCell.col, mEditStartCell.col) };
         CellIndex maxCell = new CellIndex() { row = Mathf.Max(curCell.row, mEditStartCell.row), col = Mathf.Max(curCell.col, mEditStartCell.col) };
 
-        Vector2 min = mapData.GetPositionFromCell(minCell);
-        Vector2 max = mapData.GetPositionFromCell(maxCell); max += cellSize;
-        Vector2 size = new Vector2(max.x - min.x, max.y - min.y);
-        Vector2 center = Vector2.Lerp(min, max, 0.5f);
-
-        mSpriteRender.size = size;
-        mColl.size = size;
-
-        transform.position = center;
-
-        mCellSize.row = maxCell.row - minCell.row + 1;
-        mCellSize.col = maxCell.col - minCell.col + 1;
-
-        mBody.mass = mass * matterCount;
-
-        UpdatePlacementValid();
+        UpdateDimensions(minCell, maxCell);
     }
 
-    public override void EditEnd(Vector2 pos) {
-        EditUpdate(pos);
+    public override void EditDragEnd(Vector2 pos) {
+        EditDragUpdate(pos);
+    }
+
+    public override void EditMove(Vector2 delta) {
+        var pos = (Vector2)transform.position;
+        pos += delta;
+        transform.position = pos;
+
+        UpdatePlacementValid();
+        DimensionChanged();
+    }
+
+    public override void EditExpand(int top, int bottom, int left, int right) {
+        var mapData = GameMapController.instance.mapData;
+
+        var cellSize = GameData.instance.blockSize;
+        var cellHalfSize = cellSize * 0.5f;
+
+        //grab min and max cell position
+        var extents = mColl.size * 0.5f;
+        var center = (Vector2)transform.position;
+
+        Vector2 min = (center - extents) + cellHalfSize;
+        Vector2 max = (center + extents) - cellHalfSize;
+
+        CellIndex minCell = mapData.GetCellIndex(min);
+        CellIndex maxCell = mapData.GetCellIndex(max);
+
+        if(minCell.row + bottom <= maxCell.row)
+            minCell.row += bottom;
+
+        if(minCell.col + left <= maxCell.col)
+            minCell.col += left;
+
+        if(maxCell.row + top >= minCell.row)
+            maxCell.row += top;
+
+        if(maxCell.col + right >= minCell.col)
+            maxCell.col += right;
+
+        UpdateDimensions(minCell, maxCell);
     }
 
     public override bool EditIsPlacementValid() {
@@ -106,6 +142,8 @@ public class BlockMatter : Block {
         mBody.velocity = Vector2.zero;
         mBody.angularVelocity = 0f;
 
+        ApplyCurrentCellSize();
+
         base.OnSpawned(parms);
     }
 
@@ -121,6 +159,49 @@ public class BlockMatter : Block {
         mColl = GetComponent<BoxCollider2D>();
 
         mSpriteDefaultColor = mSpriteRender.color;
+    }
+
+    private void ApplyCurrentCellSize() {
+        var cellSize = GameData.instance.blockSize;
+
+        Vector2 size = new Vector2(mCellSize.col * cellSize.x, mCellSize.row * cellSize.y);
+
+        mSpriteRender.size = size;
+        mColl.size = size;
+
+        mBody.mass = mass * matterCount;
+    }
+
+    private void UpdateDimensions(CellIndex minCell, CellIndex maxCell) {
+        var mapData = GameMapController.instance.mapData;
+
+        var cellSize = GameData.instance.blockSize;
+
+        CellIndex newCellSize = new CellIndex(maxCell.row - minCell.row + 1, maxCell.col - minCell.col + 1);
+
+        Vector2 min = mapData.GetPositionFromCell(minCell);
+        Vector2 max = mapData.GetPositionFromCell(maxCell); max += cellSize;
+
+        Vector2 center = Vector2.Lerp(min, max, 0.5f);
+
+        bool sizeChanged = mCellSize != newCellSize;
+        bool posChanged = (Vector2)transform.position != center;
+
+        if(sizeChanged) {
+            mCellSize = newCellSize;
+
+            ApplyCurrentCellSize();
+        }
+
+        if(posChanged) {
+            transform.position = center;
+        }
+
+        if(sizeChanged || posChanged) {
+            UpdatePlacementValid();
+
+            DimensionChanged();
+        }
     }
     
     private void UpdatePlacementValid() {        

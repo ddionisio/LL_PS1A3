@@ -167,7 +167,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activateOnStart: 1
   activator: {fileID: 0}
-  jumpImpulse: 9.5
+  jumpImpulse: 10
   jumpCancelImpulse: 5
   solidCheckMask:
     serializedVersion: 2

@@ -7,6 +7,7 @@ public class GameEditGrid : MonoBehaviour {
 
     private SpriteRenderer mGridSpriteRender;
     private bool mGridIsShown = false;
+    private Coroutine mGridUpdateRout;
 
     void OnDestroy() {
         if(GameMapController.instance)
@@ -38,10 +39,31 @@ public class GameEditGrid : MonoBehaviour {
 
             if(mGridIsShown) {
                 gridGO.SetActive(true);
+                                
+                if(mGridUpdateRout == null)
+                    mGridUpdateRout = StartCoroutine(DoGridUpdate());
+            }
+            else {
+                gridGO.SetActive(false);
 
+                if(mGridUpdateRout != null) {
+                    StopCoroutine(mGridUpdateRout);
+                    mGridUpdateRout = null;
+                }
+            }
+        }
+    }
+
+    IEnumerator DoGridUpdate() {
+        var gameCam = GameCamera.instance;
+        Vector2 lastCameraPos = new Vector2(float.MaxValue, float.MaxValue);
+
+        while(true) {
+            var curCameraPos = gameCam.position;
+            if(lastCameraPos != curCameraPos) {
                 //compute grid size
-                var camBounds = GameCamera.instance.cameraViewBounds;
-                camBounds.center = GameCamera.instance.transform.localToWorldMatrix.MultiplyPoint3x4(camBounds.center);
+                var camBounds = gameCam.cameraViewBounds;
+                camBounds.center = gameCam.transform.localToWorldMatrix.MultiplyPoint3x4(camBounds.center);
 
                 var mapData = GameMapController.instance.mapData;
 
@@ -59,10 +81,11 @@ public class GameEditGrid : MonoBehaviour {
                     mGridSpriteRender.size = cellMaxPos - cellMinPos;
 
                 gridGO.transform.position = Vector2.Lerp(cellMinPos, cellMaxPos, 0.5f);
+
+                lastCameraPos = curCameraPos;
             }
-            else {
-                gridGO.SetActive(false);
-            }
+
+            yield return null;
         }
     }
 }

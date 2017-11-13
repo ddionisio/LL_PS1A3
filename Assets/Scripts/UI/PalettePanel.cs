@@ -36,7 +36,7 @@ public class PalettePanel : MonoBehaviour {
             else {
                 GameMapController.instance.paletteUpdateCallback -= OnGamePaletteUpdate;
                 GameMapController.instance.modeChangeCallback -= OnGameModeChange;
-
+                
                 //TODO: animation, then clear and hide
 
                 //clear up widgets

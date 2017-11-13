@@ -33,9 +33,13 @@ public abstract class Block : M8.EntityBase {
 
     public abstract Type type { get; }
 
-    public abstract int matterCount { get; }
+    public int matterCount { get { return cellSize.area; } }
+
+    public abstract CellIndex cellSize { get; }
 
     public abstract Collider2D mainCollider { get; }
+
+    public abstract Bounds editBounds { get; }
 
     public string blockName { get { return mBlockName; } }
 
@@ -53,18 +57,27 @@ public abstract class Block : M8.EntityBase {
         }
     }
 
+    public event System.Action<Block> dimensionChangedCallback;
     public event System.Action<Block> modeChangedCallback;
 
     private string mBlockName;
     private Mode mCurMode = Mode.None;
 
     //during edit
+    public abstract bool EditIsExpandable();
     public abstract void EditStart(Vector2 pos);
-    public abstract void EditUpdate(Vector2 pos);
-    public abstract void EditEnd(Vector2 pos);
+    public abstract void EditDragUpdate(Vector2 pos);
+    public abstract void EditDragEnd(Vector2 pos);
+    public abstract void EditMove(Vector2 delta);
+    public abstract void EditExpand(int top, int bottom, int left, int right);
     public abstract bool EditIsPlacementValid();
-
+    
     protected abstract void ApplyMode();
+
+    protected void DimensionChanged() {
+        if(dimensionChangedCallback != null)
+            dimensionChangedCallback(this);
+    }
 
     protected override void OnDespawned() {
         //reset stuff here

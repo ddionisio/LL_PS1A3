@@ -42,6 +42,12 @@ public class GameCamera : M8.SingletonBehaviour<GameCamera> {
         transform.position = pos;
     }
 
+    public bool isVisible(Bounds bounds) {
+        bounds.center = transform.worldToLocalMatrix.MultiplyPoint3x4(bounds.center);
+
+        return mCamViewBounds.Intersects(bounds);
+    }
+
     protected override void OnInstanceInit() {
         mCam = GetComponentInChildren<M8.Camera2D>();
 

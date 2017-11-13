@@ -180,6 +180,8 @@ public class EntityHero : M8.EntityBase {
                     else
                         moveOpposite = true;
                 }
+                else if(collFlag == CollisionFlags.Above) //possibly a roof slanted towards the ground
+                    moveOpposite = true;
             }
 
             if(moveOpposite) {
@@ -223,6 +225,8 @@ public class EntityHero : M8.EntityBase {
 
         //mMoveCtrl.moveVertical = jumpMagnitude;
 
+        yield return new WaitForSeconds(0.1f);
+
         while(true) {
             yield return wait;
 
@@ -231,7 +235,7 @@ public class EntityHero : M8.EntityBase {
                 break;
             
             //check if velocity is downward
-            if(mMoveCtrl.localVelocity.y < 0f)
+            if(mMoveCtrl.isGrounded)
                 break;
         }
 

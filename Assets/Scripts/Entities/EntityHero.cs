@@ -296,8 +296,9 @@ public class EntityHero : M8.EntityBase {
     }
 
     IEnumerator DoSpawn() {
-        while(M8.SceneManager.instance.isLoading)
+        do {
             yield return null;
+        } while(M8.SceneManager.instance.isLoading);
 
         //animations and stuff
 

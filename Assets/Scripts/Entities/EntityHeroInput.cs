@@ -8,9 +8,6 @@ using UnityEngine.EventSystems;
 public class EntityHeroInput : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler {
     public EntityHero hero;
     
-    private EntityHero.MoveState mWaitForLandingToMoveState;
-    private Coroutine mWaitForLandingRout;
-    
     void OnDestroy() {
         if(hero) {
             hero.spawnCallback -= OnHeroSpawn;
@@ -24,7 +21,7 @@ public class EntityHeroInput : MonoBehaviour, IPointerClickHandler, IBeginDragHa
     }
 
     void OnDisable() {
-        StopWaitForLanding();
+        
     }
 
     void OnHeroSpawn(M8.EntityBase ent) {
@@ -36,11 +33,15 @@ public class EntityHeroInput : MonoBehaviour, IPointerClickHandler, IBeginDragHa
     }
 
     void IBeginDragHandler.OnBeginDrag(PointerEventData eventData) {
-        SetMove(EntityHero.MoveState.Stop);
+        //only stop if we are on ground
+        if(hero.moveCtrl.isGrounded)
+            hero.moveState = EntityHero.MoveState.Stop;
     }
 
     void IDragHandler.OnDrag(PointerEventData eventData) {
-        
+        //stop if we are now grounded
+        if(hero.moveCtrl.isGrounded)
+            hero.moveState = EntityHero.MoveState.Stop;
     }
 
     void IEndDragHandler.OnEndDrag(PointerEventData eventData) {
@@ -54,59 +55,23 @@ public class EntityHeroInput : MonoBehaviour, IPointerClickHandler, IBeginDragHa
 
         if(dragLen >= hero.moveCtrl.radius) {
             if(delta < 0f) //go left
-                SetMove(EntityHero.MoveState.Left);
+                hero.moveState = EntityHero.MoveState.Left;
             else
-                SetMove(EntityHero.MoveState.Right);
+                hero.moveState = EntityHero.MoveState.Right;
         }
         else //just apply pointer click
-            ApplyClick();
+            hero.moveState = hero.moveStatePrev;
     }
 
     void IPointerClickHandler.OnPointerClick(PointerEventData eventData) {
-        ApplyClick();
-    }
-
-    void ApplyClick() {
+        //move the opposite
         switch(hero.moveState) {
-            case EntityHero.MoveState.Stop:
-                //resume last movement
-                SetMove(hero.moveStatePrev);
+            case EntityHero.MoveState.Left:
+                hero.moveState = EntityHero.MoveState.Right;
                 break;
-
-            default:
-                //stop movement
-                SetMove(EntityHero.MoveState.Stop);
+            case EntityHero.MoveState.Right:
+                hero.moveState = EntityHero.MoveState.Left;
                 break;
-        }
-    }
-
-    private void SetMove(EntityHero.MoveState toState) {
-        if(hero.moveCtrl.isGrounded) { //move right away
-            StopWaitForLanding();
-            
-            hero.moveState = toState;
-        }
-        else { //wait until we landed
-            mWaitForLandingToMoveState = toState;
-
-            if(mWaitForLandingRout == null)
-                mWaitForLandingRout = StartCoroutine(DoWaitForLanding());
-        }
-    }
-
-    IEnumerator DoWaitForLanding() {
-        while(!hero.moveCtrl.isGrounded)
-            yield return null;
-        
-        hero.moveState = mWaitForLandingToMoveState;
-
-        mWaitForLandingRout = null;
-    }
-
-    private void StopWaitForLanding() {
-        if(mWaitForLandingRout != null) {
-            StopCoroutine(mWaitForLandingRout);
-            mWaitForLandingRout = null;
         }
     }
 }

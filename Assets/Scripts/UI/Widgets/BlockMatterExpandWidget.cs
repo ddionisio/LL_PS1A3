@@ -9,7 +9,12 @@ public class BlockMatterExpandWidget : MonoBehaviour, IBeginDragHandler, IDragHa
         Up,
         Down,
         Left,
-        Right
+        Right,
+
+        UpLeft,
+        UpRight,
+        DownLeft,
+        DownRight,
     }
 
     public Dir dir;
@@ -56,6 +61,51 @@ public class BlockMatterExpandWidget : MonoBehaviour, IBeginDragHandler, IDragHa
                 case Dir.Right:
                     if(deltaCell.col != 0 && deltaCell.col + mBlock.cellSize.col > 0) {
                         mBlock.EditExpand(0, 0, 0, deltaCell.col);
+                        mPrevCellPos = curCellPos;
+                    }
+                    break;
+
+                case Dir.UpLeft:
+                    //cull up
+                    if(deltaCell.row + mBlock.cellSize.row <= 0) { deltaCell.row = 0; curCellPos.row = mPrevCellPos.row; }
+                    //cull left
+                    if(mBlock.cellSize.col - deltaCell.col <= 0) { deltaCell.col = 0; curCellPos.col = mPrevCellPos.col; }
+
+                    if(deltaCell.row != 0 || deltaCell.col != 0) {
+                        mBlock.EditExpand(deltaCell.row, 0, deltaCell.col, 0);
+                        mPrevCellPos = curCellPos;
+                    }
+                    break;
+                case Dir.UpRight:
+                    //cull up
+                    if(deltaCell.row + mBlock.cellSize.row <= 0) { deltaCell.row = 0; curCellPos.row = mPrevCellPos.row; }
+                    //cull right
+                    if(deltaCell.col + mBlock.cellSize.col <= 0) { deltaCell.col = 0; curCellPos.col = mPrevCellPos.col; }
+
+                    if(deltaCell.row != 0 || deltaCell.col != 0) {
+                        mBlock.EditExpand(deltaCell.row, 0, 0, deltaCell.col);
+                        mPrevCellPos = curCellPos;
+                    }
+                    break;
+                case Dir.DownLeft:
+                    //cull down
+                    if(mBlock.cellSize.row - deltaCell.row <= 0) { deltaCell.row = 0; curCellPos.row = mPrevCellPos.row; }
+                    //cull left
+                    if(mBlock.cellSize.col - deltaCell.col <= 0) { deltaCell.col = 0; curCellPos.col = mPrevCellPos.col; }
+
+                    if(deltaCell.row != 0 || deltaCell.col != 0) {
+                        mBlock.EditExpand(0, deltaCell.row, deltaCell.col, 0);
+                        mPrevCellPos = curCellPos;
+                    }
+                    break;
+                case Dir.DownRight:
+                    //cull down
+                    if(mBlock.cellSize.row - deltaCell.row <= 0) { deltaCell.row = 0; curCellPos.row = mPrevCellPos.row; }
+                    //cull right
+                    if(deltaCell.col + mBlock.cellSize.col <= 0) { deltaCell.col = 0; curCellPos.col = mPrevCellPos.col; }
+
+                    if(deltaCell.row != 0 || deltaCell.col != 0) {
+                        mBlock.EditExpand(0, deltaCell.row, 0, deltaCell.col);
                         mPrevCellPos = curCellPos;
                     }
                     break;

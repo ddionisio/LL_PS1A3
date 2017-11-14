@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EntityHero : M8.EntityBase {
-    public const MoveState defaultLastMove = MoveState.Right;
     public const float radiusCheckOfs = 0.2f;
 
     public enum MoveState {
@@ -16,6 +15,7 @@ public class EntityHero : M8.EntityBase {
     public GameObject touchGO;
 
     [Header("Data")]
+    public MoveState moveStart = MoveState.Right;
     public float jumpImpulse = 5f;
     public float jumpCancelImpulse = 5f;
 
@@ -85,14 +85,13 @@ public class EntityHero : M8.EntityBase {
     }
 
     protected override void StateChanged() {
-        moveState = MoveState.Stop;
-
         JumpCancel();
 
         ClearStateRout();
 
         bool touchActive = false;
         bool physicsActive = false;
+        MoveState toMoveState = MoveState.Stop;
 
         switch((EntityState)state) {
             case EntityState.Spawn:
@@ -100,10 +99,11 @@ public class EntityHero : M8.EntityBase {
                 break;
 
             case EntityState.Normal:
-                mMoveStatePrev = defaultLastMove;
+                mMoveStatePrev = moveStart;
+                toMoveState = moveStart;
 
                 touchActive = true;
-                physicsActive = true;
+                physicsActive = true;                
                 break;
 
             case EntityState.Dead:
@@ -114,6 +114,8 @@ public class EntityHero : M8.EntityBase {
                 mStateRout = StartCoroutine(DoVictory());
                 break;
         }
+
+        moveState = toMoveState;
 
         touchGO.SetActive(touchActive);
         mMoveCtrl.body.simulated = physicsActive;
@@ -135,8 +137,7 @@ public class EntityHero : M8.EntityBase {
 
     protected override void OnSpawned(M8.GenericParams parms) {
         //initial states
-        mMoveStatePrev = defaultLastMove; //TODO: could be set by the map
-        mMoveState = MoveState.Stop;
+        mMoveStatePrev = moveStart;
 
         mJumpEndLastTime = 0f;
 
@@ -295,9 +296,10 @@ public class EntityHero : M8.EntityBase {
     }
 
     IEnumerator DoSpawn() {
-        //animations and stuff
+        while(M8.SceneManager.instance.isLoading)
+            yield return null;
 
-        yield return null;
+        //animations and stuff
 
         state = (int)EntityState.Normal;
     }

@@ -245,8 +245,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scenes:
-  - name: stage_1_intro
-    path: Assets/Scenes/Stage 1/stage_1_intro.unity
+  - name: stage_1_0
+    path: Assets/Scenes/Stage 1/stage_1_0.unity
   - name: stage_1_1
     path: Assets/Scenes/Stage 1/stage_1_1.unity
   endScene:

@@ -16,6 +16,10 @@ public class GameMapController : M8.SingletonBehaviour<GameMapController> {
 
                 switch(mMode) {
                     case Mode.Play:
+                        //check if block expand is active, hide if so
+                        if(HUD.instance.blockMatterExpandPanel.isActive)
+                            HUD.instance.blockMatterExpandPanel.Cancel();
+
                         M8.SceneManager.instance.Resume();
                         break;
                     case Mode.Edit:
@@ -108,13 +112,17 @@ public class GameMapController : M8.SingletonBehaviour<GameMapController> {
     }
 
     IEnumerator Start() {
-        yield return new WaitForSeconds(0.1f);
+        do {
+            yield return null;
+        } while(M8.SceneManager.instance.isLoading);
 
         //show game HUD elements
         if(HUD.instance) {
             HUD.instance.palettePanel.Show(true);
 
             HUD.instance.retryButtonRoot.SetActive(true);
+
+            mode = Mode.Edit;
         }
     }
 

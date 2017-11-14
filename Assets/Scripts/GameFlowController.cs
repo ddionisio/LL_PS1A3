@@ -17,6 +17,10 @@ public class GameFlowController : M8.SingletonBehaviour<GameFlowController> {
         LoadCurrentProgressScene();
     }
 
+    public static void Complete() {
+        LoLManager.instance.Complete();
+    }
+
     protected override void OnInstanceInit() {
         
     }

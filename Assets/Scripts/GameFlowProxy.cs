@@ -13,4 +13,8 @@ public class GameFlowProxy : MonoBehaviour {
     public void Progress() {
         GameFlowController.ProgressAndLoadNextScene();
     }
+
+    public void Complete() {
+        GameFlowController.Complete();
+    }
 }

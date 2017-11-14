@@ -26,7 +26,7 @@ public class GameData : M8.SingletonBehaviour<GameData> {
         var sceneDat = M8.SceneManager.instance.curScene;
 
         for(int i = 0; i < scenes.Length; i++) {
-            if(scenes[i].IsEqual(sceneDat))
+            if(scenes[i] == sceneDat)
                 return i;
         }
 
@@ -38,6 +38,9 @@ public class GameData : M8.SingletonBehaviour<GameData> {
 
         if(progress < scenes.Length)
             return scenes[progress];
+
+        if(string.IsNullOrEmpty(endScene.name))
+            return M8.SceneManager.instance.rootScene;
 
         return endScene;
     }

@@ -96,6 +96,9 @@ public class GameMapController : M8.SingletonBehaviour<GameMapController> {
     public void Victory() {
         player.state = (int)EntityState.Victory;
 
+        //focus camera to player
+        GameCamera.instance.MoveTo(player.transform.position);
+
         mode = Mode.Play; //just in case
 
         HUD.instance.HideAll();

@@ -5,6 +5,8 @@ using UnityEngine;
 public class ModalVictory : M8.UIModal.Controller {
 
     public void Proceed() {
+        Close();
+
         if(GameFlowController.isInstantiated) {
             GameFlowController.ProgressAndLoadNextScene();
         }

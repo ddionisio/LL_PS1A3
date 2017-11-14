@@ -14,7 +14,10 @@ public class GameMapData : MonoBehaviour {
 
     [SerializeField]
     Bounds _bounds;
-    
+
+    [SerializeField]
+    Vector2 _boundsStep = Vector2.one; //for scene editor
+
     [SerializeField]
     PaletteData[] _initialPalette;
 
@@ -24,6 +27,7 @@ public class GameMapData : MonoBehaviour {
     public PaletteData[] initialPalette { get { return _initialPalette; } }
     public int paletteDefaultPoolCapacity { get { return _paletteDefaultPoolCapacity; } }
     public Bounds bounds { get { return _bounds; } set { _bounds = value; } }
+    public Vector2 boundsStep { get { return _boundsStep; } }
         
     public CellIndex GetCellIndex(Vector2 pos) {
         var cellSize = GameData.instance.blockSize;

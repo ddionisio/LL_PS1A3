@@ -25,8 +25,24 @@ public class GameCameraBoundsEditor : Editor {
             EditorGUI.BeginChangeCheck();
             mBoxHandle.DrawHandle();
             if(EditorGUI.EndChangeCheck()) {
-                b.center = mBoxHandle.center;
-                b.size = mBoxHandle.size;
+                Vector2 min = mBoxHandle.center - mBoxHandle.size*0.5f;
+
+                float _minX = Mathf.Round(min.x / dat.boundsStep.x);
+                float _minY = Mathf.Round(min.y / dat.boundsStep.y);
+
+                min.x = _minX * dat.boundsStep.x;
+                min.y = _minY * dat.boundsStep.y;
+
+                Vector2 max = mBoxHandle.center + mBoxHandle.size * 0.5f;
+
+                float _maxX = Mathf.Round(max.x / dat.boundsStep.x);
+                float _maxY = Mathf.Round(max.y / dat.boundsStep.y);
+
+                max.x = _maxX * dat.boundsStep.x;
+                max.y = _maxY * dat.boundsStep.y;
+
+                b.center = Vector2.Lerp(min, max, 0.5f);
+                b.size = max - min;
 
                 Undo.RecordObject(dat, "Change Game Camera Bounds");
                 dat.bounds = b;

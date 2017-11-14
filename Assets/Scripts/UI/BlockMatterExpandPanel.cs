@@ -59,13 +59,22 @@ public class BlockMatterExpandPanel : MonoBehaviour, IBeginDragHandler, IDragHan
         }
     }
 
-    public void Cancel() {
+    /// <summary>
+    /// if forceReleaseBlock is true, release current block; if not, deploy it if it's valid
+    /// </summary>
+    public void Cancel(bool forceReleaseBlock) {
         var _block = mBlock;
 
         Hide();
 
-        if(_block)
-            M8.PoolController.ReleaseAuto(_block.gameObject);
+        if(_block) {
+            if(!forceReleaseBlock && _block.EditIsPlacementValid()) {
+                GameMapController.instance.PaletteChange(_block.blockName, -_block.matterCount);
+                _block.mode = Block.Mode.Solid;
+            }
+            else
+                M8.PoolController.ReleaseAuto(_block.gameObject);
+        }
     }
 
     void Awake() {

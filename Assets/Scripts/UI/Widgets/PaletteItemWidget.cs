@@ -133,7 +133,7 @@ public class PaletteItemWidget : MonoBehaviour, M8.IPoolSpawn, M8.IPoolDespawn, 
 
         //check to see if block interface is active, if so, clear it out and release the block ghost
         if(HUD.instance.blockMatterExpandPanel.isActive) {
-            HUD.instance.blockMatterExpandPanel.Cancel();
+            HUD.instance.blockMatterExpandPanel.Cancel(false);
         }
 
         //setup block ghost

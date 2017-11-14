@@ -18,7 +18,7 @@ public class GameMapController : M8.SingletonBehaviour<GameMapController> {
                     case Mode.Play:
                         //check if block expand is active, hide if so
                         if(HUD.instance.blockMatterExpandPanel.isActive)
-                            HUD.instance.blockMatterExpandPanel.Cancel();
+                            HUD.instance.blockMatterExpandPanel.Cancel(false);
 
                         M8.SceneManager.instance.Resume();
                         break;

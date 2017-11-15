@@ -59,19 +59,27 @@ public class EntityHeroInput : MonoBehaviour, IPointerClickHandler, IBeginDragHa
             else
                 hero.moveState = EntityHero.MoveState.Right;
         }
-        else //just apply pointer click
+        //just apply pointer click
+        else if(hero.moveState != EntityHero.MoveState.Stop)
+            hero.moveState = EntityHero.MoveState.Stop;
+        else
             hero.moveState = hero.moveStatePrev;
     }
 
     void IPointerClickHandler.OnPointerClick(PointerEventData eventData) {
+        if(hero.moveState != EntityHero.MoveState.Stop)
+            hero.moveState = EntityHero.MoveState.Stop;
+        else
+            hero.moveState = hero.moveStatePrev;
+
         //move the opposite
-        switch(hero.moveState) {
+        /*switch(hero.moveState) {
             case EntityHero.MoveState.Left:
                 hero.moveState = EntityHero.MoveState.Right;
                 break;
             case EntityHero.MoveState.Right:
                 hero.moveState = EntityHero.MoveState.Left;
                 break;
-        }
+        }*/
     }
 }

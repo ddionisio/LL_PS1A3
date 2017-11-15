@@ -36,6 +36,9 @@ public class PaletteItemWidget : MonoBehaviour, M8.IPoolSpawn, M8.IPoolDespawn, 
     }
 
     void OnPaletteUpdate(string blockName, int amount, int delta) {
+        if(blockName != mBlockName)
+            return;
+
         if(amount > 0) {
             UpdateCount(amount);
         }

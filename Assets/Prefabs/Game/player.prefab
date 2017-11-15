@@ -168,6 +168,7 @@ MonoBehaviour:
   activateOnStart: 1
   activator: {fileID: 0}
   touchGO: {fileID: 1260123913759336}
+  moveStart: 2
   jumpImpulse: 10
   jumpCancelImpulse: 5
   solidCheckMask:
@@ -203,6 +204,10 @@ MonoBehaviour:
   standDragLayer:
     serializedVersion: 2
     m_Bits: 1025
+  effectorDrag: 0.015
+  effectorLayer:
+    serializedVersion: 2
+    m_Bits: 16384
   slopLimit: 50
   aboveLimit: 145
   slideLimit: 80

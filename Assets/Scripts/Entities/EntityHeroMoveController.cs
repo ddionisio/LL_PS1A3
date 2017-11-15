@@ -36,6 +36,9 @@ public class EntityHeroMoveController : MonoBehaviour {
     public float standDrag = 60.0f;
     public LayerMask standDragLayer;
 
+    public float effectorDrag = 0.015f;
+    public LayerMask effectorLayer;
+
     public float slopLimit = 50.0f; //if we are standing still and slope is high, just use groundDrag, also determines collideflag below
     public float aboveLimit = 145.0f; //determines collideflag above, should be > 90, around 140'ish
     public float slideLimit = 80.0f;
@@ -76,10 +79,13 @@ public class EntityHeroMoveController : MonoBehaviour {
 
     private float mMoveScale = 1.0f;
 
+    private int mEffectorCount;
+
     protected Rigidbody2D mBody;
     protected Collider2D mColl;
 
     public Rigidbody2D body { get { return mBody; } }
+    public Collider2D coll { get { return mColl; } }
 
     public float moveVertical { get { return mCurMoveAxis.y; } set { mCurMoveAxis.y = value; } }
     public float moveHorizontal { get { return mCurMoveAxis.x; } set { mCurMoveAxis.x = value; } }
@@ -94,6 +100,8 @@ public class EntityHeroMoveController : MonoBehaviour {
     public Vector2 moveDir { get { return mCurMoveDir; } }
     public CollisionFlags collisionFlags { get { return mCollFlags; } }
     public bool isGrounded { get { return (mCollFlags & CollisionFlags.Below) != 0; } }
+
+    public bool isInEffector { get { return mEffectorCount > 0; } }
 
     /// <summary>
     /// Note: This will return the entire array, actual length is collisionCount
@@ -409,12 +417,28 @@ public class EntityHeroMoveController : MonoBehaviour {
         //Debug.Log("exit count: " + mCollCount);
     }
 
-    protected virtual void OnTriggerEnter2D(Collider2D col) {
+    protected virtual void OnTriggerEnter2D(Collider2D col) {        
+        if(((1<<col.gameObject.layer) & effectorLayer) != 0) {
+            //Debug.Log("Enter: " + col.name);
+
+            mEffectorCount++;
+        }
+
         if(triggerEnterCallback != null)
             triggerEnterCallback(this, col);
     }
     
     protected virtual void OnTriggerExit2D(Collider2D col) {
+        if(((1 << col.gameObject.layer) & effectorLayer) != 0) {
+            //Debug.Log("Exit: " + col.name);
+
+            mEffectorCount--;
+            if(mEffectorCount < 0) {
+                //Debug.LogWarning("Effect Count Under 0, one of the trigger didn't 'exit'");
+                mEffectorCount = 0;
+            }
+        }
+
         if(triggerExitCallback != null)
             triggerExitCallback(this, col);
     }
@@ -493,13 +517,13 @@ public class EntityHeroMoveController : MonoBehaviour {
             //move
             if(isGrounded) {
                 if(mLockDragCounter == 0)
-                    mBody.drag = groundDrag;
+                    mBody.drag = isInEffector ? effectorDrag : groundDrag;
 
                 Move(moveAxis, moveForce);
             }
             else {
                 if(mLockDragCounter == 0)
-                    mBody.drag = airDrag;
+                    mBody.drag = isInEffector ? effectorDrag : airDrag;
 
                 Move(moveAxis, moveAirForce);
             }
@@ -508,7 +532,7 @@ public class EntityHeroMoveController : MonoBehaviour {
             mCurMoveDir = Vector2.zero;
 
             if(mLockDragCounter == 0 && !mBody.isKinematic)
-                mBody.drag = isGrounded && !mIsSlopSlide ? (standDragLayer & mCollLayerMask) == 0 ? groundDrag : standDrag : airDrag;
+                mBody.drag = isInEffector ? effectorDrag : isGrounded && !mIsSlopSlide ? (standDragLayer & mCollLayerMask) == 0 ? groundDrag : standDrag : airDrag;
         }
     }
     
@@ -614,6 +638,8 @@ public class EntityHeroMoveController : MonoBehaviour {
                 mCollLayerMask |= 1 << inf.collider.gameObject.layer;
             }
         }
+
+        mEffectorCount = 0;
     }
 
     protected void ComputeLocalVelocity(bool forceUpdate) {

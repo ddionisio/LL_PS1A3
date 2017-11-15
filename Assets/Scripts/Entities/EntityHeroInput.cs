@@ -45,6 +45,9 @@ public class EntityHeroInput : MonoBehaviour, IPointerClickHandler, IBeginDragHa
     }
 
     void IEndDragHandler.OnEndDrag(PointerEventData eventData) {
+        if(!hero.moveCtrl.isGrounded)
+            return;
+
         var gameCam = GameCamera.instance;
 
         Vector2 curDragPos = gameCam.camera2D.unityCamera.ScreenToWorldPoint(eventData.position);

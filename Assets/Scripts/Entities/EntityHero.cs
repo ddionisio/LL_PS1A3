@@ -118,7 +118,16 @@ public class EntityHero : M8.EntityBase {
         moveState = toMoveState;
 
         touchGO.SetActive(touchActive);
-        mMoveCtrl.body.simulated = physicsActive;
+
+        if(physicsActive) {
+            mMoveCtrl.coll.enabled = true;
+            mMoveCtrl.body.simulated = true;
+        }
+        else {
+            mMoveCtrl.ResetCollision();
+            mMoveCtrl.coll.enabled = false;
+            mMoveCtrl.body.simulated = false;
+        }
     }
 
     protected override void OnDespawned() {

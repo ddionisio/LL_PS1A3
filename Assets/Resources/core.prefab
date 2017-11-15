@@ -257,6 +257,8 @@ MonoBehaviour:
     path: Assets/Scenes/Stage 2/stage_2_0.unity
   - name: stage_2_1
     path: Assets/Scenes/Stage 2/stage_2_1.unity
+  - name: stage_2_2
+    path: Assets/Scenes/Stage 2/stage_2_2.unity
   endScene:
     name: end
     path: Assets/Scenes/end.unity

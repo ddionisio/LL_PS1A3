@@ -280,7 +280,7 @@ MonoBehaviour:
   blockSize: {x: 1, y: 1}
   blockInvalidMask:
     serializedVersion: 2
-    m_Bits: 1281
+    m_Bits: 34049
   blockPickupDelay: 0.7
 --- !u!114 &114582526695810506
 MonoBehaviour:

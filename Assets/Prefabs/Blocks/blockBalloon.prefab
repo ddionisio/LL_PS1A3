@@ -71,7 +71,7 @@ GameObject:
   - component: {fileID: 50348855871298182}
   - component: {fileID: 58077899614120850}
   - component: {fileID: 231886486499159592}
-  m_Layer: 10
+  m_Layer: 15
   m_Name: blockBalloon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -198,7 +198,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.625
+  m_Radius: 0.45
 --- !u!58 &58640740726468562
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -240,16 +240,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activateOnStart: 0
   activator: {fileID: 0}
-  mass: 1
+  mass: 2
   propertyFlags: 0
   ghostAlpha: 0.3
   invalidColor: {r: 1, g: 0, b: 0, a: 1}
   force: 8
-  ropeLength: 2
+  ropeLength: 2.5
   ropeCheckRadius: 0.26
   ropeCheckLayerMask:
     serializedVersion: 2
-    m_Bits: 1025
+    m_Bits: 33793
   balloonSprite: {fileID: 212194585328057810}
   ropeSprite: {fileID: 212527081689792596}
   widgetSprite: {fileID: 212429153266118458}
@@ -403,5 +403,5 @@ SpringJoint2D:
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 1
   m_Distance: 7
-  m_DampingRatio: 0
+  m_DampingRatio: 0.5
   m_Frequency: 1

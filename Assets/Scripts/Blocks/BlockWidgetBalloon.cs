@@ -148,6 +148,7 @@ public class BlockWidgetBalloon : BlockWidget {
 
     protected override void OnSpawned(M8.GenericParams parms) {
         //default values
+        mBody.mass = mass;
         mBody.velocity = Vector2.zero;
         mBody.angularVelocity = 0f;
 
@@ -188,7 +189,10 @@ public class BlockWidgetBalloon : BlockWidget {
         }*/
         switch(mode) {
             case Mode.Solid:
-                UpdateRopeDisplayDynamic();
+                if(mJoint.enabled)
+                    UpdateRopeDisplayDynamic();
+                else
+                    UpdateRopeDisplayStatic();
                 break;
             case Mode.Ghost:
                 UpdateRopeDisplayStatic();

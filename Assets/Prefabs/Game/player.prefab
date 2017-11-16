@@ -115,7 +115,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -169,8 +169,8 @@ MonoBehaviour:
   activator: {fileID: 0}
   touchGO: {fileID: 1260123913759336}
   moveStart: 2
-  jumpImpulse: 10
-  jumpCancelImpulse: 5
+  jumpImpulse: 4.75
+  jumpCancelImpulse: 1.5
   solidCheckMask:
     serializedVersion: 2
     m_Bits: 1025
@@ -193,14 +193,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dirHolder: {fileID: 0}
   speedCap: 0
-  moveForce: 30
-  moveAirForce: 60
+  moveForce: 15
+  moveAirForce: 30
   moveMaxSpeed: 1.2
-  slopSlideForce: 60
+  slopSlideForce: 20
   airMaxSpeed: 2
   airDrag: 0.015
-  groundDrag: 5
-  standDrag: 100
+  groundDrag: 2.5
+  standDrag: 50
   standDragLayer:
     serializedVersion: 2
     m_Bits: 1025

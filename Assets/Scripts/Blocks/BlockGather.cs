@@ -115,17 +115,15 @@ public class BlockGather : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
         if(collActive) {
             //setup box size based on bound size of block
-            if(block.mainCollider) {                
-                var blockCollBounds = block.mainCollider.bounds;
+            var blockCollBounds = block.gatherBounds;
 
-                var size = (Vector2)blockCollBounds.size;
-                size.x += sizeOfs;
-                size.y += sizeOfs;
+            var size = (Vector2)blockCollBounds.size;
+            size.x += sizeOfs;
+            size.y += sizeOfs;
 
-                //TODO: may require changing offset for special case block types
+            //TODO: may require changing offset for special case block types
 
-                mColl.size = size;
-            }
+            mColl.size = size;
         }
         else
             CancelGather(); //just in case it was active for some reason

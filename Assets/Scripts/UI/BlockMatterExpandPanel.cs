@@ -155,6 +155,8 @@ public class BlockMatterExpandPanel : MonoBehaviour, IBeginDragHandler, IDragHan
         var maxScreenSpace = cam.WorldToScreenPoint(blockBounds.max);
 
         mTrans.sizeDelta = new Vector2(Mathf.Abs(maxScreenSpace.x - minScreenSpace.x), Mathf.Abs(maxScreenSpace.y - minScreenSpace.y));
+
+        mWorldAttach.position = blockBounds.center;
     }
 
     private void ShowExpand(bool show) {
@@ -182,7 +184,7 @@ public class BlockMatterExpandPanel : MonoBehaviour, IBeginDragHandler, IDragHan
             ShowExpand(false);
 
         if(mWorldAttach) {
-            mWorldAttach.worldAttach = mBlock.mainCollider ? mBlock.mainCollider.transform : mBlock.transform;
+            mWorldAttach.position = mBlock.editBounds.center;
             mWorldAttach.Update();
         }
     }

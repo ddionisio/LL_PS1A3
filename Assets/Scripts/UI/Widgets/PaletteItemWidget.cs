@@ -169,7 +169,7 @@ public class PaletteItemWidget : MonoBehaviour, M8.IPoolSpawn, M8.IPoolDespawn, 
         //only put the block if it's in the game area, away from the panel
         if(!HUD.instance.paletteItemDrag.isShown) {
             //make sure it's within camera bounds
-            var blockBounds = mBlockGhost.mainCollider.bounds;
+            var blockBounds = mBlockGhost.editBounds;
             if(GameCamera.instance.isVisible(blockBounds)) {
                 HUD.instance.blockMatterExpandPanel.Show(mBlockGhost);
                 mBlockGhost = null;

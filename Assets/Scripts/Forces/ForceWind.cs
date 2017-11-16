@@ -49,7 +49,7 @@ public class ForceWind : MonoBehaviour {
 
     void FixedUpdate() {
         //if we have collider, wait for trigger count > 0
-        if(mHasBoxColl && mTriggerCount == 0)
+        if(mHasBoxColl && mTriggerCount <= 0)
             return;
 
         bool apply;
@@ -84,7 +84,7 @@ public class ForceWind : MonoBehaviour {
 
                 Vector2 pt = Vector2.Lerp(start, end, t);
 
-                var hit = Physics2D.Raycast(pt, dir, length, collisionMask);
+                var hit = Physics2D.CircleCast(pt, step, dir, length, collisionMask);
                 if(hit.rigidbody) {
                     hit.rigidbody.AddForceAtPosition(dir * force, hit.point);
 
@@ -143,8 +143,8 @@ public class ForceWind : MonoBehaviour {
                 Vector3 pt = Vector3.Lerp(start, end, t);
 
                 float len;
-                if(mDistances != null && i < mDistances.Length) {
-                    len = mDistances[i] > 0f ? mDistances[i] : length;
+                if(Application.isPlaying && mDistances != null && i < mDistances.Length) {
+                    len = mDistances[i];
                 }
                 else
                     len = length;

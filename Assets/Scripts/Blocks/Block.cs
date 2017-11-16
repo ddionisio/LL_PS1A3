@@ -33,13 +33,24 @@ public abstract class Block : M8.EntityBase {
 
     public abstract Type type { get; }
 
-    public int matterCount { get { return cellSize.area; } }
+    public virtual int matterCount { get { return cellSize.area; } }
 
     public abstract CellIndex cellSize { get; }
+    
+    /// <summary>
+    /// Where to attach the edit control
+    /// </summary>
+    public abstract Transform editAttach { get; }
 
-    public abstract Collider2D mainCollider { get; }
-
+    /// <summary>
+    /// Bounds that define the dimension for edit control
+    /// </summary>
     public abstract Bounds editBounds { get; }
+
+    /// <summary>
+    /// Area to allow user to gather the block
+    /// </summary>
+    public abstract Bounds gatherBounds { get; }
 
     public string blockName { get { return mBlockName; } }
 
@@ -47,9 +58,10 @@ public abstract class Block : M8.EntityBase {
         get { return mCurMode; }
         set {
             if(mCurMode != value) {
+                var prevMode = mCurMode;
                 mCurMode = value;
 
-                ApplyMode();
+                ApplyMode(prevMode);
 
                 if(modeChangedCallback != null)
                     modeChangedCallback(this);
@@ -72,7 +84,7 @@ public abstract class Block : M8.EntityBase {
     public abstract void EditExpand(int top, int bottom, int left, int right);
     public abstract bool EditIsPlacementValid();
     
-    protected abstract void ApplyMode();
+    protected abstract void ApplyMode(Mode prevMode);
 
     protected void DimensionChanged() {
         if(dimensionChangedCallback != null)

@@ -17,8 +17,10 @@ public class BlockMatter : Block {
     public override Type type { get { return Type.Matter; } }
 
     public override CellIndex cellSize { get { return mCellSize; } }
-    
-    public override Collider2D mainCollider { get { return mColl; } }
+
+    public override Transform editAttach { get { return transform; } }
+
+    public override Bounds gatherBounds { get { return editBounds; } }
 
     public override Bounds editBounds {
         get {
@@ -113,7 +115,7 @@ public class BlockMatter : Block {
         return mEditIsValid;
     }
 
-    protected override void ApplyMode() {
+    protected override void ApplyMode(Mode prevMode) {
         switch(mode) {
             case Mode.None:
                 break;
@@ -204,9 +206,9 @@ public class BlockMatter : Block {
         }
     }
     
-    private void UpdatePlacementValid() {        
-        mEditIsValid = false;
-
+    private void UpdatePlacementValid() {
+        bool lastEditIsValid = mEditIsValid;
+        
         //check pallete count
         //check overlap
         if(matterCount <= GameMapController.instance.PaletteCount(blockName)) {
@@ -216,8 +218,11 @@ public class BlockMatter : Block {
 
             mEditIsValid = collider == null;
         }
+        else
+            mEditIsValid = false;
 
-        UpdatePlacementValidDisplay(mEditIsValid);
+        if(mEditIsValid != lastEditIsValid)
+            UpdatePlacementValidDisplay(mEditIsValid);
     }
 
     private void UpdatePlacementValidDisplay(bool valid) {

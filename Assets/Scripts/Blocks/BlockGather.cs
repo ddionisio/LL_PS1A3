@@ -19,7 +19,7 @@ public class BlockGather : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     public System.Action<State> stateChangeCallback;
 
     //we assume the collider to be box to simplify things
-    private BoxCollider2D mColl;
+    private Collider2D mColl;
     private Coroutine mRout;
 
     void OnDestroy() {
@@ -32,11 +32,7 @@ public class BlockGather : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     }
 
     void Awake() {
-        mColl = GetComponent<BoxCollider2D>();
-        if(!mColl) {
-            Debug.LogError("Missing Box Collider 2D!");
-            return;
-        }
+        mColl = GetComponent<Collider2D>();
 
         //hook ups
         block.spawnCallback += OnBlockSpawned;
@@ -112,18 +108,22 @@ public class BlockGather : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         bool collActive = block.mode == Block.Mode.Solid && GameMapController.instance.mode == GameMapController.Mode.Edit;
 
         mColl.enabled = collActive;
-
+        
         if(collActive) {
-            //setup box size based on bound size of block
-            var blockCollBounds = block.gatherBounds;
+            if(mColl is BoxCollider2D) {
+                var boxColl = (BoxCollider2D)mColl;
 
-            var size = (Vector2)blockCollBounds.size;
-            size.x += sizeOfs;
-            size.y += sizeOfs;
+                //setup box size based on bound size of block
+                var blockCollBounds = block.gatherBounds;
 
-            //TODO: may require changing offset for special case block types
+                var size = (Vector2)blockCollBounds.size;
+                size.x += sizeOfs;
+                size.y += sizeOfs;
 
-            mColl.size = size;
+                //TODO: may require changing offset for special case block types
+
+                boxColl.size = size;
+            }
         }
         else
             CancelGather(); //just in case it was active for some reason

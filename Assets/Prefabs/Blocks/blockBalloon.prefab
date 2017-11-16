@@ -244,7 +244,7 @@ MonoBehaviour:
   propertyFlags: 0
   ghostAlpha: 0.3
   invalidColor: {r: 1, g: 0, b: 0, a: 1}
-  force: 5
+  force: 8
   ropeLength: 2
   ropeCheckRadius: 0.26
   ropeCheckLayerMask:

@@ -94,8 +94,40 @@ public class BlockWidgetBalloon : BlockWidget {
                 balloonSprite.color = mBalloonSpriteDefaultColor;
                 ropeSprite.color = mRopeSpriteDefaultColor;
 
-                //delay simulation
-                StartCoroutine(DoDeploy());
+                //setup physics
+                //setup joint
+                var rayPt = (Vector2)transform.position - new Vector2(0f, mColl.radius + 0.001f);
+
+                int numHit = Physics2D.CircleCastNonAlloc(rayPt, ropeCheckRadius, Vector2.down, mRaycastHits, ropeLength, ropeCheckLayerMask);
+                if(numHit > 0) {
+                    var hit = mRaycastHits[numHit - 1];
+
+                    var hitBody = hit.rigidbody;
+                    var hitColl = hit.collider;
+
+                    if(hitBody) {
+                        //check if it's an entity
+                        mEntAttach = hitBody.GetComponent<M8.EntityBase>();
+                        if(mEntAttach)
+                            mEntAttach.releaseCallback += OnAttachDespawn;
+
+                        mJoint.connectedBody = hitBody;
+                        mJoint.connectedAnchor = hitBody.transform.worldToLocalMatrix.MultiplyPoint3x4(hit.point);
+                    }
+                    else {
+                        //just setup a fixed point
+                        mJoint.connectedBody = null;
+                        mJoint.connectedAnchor = hit.point;
+                    }
+
+                    mJoint.enabled = true;
+                }
+                else {
+                    mJoint.enabled = false;
+                }
+
+                mBody.simulated = true;
+                mColl.enabled = true;
                 break;
         }
     }
@@ -140,81 +172,60 @@ public class BlockWidgetBalloon : BlockWidget {
         mRopeSpriteDefaultColor = ropeSprite.color;
         mWidgetDefaultColor = widgetSprite.color;
     }
-
-    IEnumerator DoDeploy() {
-        yield return new WaitForFixedUpdate();
-
-        //setup joint
-        var rayPt = (Vector2)transform.position - new Vector2(0f, mColl.radius + 0.001f);
-
-        int numHit = Physics2D.CircleCastNonAlloc(rayPt, ropeCheckRadius, Vector2.down, mRaycastHits, ropeLength, ropeCheckLayerMask);
-        if(numHit > 0) {
-            var hit = mRaycastHits[numHit - 1];
-
-            var hitBody = hit.rigidbody;
-            var hitColl = hit.collider;
-
-            if(hitBody) {
-                //check if it's an entity
-                mEntAttach = hitBody.GetComponent<M8.EntityBase>();
-                if(mEntAttach)
-                    mEntAttach.releaseCallback += OnAttachDespawn;
-
-                mJoint.connectedBody = hitBody;
-                mJoint.connectedAnchor = hitBody.transform.worldToLocalMatrix.MultiplyPoint3x4(hit.point);
-            }
-            else {
-                //just setup a fixed point
-                mJoint.connectedBody = null;
-                mJoint.connectedAnchor = hit.point;
-            }
-
-            mJoint.enabled = true;
-        }
-        else {
-            mJoint.enabled = false;
-        }
-        
-        mBody.simulated = true;
-        mColl.enabled = true;
-    }
-
+    
     void Update() {
-        //update rope sprite position
+        /*switch(GameMapController.instance.mode) {
+            case GameMapController.Mode.Edit:
+                UpdateRopeDisplayStatic();
+                break;
+
+            case GameMapController.Mode.Play:
+                if(mJoint.enabled)
+                    UpdateRopeDisplayDynamic();
+                else
+                    UpdateRopeDisplayStatic();
+                break;
+        }*/
         switch(mode) {
             case Mode.Solid:
-                Vector2 jointWorldPos;
-                if(mJoint.connectedBody != null)
-                    jointWorldPos = mJoint.connectedBody.transform.localToWorldMatrix.MultiplyPoint3x4(mJoint.connectedAnchor);
-                else
-                    jointWorldPos = mJoint.connectedAnchor;
-
-                Vector2 dirToBalloon = ((Vector2)transform.position - jointWorldPos);
-                float dist = dirToBalloon.magnitude;
-                if(dist > 0f) {
-                    ropeSprite.gameObject.SetActive(true);
-
-                    dirToBalloon /= dist;
-
-                    ropeSprite.transform.up = dirToBalloon;
-
-                    var newRopeSpriteSize = new Vector2(ropeSprite.size.x, dist);
-                    ropeSprite.size = newRopeSpriteSize;
-                    ropeSprite.transform.position = jointWorldPos + dirToBalloon * (dist * 0.5f);
-                }
-                else {
-                    var newRopeSpriteSize = new Vector2(ropeSprite.size.x, ropeLength + mColl.radius);
-                    ropeSprite.size = newRopeSpriteSize;
-                    ropeSprite.transform.position = (Vector2)transform.position - new Vector2(0f, newRopeSpriteSize.y * 0.5f);
-                }
+                UpdateRopeDisplayDynamic();
                 break;
-
-            case Mode.Ghost: {
-                    var newRopeSpriteSize = new Vector2(ropeSprite.size.x, ropeLength + mColl.radius);
-                    ropeSprite.size = newRopeSpriteSize;
-                    ropeSprite.transform.position = mEditPos + new Vector2(0f, newRopeSpriteSize.y * 0.5f);
-                }
+            case Mode.Ghost:
+                UpdateRopeDisplayStatic();
                 break;
+        }
+    }
+
+    void UpdateRopeDisplayStatic() {
+        var newRopeSpriteSize = new Vector2(ropeSprite.size.x, ropeLength + mColl.radius);
+        ropeSprite.size = newRopeSpriteSize;
+
+        ropeSprite.transform.up = Vector2.up;
+        ropeSprite.transform.position = (Vector2)transform.position - new Vector2(0f, newRopeSpriteSize.y * 0.5f);
+    }
+
+    void UpdateRopeDisplayDynamic() {
+        Vector2 jointWorldPos;
+        if(mJoint.connectedBody != null)
+            jointWorldPos = mJoint.connectedBody.transform.localToWorldMatrix.MultiplyPoint3x4(mJoint.connectedAnchor);
+        else
+            jointWorldPos = mJoint.connectedAnchor;
+
+        Vector2 dirToBalloon = ((Vector2)transform.position - jointWorldPos);
+        float dist = dirToBalloon.magnitude;
+        if(dist > 0f) {
+            ropeSprite.gameObject.SetActive(true);
+
+            dirToBalloon /= dist;
+
+            ropeSprite.transform.up = dirToBalloon;
+
+            var newRopeSpriteSize = new Vector2(ropeSprite.size.x, dist);
+            ropeSprite.size = newRopeSpriteSize;
+            ropeSprite.transform.position = jointWorldPos + dirToBalloon * (dist * 0.5f);
+        }
+        else {
+            ropeSprite.gameObject.SetActive(false);
         }
     }
 

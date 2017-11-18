@@ -21,15 +21,23 @@ public abstract class Block : M8.EntityBase {
     [System.Flags]
     public enum Flags {
         None = 0x0,
-        Conductive = 0x1, //can transmit electricity
-        Buoyant = 0x2, //can float on water
-        Metallic = 0x4, //for magnets
-        Dissolvable = 0x8 //things that dissolve under water
+        Metallic = 0x1, //for magnets
     }
         
     [Header("Info")]
     public float density = 1f;
+    [M8.EnumMask]
     public Flags propertyFlags;
+
+    [Header("Heat Property")]
+    public float heatAbsorptionRate; //amount of heat to absorb from source transfer
+    public float heatTransferRate; //amount of heat to transfer to others on contacts
+    public float heatCapacityPerArea; //amount of heat it can absorb (per area)
+    public float heatCritical; //amount of heat above capacity to reach in order to: melt, burn, etc. (set to -1 to ignore critical)
+
+    [Header("Conduction")]
+    public float conductionTransferScale; //scale of received energy to transfer to another (set to 0 to absorb the entire energy, e.g. rubber)
+    public float conductionThreshold; //amount of energy it can withstand, if energy is higher than threshold, then the block explodes
 
     public abstract Type type { get; }
 

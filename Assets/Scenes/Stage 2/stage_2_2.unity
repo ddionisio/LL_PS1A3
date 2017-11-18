@@ -160,7 +160,7 @@ MonoBehaviour:
     m_Bits: 1280
   resolution: 9
   gizmoColor: {r: 0, g: 1, b: 1, a: 1}
-  force: 25
+  force: 20
   forceApplyDelay: 0.1
 --- !u!61 &39188697
 BoxCollider2D:
@@ -5296,7 +5296,7 @@ MonoBehaviour:
     m_Extent: {x: 23, y: 9.5, z: 0}
   _boundsStep: {x: 1, y: 1}
   _initialPalette:
-  - blockName: wood
+  - blockName: woodCork
     amount: 8
     capacityAdd: 0
   - blockName: iron

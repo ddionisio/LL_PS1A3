@@ -56,7 +56,7 @@ GameObject:
   - component: {fileID: 50849668889050932}
   - component: {fileID: 61805284392458756}
   m_Layer: 10
-  m_Name: blockWood
+  m_Name: blockWoodCork
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -186,7 +186,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activateOnStart: 0
   activator: {fileID: 0}
-  density: 0.745
+  density: 0.207
   propertyFlags: 1
   ghostAlpha: 0.3
   invalidColor: {r: 0.97647065, g: 0.61960787, b: 0.61960787, a: 1}

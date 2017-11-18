@@ -113,7 +113,7 @@ Rigidbody2D:
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
+  m_UseAutoMass: 1
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
@@ -186,7 +186,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activateOnStart: 0
   activator: {fileID: 0}
-  mass: 7.87
+  density: 7.87
   propertyFlags: 1
   ghostAlpha: 0.3
   invalidColor: {r: 0.97647065, g: 0.61960787, b: 0.61960787, a: 1}

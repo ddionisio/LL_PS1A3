@@ -160,6 +160,9 @@ public class BlockMatter : Block {
         mBody = GetComponent<Rigidbody2D>();
         mColl = GetComponent<BoxCollider2D>();
 
+        mBody.useAutoMass = true;
+        mColl.density = density;
+
         mSpriteDefaultColor = mSpriteRender.color;
     }
 
@@ -170,8 +173,6 @@ public class BlockMatter : Block {
 
         mSpriteRender.size = size;
         mColl.size = size;
-
-        mBody.mass = mass * matterCount;
     }
 
     private void UpdateDimensions(CellIndex minCell, CellIndex maxCell) {

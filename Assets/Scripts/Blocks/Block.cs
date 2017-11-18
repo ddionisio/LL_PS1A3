@@ -28,7 +28,7 @@ public abstract class Block : M8.EntityBase {
     }
         
     [Header("Info")]
-    public float mass = 1f;
+    public float density = 1f;
     public Flags propertyFlags;
 
     public abstract Type type { get; }

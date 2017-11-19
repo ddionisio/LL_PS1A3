@@ -105,7 +105,16 @@ public class BlockGather : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     }
 
     private void UpdateCollider() {
-        bool collActive = block.mode == Block.Mode.Solid && GameMapController.instance.mode == GameMapController.Mode.Edit;
+        bool collActive;
+
+        switch((EntityState)block.state) {
+            case EntityState.Normal:
+                collActive = block.mode == Block.Mode.Solid && GameMapController.instance.mode == GameMapController.Mode.Edit;
+                break;
+            default:
+                collActive = false;
+                break;
+        }
 
         mColl.enabled = collActive;
         

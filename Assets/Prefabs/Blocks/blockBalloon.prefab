@@ -242,6 +242,12 @@ MonoBehaviour:
   activator: {fileID: 0}
   density: 2
   propertyFlags: 0
+  heatAbsorptionRate: 0
+  heatTransferRate: 0
+  heatCapacityPerArea: 0
+  heatCritical: 0
+  conductionTransferScale: 0
+  conductionThreshold: 0
   ghostAlpha: 0.3
   invalidColor: {r: 1, g: 0, b: 0, a: 1}
   force: 8

@@ -79,6 +79,10 @@ public class BlockWidgetBalloon : BlockWidget {
     protected override void ApplyMode(Mode prevMode) {
         switch(mode) {
             case Mode.Ghost:
+                mBalloonSpriteDefaultColor = balloonSprite.color;
+                mRopeSpriteDefaultColor = ropeSprite.color;
+                mWidgetDefaultColor = widgetSprite.color;
+
                 widgetRoot.gameObject.SetActive(true);
 
                 mBody.simulated = false;
@@ -86,6 +90,8 @@ public class BlockWidgetBalloon : BlockWidget {
                 mColl.enabled = false;
 
                 mJoint.enabled = false;
+
+                UpdatePositionFromEditPos();
                 break;
 
             case Mode.Solid:
@@ -93,6 +99,7 @@ public class BlockWidgetBalloon : BlockWidget {
 
                 balloonSprite.color = mBalloonSpriteDefaultColor;
                 ropeSprite.color = mRopeSpriteDefaultColor;
+                widgetSprite.color = mWidgetDefaultColor;
 
                 //setup physics
                 //setup joint
@@ -144,16 +151,23 @@ public class BlockWidgetBalloon : BlockWidget {
         mJoint.connectedBody = null;
 
         ropeSprite.transform.localRotation = Quaternion.identity;
+
+        balloonSprite.color = mBalloonSpriteDefaultColor;
+        ropeSprite.color = mRopeSpriteDefaultColor;
+        widgetSprite.color = mWidgetDefaultColor;
     }
 
     protected override void OnSpawned(M8.GenericParams parms) {
         //default values
+        mBalloonSpriteDefaultColor = balloonSprite.color;
+        mRopeSpriteDefaultColor = ropeSprite.color;
+        mWidgetDefaultColor = widgetSprite.color;
+
         mBody.velocity = Vector2.zero;
         mBody.angularVelocity = 0f;
 
         mEditPos = transform.position;
-        UpdatePositionFromEditPos();
-
+        
         base.OnSpawned(parms);
     }
 
@@ -170,13 +184,12 @@ public class BlockWidgetBalloon : BlockWidget {
         mJoint.autoConfigureDistance = false;
         mJoint.distance = ropeLength;
         mJoint.anchor = new Vector2(0f, -mColl.radius);
-
-        mBalloonSpriteDefaultColor = balloonSprite.color;
-        mRopeSpriteDefaultColor = ropeSprite.color;
-        mWidgetDefaultColor = widgetSprite.color;
     }
     
     void Update() {
+        if(!isSpawned)
+            return;
+
         /*switch(GameMapController.instance.mode) {
             case GameMapController.Mode.Edit:
                 UpdateRopeDisplayStatic();

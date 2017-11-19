@@ -121,6 +121,8 @@ public class BlockMatter : Block {
                 break;
 
             case Mode.Ghost:
+                mSpriteDefaultColor = mSpriteRender.color;
+
                 mSpriteRender.color = new Color(mSpriteDefaultColor.r, mSpriteDefaultColor.g, mSpriteDefaultColor.b, ghostAlpha);
 
                 mBody.simulated = false;
@@ -140,6 +142,8 @@ public class BlockMatter : Block {
 
     protected override void OnSpawned(GenericParams parms) {
         //default values
+        mSpriteDefaultColor = mSpriteRender.color;
+
         mCellSize = new CellIndex(1, 1);
         mBody.velocity = Vector2.zero;
         mBody.angularVelocity = 0f;
@@ -150,7 +154,7 @@ public class BlockMatter : Block {
     }
 
     protected override void OnDespawned() {
-        
+        mSpriteRender.color = mSpriteDefaultColor;
     }
 
     protected override void Awake() {
@@ -162,8 +166,6 @@ public class BlockMatter : Block {
 
         mBody.useAutoMass = true;
         mColl.density = density;
-
-        mSpriteDefaultColor = mSpriteRender.color;
     }
 
     private void ApplyCurrentCellSize() {

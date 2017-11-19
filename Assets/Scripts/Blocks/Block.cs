@@ -28,13 +28,8 @@ public abstract class Block : M8.EntityBase {
     public float density = 1f;
     [M8.EnumMask]
     public Flags propertyFlags;
-
-    [Header("Heat Property")]
-    public float heatAbsorptionRate; //amount of heat to absorb from source transfer
-    public float heatTransferRate; //amount of heat to transfer to others on contacts
-    public float heatCapacityPerArea; //amount of heat it can absorb (per area)
-    public float heatCritical; //amount of heat above capacity to reach in order to: melt, burn, etc. (set to -1 to ignore critical)
-
+    public float deathDelay = 1.5f;
+    
     [Header("Conduction")]
     public float conductionTransferScale; //scale of received energy to transfer to another (set to 0 to absorb the entire energy, e.g. rubber)
     public float conductionThreshold; //amount of energy it can withstand, if energy is higher than threshold, then the block explodes
@@ -83,6 +78,8 @@ public abstract class Block : M8.EntityBase {
     private string mBlockName;
     private Mode mCurMode = Mode.None;
 
+    private Coroutine mRout;
+
     //during edit
     public abstract bool EditIsExpandable();
     public abstract void EditStart(Vector2 pos);
@@ -99,7 +96,25 @@ public abstract class Block : M8.EntityBase {
             dimensionChangedCallback(this);
     }
 
+    protected override void StateChanged() {
+        if(mRout != null) {
+            StopCoroutine(mRout);
+            mRout = null;
+        }
+
+        switch((EntityState)state) {
+            case EntityState.Dead:
+                mRout = StartCoroutine(DoDeath());
+                break;
+        }
+    }
+
     protected override void OnDespawned() {
+        if(mRout != null) {
+            StopCoroutine(mRout);
+            mRout = null;
+        }
+
         //reset stuff here
         mode = Mode.None;
     }
@@ -112,6 +127,8 @@ public abstract class Block : M8.EntityBase {
             mBlockName = name;
             Debug.LogWarning("No block name give for: " + name);
         }
+
+        state = (int)EntityState.Normal;
 
         Mode toMode;
         if(parms.TryGetValue(paramMode, out toMode))
@@ -137,5 +154,14 @@ public abstract class Block : M8.EntityBase {
         base.Start();
 
         //initialize variables from other sources (for communicating with managers, etc.)
+    }
+
+    IEnumerator DoDeath() {
+        yield return new WaitForSeconds(deathDelay);
+
+        //refund matter count
+        GameMapController.instance.PaletteChange(mBlockName, matterCount);
+
+        Release();
     }
 }

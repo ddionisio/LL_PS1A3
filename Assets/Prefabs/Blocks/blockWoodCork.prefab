@@ -187,7 +187,13 @@ MonoBehaviour:
   activateOnStart: 0
   activator: {fileID: 0}
   density: 0.207
-  propertyFlags: 1
+  propertyFlags: 0
+  heatAbsorptionRate: 0
+  heatTransferRate: 0
+  heatCapacityPerArea: 0
+  heatCritical: 0
+  conductionTransferScale: 0
+  conductionThreshold: 0
   ghostAlpha: 0.3
   invalidColor: {r: 0.97647065, g: 0.61960787, b: 0.61960787, a: 1}
 --- !u!114 &114705834638803034

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EntityHero : M8.EntityBase {
+    public const int heatCollideCapacity = 8;
     public const float radiusCheckOfs = 0.2f;
 
     public enum MoveState {
@@ -18,6 +19,7 @@ public class EntityHero : M8.EntityBase {
     public MoveState moveStart = MoveState.Right;
     public float jumpImpulse = 5f;
     public float jumpCancelImpulse = 5f;
+    public float heatThreshold = 5f;
 
     [Header("AI Data")]
     public LayerMask solidCheckMask;
@@ -65,6 +67,8 @@ public class EntityHero : M8.EntityBase {
 
     private Coroutine mJumpRout;
     private Coroutine mStateRout;
+
+    private M8.CacheList<HeatController.Contact> mHeatCollides;
 
     public void Jump() {
         if(mJumpRout == null)
@@ -127,6 +131,8 @@ public class EntityHero : M8.EntityBase {
             mMoveCtrl.ResetCollision();
             mMoveCtrl.coll.enabled = false;
             mMoveCtrl.body.simulated = false;
+
+            mHeatCollides.Clear();
         }
     }
 
@@ -142,6 +148,8 @@ public class EntityHero : M8.EntityBase {
         
         //reset stuff here
         mMoveCtrl.ResetCollision();
+
+        mHeatCollides.Clear();
     }
 
     protected override void OnSpawned(M8.GenericParams parms) {
@@ -160,6 +168,7 @@ public class EntityHero : M8.EntityBase {
         //dealloc here
         if(mMoveCtrl) {
             mMoveCtrl.collisionEnterCallback -= OnMoveCollisionEnter;
+            mMoveCtrl.collisionExitCallback -= OnMoveCollisionExit;
             mMoveCtrl.triggerEnterCallback -= OnMoveTriggerEnter;
             mMoveCtrl.triggerExitCallback -= OnMoveTriggerExit;
         }
@@ -171,9 +180,12 @@ public class EntityHero : M8.EntityBase {
         base.Awake();
 
         //initialize data/variables
+        mHeatCollides = new M8.CacheList<HeatController.Contact>(heatCollideCapacity);
+
         mMoveCtrl = GetComponentInChildren<EntityHeroMoveController>();
 
         mMoveCtrl.collisionEnterCallback += OnMoveCollisionEnter;
+        mMoveCtrl.collisionExitCallback += OnMoveCollisionExit;
         mMoveCtrl.triggerEnterCallback += OnMoveTriggerEnter;
         mMoveCtrl.triggerExitCallback += OnMoveTriggerExit;
 
@@ -202,6 +214,15 @@ public class EntityHero : M8.EntityBase {
             //ground
             else if(mMoveCtrl.isGrounded)
                 GroundUpdate();
+
+            //check contacted heat controls if one of them has reached the threshold
+            for(int i = 0; i < mHeatCollides.Count; i++) {
+                if(mHeatCollides[i].heat.amountCurrent > heatThreshold) {
+                    //die
+                    state = (int)EntityState.Dead;
+                    break;
+                }
+            }
         }
     }
 
@@ -334,7 +355,28 @@ public class EntityHero : M8.EntityBase {
     void OnMoveCollisionEnter(EntityHeroMoveController ctrl, Collision2D coll) {
         //check if it's a side collision
         //if(!ctrl.isSlopSlide && (ctrl.collisionFlags & CollisionFlags.Sides) != CollisionFlags.None)
-            //ctrl.moveHorizontal *= -1.0f;
+        //ctrl.moveHorizontal *= -1.0f;
+
+        //check for heat controller
+        var heatCtrl = coll.collider.GetComponent<HeatController>();
+        if(heatCtrl) {
+            if(mHeatCollides.IsFull) mHeatCollides.Expand();
+
+            mHeatCollides.Add(new HeatController.Contact(coll.collider, heatCtrl));
+        }
+    }
+
+    void OnMoveCollisionExit(EntityHeroMoveController ctrl, Collision2D coll) {
+        //check for heat controller
+        var heatCtrl = coll.collider.GetComponent<HeatController>();
+        if(heatCtrl) {
+            for(int i = 0; i < mHeatCollides.Count; i++) {
+                if(mHeatCollides[i].heat == heatCtrl) {
+                    mHeatCollides.RemoveAt(i);
+                    break;
+                }
+            }
+        }
     }
 
     void OnMoveTriggerEnter(EntityHeroMoveController ctrl, Collider2D coll) {

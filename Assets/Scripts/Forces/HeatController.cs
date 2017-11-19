@@ -6,7 +6,7 @@ using UnityEngine;
 /// Can add this to blocks, triggers
 /// </summary>
 public class HeatController : MonoBehaviour {
-    public const int contactCapacity = 16;
+    public const int contactCapacity = 8;
 
     public struct Contact {
         public Collider2D coll;
@@ -28,7 +28,8 @@ public class HeatController : MonoBehaviour {
 
     public float absorptionScale; //amount of heat per second to absorb from source transfer
 
-    public float transferScale; //amount of heat scaled to transfer to others on contacts
+    public float transferCap;   //amount to cap transfer based on heat amount
+    public float transferScale; //amount of heat scaled from amount (capped by transferCap) to send to contacts
 
     public float updateDelay; //delay to process heat per update
     
@@ -48,7 +49,6 @@ public class HeatController : MonoBehaviour {
     public event System.Action<HeatController, float> amountChangedCallback; //self, prev. amount
 
     private float mCurAmount;
-    private float mTransferAmount;
 
     private M8.EntityBase mEntity;
     private Rigidbody2D mBody;
@@ -60,8 +60,10 @@ public class HeatController : MonoBehaviour {
     private float mLastAmount;
 
     public void ReceiveHeat(HeatController source, float amount) {
-        if(!amountIsFixed && absorptionScale != 0f)
-            mCurAmount = Mathf.Clamp(mCurAmount + amount * absorptionScale, 0f, amountCapacity);
+        if(!amountIsFixed && absorptionScale != 0f) {
+            float delta = amount * absorptionScale;
+            mCurAmount = Mathf.Clamp(mCurAmount + delta, 0f, amountCapacity);
+        }
     }
 
     void OnTriggerEnter2D(Collider2D collision) {
@@ -73,8 +75,11 @@ public class HeatController : MonoBehaviour {
 
         //add
         HeatController heat = collision.GetComponent<HeatController>();
-        if(heat)
+        if(heat) {
+            if(mTriggerContacts.IsFull) mTriggerContacts.Expand();
+
             mTriggerContacts.Add(new Contact(collision, heat));
+        }
     }
 
     void OnTriggerExit2D(Collider2D collision) {
@@ -97,8 +102,11 @@ public class HeatController : MonoBehaviour {
 
         //add
         HeatController heat = coll.GetComponent<HeatController>();
-        if(heat)
+        if(heat) {
+            if(mCollisionContacts.IsFull) mCollisionContacts.Expand();
+
             mCollisionContacts.Add(new Contact(coll, heat));
+        }
     }
 
     void OnCollisionExit2D(Collision2D collision) {
@@ -119,25 +127,23 @@ public class HeatController : MonoBehaviour {
         if(curTime - mLastUpdateTime >= updateDelay) {
             mLastUpdateTime = curTime;
 
-            if(mCurAmount > 0f) {
-                //calculate transfer heat
-                float transferAmount = mCurAmount * transferScale;
-                if(transferAmount > 0f) {
-                    for(int i = 0; i < mTriggerContacts.Count; i++)
-                        mTriggerContacts[i].TransferHeat(this, transferAmount);
+            //calculate transfer heat
+            float transferAmount = mCurAmount * transferScale;
 
-                    for(int i = 0; i < mCollisionContacts.Count; i++)
-                        mCollisionContacts[i].TransferHeat(this, transferAmount);
-                }
+            if(transferCap > 0f && transferAmount > transferCap)
+                transferAmount = transferCap;
 
-                //reduce amount from transfer
-                if(!amountIsFixed) {
-                    mCurAmount -= transferAmount;
-                    if(mCurAmount < 0f)
-                        mCurAmount = 0f;
-                }
+            //transfer
+            if(transferAmount > 0f) {
+                for(int i = 0; i < mTriggerContacts.Count; i++)
+                    mTriggerContacts[i].TransferHeat(this, transferAmount);
+
+                for(int i = 0; i < mCollisionContacts.Count; i++)
+                    mCollisionContacts[i].TransferHeat(this, transferAmount);
+
+                transferAmount = 0f;
             }
-
+            
             if(mLastAmount != mCurAmount) {
                 if(amountChangedCallback != null)
                     amountChangedCallback(this, mLastAmount);

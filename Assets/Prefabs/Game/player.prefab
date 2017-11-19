@@ -176,7 +176,7 @@ MonoBehaviour:
     m_Bits: 1025
   harmCheckMask:
     serializedVersion: 2
-    m_Bits: 8192
+    m_Bits: 73728
   groundCheckForwardDist: 0.2
   groundCheckLastJumpDelay: 2
   groundCheckDownDist: 3.1

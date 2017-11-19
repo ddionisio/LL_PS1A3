@@ -53,6 +53,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4548216555643750}
   - component: {fileID: 114700719415644552}
+  - component: {fileID: 114554765902938908}
   - component: {fileID: 50849668889050932}
   - component: {fileID: 61805284392458756}
   m_Layer: 10
@@ -173,6 +174,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2, y: 2}
   m_EdgeRadius: 0
+--- !u!114 &114554765902938908
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1936218699247746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15a1e6f288efaa8479d3f206be26f244, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amountStart: 0
+  amountCapacityPerMass: 2
+  amountIsFixed: 0
+  absorptionScale: 1
+  transferCap: 0.1
+  transferScale: 0.2
+  updateDelay: 0.2
 --- !u!114 &114700719415644552
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -188,6 +207,9 @@ MonoBehaviour:
   activator: {fileID: 0}
   density: 7.87
   propertyFlags: 1
+  deathDelay: 1.5
+  conductionTransferScale: 0
+  conductionThreshold: 0
   ghostAlpha: 0.3
   invalidColor: {r: 0.97647065, g: 0.61960787, b: 0.61960787, a: 1}
 --- !u!114 &114705834638803034

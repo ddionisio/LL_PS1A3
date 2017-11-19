@@ -28,10 +28,12 @@ public class HeatEntityDeathController : MonoBehaviour {
 
     void OnHeatAmountUpdate(HeatController heat, float prevAmt) {
         if(!mIsDead) {
-            if(heat.entity)
-                heat.entity.state = (int)entityDeathState;
+            if(heat.amountCurrent >= heat.amountCapacity) {
+                if(heat.entity)
+                    heat.entity.state = (int)entityDeathState;
 
-            mIsDead = true;
+                mIsDead = true;
+            }
         }
     }
 }

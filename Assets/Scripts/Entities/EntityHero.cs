@@ -358,11 +358,21 @@ public class EntityHero : M8.EntityBase {
         //ctrl.moveHorizontal *= -1.0f;
 
         //check for heat controller
-        var heatCtrl = coll.collider.GetComponent<HeatController>();
-        if(heatCtrl) {
-            if(mHeatCollides.IsFull) mHeatCollides.Expand();
+        bool isFound = false;
+        for(int i = 0; i < mHeatCollides.Count; i++) {
+            if(mHeatCollides[i].coll == coll.collider) {
+                isFound = true;
+                break;
+            }
+        }
 
-            mHeatCollides.Add(new HeatController.Contact(coll.collider, heatCtrl));
+        if(!isFound) {
+            var heatCtrl = coll.collider.GetComponent<HeatController>();
+            if(heatCtrl) {
+                if(mHeatCollides.IsFull) mHeatCollides.Expand();
+
+                mHeatCollides.Add(new HeatController.Contact(coll.collider, heatCtrl));
+            }
         }
     }
 

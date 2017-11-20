@@ -20,6 +20,7 @@ public class BlockGather : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
     //we assume the collider to be box to simplify things
     private Collider2D mColl;
+    private BoxCollider2D mBoxColl;
     private Coroutine mRout;
 
     void OnDestroy() {
@@ -33,6 +34,7 @@ public class BlockGather : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
     void Awake() {
         mColl = GetComponent<Collider2D>();
+        mBoxColl = mColl as BoxCollider2D;
 
         //hook ups
         block.spawnCallback += OnBlockSpawned;
@@ -119,9 +121,7 @@ public class BlockGather : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         mColl.enabled = collActive;
         
         if(collActive) {
-            if(mColl is BoxCollider2D) {
-                var boxColl = (BoxCollider2D)mColl;
-
+            if(mBoxColl) {
                 //setup box size based on bound size of block
                 var blockCollBounds = block.gatherBounds;
 
@@ -131,7 +131,7 @@ public class BlockGather : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
                 //TODO: may require changing offset for special case block types
 
-                boxColl.size = size;
+                mBoxColl.size = size;
             }
         }
         else

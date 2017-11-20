@@ -29,11 +29,11 @@ public abstract class Block : M8.EntityBase {
     [M8.EnumMask]
     public Flags propertyFlags;
     public float deathDelay = 1.5f;
-    
-    [Header("Conduction")]
-    public float conductionTransferScale; //scale of received energy to transfer to another (set to 0 to absorb the entire energy, e.g. rubber)
-    public float conductionThreshold; //amount of energy it can withstand, if energy is higher than threshold, then the block explodes
 
+    [Header("Attaches")]
+    public GameObject[] solidActiveGO;
+    public GameObject[] ghostActiveGO;
+    
     public abstract Type type { get; }
 
     public virtual int matterCount { get { return cellSize.area; } }
@@ -63,6 +63,17 @@ public abstract class Block : M8.EntityBase {
             if(mCurMode != value) {
                 var prevMode = mCurMode;
                 mCurMode = value;
+
+                //activate mode GOs
+                for(int i = 0; i < solidActiveGO.Length; i++) {
+                    if(solidActiveGO[i])
+                        solidActiveGO[i].SetActive(mCurMode == Mode.Solid);
+                }
+
+                for(int i = 0; i < ghostActiveGO.Length; i++) {
+                    if(ghostActiveGO[i])
+                        ghostActiveGO[i].SetActive(mCurMode == Mode.Ghost);
+                }
 
                 ApplyMode(prevMode);
 
@@ -147,6 +158,15 @@ public abstract class Block : M8.EntityBase {
         base.Awake();
 
         //initialize data/variables
+        for(int i = 0; i < solidActiveGO.Length; i++) {
+            if(solidActiveGO[i])
+                solidActiveGO[i].SetActive(false);
+        }
+
+        for(int i = 0; i < ghostActiveGO.Length; i++) {
+            if(ghostActiveGO[i])
+                ghostActiveGO[i].SetActive(false);
+        }
     }
 
     // Use this for one-time initialization

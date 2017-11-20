@@ -94,12 +94,12 @@ public class Water : MonoBehaviour {
         }
 
         public bool IsKillable(Water water) {
-            //just check point
+            //just y position
             //just assume water is not rotated
             float collY = coll.transform.position.y;
-            collY -= water.transform.position.y;
+            float waterY = (water.transform.position.y + water.mColl.offset.y) - water.mColl.size.y * 0.5f + water.mBuoyancy.surfaceLevel;
 
-            return collY <= water.mSurfaceBaseLevel;
+            return collY <= waterY;
         }
 
         public void Kill() {

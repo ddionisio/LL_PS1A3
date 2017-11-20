@@ -37,9 +37,9 @@ public class EntityHero : M8.EntityBase {
             if(mMoveState != value) {
                 if(mMoveState != MoveState.Stop)
                     mMoveStatePrev = mMoveState;
-
+                                
                 mMoveState = value;
-
+                                
                 RefreshMoveState();
             }
         }
@@ -401,6 +401,8 @@ public class EntityHero : M8.EntityBase {
         switch(mMoveState) {
             case MoveState.Stop:
                 mMoveCtrl.moveHorizontal = 0f;
+
+                mGroundLastWallChecked = null;
                 break;
             case MoveState.Left:
                 mMoveCtrl.moveHorizontal = -1f;

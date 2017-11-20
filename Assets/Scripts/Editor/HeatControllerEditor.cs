@@ -5,6 +5,8 @@ using UnityEditor;
 
 [CustomEditor(typeof(HeatController))]
 public class HeatControllerEditor : Editor {
+    float mLastHeat;
+
     public override void OnInspectorGUI() {
         base.OnInspectorGUI();
 
@@ -14,6 +16,11 @@ public class HeatControllerEditor : Editor {
             var dat = this.target as HeatController;
 
             EditorGUILayout.LabelField("Heat Amount", string.Format("{0}/{1}", dat.amountCurrent, dat.amountCapacity));
+
+            if(mLastHeat != dat.amountCurrent) {
+                mLastHeat = dat.amountCurrent;
+                Repaint();
+            }
         }
     }
 }

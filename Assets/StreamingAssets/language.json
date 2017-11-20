@@ -7,8 +7,10 @@
   "en": {
     "welcome": "Welcome!",
 	"blockWoodName": "Wood",
+	"blockWoodCorkName": "Wood Cork",
 	"blockIronName": "Iron",
 	"blockBalloonName": "Balloon",
+	"blockRubberName": "Rubber",
 	"test": "Test",
   },
 }

@@ -276,7 +276,7 @@ MonoBehaviour:
   - name: woodCork
     prefab: {fileID: 114700719415644552, guid: 3bfe784a85ec355479432b7daff4bb24, type: 2}
     icon: {fileID: 21300000, guid: a4ed55aee31de774eb8221a065ae0b52, type: 3}
-    nameDisplayRef: blockWoodName
+    nameDisplayRef: blockWoodCorkName
   - name: iron
     prefab: {fileID: 114700719415644552, guid: a1826a5f1db9a1147989bff885c0c64c, type: 2}
     icon: {fileID: 21300000, guid: a4ed55aee31de774eb8221a065ae0b52, type: 3}
@@ -285,6 +285,10 @@ MonoBehaviour:
     prefab: {fileID: 114560649450394572, guid: d38a4defb6bc3c6428ed427650a71480, type: 2}
     icon: {fileID: 21300000, guid: a4ed55aee31de774eb8221a065ae0b52, type: 3}
     nameDisplayRef: blockBalloonName
+  - name: rubber
+    prefab: {fileID: 114700719415644552, guid: ca590576e708069479d4f1fc11026493, type: 2}
+    icon: {fileID: 21300000, guid: a4ed55aee31de774eb8221a065ae0b52, type: 3}
+    nameDisplayRef: blockRubberName
   blockSize: {x: 1, y: 1}
   blockInvalidMask:
     serializedVersion: 2

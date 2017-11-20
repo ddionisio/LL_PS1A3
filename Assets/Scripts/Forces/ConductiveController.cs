@@ -30,6 +30,9 @@ public class ConductiveController : MonoBehaviour {
     public bool energyIsFixed; //stored energy is fixed
 
     public bool explodeOnOverCapacity; //if true, kill the block when we reach above capacity
+
+    public string killTag = "Player";
+    public float killBodyExpand = 1f;
     
     [Header("Hook Ups")]
     public Block block;
@@ -51,10 +54,6 @@ public class ConductiveController : MonoBehaviour {
                     if(mCurEnergy < 0f)
                         mCurEnergy = 0f;
                 }
-
-                //die from capacity reached?
-                if(explodeOnOverCapacity && isCapacityReached && block && !block.isReleased)
-                    block.state = (int)EntityState.Dead;
             }
         }
     }
@@ -78,6 +77,7 @@ public class ConductiveController : MonoBehaviour {
 
     private Collider2D[] mCollContacts;
     private M8.CacheList<Contact> mReceivers; //conductives to transfer energy
+    private Vector2 mKillExt;
 
     public bool IsReceiver(ConductiveController other) {
         for(int i = 0; i < mReceivers.Count; i++) {
@@ -107,51 +107,80 @@ public class ConductiveController : MonoBehaviour {
             mLastUpdateTime = curTime;
 
             //setup energy to transfer
+            bool isDeath = explodeOnOverCapacity && isCapacityReached;
+
+            float energyTransfer = curEnergy * energyTransferScale;
+            curEnergy -= energyTransfer;
+
             mReceivers.Clear();
 
             int contactCount = Physics2D.GetContacts(mTriggerBoxColl, mCollContacts);
             if(contactCount > 0) {
+                M8.EntityBase killEnt = null;
+
                 for(int i = 0; i < contactCount; i++) {
                     var coll = mCollContacts[i];
+
+                    //kill?
+                    if(!string.IsNullOrEmpty(killTag) && !killEnt && coll.gameObject.CompareTag(killTag)) {
+                        killEnt = coll.GetComponent<M8.EntityBase>();
+                        continue;
+                    }
 
                     var conductive = coll.GetComponent<ConductiveController>();
 
                     //check criterias
+                    if(coll == mTriggerBoxColl)
+                        continue;
                     if(conductive.energyReceiveScale == 0f) //cannot receive energy?
                         continue;
                     if(conductive.isCapacityReached) //capacity already reached
                         continue;
                     if(conductive.IsReceiver(this)) //are we already a receiver from this conductor?
                         continue;
-                    if(conductive.block && conductive.block.state == (int)EntityState.Dead) //dead?
-                        continue;
 
                     mReceivers.Add(new Contact(coll, conductive));
                 }
-
+                                
                 //distribute energy transfer
                 if(mReceivers.Count > 0) {
-                    float energyTransfer = curEnergy * energyTransferScale;
-
-                    curEnergy -= energyTransfer;
-
                     float energyPerReceiver = energyTransfer / mReceivers.Count;
 
                     for(int i = 0; i < mReceivers.Count; i++) {
                         var ctrl = mReceivers[i].ctrl;
 
                         ctrl.curEnergy += energyPerReceiver;
-
-                        ctrl.mLastUpdateTime = Time.time; //reset cooldown
                     }
                 }
+
+                //kill entity?
+                if(killEnt) {
+                    //check if it is within kill bounds
+                    if(colliderBody) {
+                        Vector2 pos = transform.worldToLocalMatrix.MultiplyPoint3x4(killEnt.transform.position);
+                        Vector2 boxPos = mTriggerBoxColl.offset;
+                        Vector2 min = boxPos - mKillExt, max = boxPos + mKillExt;
+                        if(pos.x >= min.x && pos.x <= max.x && pos.y >= min.y && pos.y <= max.y)
+                            killEnt.state = (int)EntityState.Dead;
+                    }
+                    else
+                        killEnt.state = (int)EntityState.Dead;
+                }
             }
+
+            //die from capacity reached?
+            if(isDeath && block && !block.isReleased)
+                block.state = (int)EntityState.Dead;
         }
     }
     
     void OnDestroy() {
         if(block) {
             block.modeChangedCallback -= OnBlockChangeMode;
+        }
+
+        if(GameMapController.isInstantiated) {
+            GameMapController.instance.modeChangeCallback -= OnGameChangeMode;
         }
     }
 
@@ -173,6 +202,8 @@ public class ConductiveController : MonoBehaviour {
         else
             mIsTriggerActive = true; //activate trigger on start
 
+        GameMapController.instance.modeChangeCallback += OnGameChangeMode;
+
         mCollContacts = new Collider2D[connectCapacity];
         mReceivers = new M8.CacheList<Contact>(connectCapacity);
 
@@ -186,6 +217,7 @@ public class ConductiveController : MonoBehaviour {
             case Block.Mode.Solid:
                 SetTriggerActive(GameMapController.instance.mode == GameMapController.Mode.Play);
                 break;
+            case Block.Mode.None:
             case Block.Mode.Ghost:
                 SetTriggerActive(false);
                 ClearConnections();
@@ -212,7 +244,17 @@ public class ConductiveController : MonoBehaviour {
 
     void UpdateTriggerCollider() {
         if(mIsTriggerActive) {
-            if(mTriggerBoxColl) mTriggerBoxColl.enabled = true;
+            if(mTriggerBoxColl) {
+                if(colliderBody) {
+                    float ext = colliderBodyExpand * 2.0f;
+                    mTriggerBoxColl.size = colliderBody.size + new Vector2(ext, ext);
+
+                    float killExt = killBodyExpand * 2.0f;
+                    mKillExt = (colliderBody.size + new Vector2(killExt, killExt)) * 0.5f;
+                }
+
+                mTriggerBoxColl.enabled = true;
+            }
         }
         else {
             if(mTriggerBoxColl) mTriggerBoxColl.enabled = false;

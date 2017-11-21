@@ -87,16 +87,18 @@ public class Water : MonoBehaviour {
     public struct KillableCache {
         public Collider2D coll;
         public M8.EntityBase ent;
+        public float yOfs;
 
         public KillableCache(Collider2D aColl) {
             coll = aColl;
+            yOfs = coll.bounds.size.y * 0.3f;
             ent = coll.GetComponent<M8.EntityBase>();
         }
 
         public bool IsKillable(Water water) {
             //just y position
             //just assume water is not rotated
-            float collY = coll.transform.position.y;
+            float collY = coll.transform.position.y - yOfs;
             float waterY = (water.transform.position.y + water.mColl.offset.y) - water.mColl.size.y * 0.5f + water.mBuoyancy.surfaceLevel;
 
             return collY <= waterY;

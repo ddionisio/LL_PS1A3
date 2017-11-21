@@ -1238,7 +1238,7 @@ BuoyancyEffector2D:
   m_Density: 2
   m_LinearDrag: 5
   m_AngularDrag: 5
-  m_FlowAngle: 0
+  m_FlowAngle: 90
   m_FlowMagnitude: 5
   m_FlowVariation: 1
 --- !u!61 &617727568
@@ -2740,7 +2740,7 @@ BuoyancyEffector2D:
   m_Density: 2
   m_LinearDrag: 5
   m_AngularDrag: 5
-  m_FlowAngle: 0
+  m_FlowAngle: 90
   m_FlowMagnitude: 5
   m_FlowVariation: 1
 --- !u!61 &1969972874
@@ -3101,7 +3101,7 @@ MonoBehaviour:
     amount: 5
     capacityAdd: 0
   - blockName: woodCork
-    amount: 6
+    amount: 5
     capacityAdd: 0
   - blockName: iron
     amount: 8

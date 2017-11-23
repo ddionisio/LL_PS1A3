@@ -69,6 +69,8 @@ public class PaletteItemWidget : MonoBehaviour, M8.IPoolSpawn, M8.IPoolDespawn, 
                 ClearDragging();
 
                 UpdateCount();
+
+                UpdateInteractible();
             }
         }
     }
@@ -79,6 +81,7 @@ public class PaletteItemWidget : MonoBehaviour, M8.IPoolSpawn, M8.IPoolDespawn, 
 
         if(amount > 0) {
             UpdateCount();
+            UpdateInteractible();
         }
         else {
             //do animation thing
@@ -98,10 +101,6 @@ public class PaletteItemWidget : MonoBehaviour, M8.IPoolSpawn, M8.IPoolDespawn, 
 
     void OnGameChangeMode(GameMapController.Mode mode) {
         switch(mode) {
-            case GameMapController.Mode.Edit:
-                if(mGraphic) mGraphic.raycastTarget = true;
-                break;
-
             case GameMapController.Mode.Play:
                 ClearDragging();
 
@@ -131,10 +130,11 @@ public class PaletteItemWidget : MonoBehaviour, M8.IPoolSpawn, M8.IPoolDespawn, 
 
                 mGhostMatterCount = 0;
                 //
-
-                if(mGraphic) mGraphic.raycastTarget = false;
+                
                 break;
         }
+
+        UpdateInteractible();
     }
         
     void M8.IPoolSpawn.OnSpawned(M8.GenericParams parms) {
@@ -149,16 +149,7 @@ public class PaletteItemWidget : MonoBehaviour, M8.IPoolSpawn, M8.IPoolDespawn, 
         mBlockName = blockInf.name;
 
         //setup state
-        if(mGraphic) {
-            switch(GameMapController.instance.mode) {
-                case GameMapController.Mode.Edit:
-                    mGraphic.raycastTarget = true;
-                    break;
-                case GameMapController.Mode.Play:
-                    mGraphic.raycastTarget = false;
-                    break;
-            }
-        }
+        UpdateInteractible();
 
         //setup display
         blockNameText.text = M8.Localize.Get(blockInf.nameDisplayRef);
@@ -261,6 +252,8 @@ public class PaletteItemWidget : MonoBehaviour, M8.IPoolSpawn, M8.IPoolDespawn, 
         HUD.instance.blockMatterExpandPanel.isMoveMode = false;
 
         UpdateCount();
+
+        UpdateInteractible();
     }
 
     void OnGhostBlockDimensionChanged(Block block) {
@@ -271,6 +264,7 @@ public class PaletteItemWidget : MonoBehaviour, M8.IPoolSpawn, M8.IPoolDespawn, 
         }
 
         UpdateCount();
+        UpdateInteractible();
     }
 
     void OnGhostBlockRelease(M8.EntityBase ent) {
@@ -298,6 +292,8 @@ public class PaletteItemWidget : MonoBehaviour, M8.IPoolSpawn, M8.IPoolDespawn, 
                 }
             }
         }
+
+        UpdateInteractible();
     }
 
     private void ApplySelected(bool select) {
@@ -318,13 +314,11 @@ public class PaletteItemWidget : MonoBehaviour, M8.IPoolSpawn, M8.IPoolDespawn, 
     }
     
     private void UpdateCount() {
-        int ghostCount = mGhostMatterCount;
-        if(mBlockGhost)
-            ghostCount += mBlockGhost.matterCount;
+        int _ghostCount = ghostMatterCount;
 
         int amount = GameMapController.instance.PaletteCount(mBlockName);
 
-        blockCountText.text = string.Format("{0}/{1}", ghostCount.ToString("D2"), amount.ToString("D2"));
+        blockCountText.text = string.Format("{0}/{1}", _ghostCount.ToString("D2"), amount.ToString("D2"));
     }
 
     private void CleanUpCallbacks() {
@@ -352,6 +346,22 @@ public class PaletteItemWidget : MonoBehaviour, M8.IPoolSpawn, M8.IPoolDespawn, 
 
             if(GameMapController.instance.blockSelected == _ghostBlock)
                 GameMapController.instance.blockSelected = null;
+        }
+    }
+
+    private void UpdateInteractible() {
+        if(mGraphic) {
+            switch(GameMapController.instance.mode) {
+                case GameMapController.Mode.Edit:
+                    int _ghostCount = ghostMatterCount;
+                    int amount = GameMapController.instance.PaletteCount(mBlockName);
+
+                    mGraphic.raycastTarget = _ghostCount < amount;
+                    break;
+                case GameMapController.Mode.Play:
+                    mGraphic.raycastTarget = false;
+                    break;
+            }
         }
     }
 }

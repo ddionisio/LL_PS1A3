@@ -30,7 +30,7 @@ public class BlockWidgetBalloon : BlockWidget {
             return new Bounds(mEditPos, GameData.instance.blockSize);
         }
     }
-
+    
     private CircleCollider2D mColl;
     private SpringJoint2D mJoint;
     private Rigidbody2D mBody;
@@ -45,16 +45,9 @@ public class BlockWidgetBalloon : BlockWidget {
 
     private RaycastHit2D[] mRaycastHits = new RaycastHit2D[raycastHitCapacity];
     
-    public override void EditStart(Vector2 pos) {
-        var mapData = GameMapController.instance.mapData;
-        var cellSize = GameData.instance.blockSize;
-
-        CellIndex curCell = mapData.GetCellIndex(pos);
-
-        var lastEditPos = mEditPos;
-        mEditPos = mapData.GetPositionFromCell(curCell) + cellSize * 0.5f;
-                
-        if(mEditPos != lastEditPos) {
+    public override void EditSetPosition(Vector2 pos) {
+        if(mEditPos != pos) {
+            mEditPos = pos;
             UpdatePositionFromEditPos();
             DimensionChanged();
         }
@@ -76,6 +69,10 @@ public class BlockWidgetBalloon : BlockWidget {
         return mEditIsValid;
     }
 
+    public override void EditEnableCollision(bool aEnable) {
+        mBody.simulated = aEnable;
+    }
+
     protected override void ApplyMode(Mode prevMode) {
         switch(mode) {
             case Mode.Ghost:
@@ -86,8 +83,6 @@ public class BlockWidgetBalloon : BlockWidget {
                 widgetRoot.gameObject.SetActive(true);
 
                 mBody.simulated = false;
-
-                mColl.enabled = false;
 
                 mJoint.enabled = false;
 
@@ -134,7 +129,6 @@ public class BlockWidgetBalloon : BlockWidget {
                 }
 
                 mBody.simulated = true;
-                mColl.enabled = true;
                 break;
         }
     }
@@ -274,11 +268,15 @@ public class BlockWidgetBalloon : BlockWidget {
         transform.position = mEditPos + new Vector2(0f, ropeLength + mColl.radius);
 
         widgetRoot.localPosition = widgetRoot.parent.worldToLocalMatrix.MultiplyPoint3x4(mEditPos);
-                
-        //check to make sure balloon has room
-        var collider = Physics2D.OverlapCircle(transform.position, mColl.radius, GameData.instance.blockInvalidMask);
 
-        mEditIsValid = collider == null;
+        //check to make sure balloon has room
+        if(IsCountValid()) {
+            var collider = Physics2D.OverlapCircle(transform.position, mColl.radius, GameData.instance.blockInvalidMask);
+
+            mEditIsValid = collider == null;
+        }
+        else
+            mEditIsValid = false;
 
         //update color
         if(mEditIsValid) {

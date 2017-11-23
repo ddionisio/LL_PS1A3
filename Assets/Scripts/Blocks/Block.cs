@@ -1,8 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Block : M8.EntityBase {
+public abstract class Block : M8.EntityBase, IComparable<Block> {
     //spawn params
     public const string paramName = "name"; //Block Name
     public const string paramMode = "mode";  //Mode
@@ -49,12 +50,7 @@ public abstract class Block : M8.EntityBase {
     /// Bounds that define the dimension for edit control
     /// </summary>
     public abstract Bounds editBounds { get; }
-
-    /// <summary>
-    /// Area to allow user to gather the block
-    /// </summary>
-    public abstract Bounds gatherBounds { get; }
-
+    
     public string blockName { get { return mBlockName; } }
 
     public Mode mode {
@@ -93,13 +89,31 @@ public abstract class Block : M8.EntityBase {
 
     //during edit
     public abstract bool EditIsExpandable();
-    public abstract void EditStart(Vector2 pos);
-    public abstract void EditDragUpdate(Vector2 pos);
-    public abstract void EditDragEnd(Vector2 pos);
+    public abstract void EditSetPosition(Vector2 pos);
     public abstract void EditMove(Vector2 delta);
     public abstract void EditExpand(int top, int bottom, int left, int right);
     public abstract bool EditIsPlacementValid();
+    public abstract void EditEnableCollision(bool aEnable); //used while in ghost mode (usu. enable/disable collision to allow other blocks to update placement valid properly)
     
+    /// <summary>
+    /// Start by snapping position to grid
+    /// </summary>
+    public void EditStart(Vector2 pos) {
+        var mapData = GameMapController.instance.mapData;
+        var cellSize = GameData.instance.blockSize;
+
+        CellIndex curCell = mapData.GetCellIndex(pos);
+        
+        EditSetPosition(mapData.GetPositionFromCell(curCell) + cellSize * 0.5f);
+    }
+
+    public bool IsCountValid() {
+        int paletteBlockCount = GameMapController.instance.PaletteCount(mBlockName);
+        int ghostBlockCount = HUD.instance.palettePanel.GetGhostCountExclude(this);
+        
+        return ghostBlockCount + matterCount <= paletteBlockCount;
+    }
+
     protected abstract void ApplyMode(Mode prevMode);
 
     protected void DimensionChanged() {
@@ -183,5 +197,9 @@ public abstract class Block : M8.EntityBase {
         GameMapController.instance.PaletteChange(mBlockName, matterCount);
 
         Release();
+    }
+    
+    public int CompareTo(Block other) {
+        return (int)type - (int)other.type;
     }
 }

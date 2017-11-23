@@ -35,10 +35,10 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4185694671609520}
-  - component: {fileID: 114705834638803034}
+  - component: {fileID: 114726099827192034}
   - component: {fileID: 61095657535947814}
   m_Layer: 12
-  m_Name: gatherTrigger
+  m_Name: selectTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -212,7 +212,7 @@ MonoBehaviour:
   ghostActiveGO: []
   ghostAlpha: 0.3
   invalidColor: {r: 0.97647065, g: 0.61960787, b: 0.61960787, a: 1}
---- !u!114 &114705834638803034
+--- !u!114 &114726099827192034
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -220,11 +220,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1385330898933504}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 122e5aa89d31d054eb3eefc127b63add, type: 3}
+  m_Script: {fileID: 11500000, guid: 72138a40c97c3e7418d7f0c2cfb0e02f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   block: {fileID: 114700719415644552}
-  sizeOfs: 0.25
 --- !u!212 &212840276724023280
 SpriteRenderer:
   m_ObjectHideFlags: 1

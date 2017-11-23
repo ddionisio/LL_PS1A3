@@ -86,10 +86,10 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4821020718250942}
-  - component: {fileID: 114009859712995034}
-  - component: {fileID: 58640740726468562}
+  - component: {fileID: 114479327556141638}
+  - component: {fileID: 61817746938794388}
   m_Layer: 12
-  m_Name: gatherTrigger
+  m_Name: selectTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -199,8 +199,8 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.45
---- !u!58 &58640740726468562
-CircleCollider2D:
+--- !u!61 &61817746938794388
+BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -208,13 +208,23 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   serializedVersion: 2
-  m_Radius: 0.625
---- !u!114 &114009859712995034
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!114 &114479327556141638
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -222,11 +232,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1738404886093414}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 122e5aa89d31d054eb3eefc127b63add, type: 3}
+  m_Script: {fileID: 11500000, guid: 72138a40c97c3e7418d7f0c2cfb0e02f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   block: {fileID: 114560649450394572}
-  sizeOfs: 0.25
 --- !u!114 &114560649450394572
 MonoBehaviour:
   m_ObjectHideFlags: 1

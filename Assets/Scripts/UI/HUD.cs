@@ -18,7 +18,7 @@ public class HUD : M8.SingletonBehaviour<HUD> {
     public GameObject retryButtonRoot;
 
     public void HideAll() {
-        HUD.instance.blockMatterExpandPanel.Cancel(true);
+        HUD.instance.blockMatterExpandPanel.Cancel();
         HUD.instance.palettePanel.Show(false);
 
         retryButtonRoot.SetActive(false);

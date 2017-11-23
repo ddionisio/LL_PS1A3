@@ -19,9 +19,7 @@ public class BlockMatter : Block {
     public override CellIndex cellSize { get { return mCellSize; } }
 
     public override Transform editAttach { get { return transform; } }
-
-    public override Bounds gatherBounds { get { return editBounds; } }
-
+    
     public override Bounds editBounds {
         get {
             var center = mColl.transform.position;
@@ -46,29 +44,12 @@ public class BlockMatter : Block {
     public override bool EditIsExpandable() {
         return true;
     }
+    
+    public override void EditSetPosition(Vector2 pos) {
+        transform.position = pos;
 
-    public override void EditStart(Vector2 pos) {
-        mEditStartPos = pos;
-        mEditStartCell = GameMapController.instance.mapData.GetCellIndex(mEditStartPos);
-
-        //initialize dimension as 1x1
-        EditDragUpdate(pos);
-    }
-
-    public override void EditDragUpdate(Vector2 pos) {
-        var mapData = GameMapController.instance.mapData;
-        
-        //update dimensions
-        CellIndex curCell = mapData.GetCellIndex(pos);
-
-        CellIndex minCell = new CellIndex() { row = Mathf.Min(curCell.row, mEditStartCell.row), col = Mathf.Min(curCell.col, mEditStartCell.col) };
-        CellIndex maxCell = new CellIndex() { row = Mathf.Max(curCell.row, mEditStartCell.row), col = Mathf.Max(curCell.col, mEditStartCell.col) };
-
-        UpdateDimensions(minCell, maxCell);
-    }
-
-    public override void EditDragEnd(Vector2 pos) {
-        EditDragUpdate(pos);
+        UpdatePlacementValid();
+        DimensionChanged();
     }
 
     public override void EditMove(Vector2 delta) {
@@ -115,6 +96,10 @@ public class BlockMatter : Block {
         return mEditIsValid;
     }
 
+    public override void EditEnableCollision(bool aEnable) {
+        mBody.simulated = aEnable;
+    }
+
     protected override void ApplyMode(Mode prevMode) {
         switch(mode) {
             case Mode.None:
@@ -126,16 +111,12 @@ public class BlockMatter : Block {
                 mSpriteRender.color = new Color(mSpriteDefaultColor.r, mSpriteDefaultColor.g, mSpriteDefaultColor.b, ghostAlpha);
 
                 mBody.simulated = false;
-
-                mColl.enabled = false;
                 break;
 
             case Mode.Solid:
                 mSpriteRender.color = mSpriteDefaultColor;
 
                 mBody.simulated = true;
-
-                mColl.enabled = true;
                 break;
         }
     }
@@ -214,7 +195,7 @@ public class BlockMatter : Block {
         
         //check pallete count
         //check overlap
-        if(matterCount <= GameMapController.instance.PaletteCount(blockName)) {
+        if(IsCountValid()) {
             var checkSize = new Vector2(mColl.size.x - overlapThreshold, mColl.size.y - overlapThreshold);
 
             var collider = Physics2D.OverlapBox(transform.position, checkSize, 0f, GameData.instance.blockInvalidMask);

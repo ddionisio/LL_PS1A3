@@ -12,6 +12,24 @@ public class PalettePanel : MonoBehaviour {
     private M8.CacheList<PaletteItemWidget> mActiveWidgets = new M8.CacheList<PaletteItemWidget>(widgetCacheCapacity);
     private bool mIsShow = false;
 
+    public int GetGhostCount(string blockName) {
+        for(int i = 0; i < mActiveWidgets.Count; i++) {
+            if(mActiveWidgets[i].blockName == blockName)
+                return mActiveWidgets[i].ghostMatterCount;
+        }
+
+        return 0;
+    }
+
+    public int GetGhostCountExclude(Block block) {
+        for(int i = 0; i < mActiveWidgets.Count; i++) {
+            if(mActiveWidgets[i].blockName == block.blockName)
+                return mActiveWidgets[i].GetGhostMatterCount(block);
+        }
+
+        return 0;
+    }
+
     public void Show(bool aShow) {
         if(mIsShow != aShow) {
             mIsShow = aShow;
@@ -25,18 +43,20 @@ public class PalettePanel : MonoBehaviour {
                     var blockInfo = blocks[i];
 
                     if(GameMapController.instance.PaletteCount(blockInfo.name) > 0)
-                        AddNewBlock(blockInfo, false);
+                        AddNewPaletteItem(blockInfo, false);
                 }
 
                 //TODO: animation
 
                 GameMapController.instance.paletteUpdateCallback += OnGamePaletteUpdate;
                 GameMapController.instance.modeChangeCallback += OnGameModeChange;
+                GameMapController.instance.blockSelectedChangeCallback += OnGameBlockSelectChanged;
             }
             else {
                 GameMapController.instance.paletteUpdateCallback -= OnGamePaletteUpdate;
                 GameMapController.instance.modeChangeCallback -= OnGameModeChange;
-                
+                GameMapController.instance.blockSelectedChangeCallback -= OnGameBlockSelectChanged;
+
                 //TODO: animation, then clear and hide
 
                 //clear up widgets
@@ -57,13 +77,12 @@ public class PalettePanel : MonoBehaviour {
                 break;
 
             case GameMapController.Mode.Edit:
-                GameMapController.instance.blockNameActive = "";
                 GameMapController.instance.mode = GameMapController.Mode.Play;
                 break;
         }
     }
     
-    void AddNewBlock(BlockInfo blockInfo, bool showIntro) {
+    void AddNewPaletteItem(BlockInfo blockInfo, bool showIntro) {
         var parms = new M8.GenericParams();
         parms[PaletteItemWidget.paramBlockInfo] = blockInfo;
         parms[PaletteItemWidget.paramShowIntro] = showIntro;
@@ -102,8 +121,17 @@ public class PalettePanel : MonoBehaviour {
 
         if(widgetInd == -1) {
             var blockInfo = GameData.instance.GetBlockInfo(blockName);
-            AddNewBlock(blockInfo, true);
+            AddNewPaletteItem(blockInfo, true);
         }
+    }
+
+    void OnGameBlockSelectChanged(Block newBlock, Block prevBlock) {
+        var blockEdit = HUD.instance.blockMatterExpandPanel;
+
+        if(newBlock)
+            blockEdit.Show(newBlock);
+        else if(prevBlock == blockEdit.block)
+            blockEdit.Hide();
     }
 
     void OnWidgetRelease(PaletteItemWidget widget) {

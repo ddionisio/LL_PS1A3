@@ -16,10 +16,8 @@ public class GameMapController : M8.SingletonBehaviour<GameMapController> {
 
                 switch(mMode) {
                     case Mode.Play:
-                        //check if block expand is active, hide if so
-                        if(HUD.instance.blockMatterExpandPanel.isActive)
-                            HUD.instance.blockMatterExpandPanel.Cancel(false);
-
+                        blockSelected = null;
+                        
                         M8.SceneManager.instance.Resume();
                         break;
                     case Mode.Edit:
@@ -35,15 +33,15 @@ public class GameMapController : M8.SingletonBehaviour<GameMapController> {
 
     public GameMapData mapData { get { return mMapData; } }
 
-    public string blockNameActive {
-        get { return mBlockNameActive; }
+    public Block blockSelected {
+        get { return mBlockSelected; }
         set {
-            if(mBlockNameActive != value) {
-                string prevBlockName = mBlockNameActive;
-                mBlockNameActive = value;
+            if(mBlockSelected != value) {
+                var prevBlock = mBlockSelected;
+                mBlockSelected = value;
 
-                if(blockActiveChangeCallback != null)
-                    blockActiveChangeCallback(mBlockNameActive, prevBlockName);
+                if(blockSelectedChangeCallback != null)
+                    blockSelectedChangeCallback(mBlockSelected, prevBlock);
             }
         }
     }
@@ -61,13 +59,13 @@ public class GameMapController : M8.SingletonBehaviour<GameMapController> {
 
     public event System.Action<string, int, int> paletteUpdateCallback; //block name, new amount, delta
     public event System.Action<Mode> modeChangeCallback;
-    public event System.Action<string, string> blockActiveChangeCallback; //new block, previous block
+    public event System.Action<Block, Block> blockSelectedChangeCallback; //new block, previous block
 
     private Dictionary<string, int> mBlockPalette = new Dictionary<string, int>();
 
     private Mode mMode = Mode.Play;
 
-    private string mBlockNameActive;
+    private Block mBlockSelected;
 
     private GameMapData mMapData;
 

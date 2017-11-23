@@ -20,25 +20,10 @@ public abstract class BlockWidget : Block {
         }
     }
     
-    public override Bounds gatherBounds { get { return editBounds; } }
-
     public override bool EditIsExpandable() { return false; }
-
-    public override void EditStart(Vector2 pos) {
-        var mapData = GameMapController.instance.mapData;
-        var cellSize = GameData.instance.blockSize;
-
-        CellIndex curCell = mapData.GetCellIndex(pos);
-
-        transform.position = mapData.GetPositionFromCell(curCell) + cellSize * 0.5f;
-    }
-
-    public override void EditDragUpdate(Vector2 pos) {
-        EditStart(pos);
-    }
-
-    public override void EditDragEnd(Vector2 pos) {
-        EditStart(pos);
+    
+    public override void EditSetPosition(Vector2 pos) {
+        transform.position = pos;
     }
 
     public override void EditMove(Vector2 delta) {

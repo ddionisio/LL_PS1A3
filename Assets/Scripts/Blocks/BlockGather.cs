@@ -123,7 +123,7 @@ public class BlockGather : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         if(collActive) {
             if(mBoxColl) {
                 //setup box size based on bound size of block
-                var blockCollBounds = block.gatherBounds;
+                var blockCollBounds = block.editBounds;
 
                 var size = (Vector2)blockCollBounds.size;
                 size.x += sizeOfs;

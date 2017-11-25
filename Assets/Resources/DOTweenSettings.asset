@@ -19,7 +19,7 @@ MonoBehaviour:
   logBehaviour: 2
   drawGizmos: 1
   defaultRecyclable: 0
-  defaultAutoPlay: 3
+  defaultAutoPlay: 0
   defaultUpdateType: 0
   defaultTimeScaleIndependent: 0
   defaultEaseType: 6

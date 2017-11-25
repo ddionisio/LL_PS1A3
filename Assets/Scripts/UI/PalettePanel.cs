@@ -9,8 +9,17 @@ public class PalettePanel : MonoBehaviour {
     public M8.PoolController widgetPool;
     public Transform widgetContainer;
 
+    public M8.Animator.AnimatorData animator;
+    public string takeEditShow;
+    public string takeEditHide;
+
+    public Graphic toggleButton;
+    
     private M8.CacheList<PaletteItemWidget> mActiveWidgets = new M8.CacheList<PaletteItemWidget>(widgetCacheCapacity);
     private bool mIsShow = false;
+
+    private int mTakeEditShowId;
+    private int mTakeEditHideId;
 
     public int GetGhostCount(string blockName) {
         for(int i = 0; i < mActiveWidgets.Count; i++) {
@@ -46,7 +55,17 @@ public class PalettePanel : MonoBehaviour {
                         AddNewPaletteItem(blockInfo, false);
                 }
 
-                //TODO: animation
+                //ensure we are positioned properly
+                switch(GameMapController.instance.mode) {
+                    case GameMapController.Mode.Play:
+                        toggleButton.transform.localScale = new Vector3(-1f, 1f, 1f);
+                        animator.ResetTake(mTakeEditShowId);
+                        break;
+                    case GameMapController.Mode.Edit:
+                        toggleButton.transform.localScale = new Vector3(1f, 1f, 1f);
+                        animator.ResetTake(mTakeEditHideId);
+                        break;
+                }
 
                 GameMapController.instance.paletteUpdateCallback += OnGamePaletteUpdate;
                 GameMapController.instance.modeChangeCallback += OnGameModeChange;
@@ -56,9 +75,7 @@ public class PalettePanel : MonoBehaviour {
                 GameMapController.instance.paletteUpdateCallback -= OnGamePaletteUpdate;
                 GameMapController.instance.modeChangeCallback -= OnGameModeChange;
                 GameMapController.instance.blockSelectedChangeCallback -= OnGameBlockSelectChanged;
-
-                //TODO: animation, then clear and hide
-
+                
                 //clear up widgets
                 for(int i = 0; i < mActiveWidgets.Count; i++)
                     widgetPool.Release(mActiveWidgets[i].gameObject);
@@ -81,7 +98,20 @@ public class PalettePanel : MonoBehaviour {
                 break;
         }
     }
-    
+
+    void OnDestroy() {
+        if(animator) {
+            animator.takeCompleteCallback -= OnAnimatorComplete;
+        }
+    }
+
+    void Awake() {
+        animator.takeCompleteCallback += OnAnimatorComplete;
+
+        mTakeEditShowId = animator.GetTakeIndex(takeEditShow);
+        mTakeEditHideId = animator.GetTakeIndex(takeEditHide);
+    }
+
     void AddNewPaletteItem(BlockInfo blockInfo, bool showIntro) {
         var parms = new M8.GenericParams();
         parms[PaletteItemWidget.paramBlockInfo] = blockInfo;
@@ -91,17 +121,31 @@ public class PalettePanel : MonoBehaviour {
 
         widget.releaseCallback += OnWidgetRelease;
 
+        //hide if we are in play mode
+        if(GameMapController.instance.mode == GameMapController.Mode.Play)
+            widget.gameObject.SetActive(false);
+
         mActiveWidgets.Add(widget);
     }
 
     void OnGameModeChange(GameMapController.Mode mode) {
         switch(mode) {
             case GameMapController.Mode.Play:
+                toggleButton.raycastTarget = false;
+
                 //play edit mode exit
+                animator.Play(mTakeEditHideId);
                 break;
 
             case GameMapController.Mode.Edit:
+                toggleButton.raycastTarget = false;
+
+                //show active items
+                for(int i = 0; i < mActiveWidgets.Count; i++)
+                    mActiveWidgets[i].gameObject.SetActive(true);
+
                 //play edit mode enter
+                animator.Play(mTakeEditShowId);
                 break;
         }
     }
@@ -138,5 +182,23 @@ public class PalettePanel : MonoBehaviour {
         widget.releaseCallback -= OnWidgetRelease;
 
         mActiveWidgets.Remove(widget);
+    }
+
+    void OnAnimatorComplete(M8.Animator.AnimatorData anim, M8.Animator.AMTakeData take) {
+        toggleButton.raycastTarget = true;
+
+        switch(GameMapController.instance.mode) {
+            case GameMapController.Mode.Play:
+                toggleButton.transform.localScale = new Vector3(-1f, 1f, 1f);
+
+                //hide active widgets on toggle hide end
+                for(int i = 0; i < mActiveWidgets.Count; i++)
+                    mActiveWidgets[i].gameObject.SetActive(false);
+                break;
+
+            case GameMapController.Mode.Edit:
+                toggleButton.transform.localScale = new Vector3(1f, 1f, 1f);
+                break;
+        }
     }
 }

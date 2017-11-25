@@ -102,26 +102,24 @@ public class GameMapController : M8.SingletonBehaviour<GameMapController> {
         GameCamera.instance.MoveTo(player.transform.position);
 
         mode = Mode.Play; //just in case
-
-        HUD.instance.HideAll();
-
+                
         //show victory modal
         M8.UIModal.Manager.instance.ModalOpen(Modals.victory);
     }
 
     IEnumerator Start() {
-        do {
-            yield return null;
-        } while(M8.SceneManager.instance.isLoading);
+        yield return null;
 
         //show game HUD elements
         if(HUD.instance) {
             HUD.instance.palettePanel.Show(true);
-
             HUD.instance.retryButtonRoot.SetActive(true);
-
-            mode = Mode.Edit;
         }
+
+        while(M8.SceneManager.instance.isLoading)
+            yield return null;
+        
+        mode = Mode.Edit;
     }
 
     protected override void OnInstanceInit() {

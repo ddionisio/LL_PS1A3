@@ -208,7 +208,9 @@ public class BlockMatterExpandPanel : MonoBehaviour, IBeginDragHandler, IDragHan
 
         infoMatterCountText.color =  isValid ? infoMatterCountValidColor : infoMatterCountInvalidColor;
 
-        infoMatterCountText.text = string.Format("{0}/{1}", curBlockCount.ToString("D2"), maxCount.ToString("D2"));
+        float mass = mBlock.mainBody ? mBlock.mainBody.mass : 0f;
+
+        infoMatterCountText.text = string.Format("{0}/{1}\n{2:f2} kg", curBlockCount.ToString("D2"), maxCount.ToString("D2"), mass);
 
         if(infoMatterDeployButton)
             infoMatterDeployButton.interactable = isValid && mBlock.EditIsPlacementValid();

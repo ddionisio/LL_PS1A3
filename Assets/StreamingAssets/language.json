@@ -17,7 +17,7 @@
 	"sound": "SOUND"
 	"music": "MUSIC",
 	"restart": "RESTART",
-	"restartDesc": "Confirm to try again.",
+	"restartDesc": "Confirm to reset the level.",
 	"confirm": "CONFIRM",
 	"cancel": "CANCEL",
 	

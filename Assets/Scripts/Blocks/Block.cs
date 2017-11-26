@@ -40,6 +40,8 @@ public abstract class Block : M8.EntityBase, IComparable<Block> {
     public virtual int matterCount { get { return cellSize.area; } }
 
     public abstract CellIndex cellSize { get; }
+
+    public abstract Rigidbody2D mainBody { get; }
     
     /// <summary>
     /// Where to attach the edit control

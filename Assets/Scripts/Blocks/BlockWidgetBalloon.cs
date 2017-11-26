@@ -24,7 +24,9 @@ public class BlockWidgetBalloon : BlockWidget {
     public SpriteRenderer widgetSprite;
         
     public Transform widgetRoot;
-    
+
+    public override Rigidbody2D mainBody { get { return mBody; } }
+
     public override Bounds editBounds {
         get {
             return new Bounds(mEditPos, GameData.instance.blockSize);

@@ -18,6 +18,8 @@ public class BlockMatter : Block {
 
     public override CellIndex cellSize { get { return mCellSize; } }
 
+    public override Rigidbody2D mainBody { get { return mBody; } }
+
     public override Transform editAttach { get { return transform; } }
     
     public override Bounds editBounds {

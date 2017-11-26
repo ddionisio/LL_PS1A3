@@ -11,6 +11,16 @@
 	"blockIronName": "Iron",
 	"blockBalloonName": "Balloon",
 	"blockRubberName": "Rubber",
+	
+	"options": "OPTIONS",
+	"close": "CLOSE",
+	"sound": "SOUND"
+	"music": "MUSIC",
+	"restart": "RESTART",
+	"restartDesc": "Confirm to try again.",
+	"confirm": "CONFIRM",
+	"cancel": "CANCEL",
+	
 	"test": "Test",
   },
 }

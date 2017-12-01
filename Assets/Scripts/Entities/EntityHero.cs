@@ -15,6 +15,13 @@ public class EntityHero : M8.EntityBase {
     [Header("Components")]
     public GameObject touchGO;
 
+    [Header("States")]
+    public M8.Animator.AnimatorData spawnAnim;
+    public string spawnAnimTake = "start";
+
+    public M8.Animator.AnimatorData deathAnim;
+    public string deathAnimTake = "start";
+
     [Header("Data")]
     public MoveState moveStart = MoveState.Right;
     public float jumpImpulse = 5f;
@@ -115,6 +122,8 @@ public class EntityHero : M8.EntityBase {
                 break;
 
             case EntityState.Victory:
+                physicsActive = true;
+
                 mStateRout = StartCoroutine(DoVictory());
                 break;
         }
@@ -158,6 +167,9 @@ public class EntityHero : M8.EntityBase {
 
         mJumpEndLastTime = 0f;
 
+        if(spawnAnim) spawnAnim.gameObject.SetActive(false);
+        if(deathAnim) deathAnim.gameObject.SetActive(false);
+
         //populate data/state for ai, player control, etc.
 
         //start ai, player control, etc
@@ -190,6 +202,9 @@ public class EntityHero : M8.EntityBase {
         mMoveCtrl.triggerExitCallback += OnMoveTriggerExit;
 
         mStartPos = transform.position;
+
+        if(spawnAnim) spawnAnim.gameObject.SetActive(false);
+        if(deathAnim) deathAnim.gameObject.SetActive(false);
     }
 
     // Use this for one-time initialization
@@ -331,19 +346,35 @@ public class EntityHero : M8.EntityBase {
         } while(M8.SceneManager.instance.isLoading);
 
         //animations and stuff
+        if(spawnAnim) {
+            spawnAnim.gameObject.SetActive(true);
+            spawnAnim.Play(spawnAnimTake);
+
+            while(spawnAnim.isPlaying)
+                yield return null;
+
+            spawnAnim.gameObject.SetActive(false);
+        }
 
         state = (int)EntityState.Normal;
     }
 
     IEnumerator DoDead() {
         //animations and stuff
+        if(deathAnim) {
+            deathAnim.gameObject.SetActive(true);
+            deathAnim.Play(deathAnimTake);
 
-        yield return null;
+            while(deathAnim.isPlaying)
+                yield return null;
+
+            deathAnim.gameObject.SetActive(false);
+        }
 
         //return to start position
         transform.position = mStartPos;
 
-        state = (int)EntityState.Normal;
+        state = (int)EntityState.Spawn;
     }
 
     IEnumerator DoVictory() {

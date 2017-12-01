@@ -65,8 +65,6 @@ public class EntityHeroAnimation : MonoBehaviour {
         switch(mState) {
             case EntityState.Normal:
             case EntityState.Victory:
-                sprite.gameObject.SetActive(true);
-
                 mIsGrounded = heroEntity.moveCtrl.isGrounded;
                 mMoveState = heroEntity.moveState;
                 mVelY = Mathf.Sign(heroEntity.moveCtrl.localVelocity.y)*velYThreshold;
@@ -79,10 +77,10 @@ public class EntityHeroAnimation : MonoBehaviour {
     private void UpdateAnim() {
         switch(mMoveState) {
             case EntityHero.MoveState.Left:
-                sprite.transform.localScale = new Vector3(-1f, 1f, 1f);
+                sprite.flipX = true;
                 break;
             case EntityHero.MoveState.Right:
-                sprite.transform.localScale = new Vector3(1f, 1f, 1f);
+                sprite.flipX = false;
                 break;
         }
 

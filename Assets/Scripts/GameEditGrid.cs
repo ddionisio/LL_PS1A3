@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class GameEditGrid : MonoBehaviour {
     public GameObject gridGO;
+    public float fadeDelay = 0.3f;
 
     private SpriteRenderer mGridSpriteRender;
     private bool mGridIsShown = false;
+    private bool mIsFade;
+    private float mLastFadeTime;
     private Coroutine mGridUpdateRout;
+    private Color mCurColor;
+    private Color mDefaultColor;
 
     void OnDestroy() {
         if(GameMapController.instance)
@@ -17,6 +22,9 @@ public class GameEditGrid : MonoBehaviour {
     void Awake() {
         mGridSpriteRender = gridGO.GetComponent<SpriteRenderer>();
         gridGO.SetActive(false);
+
+        mDefaultColor = mGridSpriteRender.color;
+        mCurColor = Color.clear;
 
         GameMapController.instance.modeChangeCallback += OnGameModeChanged;
     }
@@ -39,21 +47,19 @@ public class GameEditGrid : MonoBehaviour {
 
             if(mGridIsShown) {
                 gridGO.SetActive(true);
-                                
-                if(mGridUpdateRout == null)
-                    mGridUpdateRout = StartCoroutine(DoGridUpdate());
-            }
-            else {
-                gridGO.SetActive(false);
 
-                if(mGridUpdateRout != null) {
+                if(mGridUpdateRout != null)
                     StopCoroutine(mGridUpdateRout);
-                    mGridUpdateRout = null;
-                }
+                
+                mGridUpdateRout = StartCoroutine(DoGridUpdate());
             }
+
+            mIsFade = true;
+            mLastFadeTime = Time.realtimeSinceStartup;
+            mCurColor = mGridSpriteRender.color;
         }
     }
-
+    
     IEnumerator DoGridUpdate() {
         var gameCam = GameCamera.instance;
         Vector2 lastCameraPos = new Vector2(float.MaxValue, float.MaxValue);
@@ -85,7 +91,30 @@ public class GameEditGrid : MonoBehaviour {
                 lastCameraPos = curCameraPos;
             }
 
+            if(mIsFade) {
+                float time = Time.realtimeSinceStartup;
+                float curFadeTime = time - mLastFadeTime;
+                if(curFadeTime > fadeDelay) {
+                    curFadeTime = fadeDelay;
+                    mIsFade = false;
+                }
+
+                float t = curFadeTime / fadeDelay;
+
+                if(mGridIsShown) {
+                    mGridSpriteRender.color = Color.Lerp(mCurColor, mDefaultColor, t);
+                }
+                else {
+                    mGridSpriteRender.color = Color.Lerp(mCurColor, Color.clear, t);
+
+                    if(!mIsFade)
+                        break;
+                }
+            }
+
             yield return null;
         }
+
+        gridGO.SetActive(true);
     }
 }

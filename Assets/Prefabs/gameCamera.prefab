@@ -103,7 +103,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1497181684127048}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 5, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4697336053369594}
@@ -212,7 +212,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.6012039, y: -0.00000047683716}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -223,7 +223,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 35.169815, y: 19.325329}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
 --- !u!81 &81979089597326478
 AudioListener:
@@ -338,6 +338,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridGO: {fileID: 1299764009745510}
+  fadeDelay: 0.2
 --- !u!124 &124174304957895940
 Behaviour:
   m_ObjectHideFlags: 1
@@ -379,8 +380,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 6329211998a2d5e4f8cce9f4d829f0a4, type: 3}
-  m_Color: {r: 0.33957866, g: 0.9264706, b: 0.32017732, a: 0.1254902}
+  m_Sprite: {fileID: 21300000, guid: f91ca4a4961cb4043996a46b06a93a77, type: 3}
+  m_Color: {r: 0.11072664, g: 0.9411765, b: 0.11072664, a: 0.247}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2

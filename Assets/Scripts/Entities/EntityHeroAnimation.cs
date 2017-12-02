@@ -40,6 +40,9 @@ public class EntityHeroAnimation : MonoBehaviour {
     }
 
     void Update() {
+        if(GameMapController.instance.mode == GameMapController.Mode.Edit)
+            return;
+
         switch(mState) {
             case EntityState.Normal:
             case EntityState.Victory:
@@ -65,7 +68,11 @@ public class EntityHeroAnimation : MonoBehaviour {
         switch(mState) {
             case EntityState.Normal:
             case EntityState.Victory:
-                mIsGrounded = heroEntity.moveCtrl.isGrounded;
+                if((EntityState)ent.prevState == EntityState.Spawn)
+                    mIsGrounded = true;
+                else
+                    mIsGrounded = heroEntity.moveCtrl.isGrounded;
+
                 mMoveState = heroEntity.moveState;
                 mVelY = Mathf.Sign(heroEntity.moveCtrl.localVelocity.y)*velYThreshold;
 

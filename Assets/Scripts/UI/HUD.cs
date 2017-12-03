@@ -17,11 +17,26 @@ public class HUD : M8.SingletonBehaviour<HUD> {
     public PaletteItemDragWidget paletteItemDrag;
     public GameObject retryButtonRoot;
 
+    [Header("Misc HUDs")]
+    public Transform miscContainer;
+
+    private Dictionary<string, GameObject> mMiscHUDs;
+
     public void HideAll() {
         HUD.instance.blockMatterExpandPanel.Cancel();
         HUD.instance.palettePanel.Show(false);
 
         retryButtonRoot.SetActive(false);
+
+        foreach(var pair in mMiscHUDs) {
+            pair.Value.SetActive(false);
+        }
+    }
+
+    public GameObject GetMiscHUD(string name) {
+        GameObject go;
+        mMiscHUDs.TryGetValue(name, out go);
+        return go;
     }
 
     protected override void OnInstanceInit() {
@@ -32,5 +47,15 @@ public class HUD : M8.SingletonBehaviour<HUD> {
         paletteItemDrag.gameObject.SetActive(false);
 
         retryButtonRoot.SetActive(false);
+
+        mMiscHUDs = new Dictionary<string, GameObject>();
+        if(miscContainer) {
+            for(int i = 0; i < miscContainer.childCount; i++) {
+                var child = miscContainer.GetChild(i);
+                var childGO = child.gameObject;
+                mMiscHUDs.Add(childGO.name, childGO);
+                childGO.SetActive(false);
+            }
+        }
     }
 }

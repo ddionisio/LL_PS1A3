@@ -14,12 +14,30 @@ public class PalettePanel : MonoBehaviour {
     public string takeEditHide;
 
     public Graphic toggleButton;
+
+    public bool isShown { get { return mIsShow; } }
     
     private M8.CacheList<PaletteItemWidget> mActiveWidgets = new M8.CacheList<PaletteItemWidget>(widgetCacheCapacity);
     private bool mIsShow = false;
 
     private int mTakeEditShowId;
     private int mTakeEditHideId;
+
+    public PaletteItemWidget GetActiveWidget(int index) {
+        if(index >= mActiveWidgets.Count)
+            return null;
+
+        return mActiveWidgets[index];
+    }
+
+    public PaletteItemWidget GetActiveWidget(string blockName) {
+        for(int i = 0; i < mActiveWidgets.Count; i++) {
+            if(mActiveWidgets[i].blockName == blockName)
+                return mActiveWidgets[i];
+        }
+
+        return null;
+    }
 
     public int GetGhostCount(string blockName) {
         for(int i = 0; i < mActiveWidgets.Count; i++) {

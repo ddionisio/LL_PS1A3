@@ -20,6 +20,8 @@
 	"restartDesc": "Confirm to reset the level.",
 	"confirm": "CONFIRM",
 	"cancel": "CANCEL",
+	"goal": "Goal!",
+	"dragItemDesc": "Drag the item into the world.",
 	
 	"test": "Test",
   },

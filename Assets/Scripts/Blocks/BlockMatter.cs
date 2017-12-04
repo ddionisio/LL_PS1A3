@@ -9,6 +9,11 @@ public class BlockMatter : Block {
 
     [Header("Matter")]
 
+    public SpriteRenderer spriteBody;
+    public float spriteBodyBorderPixelOfs = 3f;
+
+    public SpriteRenderer spriteFrame;
+
     [Range(0f, 1f)]
     public float ghostAlpha;
 
@@ -30,18 +35,20 @@ public class BlockMatter : Block {
             return new Bounds(center, size);
         }
     }
-
-    private SpriteRenderer mSpriteRender;
+    
     private Rigidbody2D mBody;
     private BoxCollider2D mColl;
 
-    private Color mSpriteDefaultColor;
+    private Color mSpriteBodyDefaultColor;
+    private Color mSpriteFrameDefaultColor;
 
     private CellIndex mCellSize;
 
     private Vector2 mEditStartPos;
     private CellIndex mEditStartCell;
     private bool mEditIsValid;
+
+    private float mSpriteBodyBorderOfs;
 
     public override bool EditIsExpandable() {
         return true;
@@ -108,15 +115,18 @@ public class BlockMatter : Block {
                 break;
 
             case Mode.Ghost:
-                mSpriteDefaultColor = mSpriteRender.color;
+                mSpriteBodyDefaultColor = spriteBody.color;
+                mSpriteFrameDefaultColor = spriteFrame.color;
 
-                mSpriteRender.color = new Color(mSpriteDefaultColor.r, mSpriteDefaultColor.g, mSpriteDefaultColor.b, ghostAlpha);
+                spriteBody.color = new Color(mSpriteBodyDefaultColor.r, mSpriteBodyDefaultColor.g, mSpriteBodyDefaultColor.b, ghostAlpha);
+                spriteFrame.color = new Color(mSpriteFrameDefaultColor.r, mSpriteFrameDefaultColor.g, mSpriteFrameDefaultColor.b, ghostAlpha);
 
                 mBody.simulated = false;
                 break;
 
             case Mode.Solid:
-                mSpriteRender.color = mSpriteDefaultColor;
+                spriteBody.color = mSpriteBodyDefaultColor;
+                spriteFrame.color = mSpriteFrameDefaultColor;
 
                 mBody.simulated = true;
                 break;
@@ -125,7 +135,8 @@ public class BlockMatter : Block {
 
     protected override void OnSpawned(GenericParams parms) {
         //default values
-        mSpriteDefaultColor = mSpriteRender.color;
+        mSpriteBodyDefaultColor = spriteBody.color;
+        mSpriteFrameDefaultColor = spriteFrame.color;
 
         mCellSize = new CellIndex(1, 1);
         mBody.velocity = Vector2.zero;
@@ -137,26 +148,30 @@ public class BlockMatter : Block {
     }
 
     protected override void OnDespawned() {
-        mSpriteRender.color = mSpriteDefaultColor;
+        spriteBody.color = mSpriteBodyDefaultColor;
+        spriteFrame.color = mSpriteFrameDefaultColor;
     }
 
     protected override void Awake() {
         base.Awake();
-
-        mSpriteRender = GetComponentInChildren<SpriteRenderer>();
+        
         mBody = GetComponent<Rigidbody2D>();
         mColl = GetComponent<BoxCollider2D>();
 
         mBody.useAutoMass = true;
         mColl.density = density;
+
+        mSpriteBodyBorderOfs = spriteBodyBorderPixelOfs / spriteBody.sprite.pixelsPerUnit;
     }
 
     private void ApplyCurrentCellSize() {
         var cellSize = GameData.instance.blockSize;
 
         Vector2 size = new Vector2(mCellSize.col * cellSize.x, mCellSize.row * cellSize.y);
+        Vector2 bodySize = new Vector2(size.x - mSpriteBodyBorderOfs*2f, size.y - mSpriteBodyBorderOfs*2f);
 
-        mSpriteRender.size = size;
+        spriteBody.size = bodySize;
+        spriteFrame.size = size;
         mColl.size = size;
     }
 
@@ -207,18 +222,21 @@ public class BlockMatter : Block {
         else
             mEditIsValid = false;
 
-        if(mEditIsValid != lastEditIsValid)
+        //if(mEditIsValid != lastEditIsValid)
             UpdatePlacementValidDisplay(mEditIsValid);
     }
 
     private void UpdatePlacementValidDisplay(bool valid) {
-        float alpha = mode == Mode.Ghost ? ghostAlpha : mSpriteDefaultColor.a;
+        float alpha = mode == Mode.Ghost ? ghostAlpha : mSpriteBodyDefaultColor.a;
 
         if(valid) {
-            mSpriteRender.color = new Color(mSpriteDefaultColor.r, mSpriteDefaultColor.g, mSpriteDefaultColor.g, alpha);
+            spriteBody.color = new Color(mSpriteBodyDefaultColor.r, mSpriteBodyDefaultColor.g, mSpriteBodyDefaultColor.g, alpha);
+            spriteFrame.color = new Color(mSpriteFrameDefaultColor.r, mSpriteFrameDefaultColor.g, mSpriteFrameDefaultColor.g, alpha);
         }
         else {
-            mSpriteRender.color = new Color(invalidColor.r, invalidColor.g, invalidColor.g, alpha);
+            var clr = new Color(invalidColor.r, invalidColor.g, invalidColor.g, alpha);
+            spriteBody.color = clr;
+            spriteFrame.color = clr;
         }
     }
 }

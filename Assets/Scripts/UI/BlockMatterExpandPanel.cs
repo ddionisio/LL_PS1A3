@@ -97,6 +97,8 @@ public class BlockMatterExpandPanel : MonoBehaviour, IBeginDragHandler, IDragHan
             if(GameMapController.instance.blockSelected == _block)
                 GameMapController.instance.blockSelected = null;
 
+            string blockName = _block.blockName;
+
             _block.Release();
             /*if(!forceReleaseBlock && _block.EditIsPlacementValid()) {
                 GameMapController.instance.PaletteChange(_block.blockName, -_block.matterCount);
@@ -104,6 +106,8 @@ public class BlockMatterExpandPanel : MonoBehaviour, IBeginDragHandler, IDragHan
             }
             else
                 M8.PoolController.ReleaseAuto(_block.gameObject);*/
+
+            GameMapController.instance.PaletteBlockCancel(blockName);
         }
     }
 
@@ -204,7 +208,7 @@ public class BlockMatterExpandPanel : MonoBehaviour, IBeginDragHandler, IDragHan
 
         int maxCount = (paletteBlockCount - ghostBlockCount) + curBlockCount;
 
-        bool isValid = curBlockCount <= maxCount;
+        bool isValid = curBlockCount <= maxCount && mBlock.EditIsPlacementValid();
 
         infoMatterCountText.color =  isValid ? infoMatterCountValidColor : infoMatterCountInvalidColor;
 

@@ -61,6 +61,7 @@ public class GameMapController : M8.SingletonBehaviour<GameMapController> {
     public event System.Action<Mode> modeChangeCallback;
     public event System.Action<Block, Block> blockSelectedChangeCallback; //new block, previous block
     public event System.Action<Block> blockGhostDroppedCallback; //called when a block from the palette has been placed into the world (only if valid)
+    public event System.Action<string> blockGhostCancelCallback; //called when a block ghost was cancelled via block controller (block name)
 
     private Dictionary<string, int> mBlockPalette = new Dictionary<string, int>();
 
@@ -102,6 +103,14 @@ public class GameMapController : M8.SingletonBehaviour<GameMapController> {
     public void PaletteBlockGhostDropped(Block blockGhost) {
         if(blockGhostDroppedCallback != null)
             blockGhostDroppedCallback(blockGhost);
+    }
+
+    /// <summary>
+    /// Called by BlockMatterExpandPanel when a block ghost is cancelled
+    /// </summary>
+    public void PaletteBlockCancel(string blockName) {
+        if(blockGhostCancelCallback != null)
+            blockGhostCancelCallback(blockName);
     }
 
     public void Victory() {

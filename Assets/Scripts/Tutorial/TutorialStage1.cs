@@ -15,6 +15,7 @@ public class TutorialStage1 : MonoBehaviour {
         if(GameMapController.instance) {
             GameMapController.instance.modeChangeCallback -= OnGameModeChanged;
             GameMapController.instance.blockGhostDroppedCallback -= OnGameBlockGhostDropped;
+            GameMapController.instance.blockGhostCancelCallback -= OnGameBlockGhostCancel;
         }
     }
 
@@ -27,15 +28,17 @@ public class TutorialStage1 : MonoBehaviour {
 
         GameMapController.instance.modeChangeCallback += OnGameModeChanged;
         GameMapController.instance.blockGhostDroppedCallback += OnGameBlockGhostDropped;
+        GameMapController.instance.blockGhostCancelCallback += OnGameBlockGhostCancel;
     }
 
     IEnumerator DoEditTutorial() {
         float startTime = Time.realtimeSinceStartup;
-        while(Time.realtimeSinceStartup - startTime <= 1.0f)
+        while(Time.realtimeSinceStartup - startTime <= 0.5f)
             yield return null;
 
         //show palette block drop help
-        mTutorialPaletteItemDragGO = HUD.instance.GetMiscHUD("tutorialPaletteItemDrag");
+        if(!mTutorialPaletteItemDragGO)
+            mTutorialPaletteItemDragGO = HUD.instance.GetMiscHUD("tutorialPaletteItemDrag");
         mTutorialPaletteItemDragGO.SetActive(true);
 
         if(blockAreaHintGO)
@@ -48,21 +51,40 @@ public class TutorialStage1 : MonoBehaviour {
         mTutorialPaletteItemDragGO.SetActive(false);
 
         //show block control help
-        mTutorialBlockControlGO = HUD.instance.GetMiscHUD("tutorialBlockControl");
+        if(!mTutorialBlockControlGO)
+            mTutorialBlockControlGO = HUD.instance.GetMiscHUD("tutorialBlockControl");
         mTutorialBlockControlGO.SetActive(true);
-
-        mIsEditTutorialFinished = true;
     }
 
     void OnGameBlockGhostDropped(Block blockGhost) {
         mHasDeployedBlock = true;
     }
 
+    void OnGameBlockGhostCancel(string blockName) {
+        mHasDeployedBlock = false;
+
+        if(!mIsEditTutorialFinished) {
+            if(mTutorialBlockControlGO)
+                mTutorialBlockControlGO.SetActive(false);
+
+            StopAllCoroutines();
+            StartCoroutine(DoEditTutorial());
+        }
+    }
+
     void OnGameModeChanged(GameMapController.Mode mode) {
+        var goalGO = HUD.instance.GetMiscHUD("goal");
+
         switch(mode) {
             case GameMapController.Mode.Edit:
                 if(!mIsEditTutorialFinished)
                     StartCoroutine(DoEditTutorial());
+                else {
+                    if(mTutorialBlockControlGO)
+                        mTutorialBlockControlGO.SetActive(true);
+                }
+                
+                goalGO.SetActive(false);
                 break;
 
             case GameMapController.Mode.Play:                
@@ -74,9 +96,11 @@ public class TutorialStage1 : MonoBehaviour {
 
                 if(blockAreaHintGO)
                     blockAreaHintGO.SetActive(false);
-
-                var goalGO = HUD.instance.GetMiscHUD("goal");
+                
                 goalGO.SetActive(true);
+
+                if(mHasDeployedBlock)
+                    mIsEditTutorialFinished = true;
                 break;
         }
     }

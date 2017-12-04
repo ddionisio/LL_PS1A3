@@ -21,7 +21,10 @@
 	"confirm": "CONFIRM",
 	"cancel": "CANCEL",
 	"goal": "Goal!",
-	"dragItemDesc": "Drag the item into the world.",
+	"dragItemDesc": "Drag the matter into the world.",
+	"move": "MOVE",
+	"expand": "EXPAND",
+	"playDesc": "Press this when you're ready!",
 	
 	"test": "Test",
   },

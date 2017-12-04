@@ -28,6 +28,10 @@ public class HUD : M8.SingletonBehaviour<HUD> {
 
         retryButtonRoot.SetActive(false);
 
+        HideAllMisc();
+    }
+
+    public void HideAllMisc() {
         foreach(var pair in mMiscHUDs) {
             pair.Value.SetActive(false);
         }

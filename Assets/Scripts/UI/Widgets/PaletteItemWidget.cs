@@ -238,11 +238,14 @@ public class PaletteItemWidget : MonoBehaviour, M8.IPoolSpawn, M8.IPoolDespawn, 
                 //make sure it's within camera bounds
                 var blockBounds = mBlockGhost.editBounds;
                 if(GameCamera.instance.isVisible(blockBounds)) {
-                    //add to active ghosts
-                    mGhostActives.Add(mBlockGhost);
-                    mGhostMatterCount += mBlockGhost.matterCount;
-
+                    var block = mBlockGhost;
                     mBlockGhost = null;
+
+                    //add to active ghosts
+                    mGhostActives.Add(block);
+                    mGhostMatterCount += block.matterCount;
+
+                    GameMapController.instance.PaletteBlockGhostDropped(block);
                 }
             }
         }

@@ -58,6 +58,9 @@ public class TutorialStage1 : MonoBehaviour {
 
     void OnGameBlockGhostDropped(Block blockGhost) {
         mHasDeployedBlock = true;
+
+        var playReadyDescGO = HUD.instance.GetMiscHUD("tutorialPlayReady");
+        playReadyDescGO.SetActive(true);
     }
 
     void OnGameBlockGhostCancel(string blockName) {
@@ -67,6 +70,9 @@ public class TutorialStage1 : MonoBehaviour {
             if(mTutorialBlockControlGO)
                 mTutorialBlockControlGO.SetActive(false);
 
+            var playReadyDescGO = HUD.instance.GetMiscHUD("tutorialPlayReady");
+            playReadyDescGO.SetActive(false);
+
             StopAllCoroutines();
             StartCoroutine(DoEditTutorial());
         }
@@ -74,6 +80,7 @@ public class TutorialStage1 : MonoBehaviour {
 
     void OnGameModeChanged(GameMapController.Mode mode) {
         var goalGO = HUD.instance.GetMiscHUD("goal");
+        var restartDescGO = HUD.instance.GetMiscHUD("tutorialRestart");
 
         switch(mode) {
             case GameMapController.Mode.Edit:
@@ -85,6 +92,7 @@ public class TutorialStage1 : MonoBehaviour {
                 }
                 
                 goalGO.SetActive(false);
+                restartDescGO.SetActive(false);
                 break;
 
             case GameMapController.Mode.Play:                
@@ -98,6 +106,10 @@ public class TutorialStage1 : MonoBehaviour {
                     blockAreaHintGO.SetActive(false);
                 
                 goalGO.SetActive(true);
+                restartDescGO.SetActive(true);
+
+                var playReadyDescGO = HUD.instance.GetMiscHUD("tutorialPlayReady");
+                playReadyDescGO.SetActive(false);
 
                 if(mHasDeployedBlock)
                     mIsEditTutorialFinished = true;

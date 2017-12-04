@@ -24,7 +24,8 @@
 	"dragItemDesc": "Drag the matter into the world.",
 	"move": "MOVE",
 	"expand": "EXPAND",
-	"playDesc": "Press this when you're ready!",
+	"playButtonDesc": "Press this when you're ready!",
+	"restartButtonDesc": "Press this if you want to restart.",
 	
 	"test": "Test",
   },

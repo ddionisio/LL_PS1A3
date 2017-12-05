@@ -208,7 +208,7 @@ public class BlockMatter : Block {
     }
     
     private void UpdatePlacementValid() {
-        bool lastEditIsValid = mEditIsValid;
+        //bool lastEditIsValid = mEditIsValid;
         
         //check pallete count
         //check overlap

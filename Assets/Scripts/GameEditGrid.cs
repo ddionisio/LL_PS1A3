@@ -115,6 +115,6 @@ public class GameEditGrid : MonoBehaviour {
             yield return null;
         }
 
-        gridGO.SetActive(true);
+        gridGO.SetActive(false);
     }
 }

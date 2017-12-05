@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 74d65bda9408dd345a0ea4bde08cd5e5
-timeCreated: 1512294386
+guid: a22d03b4b0cbd3e4f80a7a3c6d0aaf16
+timeCreated: 1512455559
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName: {}
@@ -34,20 +34,20 @@ TextureImporter:
     filterMode: 2
     aniso: -1
     mipBias: -1
-    wrapU: 0
-    wrapV: 0
-    wrapW: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
   spriteMode: 1
   spriteExtrude: 1
-  spriteMeshType: 0
-  alignment: 0
-  spritePivot: {x: 0.5, y: 0.5}
+  spriteMeshType: 1
+  alignment: 1
+  spritePivot: {x: 0, y: 1}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 32
-  alphaUsage: 0
+  alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
   textureType: 8
@@ -106,7 +106,7 @@ TextureImporter:
     sprites: []
     outline: []
     physicsShape: []
-  spritePackingTag: 
+  spritePackingTag: stage_1
   userData: 
   assetBundleName: 
   assetBundleVariant: 

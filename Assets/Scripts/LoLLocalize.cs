@@ -12,13 +12,13 @@ public class LoLLocalize : Localize {
         }
     }
 
-#if UNITY_EDITOR
+#if DEBUG_LOCAL || UNITY_EDITOR
     public string debugLanguageCode = "en";
     public string debugLanguageRef = "language.json";
 
     public string debugLanguagePath { get { return System.IO.Path.Combine(Application.streamingAssetsPath, debugLanguageRef); } }
 #endif
-        
+
     private Dictionary<string, LocalizeData> mEntries;
 
     private string mCurLang;
@@ -62,7 +62,7 @@ public class LoLLocalize : Localize {
     }
 
     public override string[] GetKeys() {
-#if UNITY_EDITOR
+#if DEBUG_LOCAL || UNITY_EDITOR
         if(mEntries == null)
             LoadFromReference();
 #endif
@@ -82,7 +82,7 @@ public class LoLLocalize : Localize {
     }
 
     public override bool IsLanguageFile(string filepath) {
-#if UNITY_EDITOR
+#if DEBUG_LOCAL || UNITY_EDITOR
         return filepath.Contains(debugLanguageRef);
 #else
         return false;
@@ -116,7 +116,7 @@ public class LoLLocalize : Localize {
         return mEntries.TryGetValue(key, out data);
     }
 
-#if UNITY_EDITOR
+#if DEBUG_LOCAL || UNITY_EDITOR
     private void LoadFromReference() {
         if(string.IsNullOrEmpty(debugLanguageRef))
             return;

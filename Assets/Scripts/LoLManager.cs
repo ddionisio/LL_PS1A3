@@ -261,6 +261,7 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
     }
 
     void Start() {
+        mLangCode = "en";
         mIsReady = false;
 
         // Create the WebGL (or mock) object
@@ -274,10 +275,12 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
         LOLSDK.Init(webGL, _gameID);
 
         // Register event handlers
+#if !(DEBUG_LOCAL || UNITY_EDITOR)
         LOLSDK.Instance.StartGameReceived += new StartGameReceivedHandler(this.HandleStartGame);
         LOLSDK.Instance.GameStateChanged += new GameStateChangedHandler(this.HandleGameStateChange);
         LOLSDK.Instance.QuestionsReceived += new QuestionListReceivedHandler(this.HandleQuestions);
         LOLSDK.Instance.LanguageDefsReceived += new LanguageDefsReceivedHandler(this.HandleLanguageDefs);
+#endif
 
         mCurProgress = 0;
 
@@ -290,7 +293,7 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
         ApplyVolumes();
 
         // Mock the platform-to-game messages when in the Unity editor.
-#if UNITY_EDITOR
+#if DEBUG_LOCAL || UNITY_EDITOR
         LoadMockData();
 #endif
 
@@ -351,21 +354,10 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
         LoLLocalize.instance.Load(mLangCode, json);
     }
 
-#if UNITY_EDITOR
+#if DEBUG_LOCAL || UNITY_EDITOR
     void LoadMockData() {
-        mLangCode = LoLLocalize.instance.debugLanguageRef;
-
-        //apply start data
-        string startDataFilePath = Path.Combine(Application.streamingAssetsPath, startGameJSONFilePath);
-        if(File.Exists(startDataFilePath)) {
-            string startDataAsJSON = File.ReadAllText(startDataFilePath);
-            JSONNode startGamePayload = JSON.Parse(startDataAsJSON);
-            // Capture the language code from the start payload. Use this to switch fontss
-            mLangCode = startGamePayload["languageCode"];
-            HandleStartGame(startDataAsJSON);
-        }
-        //
-
+        mLangCode = LoLLocalize.instance.debugLanguageCode;
+                
         //apply language
         string langFilePath = LoLLocalize.instance.debugLanguagePath;
         if(File.Exists(langFilePath)) {
@@ -383,6 +375,17 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
             string questionsDataAsJson = File.ReadAllText(questionsFilePath);
             MultipleChoiceQuestionList qs = MultipleChoiceQuestionList.CreateFromJSON(questionsDataAsJson);
             HandleQuestions(qs);
+        }
+        //
+
+        //apply start data
+        string startDataFilePath = Path.Combine(Application.streamingAssetsPath, startGameJSONFilePath);
+        if(File.Exists(startDataFilePath)) {
+            string startDataAsJSON = File.ReadAllText(startDataFilePath);
+            JSONNode startGamePayload = JSON.Parse(startDataAsJSON);
+            // Capture the language code from the start payload. Use this to switch fontss
+            mLangCode = startGamePayload["languageCode"];
+            HandleStartGame(startDataAsJSON);
         }
         //
     }

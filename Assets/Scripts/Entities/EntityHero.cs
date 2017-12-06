@@ -61,6 +61,8 @@ public class EntityHero : M8.EntityBase {
     /// </summary>
     public float lastJumpTime { get { return mJumpEndLastTime; } }
 
+    public event System.Action spawnStartCallback;
+
     private EntityHeroMoveController mMoveCtrl;
 
     private MoveState mMoveState;
@@ -344,6 +346,9 @@ public class EntityHero : M8.EntityBase {
         do {
             yield return null;
         } while(M8.SceneManager.instance.isLoading);
+
+        if(spawnStartCallback != null)
+            spawnStartCallback();
 
         //animations and stuff
         if(spawnAnim) {

@@ -1,7 +1,7 @@
 {
   "_meta": {
     "maxChars": {
-      "welcome": 20,
+      "welcome": 20
     }
   },
   "en": {
@@ -14,19 +14,20 @@
 	
 	"options": "OPTIONS",
 	"close": "CLOSE",
-	"sound": "SOUND"
+	"sound": "SOUND",
 	"music": "MUSIC",
 	"restart": "RESTART",
-	"restartDesc": "Confirm to reset the level.",
+	"restartDesc": "Press CONFIRM to reset the level.",
 	"confirm": "CONFIRM",
 	"cancel": "CANCEL",
 	"goal": "Goal!",
-	"dragItemDesc": "Drag the matter into the world.",
+	"dragItemDesc": "Drag the material into the world.",
 	"move": "MOVE",
 	"expand": "EXPAND",
 	"playButtonDesc": "Press this when you're ready!",
-	"restartButtonDesc": "Press this if you want to restart.",
+	"restartButtonDesc": "Press this to start over.",
+	"dragScreenDesc": "Drag anywhere on the screen to move the view.",
 	
-	"test": "Test",
-  },
+	"test": "Test"
+  }
 }

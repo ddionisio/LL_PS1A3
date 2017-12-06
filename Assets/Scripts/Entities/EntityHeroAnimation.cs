@@ -26,11 +26,13 @@ public class EntityHeroAnimation : MonoBehaviour {
 
     void OnDestroy() {
         if(heroEntity) {
+            heroEntity.spawnStartCallback -= OnEntityHeroSpawnStart;
             heroEntity.setStateCallback -= OnEntityChangeState;
         }
     }
 
     void Awake() {
+        heroEntity.spawnStartCallback += OnEntityHeroSpawnStart;
         heroEntity.setStateCallback += OnEntityChangeState;
 
         mTakeIdleInd = anim.GetTakeIndex(takeIdle);
@@ -66,6 +68,10 @@ public class EntityHeroAnimation : MonoBehaviour {
         mState = (EntityState)ent.state;
         
         switch(mState) {
+            case EntityState.Spawn:
+                sprite.gameObject.SetActive(false);
+                break;
+
             case EntityState.Normal:
             case EntityState.Victory:
                 if((EntityState)ent.prevState == EntityState.Spawn)
@@ -79,6 +85,10 @@ public class EntityHeroAnimation : MonoBehaviour {
                 UpdateAnim();
                 break;
         }
+    }
+
+    void OnEntityHeroSpawnStart() {
+        sprite.gameObject.SetActive(true);
     }
 
     private void UpdateAnim() {

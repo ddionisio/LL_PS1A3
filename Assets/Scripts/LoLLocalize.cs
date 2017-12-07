@@ -16,7 +16,11 @@ public class LoLLocalize : Localize {
     public string debugLanguageCode = "en";
     public string debugLanguageRef = "language.json";
 
-    public string debugLanguagePath { get { return System.IO.Path.Combine(Application.streamingAssetsPath, debugLanguageRef); } }
+    public string debugLanguagePath {
+        get {
+            return System.IO.Path.Combine(Application.streamingAssetsPath, debugLanguageRef);
+        }
+    }
 #endif
 
     private Dictionary<string, LocalizeData> mEntries;

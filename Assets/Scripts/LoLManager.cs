@@ -265,7 +265,7 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
         mIsReady = false;
 
         // Create the WebGL (or mock) object
-#if UNITY_EDITOR
+#if DEBUG_LOCAL || UNITY_EDITOR
         ILOLSDK webGL = new LoLSDK.MockWebGL();
 #elif UNITY_WEBGL
 		ILOLSDK webGL = new LoLSDK.WebGL();
@@ -387,6 +387,8 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
             mLangCode = startGamePayload["languageCode"];
             HandleStartGame(startDataAsJSON);
         }
+        else
+            HandleStartGame("");
         //
     }
 #endif

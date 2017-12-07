@@ -19,6 +19,7 @@ public class PaletteItemDragWidget : MonoBehaviour {
 
         icon.gameObject.SetActive(true);
         icon.sprite = iconSprite;
+        icon.SetNativeSize();
 
         mIsShown = true;
     }

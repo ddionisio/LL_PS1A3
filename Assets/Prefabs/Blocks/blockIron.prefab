@@ -304,14 +304,14 @@ MonoBehaviour:
   activateOnStart: 0
   activator: {fileID: 0}
   density: 7.87
-  propertyFlags: 1
+  propertyFlags: 0
   deathDelay: 1.5
   solidActiveGO: []
   ghostActiveGO: []
   spriteBody: {fileID: 212840276724023280}
   spriteBodyBorderPixelOfs: 2.9
   spriteFrame: {fileID: 212590611114405182}
-  ghostAlpha: 0.6
+  ghostAlpha: 0.8
   invalidColor: {r: 0.9705882, g: 0.24493444, b: 0.23551036, a: 1}
 --- !u!114 &114748501093265664
 MonoBehaviour:

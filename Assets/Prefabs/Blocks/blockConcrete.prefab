@@ -225,7 +225,7 @@ MonoBehaviour:
   spriteBody: {fileID: 212672252688996024}
   spriteBodyBorderPixelOfs: 2.9
   spriteFrame: {fileID: 212131991723269322}
-  ghostAlpha: 0.6
+  ghostAlpha: 0.8
   invalidColor: {r: 0.9705882, g: 0.24493444, b: 0.23551036, a: 1}
 --- !u!114 &114733395151342082
 MonoBehaviour:

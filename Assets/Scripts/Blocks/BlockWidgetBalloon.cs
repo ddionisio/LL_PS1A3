@@ -14,6 +14,7 @@ public class BlockWidgetBalloon : BlockWidget {
     [Header("Balloon Physics")]
     public float force;
     public float ropeLength;
+    public float forceStartDelay = 0.1f;
 
     public float ropeCheckRadius;
     public LayerMask ropeCheckLayerMask;
@@ -22,6 +23,8 @@ public class BlockWidgetBalloon : BlockWidget {
     public SpriteRenderer balloonSprite;
     public SpriteRenderer ropeSprite;
     public SpriteRenderer widgetSprite;
+
+    public float ropeLengthOfs;
         
     public Transform widgetRoot;
 
@@ -37,6 +40,7 @@ public class BlockWidgetBalloon : BlockWidget {
     private SpringJoint2D mJoint;
     private Rigidbody2D mBody;
     private M8.EntityBase mEntAttach;
+    private float mRopePixelRatio;
 
     private bool mEditIsValid;
     private Vector2 mEditPos;
@@ -44,6 +48,9 @@ public class BlockWidgetBalloon : BlockWidget {
     private Color mBalloonSpriteDefaultColor;
     private Color mRopeSpriteDefaultColor;
     private Color mWidgetDefaultColor;
+
+    private bool mIsForceActive;
+    private float mLastTime;
 
     private RaycastHit2D[] mRaycastHits = new RaycastHit2D[raycastHitCapacity];
     
@@ -131,6 +138,9 @@ public class BlockWidgetBalloon : BlockWidget {
                 }
 
                 mBody.simulated = true;
+
+                mIsForceActive = false;
+                mLastTime = Time.fixedTime;
                 break;
         }
     }
@@ -138,6 +148,8 @@ public class BlockWidgetBalloon : BlockWidget {
     protected override void OnDespawned() {
         mBody.velocity = Vector2.zero;
         mBody.angularVelocity = 0f;
+
+        mIsForceActive = false;
 
         if(mEntAttach) {
             mEntAttach.releaseCallback -= OnAttachDespawn;
@@ -180,6 +192,10 @@ public class BlockWidgetBalloon : BlockWidget {
         mJoint.autoConfigureDistance = false;
         mJoint.distance = ropeLength;
         mJoint.anchor = new Vector2(0f, -mColl.radius);
+
+        mRopePixelRatio = ropeSprite.sprite.textureRect.size.y / ropeSprite.sprite.pixelsPerUnit;
+        if(mRopePixelRatio <= 0f)
+            mRopePixelRatio = 1f;
     }
     
     void Update() {
@@ -212,11 +228,19 @@ public class BlockWidgetBalloon : BlockWidget {
     }
 
     void UpdateRopeDisplayStatic() {
-        var newRopeSpriteSize = new Vector2(ropeSprite.size.x, ropeLength + mColl.radius);
-        ropeSprite.size = newRopeSpriteSize;
+        float len = ropeLength + mColl.radius + ropeLengthOfs;
+
+        if(ropeSprite.drawMode == SpriteDrawMode.Simple) {
+            var newRopeSpriteSize = new Vector2(ropeSprite.transform.localScale.x, len / mRopePixelRatio);
+            ropeSprite.transform.localScale = newRopeSpriteSize;
+        }
+        else {
+            var newRopeSpriteSize = new Vector2(ropeSprite.size.x, len);
+            ropeSprite.size = newRopeSpriteSize;
+        }
 
         ropeSprite.transform.up = Vector2.up;
-        ropeSprite.transform.position = (Vector2)transform.position - new Vector2(0f, newRopeSpriteSize.y * 0.5f);
+        ropeSprite.transform.position = (Vector2)transform.position - new Vector2(0f, len * 0.5f);
     }
 
     void UpdateRopeDisplayDynamic() {
@@ -235,8 +259,17 @@ public class BlockWidgetBalloon : BlockWidget {
 
             ropeSprite.transform.up = dirToBalloon;
 
-            var newRopeSpriteSize = new Vector2(ropeSprite.size.x, dist);
-            ropeSprite.size = newRopeSpriteSize;
+            dist += ropeLengthOfs;
+            
+            if(ropeSprite.drawMode == SpriteDrawMode.Simple) {
+                var newRopeSpriteSize = new Vector2(ropeSprite.transform.localScale.x, dist / mRopePixelRatio);
+                ropeSprite.transform.localScale = newRopeSpriteSize;
+            }
+            else {
+                var newRopeSpriteSize = new Vector2(ropeSprite.size.x, dist);
+                ropeSprite.size = newRopeSpriteSize;
+            }
+
             ropeSprite.transform.position = jointWorldPos + dirToBalloon * (dist * 0.5f);
         }
         else {
@@ -245,8 +278,17 @@ public class BlockWidgetBalloon : BlockWidget {
     }
 
     void FixedUpdate() {
-        //add force
-        mBody.AddForce(new Vector2(0f, force));
+        if(mode != Mode.Solid)
+            return;
+
+        if(mIsForceActive) {
+            //add force
+            mBody.AddForce(new Vector2(0f, force));
+        }
+        else {
+            if(Time.fixedTime - mLastTime >= forceStartDelay)
+                mIsForceActive = true;
+        }
     }
 
     void OnDrawGizmos() {

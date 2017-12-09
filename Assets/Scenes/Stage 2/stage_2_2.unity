@@ -10265,7 +10265,7 @@ MonoBehaviour:
     m_Extent: {x: 22.5, y: 9, z: 0}
   _boundsStep: {x: 1, y: 1}
   _initialPalette:
-  - blockName: corkWood
+  - blockName: corkwood
     amount: 5
     capacityAdd: 0
   - blockName: wood

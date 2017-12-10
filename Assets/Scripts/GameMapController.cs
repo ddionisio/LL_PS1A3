@@ -156,12 +156,15 @@ public class GameMapController : M8.SingletonBehaviour<GameMapController> {
 
             //generate pool
             var blockInfo = GameData.instance.GetBlockInfo(paletteItem.blockName);
+            if(blockInfo != null) {
+                int poolCapacity = paletteItem.amount + paletteItem.capacityAdd;
+                if(poolCapacity <= 0)
+                    poolCapacity = mapData.paletteDefaultPoolCapacity;
 
-            int poolCapacity = paletteItem.amount + paletteItem.capacityAdd;
-            if(poolCapacity <= 0)
-                poolCapacity = mapData.paletteDefaultPoolCapacity;
-
-            blockInfo.GeneratePool(transform, poolCapacity, poolCapacity);
+                blockInfo.GeneratePool(transform, poolCapacity, poolCapacity);
+            }
+            else
+                Debug.LogWarning("Block does not exists: " + paletteItem.blockName);
         }
     }
 

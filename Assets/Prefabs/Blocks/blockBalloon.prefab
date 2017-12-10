@@ -254,7 +254,7 @@ MonoBehaviour:
   deathDelay: 1.5
   solidActiveGO: []
   ghostActiveGO: []
-  ghostAlpha: 0.6
+  ghostAlpha: 0.8
   invalidColor: {r: 0.9705882, g: 0.24493444, b: 0.23551036, a: 1}
   force: 8
   ropeLength: 2.5

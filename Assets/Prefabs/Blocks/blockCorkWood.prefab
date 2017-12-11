@@ -435,8 +435,8 @@ MonoBehaviour:
   amountStart: 0
   amountCapacityPerMass: 1
   amountIsFixed: 0
-  absorptionScale: 1
-  transferCap: 3
+  absorptionScale: 0.75
+  transferCap: 2
   transferScale: 0.5
   updateDelay: 0.2
   displays:
@@ -450,8 +450,8 @@ MonoBehaviour:
     activeGO: {fileID: 0}
     color: {r: 0, g: 0, b: 0, a: 0.747}
   displaySpriteColorRefs:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 212840276724023280}
+  - {fileID: 212905478956485220}
 --- !u!198 &198665816958475486
 ParticleSystem:
   m_ObjectHideFlags: 1

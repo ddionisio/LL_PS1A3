@@ -22,6 +22,15 @@ public class HeatController : MonoBehaviour {
         }
     }
 
+    [System.Serializable]
+    public struct DisplayData {
+        public float t; //[0, 1]
+
+        public GameObject activeGO;
+
+        public Color color;
+    }
+
     public float amountStart; //starting amount of heat
     public float amountCapacityPerMass; //maximum amount of heat it can absorb before able to transfer (if no body, assume mass = 1)
     public bool amountIsFixed; //if true, amount remains constant (cannot add or remove)
@@ -32,6 +41,9 @@ public class HeatController : MonoBehaviour {
     public float transferScale; //amount of heat scaled from amount (capped by transferCap) to send to contacts
 
     public float updateDelay; //delay to process heat per update
+
+    public DisplayData[] displays;
+    public SpriteRenderer[] displaySpriteColorRefs;
     
     public float amountCurrent { get { return mCurAmount; } }
     public float amountCapacity {
@@ -58,6 +70,8 @@ public class HeatController : MonoBehaviour {
 
     private float mLastUpdateTime;
     private float mLastAmount;
+
+    private Color[] mDisplaySpriteColorDefaults;
 
     public void ReceiveHeat(HeatController source, float amount) {
         if(!amountIsFixed && absorptionScale != 0f) {
@@ -145,6 +159,72 @@ public class HeatController : MonoBehaviour {
             }
             
             if(mLastAmount != mCurAmount) {
+                //update displays
+                if(displays.Length > 0) {
+                    float t = amountCapacity > 0f ? mCurAmount / amountCapacity : mCurAmount;
+
+                    int ind = 0;
+
+                    if(mCurAmount > mLastAmount) {
+                        for(int i = 0; i < displays.Length; i++) {
+                            var display = displays[i];
+                            if(t >= display.t) {
+                                if(display.activeGO)
+                                    display.activeGO.SetActive(true);
+
+                                ind++;
+                            }
+                            else
+                                break;
+                        }
+                    }
+                    else {
+                        for(int i = displays.Length - 1; i >= 0; i--) {
+                            var display = displays[i];
+                            if(t < display.t) {
+                                if(display.activeGO)
+                                    display.activeGO.SetActive(false);
+
+                                ind = i;
+                            }
+                            else
+                                break;
+                        }
+                    }
+
+                    //apply color lerp
+                    if(mDisplaySpriteColorDefaults != null) {
+                        if(ind <= 0) {
+                            var display = displays[0];
+                            float subT = display.t > 0f ? Mathf.Clamp01(t / display.t) : 0f;
+
+                            for(int i = 0; i < displaySpriteColorRefs.Length; i++) {
+                                if(displaySpriteColorRefs[i])
+                                    displaySpriteColorRefs[i].color = Color.Lerp(mDisplaySpriteColorDefaults[i], display.color, subT);
+                            }
+                        }
+                        else if(ind >= displays.Length) {
+                            var display = displays[displays.Length - 1];
+
+                            for(int i = 0; i < displaySpriteColorRefs.Length; i++) {
+                                if(displaySpriteColorRefs[i])
+                                    displaySpriteColorRefs[i].color = display.color;
+                            }
+                        }
+                        else {
+                            var display1 = displays[ind - 1];
+                            var display2 = displays[ind];
+                            float subTLen = display2.t - display1.t;
+                            float subT = subTLen > 0f ? Mathf.Clamp01((t - display1.t) / subTLen) : 0f;
+
+                            for(int i = 0; i < displaySpriteColorRefs.Length; i++) {
+                                if(displaySpriteColorRefs[i])
+                                    displaySpriteColorRefs[i].color = Color.Lerp(display1.color, display2.color, subT);
+                            }
+                        }
+                    }
+                }
+
                 if(amountChangedCallback != null)
                     amountChangedCallback(this, mLastAmount);
 
@@ -179,6 +259,20 @@ public class HeatController : MonoBehaviour {
 
         mTriggerContacts = new M8.CacheList<Contact>(contactCapacity);
         mCollisionContacts = new M8.CacheList<Contact>(contactCapacity);
+
+        //setup display
+        if(displaySpriteColorRefs.Length > 0) {
+            mDisplaySpriteColorDefaults = new Color[displaySpriteColorRefs.Length];
+            for(int i = 0; i < displaySpriteColorRefs.Length; i++) {
+                if(displaySpriteColorRefs[i])
+                    mDisplaySpriteColorDefaults[i] = displaySpriteColorRefs[i].color;
+            }
+        }
+
+        for(int i = 0; i < displays.Length; i++) {
+            if(displays[i].activeGO)
+                displays[i].activeGO.SetActive(false);
+        }
     }
 
     void Start() {
@@ -202,6 +296,16 @@ public class HeatController : MonoBehaviour {
         mCurAmount = 0f;
 
         ResetContacts();
+
+        for(int i = 0; i < displaySpriteColorRefs.Length; i++) {
+            if(displaySpriteColorRefs[i])
+                displaySpriteColorRefs[i].color = mDisplaySpriteColorDefaults[i];
+        }
+
+        for(int i = 0; i < displays.Length; i++) {
+            if(displays[i].activeGO)
+                displays[i].activeGO.SetActive(false);
+        }
     }
 
     void ResetContacts() {

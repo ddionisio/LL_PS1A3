@@ -287,9 +287,22 @@ MonoBehaviour:
   amountCapacityPerMass: 2
   amountIsFixed: 0
   absorptionScale: 1
-  transferCap: 0.1
-  transferScale: 0.2
+  transferCap: 0.2
+  transferScale: 0.25
   updateDelay: 0.2
+  displays:
+  - t: 0.5
+    activeGO: {fileID: 0}
+    color: {r: 1, g: 0.6666667, b: 0.5921569, a: 1}
+  - t: 0.75
+    activeGO: {fileID: 0}
+    color: {r: 0.83921576, g: 0.2784314, b: 0.30588236, a: 1}
+  - t: 1
+    activeGO: {fileID: 0}
+    color: {r: 1, g: 0.72156864, b: 0.45098042, a: 1}
+  displaySpriteColorRefs:
+  - {fileID: 212840276724023280}
+  - {fileID: 212590611114405182}
 --- !u!114 &114700719415644552
 MonoBehaviour:
   m_ObjectHideFlags: 1

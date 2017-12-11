@@ -12,6 +12,9 @@ public class SpriteAnchor : MonoBehaviour {
         Right,
         Top,
         Bottom,
+
+        TopLeft,
+        TopRight,
     }
 
     public SpriteRenderer toSprite;
@@ -26,7 +29,16 @@ public class SpriteAnchor : MonoBehaviour {
             return;
 
         var toSpritePos = toSprite.transform.position;
-        var toSpriteSize = toSprite.size;
+
+        Vector2 toSpriteSize;
+
+        if(toSprite.drawMode == SpriteDrawMode.Simple) {
+            toSpriteSize = toSprite.transform.localScale;
+            toSpriteSize.x *= toSprite.sprite.rect.size.x / toSprite.sprite.pixelsPerUnit;
+            toSpriteSize.y *= toSprite.sprite.rect.size.y / toSprite.sprite.pixelsPerUnit;
+        }
+        else
+            toSpriteSize = toSprite.size;
         
         Vector2 pos = transform.position;
 
@@ -42,6 +54,15 @@ public class SpriteAnchor : MonoBehaviour {
                 break;
             case Anchor.Bottom:
                 pos.y = toSpritePos.y + toSpriteSize.y;
+                break;
+
+            case Anchor.TopLeft:
+                pos.x = toSpritePos.x;
+                pos.y = toSpritePos.y;
+                break;
+            case Anchor.TopRight:
+                pos.x = toSpritePos.x + toSpriteSize.x;
+                pos.y = toSpritePos.y;
                 break;
         }
 

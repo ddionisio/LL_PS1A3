@@ -1401,7 +1401,7 @@ MonoBehaviour:
   moveStart: 2
   jumpImpulse: 4.75
   jumpCancelImpulse: 1.5
-  heatThreshold: 5
+  heatThreshold: 4
   solidCheckMask:
     serializedVersion: 2
     m_Bits: 1025

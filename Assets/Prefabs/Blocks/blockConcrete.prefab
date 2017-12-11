@@ -257,6 +257,14 @@ MonoBehaviour:
   transferCap: 0.05
   transferScale: 0.2
   updateDelay: 0.2
+  displays:
+  - t: 0.75
+    activeGO: {fileID: 0}
+    color: {r: 0.85294116, g: 0.65852076, b: 0.65852076, a: 1}
+  - t: 1
+    activeGO: {fileID: 0}
+    color: {r: 0.622, g: 0.52683395, b: 0.52683395, a: 1}
+  displaySpriteColorRefs: []
 --- !u!212 &212131991723269322
 SpriteRenderer:
   m_ObjectHideFlags: 1

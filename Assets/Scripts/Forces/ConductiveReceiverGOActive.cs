@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ConductiveReceiverGOActive : ConductiveReceiver {
-    public GameObject target;
+    public GameObject[] targets;
 
     protected override void OnEnable() {
         base.OnEnable();
 
-        target.SetActive(false);
+        for(int i = 0; i < targets.Length; i++)
+            targets[i].SetActive(false);
     }
 
     protected override void OnPowerChanged() {
-        target.SetActive(isPowered);
+        for(int i = 0; i < targets.Length; i++)
+            targets[i].SetActive(isPowered);
     }
 }

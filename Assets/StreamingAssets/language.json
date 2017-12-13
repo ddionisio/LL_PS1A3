@@ -12,6 +12,7 @@
 	"blockConcreteName": "Concrete",
 	"blockBalloonName": "Balloon",
 	"blockRubberName": "Rubber",
+	"blockAluminumName": "Aluminum",
 	
 	"options": "OPTIONS",
 	"close": "CLOSE",

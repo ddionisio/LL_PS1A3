@@ -28,12 +28,12 @@ SpriteAtlas:
       enableTightPacking: 1
     packedHash:
       serializedVersion: 2
-      Hash: 9af7130065e9fd15d41b150f2ab1bd57
+      Hash: 0a9b2b90303483fe1c7aaa542f097dcc
     variantMultiplier: 1
     bindAsDefault: 1
     finalFormat: 12
-    hashString: 9af7130065e9fd15d41b150f2ab1bd57
-    totalSpriteSurfaceArea: 242317
+    hashString: 0a9b2b90303483fe1c7aaa542f097dcc
+    totalSpriteSurfaceArea: 248129
     packables:
     - {fileID: 102900000, guid: 830a0fe5ed09415429803835c9caa7ce, type: 3}
     - {fileID: 102900000, guid: 6913a7bc88c1c344a82f010764a66bca, type: 3}
@@ -63,6 +63,7 @@ SpriteAtlas:
     - 4c42afe9ccea114488a991d49586ef22: 21300000
     - 4c3de847b13ad824ba0372d336f5f5c0: 21300000
     - fd8b74e434d741f47b20577d18aa13eb: 21300000
+    - e4883db2d468766459eeca9ad14da802: 21300000
     - cb3644ffe3744d24e9b542be1dafc01f: 21300000
     - 95b020e0024fd2a449af515a2164d5da: 21300000
     - 7733da2b1697b8c459985e3fa56ffdef: 21300000
@@ -101,6 +102,7 @@ SpriteAtlas:
     - 194b3f369ed97194d869055313cbaaf1: 21300000
     - b2f0ceb758908be4bbc9c8d7e6a31310: 21300000
     - 54ac4c5043107c24395579ec0c58610e: 21300000
+    - 223366c4d2db50645baca7582e2c9432: 21300000
     - b95e27d683b6d79478ab6d875afe8815: 21300000
     - 416c6320efd86ee40bc9c3e9f708b879: 21300000
     - 5d6a999a89ac53346b6a811e65f601bd: 21300000
@@ -164,6 +166,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 4c42afe9ccea114488a991d49586ef22, type: 3}
   - {fileID: 21300000, guid: 4c3de847b13ad824ba0372d336f5f5c0, type: 3}
   - {fileID: 21300000, guid: fd8b74e434d741f47b20577d18aa13eb, type: 3}
+  - {fileID: 21300000, guid: e4883db2d468766459eeca9ad14da802, type: 3}
   - {fileID: 21300000, guid: cb3644ffe3744d24e9b542be1dafc01f, type: 3}
   - {fileID: 21300000, guid: 95b020e0024fd2a449af515a2164d5da, type: 3}
   - {fileID: 21300000, guid: 7733da2b1697b8c459985e3fa56ffdef, type: 3}
@@ -202,6 +205,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 194b3f369ed97194d869055313cbaaf1, type: 3}
   - {fileID: 21300000, guid: b2f0ceb758908be4bbc9c8d7e6a31310, type: 3}
   - {fileID: 21300000, guid: 54ac4c5043107c24395579ec0c58610e, type: 3}
+  - {fileID: 21300000, guid: 223366c4d2db50645baca7582e2c9432, type: 3}
   - {fileID: 21300000, guid: b95e27d683b6d79478ab6d875afe8815, type: 3}
   - {fileID: 21300000, guid: 416c6320efd86ee40bc9c3e9f708b879, type: 3}
   - {fileID: 21300000, guid: 5d6a999a89ac53346b6a811e65f601bd, type: 3}
@@ -264,6 +268,7 @@ SpriteAtlas:
   - portalInnerInv
   - tutorialBoundHighlight64x64
   - blockWood
+  - blockAluminum
   - blockConcrete
   - signDeath
   - chinchilla_move_10
@@ -302,6 +307,7 @@ SpriteAtlas:
   - palettePanelExpandButton
   - tutorialArrow
   - circleGlow
+  - blockAluminumIcon
   - blockIronIcon
   - blockBalloonIcon
   - blockRubberIcon

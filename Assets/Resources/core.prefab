@@ -215,6 +215,10 @@ MonoBehaviour:
     prefab: {fileID: 114700719415644552, guid: a1826a5f1db9a1147989bff885c0c64c, type: 2}
     icon: {fileID: 21300000, guid: b95e27d683b6d79478ab6d875afe8815, type: 3}
     nameDisplayRef: blockIronName
+  - name: aluminum
+    prefab: {fileID: 114834199038982648, guid: adc814e5f2c4df947b189f39c1a0fefe, type: 2}
+    icon: {fileID: 21300000, guid: 223366c4d2db50645baca7582e2c9432, type: 3}
+    nameDisplayRef: blockAluminumName
   - name: concrete
     prefab: {fileID: 114670215988522418, guid: 66e65c50ed0d23b4bbf7b2b1a15de8ed, type: 2}
     icon: {fileID: 21300000, guid: 6e42e4a00a8e4a64cab74f554533a24f, type: 3}

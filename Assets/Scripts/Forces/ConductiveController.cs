@@ -67,6 +67,8 @@ public class ConductiveController : MonoBehaviour {
         }
     }
 
+    public event System.Action<ConductiveController, float> receivedCallback; //from, amt
+
     private BoxCollider2D mTriggerBoxColl;
 
     private bool mIsTriggerActive;
@@ -150,6 +152,9 @@ public class ConductiveController : MonoBehaviour {
                         var ctrl = mReceivers[i].ctrl;
 
                         ctrl.curEnergy += energyPerReceiver;
+
+                        if(ctrl.receivedCallback != null)
+                            ctrl.receivedCallback(this, energyPerReceiver);
                     }
                 }
 

@@ -34,9 +34,10 @@ public abstract class ConductiveReceiver : MonoBehaviour {
 
     protected virtual void Update() {
         if(controller.curEnergy > 0f) {
-            float amt = energyRate * Time.deltaTime;
-
-            controller.curEnergy -= amt;
+            if(energyRate > 0f) {
+                float amt = energyRate * Time.deltaTime;
+                controller.curEnergy -= amt;
+            }
 
             isPowered = controller.curEnergy >= energyRequire;
         }

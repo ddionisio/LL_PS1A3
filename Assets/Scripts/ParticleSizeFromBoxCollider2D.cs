@@ -9,6 +9,7 @@ using UnityEngine;
 public class ParticleSizeFromBoxCollider2D : MonoBehaviour {
     public BoxCollider2D toBoxCollider;
     public bool updateOnEnable;
+    public Vector2 extOfs;
 
     private ParticleSystem mParticle;
 
@@ -31,9 +32,14 @@ public class ParticleSizeFromBoxCollider2D : MonoBehaviour {
         Bounds bounds = toBoxCollider.bounds;
 
         var shape = mParticle.shape;
-
-        shape.shapeType = ParticleSystemShapeType.Box;
+        
         shape.position = transform.worldToLocalMatrix.MultiplyPoint3x4(bounds.center);
-        shape.scale = bounds.size;
+
+        Vector2 size = bounds.size;
+        if(extOfs != Vector2.zero) {
+            size += extOfs * 2f;
+        }
+
+        shape.scale = size;
     }
 }

@@ -28,12 +28,12 @@ SpriteAtlas:
       enableTightPacking: 1
     packedHash:
       serializedVersion: 2
-      Hash: 99ed978483a1291bc2fd413ffd3a9408
+      Hash: 9af7130065e9fd15d41b150f2ab1bd57
     variantMultiplier: 1
     bindAsDefault: 1
     finalFormat: 12
-    hashString: 99ed978483a1291bc2fd413ffd3a9408
-    totalSpriteSurfaceArea: 234125
+    hashString: 9af7130065e9fd15d41b150f2ab1bd57
+    totalSpriteSurfaceArea: 242317
     packables:
     - {fileID: 102900000, guid: 830a0fe5ed09415429803835c9caa7ce, type: 3}
     - {fileID: 102900000, guid: 6913a7bc88c1c344a82f010764a66bca, type: 3}
@@ -41,6 +41,7 @@ SpriteAtlas:
     - {fileID: 102900000, guid: 0755264137c18f344b40b7a5c444d46d, type: 3}
     - {fileID: 102900000, guid: 8337763d6ec7efe409e872a58575a648, type: 3}
     - {fileID: 102900000, guid: 5a17209aab1300e41a7366460fcfed66, type: 3}
+    - {fileID: 102900000, guid: 4880894160e8f434fa3db3a503be6c3c, type: 3}
     - {fileID: 102900000, guid: f0225da5b123bdb42a2d650bdbb8c9bc, type: 3}
     - {fileID: 2800000, guid: 50b9ed4d76473f04ba33073d6cfafca9, type: 3}
     packedSpriteRenderDataKeys:
@@ -92,6 +93,10 @@ SpriteAtlas:
     - c70755a65a627e2469dd164a7da5e020: 21300000
     - 91fe0e40bd0acce44bb27d56e315b470: 21300000
     - 8358c6f97773ba64eaba09a788756b78: 21300000
+    - 8d96c941d602de145b03c397a6ae7935: 21300002
+    - 8d96c941d602de145b03c397a6ae7935: 21300000
+    - 8d96c941d602de145b03c397a6ae7935: 21300006
+    - 8d96c941d602de145b03c397a6ae7935: 21300004
     - df7204954bdc5d24aa8774eda120b6dd: 21300000
     - 194b3f369ed97194d869055313cbaaf1: 21300000
     - b2f0ceb758908be4bbc9c8d7e6a31310: 21300000
@@ -189,6 +194,10 @@ SpriteAtlas:
   - {fileID: 21300000, guid: c70755a65a627e2469dd164a7da5e020, type: 3}
   - {fileID: 21300000, guid: 91fe0e40bd0acce44bb27d56e315b470, type: 3}
   - {fileID: 21300000, guid: 8358c6f97773ba64eaba09a788756b78, type: 3}
+  - {fileID: 21300002, guid: 8d96c941d602de145b03c397a6ae7935, type: 3}
+  - {fileID: 21300000, guid: 8d96c941d602de145b03c397a6ae7935, type: 3}
+  - {fileID: 21300006, guid: 8d96c941d602de145b03c397a6ae7935, type: 3}
+  - {fileID: 21300004, guid: 8d96c941d602de145b03c397a6ae7935, type: 3}
   - {fileID: 21300000, guid: df7204954bdc5d24aa8774eda120b6dd, type: 3}
   - {fileID: 21300000, guid: 194b3f369ed97194d869055313cbaaf1, type: 3}
   - {fileID: 21300000, guid: b2f0ceb758908be4bbc9c8d7e6a31310, type: 3}
@@ -285,6 +294,10 @@ SpriteAtlas:
   - ground2_top
   - retryButton
   - ground1_top
+  - lightningFXs_1
+  - lightningFXs_0
+  - lightningFXs_3
+  - lightningFXs_2
   - optionButton
   - palettePanelExpandButton
   - tutorialArrow

@@ -5,25 +5,47 @@ using UnityEngine;
 public class GameEditGrid : MonoBehaviour {
     public GameObject gridGO;
     public float fadeDelay = 0.3f;
-
-    private SpriteRenderer mGridSpriteRender;
+        
     private bool mGridIsShown = false;
     private bool mIsFade;
     private float mLastFadeTime;
     private Coroutine mGridUpdateRout;
+
+    private Material mMat;
+
+    private int mMatColorId;
+
     private Color mCurColor;
     private Color mDefaultColor;
 
     void OnDestroy() {
         if(GameMapController.instance)
             GameMapController.instance.modeChangeCallback -= OnGameModeChanged;
+
+        if(mMat)
+            Destroy(mMat);
     }
 
     void Awake() {
-        mGridSpriteRender = gridGO.GetComponent<SpriteRenderer>();
+        Renderer r = gridGO.GetComponent<Renderer>();
+        mMat = r.material;
+
+        //apply cam dimension
+        var gameCam = GameCamera.instance;
+
+        var camBounds = gameCam.cameraViewBounds;
+        camBounds.center = gameCam.transform.localToWorldMatrix.MultiplyPoint3x4(camBounds.center);
+
+        Transform gridT = gridGO.transform;
+        gridT.position = new Vector3(camBounds.center.x, camBounds.center.y, 0f);
+        gridT.localScale = camBounds.size;
+
         gridGO.SetActive(false);
 
-        mDefaultColor = mGridSpriteRender.color;
+        //setup color
+        mMatColorId = Shader.PropertyToID("colorMod");
+
+        mDefaultColor = mMat.GetColor(mMatColorId);
         mCurColor = Color.clear;
 
         GameMapController.instance.modeChangeCallback += OnGameModeChanged;
@@ -56,41 +78,12 @@ public class GameEditGrid : MonoBehaviour {
 
             mIsFade = true;
             mLastFadeTime = Time.realtimeSinceStartup;
-            mCurColor = mGridSpriteRender.color;
+            mCurColor = mMat.GetColor(mMatColorId);
         }
     }
     
     IEnumerator DoGridUpdate() {
-        var gameCam = GameCamera.instance;
-        Vector2 lastCameraPos = new Vector2(float.MaxValue, float.MaxValue);
-
         while(true) {
-            var curCameraPos = gameCam.position;
-            if(lastCameraPos != curCameraPos) {
-                //compute grid size
-                var camBounds = gameCam.cameraViewBounds;
-                camBounds.center = gameCam.transform.localToWorldMatrix.MultiplyPoint3x4(camBounds.center);
-
-                var mapData = GameMapController.instance.mapData;
-
-                //grab min and max cell indices
-                var cellMin = mapData.GetCellIndex(camBounds.min);
-                var cellMax = mapData.GetCellIndex(camBounds.max);
-
-                //convert back to world space
-                var blockHalfSize = GameData.instance.blockSize * 0.5f;
-
-                var cellMinPos = mapData.GetPositionFromCell(cellMin) - blockHalfSize;
-                var cellMaxPos = mapData.GetPositionFromCell(cellMax) + GameData.instance.blockSize;
-
-                if(mGridSpriteRender)
-                    mGridSpriteRender.size = cellMaxPos - cellMinPos;
-
-                gridGO.transform.position = Vector2.Lerp(cellMinPos, cellMaxPos, 0.5f);
-
-                lastCameraPos = curCameraPos;
-            }
-
             if(mIsFade) {
                 float time = Time.realtimeSinceStartup;
                 float curFadeTime = time - mLastFadeTime;
@@ -102,10 +95,10 @@ public class GameEditGrid : MonoBehaviour {
                 float t = curFadeTime / fadeDelay;
 
                 if(mGridIsShown) {
-                    mGridSpriteRender.color = Color.Lerp(mCurColor, mDefaultColor, t);
+                    mMat.SetColor(mMatColorId, Color.Lerp(mCurColor, mDefaultColor, t));
                 }
                 else {
-                    mGridSpriteRender.color = Color.Lerp(mCurColor, Color.clear, t);
+                    mMat.SetColor(mMatColorId, Color.Lerp(mCurColor, Color.clear, t));
 
                     if(!mIsFade)
                         break;

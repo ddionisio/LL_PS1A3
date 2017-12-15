@@ -37,3 +37,8 @@ MonoBehaviour:
     fVal: 0
     sVal: 
     oVal: {fileID: 4900000, guid: 68cca0cfa67fd664cb7e257ab586c194, type: 3}
+  - _key: localizeFromTextAsset
+    iVal: 0
+    fVal: 0
+    sVal: 
+    oVal: {fileID: 0}

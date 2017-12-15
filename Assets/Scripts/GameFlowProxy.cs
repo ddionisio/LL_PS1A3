@@ -6,6 +6,10 @@ using UnityEngine;
 /// Helper Behaviour to hookup calls to GameFlowController
 /// </summary>
 public class GameFlowProxy : MonoBehaviour {
+    public void LoadScene(string toScene) {
+        M8.SceneManager.instance.LoadScene(toScene);
+    }
+
     public void ProgressStart() {
         GameFlowController.LoadCurrentProgressScene();
     }

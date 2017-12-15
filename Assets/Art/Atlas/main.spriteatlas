@@ -93,6 +93,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 8d96c941d602de145b03c397a6ae7935, type: 3}
   - {fileID: 21300006, guid: 8d96c941d602de145b03c397a6ae7935, type: 3}
   - {fileID: 21300004, guid: 8d96c941d602de145b03c397a6ae7935, type: 3}
+  - {fileID: 21300000, guid: afb95580ee3e0d34f9c3feb8f70214a2, type: 3}
   - {fileID: 21300000, guid: df7204954bdc5d24aa8774eda120b6dd, type: 3}
   - {fileID: 21300000, guid: 194b3f369ed97194d869055313cbaaf1, type: 3}
   - {fileID: 21300000, guid: b2f0ceb758908be4bbc9c8d7e6a31310, type: 3}
@@ -114,7 +115,6 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 5cc4cccd80d062b498fbefb55a457b7e, type: 3}
   - {fileID: 21300000, guid: af77b1b39d6cb0040a456355fa201ac7, type: 3}
   - {fileID: 21300000, guid: a22d03b4b0cbd3e4f80a7a3c6d0aaf16, type: 3}
-  - {fileID: 21300000, guid: f91ca4a4961cb4043996a46b06a93a77, type: 3}
   - {fileID: 21300000, guid: 4c68e1aa438588a44b4c6dbf6ed32155, type: 3}
   - {fileID: 21300000, guid: 50b9ed4d76473f04ba33073d6cfafca9, type: 3}
   - {fileID: 21300000, guid: 5c0f98b80ca61c840a407e2b2052ef79, type: 3}
@@ -195,6 +195,7 @@ SpriteAtlas:
   - lightningFXs_0
   - lightningFXs_3
   - lightningFXs_2
+  - speakIcon
   - optionButton
   - palettePanelExpandButton
   - tutorialArrow
@@ -216,7 +217,6 @@ SpriteAtlas:
   - scaleChains
   - blockBalloonWidget
   - ground1_top_right
-  - grid
   - panelHole
   - block
   - powerOff

@@ -33,6 +33,20 @@
 	"introTitle1": "ALL THINGS MATTER",
 	"introDesc1": "Matters are things that have mass and volume.\n\nYou can measure and observe a matter's physical and chemical property.",
 	
+	"introTitle2": "PHYSICAL PROPERTIES",
+	"introTitle2_example": "EXAMPLES",
+	"introDesc2": "Physical properties can be observed with your senses.\n\nThis includes the state of matter: solid, liquid, gas.",
+	"intro_ex_size": "Size",
+	"intro_ex_volume": "Volume",
+	"intro_ex_freezing": "Freezing Point",
+	"intro_ex_melting": "Melting Point",
+	"intro_ex_magnet": "Magnetic",
+	
+	"introTitle3": "CHEMICAL PROPERTIES",
+	"introDesc3": "Chemical properties can only be observed when matter undergoes a change.\n\nThe resulting matter becomes something else entirely.",
+	"intro_ex_flammability": "Flammability",
+	"intro_ex_oxidation": "Oxidation",
+	
 	"test": "Test"
   }
 }

@@ -29,6 +29,10 @@ public class CutsceneController : MonoBehaviour {
             if(pages[i].root)
                 pages[i].root.SetActive(false);
         }
+
+        //setup initial display
+        animator.ResetTake(animator.GetTakeIndex(takeStart));
+        animator.ResetTake(animator.GetTakeIndex(takeInteractEnter));
     }
 
     // Use this for initialization
@@ -69,6 +73,8 @@ public class CutsceneController : MonoBehaviour {
     IEnumerator DoGoNextPage() {
         animator.Play(takeInteractExit);
 
+        bool isLastPage = mCurPageInd == pages.Length - 1;
+
         if(mCurPageInd < pages.Length) {
             var page = pages[mCurPageInd];
 
@@ -78,11 +84,12 @@ public class CutsceneController : MonoBehaviour {
                     yield return null;
             }
 
-            if(page.root)
+            //only deactivate if it's the last page or the next page has a different root
+            if(isLastPage || page.root != pages[mCurPageInd + 1].root)
                 page.root.SetActive(false);
         }
 
-        if(mCurPageInd < pages.Length - 1) {
+        if(!isLastPage) {
             mCurPageInd++;
             ShowCurrentPage();
         }

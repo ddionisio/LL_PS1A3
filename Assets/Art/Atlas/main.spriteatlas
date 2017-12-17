@@ -44,6 +44,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: f9e7f2c03299aa24291f1fbfc71933f4, type: 3}
   - {fileID: 21300000, guid: bd26be54febb810489ad0f739d5eba63, type: 3}
   - {fileID: 21300000, guid: 2e492bdfa943dbd4b82b40cf5d2d3049, type: 3}
+  - {fileID: 21300000, guid: c1f5fc9afb034f74aac8e0be2bdbc03e, type: 3}
   - {fileID: 21300000, guid: f6ee11543d3aa8646b16c9f6daa7c720, type: 3}
   - {fileID: 21300000, guid: c369d299d52557645b45e8eebe38f77c, type: 3}
   - {fileID: 21300000, guid: 3572659f09a4edd44bebe76f17e0c0e0, type: 3}
@@ -97,6 +98,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: df7204954bdc5d24aa8774eda120b6dd, type: 3}
   - {fileID: 21300000, guid: 194b3f369ed97194d869055313cbaaf1, type: 3}
   - {fileID: 21300000, guid: b2f0ceb758908be4bbc9c8d7e6a31310, type: 3}
+  - {fileID: 21300000, guid: 9b6289659dbef8a4aa779b6fb6e1daf7, type: 3}
   - {fileID: 21300000, guid: 54ac4c5043107c24395579ec0c58610e, type: 3}
   - {fileID: 21300000, guid: 223366c4d2db50645baca7582e2c9432, type: 3}
   - {fileID: 21300000, guid: b95e27d683b6d79478ab6d875afe8815, type: 3}
@@ -116,6 +118,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: af77b1b39d6cb0040a456355fa201ac7, type: 3}
   - {fileID: 21300000, guid: a22d03b4b0cbd3e4f80a7a3c6d0aaf16, type: 3}
   - {fileID: 21300000, guid: 4c68e1aa438588a44b4c6dbf6ed32155, type: 3}
+  - {fileID: 21300000, guid: 5f8aeb6cb0ab9db4c9f8bb882f27e805, type: 3}
   - {fileID: 21300000, guid: 50b9ed4d76473f04ba33073d6cfafca9, type: 3}
   - {fileID: 21300000, guid: 5c0f98b80ca61c840a407e2b2052ef79, type: 3}
   - {fileID: 21300000, guid: 52e7b214713d7e242b8155ad259510a0, type: 3}
@@ -135,6 +138,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 079a055deb500164e949abce97c79df9, type: 3}
   - {fileID: 21300000, guid: 76af45747634bf542a9632c7000e372a, type: 3}
   - {fileID: 21300000, guid: 56c8d25ec9b8c9e4eaea697303a62a8e, type: 3}
+  - {fileID: 21300000, guid: 14184d5cb923565449abdb9e7b3a5bea, type: 3}
   - {fileID: 21300000, guid: bf49c032bb702864eb4c7c142adb34f3, type: 3}
   - {fileID: 21300000, guid: e1f2ec46776e58046b470eeec30bba82, type: 3}
   - {fileID: 21300000, guid: d55f8ac932e44e849a8ee70c4f18869b, type: 3}
@@ -146,6 +150,7 @@ SpriteAtlas:
   - exitPortalBase
   - spawnPortalBase
   - scaleBody
+  - nextArrow
   - panel
   - paletteItemSelect
   - paletteItem
@@ -199,6 +204,7 @@ SpriteAtlas:
   - optionButton
   - palettePanelExpandButton
   - tutorialArrow
+  - levelProgressHighlight
   - circleGlow
   - blockAluminumIcon
   - blockIronIcon
@@ -218,6 +224,7 @@ SpriteAtlas:
   - blockBalloonWidget
   - ground1_top_right
   - panelHole
+  - levelProgressBase
   - block
   - powerOff
   - triangle
@@ -237,6 +244,7 @@ SpriteAtlas:
   - buttonBase
   - wire
   - fan
+  - levelProgressDot
   - circleGlowSmall
   - blockBlank
   - blockFrame

@@ -29,14 +29,14 @@ public class CutsceneController : MonoBehaviour {
             if(pages[i].root)
                 pages[i].root.SetActive(false);
         }
-
-        //setup initial display
-        animator.ResetTake(animator.GetTakeIndex(takeStart));
-        animator.ResetTake(animator.GetTakeIndex(takeInteractEnter));
     }
 
     // Use this for initialization
     IEnumerator Start () {
+        //setup initial display
+        animator.ResetTake(animator.GetTakeIndex(takeStart));
+        animator.ResetTake(animator.GetTakeIndex(takeInteractEnter));
+
         while(M8.SceneManager.instance.isLoading)
             yield return null;
 

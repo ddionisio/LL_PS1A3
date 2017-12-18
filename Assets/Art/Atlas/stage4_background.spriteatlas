@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: stage4_background
+  m_EditorData:
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingParameters:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: b808fb775cdd176438dd4e54aa11973d, type: 3}
+    bindAsDefault: 1
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 5105bb770848c50479222aa7e3cf3151, type: 3}
+  - {fileID: 21300000, guid: 914d95cfe766de64ab80764e4462f480, type: 3}
+  - {fileID: 21300000, guid: 2b2193d103c0130469730b6e459c7557, type: 3}
+  - {fileID: 21300000, guid: 9f087b2d0c858b143b7247540c4ef65c, type: 3}
+  - {fileID: 21300000, guid: ca4f0e5aec0701a49a2b026f25c8b01c, type: 3}
+  - {fileID: 21300000, guid: 40072b42ceedabe4888083ea9d7d96cf, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - ridge
+  - bricks1r
+  - bricks5r
+  - bricks2r
+  - bricks3r
+  - bricks4r
+  m_Tag: stage4_background
+  m_IsVariant: 0

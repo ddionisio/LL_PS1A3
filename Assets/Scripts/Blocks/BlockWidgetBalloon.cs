@@ -193,7 +193,7 @@ public class BlockWidgetBalloon : BlockWidget {
         mJoint.distance = ropeLength;
         mJoint.anchor = new Vector2(0f, -mColl.radius);
 
-        mRopePixelRatio = ropeSprite.sprite.textureRect.size.y / ropeSprite.sprite.pixelsPerUnit;
+        mRopePixelRatio = ropeSprite.sprite.rect.size.y / ropeSprite.sprite.pixelsPerUnit;
         if(mRopePixelRatio <= 0f)
             mRopePixelRatio = 1f;
     }

@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: stage3_background
+  m_EditorData:
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingParameters:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: d7dc6fdf87775914abffd29a2a1242b2, type: 3}
+    bindAsDefault: 1
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 51182e969c01edd4ebd92de5101b869a, type: 3}
+  - {fileID: 21300000, guid: 441253b1b2ebbbc419b620de406c67e2, type: 3}
+  - {fileID: 21300000, guid: 9442db6016853bf4ca864356f00a3577, type: 3}
+  - {fileID: 21300000, guid: d46fc59ba743d504a8840addf0eed577, type: 3}
+  - {fileID: 21300000, guid: 7b5ba17135c9ade43b03b8dd29c76bf7, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - cloudish
+  - strip1
+  - strip2
+  - hill
+  - strip3
+  m_Tag: stage3_background
+  m_IsVariant: 0

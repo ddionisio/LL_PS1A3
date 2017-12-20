@@ -17,7 +17,7 @@ SpriteAtlas:
       generateMipMaps: 0
       readable: 0
       crunchedCompression: 0
-      sRGB: 0
+      sRGB: 1
     platformSettings: []
     packingParameters:
       serializedVersion: 2

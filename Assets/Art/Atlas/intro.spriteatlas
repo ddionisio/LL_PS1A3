@@ -5,7 +5,7 @@ SpriteAtlas:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: stage4_background
+  m_Name: intro
   m_EditorData:
     textureSettings:
       serializedVersion: 2
@@ -28,22 +28,12 @@ SpriteAtlas:
       enableTightPacking: 1
     variantMultiplier: 1
     packables:
-    - {fileID: 102900000, guid: b808fb775cdd176438dd4e54aa11973d, type: 3}
+    - {fileID: 102900000, guid: 2b8ea4d148cd3274e85795b2090c3da1, type: 3}
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
-  - {fileID: 21300000, guid: 5105bb770848c50479222aa7e3cf3151, type: 3}
-  - {fileID: 21300000, guid: 914d95cfe766de64ab80764e4462f480, type: 3}
-  - {fileID: 21300000, guid: 2b2193d103c0130469730b6e459c7557, type: 3}
-  - {fileID: 21300000, guid: 9f087b2d0c858b143b7247540c4ef65c, type: 3}
-  - {fileID: 21300000, guid: ca4f0e5aec0701a49a2b026f25c8b01c, type: 3}
-  - {fileID: 21300000, guid: 40072b42ceedabe4888083ea9d7d96cf, type: 3}
+  - {fileID: 21300000, guid: 23bcd5138d2c0f949bf3f48f54607041, type: 3}
   m_PackedSpriteNamesToIndex:
-  - ridge
-  - bricks1r
-  - bricks5r
-  - bricks2r
-  - bricks3r
-  - bricks4r
-  m_Tag: stage4_background
+  - page1Desc
+  m_Tag: intro
   m_IsVariant: 0

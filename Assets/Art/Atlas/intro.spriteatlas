@@ -33,6 +33,7 @@ SpriteAtlas:
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
   - {fileID: 21300000, guid: 23bcd5138d2c0f949bf3f48f54607041, type: 3}
+  - {fileID: 21300000, guid: 3485fcb07f970ac44b08248df8ec3b4b, type: 3}
   - {fileID: 21300000, guid: 9553bde41d6bc1f41a472cd98a0fdf47, type: 3}
   - {fileID: 21300000, guid: 6edce6df81ffa804e84a47800a8da9d0, type: 3}
   - {fileID: 21300000, guid: 1025d33102fcabf41b7ac93adf0b37ce, type: 3}
@@ -43,8 +44,12 @@ SpriteAtlas:
   - {fileID: 21300000, guid: f1ef1f3a2c6bfb74aa5c23c8bdbe6ba4, type: 3}
   - {fileID: 21300000, guid: a366c6803282f7a47960695c2bb260bd, type: 3}
   - {fileID: 21300000, guid: 869b72494e1a34c42896c99ea9e5cee2, type: 3}
+  - {fileID: 21300000, guid: 82cdd8375d6c27e48b349a35b97c8f20, type: 3}
+  - {fileID: 21300000, guid: fc1ebc73fee436c478e3d4818163aafd, type: 3}
+  - {fileID: 21300000, guid: 09201378d3da76c43b9222315eca7b7f, type: 3}
   m_PackedSpriteNamesToIndex:
   - page1Desc
+  - page4_furnace
   - page3_ex_melting
   - page3_ex_freezing
   - page3_ex_size
@@ -55,5 +60,8 @@ SpriteAtlas:
   - page3_ex_volume
   - page2_sense_tongue
   - page2_sense_eye
+  - page4_steel
+  - page4_carbon
+  - page4_iron
   m_Tag: intro
   m_IsVariant: 0

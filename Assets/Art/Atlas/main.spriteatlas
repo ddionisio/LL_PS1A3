@@ -134,6 +134,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 541a9d4605c22504bbcb66470a77b31c, type: 3}
   - {fileID: 21300000, guid: 097445a935ceed74494b6a7d036e76bb, type: 3}
   - {fileID: 21300000, guid: c5a54a7e88b59e547a8905c1ad93d892, type: 3}
+  - {fileID: 21300000, guid: c4f17fd57e97b9443ac1fdf1c1cda0e5, type: 3}
   - {fileID: 21300000, guid: 07c52ec467743d542a467d1cd2867300, type: 3}
   - {fileID: 21300000, guid: 079a055deb500164e949abce97c79df9, type: 3}
   - {fileID: 21300000, guid: 76af45747634bf542a9632c7000e372a, type: 3}
@@ -240,6 +241,7 @@ SpriteAtlas:
   - thumb
   - heaterKnob
   - edge_shade
+  - edge_shade_horz
   - rope
   - buttonBase
   - wire

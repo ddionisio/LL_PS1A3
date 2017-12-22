@@ -44,9 +44,17 @@ SpriteAtlas:
   - {fileID: 21300000, guid: f1ef1f3a2c6bfb74aa5c23c8bdbe6ba4, type: 3}
   - {fileID: 21300000, guid: a366c6803282f7a47960695c2bb260bd, type: 3}
   - {fileID: 21300000, guid: 869b72494e1a34c42896c99ea9e5cee2, type: 3}
+  - {fileID: 21300000, guid: 030f5efc391935747bc14fe016bd3006, type: 3}
+  - {fileID: 21300000, guid: fa9d5d7e698b0a04d9747a1b2fc76646, type: 3}
+  - {fileID: 21300000, guid: 1adce69c11c9c1645b84091fbb14b132, type: 3}
+  - {fileID: 21300000, guid: 044d3c2a628fa13429ba9cdc53ff9776, type: 3}
   - {fileID: 21300000, guid: 82cdd8375d6c27e48b349a35b97c8f20, type: 3}
+  - {fileID: 21300000, guid: a0b8148d698ec9a4992e7b228ee77121, type: 3}
   - {fileID: 21300000, guid: fc1ebc73fee436c478e3d4818163aafd, type: 3}
   - {fileID: 21300000, guid: 09201378d3da76c43b9222315eca7b7f, type: 3}
+  - {fileID: 21300000, guid: 88208a7edcae56643ac08bd7588d5f49, type: 3}
+  - {fileID: 21300000, guid: 0a00b57507c595c47b0b8fe9ffa65dfb, type: 3}
+  - {fileID: 21300000, guid: bae21a99555a14e45890921311b0d840, type: 3}
   m_PackedSpriteNamesToIndex:
   - page1Desc
   - page4_furnace
@@ -60,8 +68,16 @@ SpriteAtlas:
   - page3_ex_volume
   - page2_sense_tongue
   - page2_sense_eye
+  - page4_ex_iron_rust
+  - page4_ex_iron
+  - page4_ex_log
+  - page4_ex_air
   - page4_steel
+  - page4_ex_calcifer
   - page4_carbon
   - page4_iron
+  - page4_ex_ash
+  - page4_ex_plus
+  - page4_ex_equal
   m_Tag: intro
   m_IsVariant: 0

@@ -580,7 +580,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1273378667740278}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3, y: -2.36, z: 0}
+  m_LocalPosition: {x: -1.99, y: -2.43, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4895175753542526}
@@ -1207,6 +1207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cfbd82fb092fa9499c8a006177fad20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 0}
   rotatePerSecond: {x: 0, y: 0, z: 1080}
   local: 1
   updateType: 3
@@ -1411,6 +1412,11 @@ MonoBehaviour:
   groundCheckForwardDist: 0.2
   groundCheckLastJumpDelay: 2
   groundCheckDownDist: 3.1
+  victoryAttachPoint: portalExitCenter
+  victoryToPortalWait: 0.3
+  victoryToPortalSpeed: 5
+  victoryRotatePerSecond: 1080
+  victoryScaleOutDelay: 0.65
 --- !u!114 &114223338977264014
 MonoBehaviour:
   m_ObjectHideFlags: 1

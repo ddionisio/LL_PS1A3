@@ -137,6 +137,8 @@ SpriteAtlas:
   - {fileID: 21300000, guid: c5a54a7e88b59e547a8905c1ad93d892, type: 3}
   - {fileID: 21300000, guid: c4f17fd57e97b9443ac1fdf1c1cda0e5, type: 3}
   - {fileID: 21300000, guid: 07c52ec467743d542a467d1cd2867300, type: 3}
+  - {fileID: 21300000, guid: 951c056f9ebf0a74e88228b71a7f6367, type: 3}
+  - {fileID: 21300000, guid: a67194a65e632344e821e6b43a844d95, type: 3}
   - {fileID: 21300000, guid: 079a055deb500164e949abce97c79df9, type: 3}
   - {fileID: 21300000, guid: 76af45747634bf542a9632c7000e372a, type: 3}
   - {fileID: 21300000, guid: 56c8d25ec9b8c9e4eaea697303a62a8e, type: 3}
@@ -245,6 +247,8 @@ SpriteAtlas:
   - edge_shade
   - edge_shade_horz
   - rope
+  - star_happy0
+  - star_happy1
   - buttonBase
   - wire
   - fan

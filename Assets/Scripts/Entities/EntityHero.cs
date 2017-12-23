@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using DG.Tweening;
+using DG.Tweening.Core.Easing;
+
 public class EntityHero : M8.EntityBase {
     public const int heatCollideCapacity = 8;
     public const float radiusCheckOfs = 0.2f;
@@ -35,6 +38,13 @@ public class EntityHero : M8.EntityBase {
     public float groundCheckForwardDist = 0.3f; //add radius
     public float groundCheckLastJumpDelay = 2f;
     public float groundCheckDownDist = 3.1f; //add radius
+
+    [Header("Victory")]
+    public string victoryAttachPoint = "portalExitCenter";
+    public float victoryToPortalWait = 1.0f;
+    public float victoryToPortalSpeed = 1.0f;
+    public float victoryRotatePerSecond = 720f;
+    public float victoryScaleOutDelay = 0.5f;
 
     public EntityHeroMoveController moveCtrl { get { return mMoveCtrl; } }
 
@@ -139,11 +149,7 @@ public class EntityHero : M8.EntityBase {
             mMoveCtrl.body.simulated = true;
         }
         else {
-            mMoveCtrl.ResetCollision();
-            mMoveCtrl.coll.enabled = false;
-            mMoveCtrl.body.simulated = false;
-
-            mHeatCollides.Clear();
+            DisablePhysics();
         }
     }
 
@@ -161,6 +167,9 @@ public class EntityHero : M8.EntityBase {
         mMoveCtrl.ResetCollision();
 
         mHeatCollides.Clear();
+
+        transform.rotation = Quaternion.identity;
+        transform.localScale = Vector3.one;
     }
 
     protected override void OnSpawned(M8.GenericParams parms) {
@@ -383,9 +392,72 @@ public class EntityHero : M8.EntityBase {
     }
 
     IEnumerator DoVictory() {
-        //animations and stuff
+        //wait for player to land
+        while(!mMoveCtrl.isGrounded)
+            yield return null;
 
         yield return null;
+
+        DisablePhysics();
+
+        float curT = 0f;
+
+        //wait a bit
+        while(curT < victoryToPortalWait) {
+            //rotate
+            Vector3 euler = transform.localEulerAngles;
+            euler.z += victoryRotatePerSecond * Time.deltaTime;
+            transform.eulerAngles = euler;
+
+            curT += Time.deltaTime;
+            yield return null;
+        }
+
+        //move towards victory
+        var destAttachPt = AttachPoint.Get(victoryAttachPoint);
+
+        Vector2 start = transform.position;
+        Vector2 end = destAttachPt.transform.position;
+
+        curT = 0f;
+
+        float dist = (end - start).magnitude;
+        if(dist > 0f) {
+            float moveDelay = dist / victoryToPortalSpeed;
+
+            while(curT < moveDelay) {
+                //rotate
+                Vector3 euler = transform.localEulerAngles;
+                euler.z += victoryRotatePerSecond * Time.deltaTime;
+                transform.eulerAngles = euler;
+
+                //move
+                transform.position = Vector2.Lerp(start, end, Mathf.Clamp01(curT / moveDelay));
+
+                curT += Time.deltaTime;
+                yield return null;
+            }
+
+            transform.position = end;
+        }
+
+        //shrink
+        curT = 0f;
+
+        while(curT < victoryScaleOutDelay) {
+            //rotate
+            Vector3 euler = transform.localEulerAngles;
+            euler.z += victoryRotatePerSecond * Time.deltaTime;
+            transform.eulerAngles = euler;
+
+            //scale
+            transform.localScale = Vector3.Lerp(Vector3.one, Vector3.zero, Mathf.Clamp01(curT / victoryScaleOutDelay));
+
+            curT += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.localScale = Vector3.zero;
     }
 
     void OnMoveCollisionEnter(EntityHeroMoveController ctrl, Collision2D coll) {
@@ -431,6 +503,14 @@ public class EntityHero : M8.EntityBase {
 
     void OnMoveTriggerExit(EntityHeroMoveController ctrl, Collider2D coll) {
 
+    }
+
+    private void DisablePhysics() {
+        mMoveCtrl.ResetCollision();
+        mMoveCtrl.coll.enabled = false;
+        mMoveCtrl.body.simulated = false;
+
+        mHeatCollides.Clear();
     }
 
     private void RefreshMoveState() {

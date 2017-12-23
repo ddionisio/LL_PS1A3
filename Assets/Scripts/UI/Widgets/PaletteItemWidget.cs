@@ -54,8 +54,20 @@ public class PaletteItemWidget : MonoBehaviour, M8.IPoolSpawn, M8.IPoolDespawn, 
         return ghostCount;
     }
 
+    public void UpdateCount() {
+        int _ghostCount = ghostMatterCount;
+
+        int amount = !string.IsNullOrEmpty(mBlockName) ? GameMapController.instance.PaletteCount(mBlockName) : 0;
+
+        blockCountText.text = string.Format("{0}/{1}", _ghostCount.ToString("D2"), amount.ToString("D2"));
+    }
+
     void OnDestroy() {
         CleanUpCallbacks();
+    }
+
+    void OnEnable() {
+        UpdateCount();
     }
 
     void Awake() {
@@ -130,7 +142,8 @@ public class PaletteItemWidget : MonoBehaviour, M8.IPoolSpawn, M8.IPoolDespawn, 
 
                 mGhostMatterCount = 0;
                 //
-                
+
+                UpdateCount();
                 break;
         }
 
@@ -315,15 +328,7 @@ public class PaletteItemWidget : MonoBehaviour, M8.IPoolSpawn, M8.IPoolDespawn, 
                 selectActiveGO.SetActive(false);
         }
     }
-    
-    private void UpdateCount() {
-        int _ghostCount = ghostMatterCount;
-
-        int amount = GameMapController.instance.PaletteCount(mBlockName);
-
-        blockCountText.text = string.Format("{0}/{1}", _ghostCount.ToString("D2"), amount.ToString("D2"));
-    }
-
+        
     private void CleanUpCallbacks() {
         if(GameMapController.isInstantiated) {
             GameMapController.instance.paletteUpdateCallback -= OnPaletteUpdate;

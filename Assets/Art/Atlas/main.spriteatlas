@@ -110,6 +110,8 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 32890cfd3849dc4479f97ede4c66d8e3, type: 3}
   - {fileID: 21300000, guid: d100bf3fba8e48343b4f69fe5447d682, type: 3}
   - {fileID: 21300000, guid: ac631525cf585524d9b8ef2c49f72c60, type: 3}
+  - {fileID: 21300000, guid: a95c56f40f7822648a4117d48a39fbb9, type: 3}
+  - {fileID: 21300000, guid: a67e664e6e1a73948b0726e30ae592e9, type: 3}
   - {fileID: 21300000, guid: b5f1f248fc842084cb79fa132167e30b, type: 3}
   - {fileID: 21300000, guid: 2154a69bc7b0e4c44817852a2b68cca9, type: 3}
   - {fileID: 21300000, guid: 6f7ecf39209dff94086d81b4de5dc0a2, type: 3}
@@ -220,6 +222,8 @@ SpriteAtlas:
   - blockWoodIcon
   - tutorialHandPoint
   - blockBalloonBase
+  - handStop
+  - handPoint
   - tutorialHandPointDown
   - ground3_top
   - circleXButton

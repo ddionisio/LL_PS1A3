@@ -159,8 +159,10 @@ public class PalettePanel : MonoBehaviour {
                 toggleButton.raycastTarget = false;
 
                 //show active items
-                for(int i = 0; i < mActiveWidgets.Count; i++)
+                for(int i = 0; i < mActiveWidgets.Count; i++) {
                     mActiveWidgets[i].gameObject.SetActive(true);
+                    mActiveWidgets[i].UpdateCount();
+                }
 
                 //play edit mode enter
                 animator.Play(mTakeEditShowId);

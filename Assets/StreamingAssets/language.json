@@ -5,6 +5,8 @@
     }
   },
   "en": {
+	"title": "<size=52>MIGHTY CHIN CHIN</size>\nand the\n<size=40>Properties of Matter</size>",
+	"start": "START",
     "welcome": "Welcome!",
 	"blockWoodName": "Wood",
 	"blockCorkwoodName": "Corkwood",

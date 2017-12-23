@@ -27,6 +27,12 @@ public class LoLLocalize : Localize {
 
     private string mCurLang;
 
+    public bool isLoaded {
+        get {
+            return mCurLang != null;
+        }
+    }
+
     public override string[] languages {
         get {
             return new string[] { mCurLang };
@@ -41,6 +47,8 @@ public class LoLLocalize : Localize {
 
     public void Load(string langCode, string json) {
         mCurLang = langCode;
+        if(mCurLang == null) //langCode shouldn't be null
+            mCurLang = "";
 
         var defs = JSON.Parse(json) as Dictionary<string, object>;
         

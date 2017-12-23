@@ -5,14 +5,14 @@ SpriteAtlas:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: stage3_intro
+  m_Name: start
   m_EditorData:
     textureSettings:
       serializedVersion: 2
       anisoLevel: 1
       compressionQuality: 50
       maxTextureSize: 2048
-      textureCompression: 2
+      textureCompression: 1
       filterMode: 2
       generateMipMaps: 0
       readable: 0
@@ -28,12 +28,16 @@ SpriteAtlas:
       enableTightPacking: 1
     variantMultiplier: 1
     packables:
-    - {fileID: 2800000, guid: b98e986f6d6f4a249a54d140a6d4f590, type: 3}
+    - {fileID: 102900000, guid: cb6439414e9955642b7d2e6c2a985f33, type: 3}
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
-  - {fileID: 21300000, guid: b98e986f6d6f4a249a54d140a6d4f590, type: 3}
+  - {fileID: 21300000, guid: 2412572868ec14349a67659648286d96, type: 3}
+  - {fileID: 21300000, guid: 8ed80670ba86a434e981cb6d3361531e, type: 3}
+  - {fileID: 21300000, guid: be6cb0332943b1949881b43ec5472843, type: 3}
   m_PackedSpriteNamesToIndex:
-  - stage3
-  m_Tag: stage3_intro
+  - mountains
+  - sun
+  - chinchillaBacklit
+  m_Tag: start
   m_IsVariant: 0

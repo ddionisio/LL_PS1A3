@@ -82,6 +82,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 776b54876e58fd140a4b13395cbfdd6f, type: 3}
   - {fileID: 21300000, guid: a92bb75807133694c8d455389bbc8c35, type: 3}
   - {fileID: 21300000, guid: 200308fa670853446b0f821d002cde6d, type: 3}
+  - {fileID: 21300000, guid: 59d2f14b55b373b4c953f782b0d8858f, type: 3}
   - {fileID: 21300000, guid: 097a501b1760353409257e753ff52123, type: 3}
   - {fileID: 21300000, guid: a2ecd4d072bc5814593d67a3e29ef12c, type: 3}
   - {fileID: 21300000, guid: 84abc456a11766248a61fc7a449a252c, type: 3}
@@ -189,6 +190,7 @@ SpriteAtlas:
   - chinchilla_move_6
   - chinchilla_move_9
   - chinchilla_move_8
+  - hourglass
   - ground5_top
   - palettePanelExpandButtonGlow
   - ground4_top

@@ -2693,7 +2693,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 053a561a000d402489b891a0bd9385de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  key: introTitle2
+  key: introTitle2_example
 --- !u!114 &689480469
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3171,7 +3171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 053a561a000d402489b891a0bd9385de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  key: introTitle2
+  key: introTitle2_example
 --- !u!114 &940770812
 MonoBehaviour:
   m_ObjectHideFlags: 0

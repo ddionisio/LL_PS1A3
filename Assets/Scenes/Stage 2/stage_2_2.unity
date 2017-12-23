@@ -9278,6 +9278,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114384800968059630, guid: cd1384428e12f1045bd8021fa1a66da8,
+        type: 2}
+      propertyPath: force
+      value: 25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cd1384428e12f1045bd8021fa1a66da8, type: 2}
   m_IsPrefabParent: 0
@@ -10860,7 +10865,7 @@ MonoBehaviour:
   _boundsStep: {x: 1, y: 1}
   _initialPalette:
   - blockName: corkwood
-    amount: 5
+    amount: 6
     capacityAdd: 0
   - blockName: wood
     amount: 5

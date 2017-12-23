@@ -32,8 +32,8 @@ SpriteAtlas:
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
-  - {fileID: 21300000, guid: 407fdf7f01e0d09488a545d3128d8eb0, type: 3}
+  - {fileID: 21300000, guid: 1be874d8a3ab7e54cb10f30ef948c512, type: 3}
   m_PackedSpriteNamesToIndex:
-  - stage1
+  - stage2
   m_Tag: stage2_intro
   m_IsVariant: 0

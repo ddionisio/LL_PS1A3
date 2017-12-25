@@ -37,10 +37,13 @@ SpriteAtlas:
     - {fileID: 102900000, guid: 4880894160e8f434fa3db3a503be6c3c, type: 3}
     - {fileID: 102900000, guid: f0225da5b123bdb42a2d650bdbb8c9bc, type: 3}
     - {fileID: 2800000, guid: 50b9ed4d76473f04ba33073d6cfafca9, type: 3}
+    - {fileID: 102900000, guid: cdc3a6cce0c7e66418f16f15fc2e3b34, type: 3}
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
   - {fileID: 21300000, guid: e46b7919f16fa1c4690aa75d2c3b28d6, type: 3}
+  - {fileID: 21300000, guid: d4b0e4fc50c0e274fad6712e6aac39de, type: 3}
+  - {fileID: 21300000, guid: 50b3ce6631f63fc4db9a50bfdfff2239, type: 3}
   - {fileID: 21300000, guid: f9e7f2c03299aa24291f1fbfc71933f4, type: 3}
   - {fileID: 21300000, guid: bd26be54febb810489ad0f739d5eba63, type: 3}
   - {fileID: 21300000, guid: 2e492bdfa943dbd4b82b40cf5d2d3049, type: 3}
@@ -153,6 +156,8 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 02cb7109eec577d45a27167e2308de23, type: 3}
   m_PackedSpriteNamesToIndex:
   - scaleTop
+  - oxidizerBarrel
+  - fuelBarrel
   - exitPortalBase
   - spawnPortalBase
   - scaleBody

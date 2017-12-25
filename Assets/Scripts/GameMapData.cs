@@ -53,8 +53,15 @@ public class GameMapData : MonoBehaviour {
         Vector2 min = (Vector2)_bounds.min + ext;
         Vector2 max = (Vector2)_bounds.max - ext;
 
-        center.x = Mathf.Clamp(center.x, min.x, max.x);
-        center.y = Mathf.Clamp(center.y, min.y, max.y);
+        if(_bounds.extents.x > ext.x)
+            center.x = Mathf.Clamp(center.x, min.x, max.x);
+        else
+            center.x = _bounds.center.x;
+
+        if(_bounds.extents.y > ext.y)
+            center.y = Mathf.Clamp(center.y, min.y, max.y);
+        else
+            center.y = _bounds.center.y;
 
         return center;
     }

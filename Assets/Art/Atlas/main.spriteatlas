@@ -47,6 +47,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 50b3ce6631f63fc4db9a50bfdfff2239, type: 3}
   - {fileID: 21300000, guid: f9e7f2c03299aa24291f1fbfc71933f4, type: 3}
   - {fileID: 21300000, guid: bd26be54febb810489ad0f739d5eba63, type: 3}
+  - {fileID: 21300000, guid: ddad3c7ef598dab46839f433a25ca872, type: 3}
   - {fileID: 21300000, guid: c34279de5072be04ab9c083b14b8708a, type: 3}
   - {fileID: 21300000, guid: 2e492bdfa943dbd4b82b40cf5d2d3049, type: 3}
   - {fileID: 21300000, guid: 8039358ec0b9f45468142a96af9e72ea, type: 3}
@@ -172,6 +173,7 @@ SpriteAtlas:
   - fuelBarrel
   - exitPortalBase
   - spawnPortalBase
+  - spaceship
   - thing
   - scaleBody
   - combustionChamber

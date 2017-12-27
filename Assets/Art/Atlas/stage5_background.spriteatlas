@@ -36,10 +36,12 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 2c2df635f881fba4eab76fb54ce969e3, type: 3}
   - {fileID: 21300000, guid: 5ea5364738ec9ea4b8d4a91f7057d1ff, type: 3}
   - {fileID: 21300000, guid: f0e8485d83925714297418a35b9ba249, type: 3}
+  - {fileID: 21300000, guid: 28acccc20941667418a9433a8506f1d9, type: 3}
   m_PackedSpriteNamesToIndex:
   - clouds
   - crystal1
   - crystal2
   - sun
+  - noise
   m_Tag: stage5_background
   m_IsVariant: 0

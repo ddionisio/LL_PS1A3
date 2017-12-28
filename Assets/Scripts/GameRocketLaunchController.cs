@@ -42,6 +42,7 @@ public class GameRocketLaunchController : M8.SingletonBehaviour<GameRocketLaunch
 
     public void LiftOff() {
         isLiftingOff = true;
+        animator.Play(takeLiftoff);
     }
 
     void OnDestroy() {

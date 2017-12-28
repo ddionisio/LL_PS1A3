@@ -140,7 +140,11 @@ SpriteAtlas:
   - {fileID: 21300002, guid: e4d26837d115d654a8177de7021ae41d, type: 3}
   - {fileID: 21300000, guid: 4c68e1aa438588a44b4c6dbf6ed32155, type: 3}
   - {fileID: 21300000, guid: 5f8aeb6cb0ab9db4c9f8bb882f27e805, type: 3}
+  - {fileID: 21300000, guid: 8b319eedad91f9240bab0e2afd3cce74, type: 3}
   - {fileID: 21300000, guid: 50b9ed4d76473f04ba33073d6cfafca9, type: 3}
+  - {fileID: 21300000, guid: 0103d1ccfcfbb9442809830aab86f261, type: 3}
+  - {fileID: 21300000, guid: afd523437961d6b4ca1f0901ffcfe421, type: 3}
+  - {fileID: 21300000, guid: c4606b9d50b4d7241a7153e461fa29a9, type: 3}
   - {fileID: 21300000, guid: 7c0ca8c27a25dbe459166b79150933ac, type: 3}
   - {fileID: 21300000, guid: 5c0f98b80ca61c840a407e2b2052ef79, type: 3}
   - {fileID: 21300000, guid: 52e7b214713d7e242b8155ad259510a0, type: 3}
@@ -271,7 +275,11 @@ SpriteAtlas:
   - fieryBallFX_bottom
   - panelHole
   - levelProgressBase
+  - smoke02
   - block
+  - smoke03
+  - smoke01
+  - smoke04
   - fieryBlastOff
   - powerOff
   - triangle

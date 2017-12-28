@@ -165,11 +165,20 @@ public class RocketHUDController : MonoBehaviour {
         AddConsoleText("launchSequence11"); //lift-off! we have a lift-off!
 
         //wait for launch to finish
+        while(ctrl.isLiftingOff)
+            yield return null;
 
         AddConsoleText("launchSequence12");
 
-        yield return waitSecond;
+        yield return new WaitForSeconds(2.0f);
 
         //go to ending
+        if(GameFlowController.isInstantiated) {
+            GameFlowController.ProgressAndLoadNextScene();
+        }
+        else {
+            var endScene = GameData.instance.endScene;
+            endScene.Load();
+        }
     }
 }

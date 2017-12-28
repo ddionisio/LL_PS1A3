@@ -10,7 +10,8 @@ public abstract class Block : M8.EntityBase, IComparable<Block> {
 
     public enum Type {
         Matter, //for most things, can be resized during edit
-        Widget //special block that can't be resized during edit, just placed
+        Widget, //special block that can't be resized during edit, just placed
+        Static,
     }
 
     public enum Mode {
@@ -97,6 +98,13 @@ public abstract class Block : M8.EntityBase, IComparable<Block> {
     public abstract bool EditIsPlacementValid();
     public abstract void EditEnableCollision(bool aEnable); //used while in ghost mode (usu. enable/disable collision to allow other blocks to update placement valid properly)
     
+    /// <summary>
+    /// Block is about to be released via "cancel" in edit mode
+    /// </summary>
+    public virtual void EditCancel() {
+
+    }
+
     /// <summary>
     /// Start by snapping position to grid
     /// </summary>

@@ -163,6 +163,8 @@ public class BlockWidgetBalloon : BlockWidget {
         balloonSprite.color = mBalloonSpriteDefaultColor;
         ropeSprite.color = mRopeSpriteDefaultColor;
         widgetSprite.color = mWidgetDefaultColor;
+
+        base.OnDespawned();
     }
 
     protected override void OnSpawned(M8.GenericParams parms) {

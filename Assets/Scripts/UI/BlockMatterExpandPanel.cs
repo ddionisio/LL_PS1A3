@@ -99,6 +99,8 @@ public class BlockMatterExpandPanel : MonoBehaviour, IBeginDragHandler, IDragHan
 
             string blockName = _block.blockName;
 
+            _block.EditCancel();
+
             _block.Release();
             /*if(!forceReleaseBlock && _block.EditIsPlacementValid()) {
                 GameMapController.instance.PaletteChange(_block.blockName, -_block.matterCount);
@@ -212,9 +214,14 @@ public class BlockMatterExpandPanel : MonoBehaviour, IBeginDragHandler, IDragHan
 
         infoMatterCountText.color =  isValid ? infoMatterCountValidColor : infoMatterCountInvalidColor;
 
-        float mass = mBlock.mainBody ? mBlock.mainBody.mass : 0f;
+        if(mBlock.mainBody) {
+            float mass = mBlock.mainBody.mass;
 
-        infoMatterCountText.text = string.Format("{0}/{1}\n{2:f2} kg", curBlockCount.ToString("D2"), maxCount.ToString("D2"), mass);
+            infoMatterCountText.text = string.Format("{0}/{1}\n{2:f2} kg", curBlockCount.ToString("D2"), maxCount.ToString("D2"), mass);
+        }
+        else {
+            infoMatterCountText.text = string.Format("{0}/{1}", curBlockCount.ToString("D2"), maxCount.ToString("D2"));
+        }
 
         if(infoMatterDeployButton)
             infoMatterDeployButton.interactable = isValid && mBlock.EditIsPlacementValid();

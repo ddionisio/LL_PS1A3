@@ -111,8 +111,11 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 54ac4c5043107c24395579ec0c58610e, type: 3}
   - {fileID: 21300000, guid: 223366c4d2db50645baca7582e2c9432, type: 3}
   - {fileID: 21300000, guid: b95e27d683b6d79478ab6d875afe8815, type: 3}
+  - {fileID: 21300000, guid: cb80fcee4ffd13c43a43e0b5ee788c9b, type: 3}
+  - {fileID: 21300000, guid: bbb470816413f5640a65d66b41d0286f, type: 3}
   - {fileID: 21300000, guid: 416c6320efd86ee40bc9c3e9f708b879, type: 3}
   - {fileID: 21300000, guid: 5d6a999a89ac53346b6a811e65f601bd, type: 3}
+  - {fileID: 21300000, guid: fa8e6e3110fbf71468ef3e8daf6d809e, type: 3}
   - {fileID: 21300000, guid: ddd5a96da4632b74faeb149226467fec, type: 3}
   - {fileID: 21300000, guid: 6e42e4a00a8e4a64cab74f554533a24f, type: 3}
   - {fileID: 21300000, guid: 32890cfd3849dc4479f97ede4c66d8e3, type: 3}
@@ -238,8 +241,11 @@ SpriteAtlas:
   - circleGlow
   - blockAluminumIcon
   - blockIronIcon
+  - blockOxidizerIcon
+  - blockCombustionChamberIcon
   - blockBalloonIcon
   - blockRubberIcon
+  - blockFuelIcon
   - blockCorkwoodIcon
   - blockConcreteIcon
   - blockWoodIcon

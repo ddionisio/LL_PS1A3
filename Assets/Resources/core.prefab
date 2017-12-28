@@ -235,6 +235,18 @@ MonoBehaviour:
     prefab: {fileID: 114700719415644552, guid: ca590576e708069479d4f1fc11026493, type: 2}
     icon: {fileID: 21300000, guid: 5d6a999a89ac53346b6a811e65f601bd, type: 3}
     nameDisplayRef: blockRubberName
+  - name: fuel
+    prefab: {fileID: 114217066636121504, guid: 781a790ba02a07748bf5fd94c779172d, type: 2}
+    icon: {fileID: 21300000, guid: fa8e6e3110fbf71468ef3e8daf6d809e, type: 3}
+    nameDisplayRef: blockFuelName
+  - name: oxidizer
+    prefab: {fileID: 114081725187301670, guid: 56334de5c1ae9874e89c973e6c239be1, type: 2}
+    icon: {fileID: 21300000, guid: cb80fcee4ffd13c43a43e0b5ee788c9b, type: 3}
+    nameDisplayRef: blockOxidizerName
+  - name: combustionChamber
+    prefab: {fileID: 114386903833719754, guid: bcca6d1fd566162498ea6b875eb92beb, type: 2}
+    icon: {fileID: 21300000, guid: bbb470816413f5640a65d66b41d0286f, type: 3}
+    nameDisplayRef: blockCombustionChamberName
   blockSize: {x: 1, y: 1}
   blockInvalidMask:
     serializedVersion: 2

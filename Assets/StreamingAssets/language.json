@@ -15,6 +15,9 @@
 	"blockBalloonName": "Balloon",
 	"blockRubberName": "Rubber",
 	"blockAluminumName": "Aluminum",
+	"blockFuelName": "Fuel",
+	"blockOxidizerName": "Oxidizer",
+	"blockCombustionChamberName": "Combustion Chamber",
 	
 	"options": "OPTIONS",
 	"close": "CLOSE",

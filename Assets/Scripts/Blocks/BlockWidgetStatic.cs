@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class BlockWidgetStatic : BlockWidget {
     [Header("Data")]
-    public string id;
     public SpriteRenderer sprite;
 
     [Range(0f, 1f)]
@@ -13,6 +12,9 @@ public class BlockWidgetStatic : BlockWidget {
 
     public Color invalidColor = Color.red;
 
+    public GameObject rootConnectActiveGO; //this is set to inactive on spawn, will need to be activated manually
+
+    private Rigidbody2D mBody;
     private BoxCollider2D mColl;
 
     private bool mEditIsValid;
@@ -38,7 +40,7 @@ public class BlockWidgetStatic : BlockWidget {
 
     public override Rigidbody2D mainBody {
         get {
-            return null;
+            return mBody;
         }
     }
 
@@ -67,7 +69,7 @@ public class BlockWidgetStatic : BlockWidget {
     }
 
     public override void EditEnableCollision(bool aEnable) {
-        mColl.enabled = aEnable;
+        SetPhysicsActive(aEnable);
     }
 
     public override void EditCancel() {
@@ -82,14 +84,14 @@ public class BlockWidgetStatic : BlockWidget {
             case Mode.Ghost:
                 mSpriteDefaultColor = sprite.color;
 
-                mColl.enabled = false;
+                SetPhysicsActive(false);
 
                 UpdatePositionFromEditPos();
                 break;
             case Mode.Solid:
                 sprite.color = mSpriteDefaultColor;
 
-                mColl.enabled = true;
+                SetPhysicsActive(true);
 
                 mIsDeployed = true;
                 break;
@@ -102,6 +104,9 @@ public class BlockWidgetStatic : BlockWidget {
         GameMapController.instance.modeChangeCallback -= OnGameChangeMode;
 
         mIsDeployed = false;
+
+        if(rootConnectActiveGO)
+            rootConnectActiveGO.SetActive(false);
 
         base.OnDespawned();
     }
@@ -117,9 +122,13 @@ public class BlockWidgetStatic : BlockWidget {
     protected override void Awake() {
         base.Awake();
 
+        mBody = GetComponent<Rigidbody2D>();
         mColl = GetComponent<BoxCollider2D>();
 
         mEditPos = transform.position;
+
+        if(rootConnectActiveGO)
+            rootConnectActiveGO.SetActive(false);
     }
 
     void OnGameChangeMode(GameMapController.Mode mode) {
@@ -155,5 +164,12 @@ public class BlockWidgetStatic : BlockWidget {
         else {
             sprite.color = new Color(invalidColor.r, invalidColor.g, invalidColor.b, ghostAlpha);
         }
+    }
+
+    private void SetPhysicsActive(bool aActive) {
+        if(mBody)
+            mBody.simulated = aActive;
+        if(mColl)
+            mColl.enabled = aActive;
     }
 }

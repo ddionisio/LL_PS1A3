@@ -111,7 +111,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -170,7 +170,6 @@ MonoBehaviour:
   deathDelay: 1.5
   solidActiveGO: []
   ghostActiveGO: []
-  id: fuel
   sprite: {fileID: 212766420710445886}
   ghostAlpha: 0.8
   invalidColor: {r: 0.9705882, g: 0.24493444, b: 0.23551036, a: 1}

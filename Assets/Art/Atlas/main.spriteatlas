@@ -137,6 +137,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: af77b1b39d6cb0040a456355fa201ac7, type: 3}
   - {fileID: 21300000, guid: a22d03b4b0cbd3e4f80a7a3c6d0aaf16, type: 3}
   - {fileID: 21300000, guid: e4d26837d115d654a8177de7021ae41d, type: 3}
+  - {fileID: 21300002, guid: e4d26837d115d654a8177de7021ae41d, type: 3}
   - {fileID: 21300000, guid: 4c68e1aa438588a44b4c6dbf6ed32155, type: 3}
   - {fileID: 21300000, guid: 5f8aeb6cb0ab9db4c9f8bb882f27e805, type: 3}
   - {fileID: 21300000, guid: 50b9ed4d76473f04ba33073d6cfafca9, type: 3}
@@ -267,6 +268,7 @@ SpriteAtlas:
   - blockBalloonWidget
   - ground1_top_right
   - fieryBallFX
+  - fieryBallFX_bottom
   - panelHole
   - levelProgressBase
   - block

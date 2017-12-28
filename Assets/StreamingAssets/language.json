@@ -15,8 +15,8 @@
 	"blockBalloonName": "Balloon",
 	"blockRubberName": "Rubber",
 	"blockAluminumName": "Aluminum",
-	"blockFuelName": "Fuel",
-	"blockOxidizerName": "Oxidizer",
+	"blockFuelName": "Fuel Tank",
+	"blockOxidizerName": "Oxidizer Tank",
 	"blockCombustionChamberName": "Combustion Chamber",
 	
 	"options": "OPTIONS",
@@ -64,6 +64,24 @@
 	"stage_title_6": "My Chemical Reaction",
 	
 	"victory": "VICTORY",
+	
+	"launch": "LAUNCH",
+	"launchChecklist1": "Connect the Fuel Tank to a pump socket.",
+	"launchChecklist2": "Connect the Oxidizer Tank to a pump socket.",
+	"launchChecklist3": "Connect the Combustion Chamber to the pump tubes.",
+	
+	"launchSequence1": "Prepping for launch.",
+	"launchSequence2": "ignition sequence start.",
+	"launchSequence3": "Launching in...",
+	"launchSequence4": "5...",
+	"launchSequence5": "4...",
+	"launchSequence6": "3...",
+	"launchSequence7": "2...",
+	"launchSequence8": "1...",
+	"launchSequence9": "0...",
+	"launchSequence10": "All engines running...",
+	"launchSequence11": "Lift-off!",
+	"launchSequence12": "Godspeed!",
 	
 	"test": "Test"
   }

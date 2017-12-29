@@ -8810,6 +8810,7 @@ MonoBehaviour:
   checklistItemValidColor: {r: 0.6627451, g: 0.8196079, b: 0.5176471, a: 1}
   checklistItemInvalidColor: {r: 0.9705882, g: 0.24493444, b: 0.23551036, a: 1}
   launchConsoleText: {fileID: 114351696830022524}
+  launchConsoleMaxLines: 4
   launchButton: {fileID: 114323740170563496}
 --- !u!114 &114559308589463946
 MonoBehaviour:
@@ -10957,6 +10958,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   infoGO: {fileID: 1609918208409922}
+  infoYOfsNoExpand: -30
   infoMatterCountText: {fileID: 114670424500402496}
   infoMatterCountValidColor: {r: 0.98823535, g: 0.6901961, b: 0.47450984, a: 1}
   infoMatterCountInvalidColor: {r: 0.91372555, g: 0.33333334, b: 0.34117648, a: 1}

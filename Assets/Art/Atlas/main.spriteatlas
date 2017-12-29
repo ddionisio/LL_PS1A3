@@ -104,6 +104,7 @@ SpriteAtlas:
   - {fileID: 21300006, guid: 8d96c941d602de145b03c397a6ae7935, type: 3}
   - {fileID: 21300004, guid: 8d96c941d602de145b03c397a6ae7935, type: 3}
   - {fileID: 21300000, guid: afb95580ee3e0d34f9c3feb8f70214a2, type: 3}
+  - {fileID: 21300000, guid: ac631525cf585524d9b8ef2c49f72c60, type: 3}
   - {fileID: 21300000, guid: df7204954bdc5d24aa8774eda120b6dd, type: 3}
   - {fileID: 21300000, guid: 194b3f369ed97194d869055313cbaaf1, type: 3}
   - {fileID: 21300000, guid: b2f0ceb758908be4bbc9c8d7e6a31310, type: 3}
@@ -120,7 +121,6 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 6e42e4a00a8e4a64cab74f554533a24f, type: 3}
   - {fileID: 21300000, guid: 32890cfd3849dc4479f97ede4c66d8e3, type: 3}
   - {fileID: 21300000, guid: d100bf3fba8e48343b4f69fe5447d682, type: 3}
-  - {fileID: 21300000, guid: ac631525cf585524d9b8ef2c49f72c60, type: 3}
   - {fileID: 21300000, guid: 5b3ca70b713556641bf591fc579c3353, type: 3}
   - {fileID: 21300000, guid: a95c56f40f7822648a4117d48a39fbb9, type: 3}
   - {fileID: 21300000, guid: a67e664e6e1a73948b0726e30ae592e9, type: 3}
@@ -239,6 +239,7 @@ SpriteAtlas:
   - lightningFXs_3
   - lightningFXs_2
   - speakIcon
+  - blockBalloonBase
   - optionButton
   - palettePanelExpandButton
   - tutorialArrow
@@ -255,7 +256,6 @@ SpriteAtlas:
   - blockConcreteIcon
   - blockWoodIcon
   - tutorialHandPoint
-  - blockBalloonBase
   - levelProgressLastBase
   - handStop
   - handPoint

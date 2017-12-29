@@ -45,6 +45,7 @@ public class BlockWidgetBalloon : BlockWidget {
     private bool mEditIsValid;
     private Vector2 mEditPos;
 
+    private Transform mBalloonTrans;
     private Color mBalloonSpriteDefaultColor;
     private Color mRopeSpriteDefaultColor;
     private Color mWidgetDefaultColor;
@@ -158,6 +159,8 @@ public class BlockWidgetBalloon : BlockWidget {
                 
         mJoint.connectedBody = null;
 
+        mBalloonTrans.localRotation = Quaternion.identity;
+
         ropeSprite.transform.localRotation = Quaternion.identity;
 
         balloonSprite.color = mBalloonSpriteDefaultColor;
@@ -198,6 +201,8 @@ public class BlockWidgetBalloon : BlockWidget {
         mRopePixelRatio = ropeSprite.sprite.rect.size.y / ropeSprite.sprite.pixelsPerUnit;
         if(mRopePixelRatio <= 0f)
             mRopePixelRatio = 1f;
+
+        mBalloonTrans = balloonSprite.transform;
     }
     
     void Update() {
@@ -243,6 +248,8 @@ public class BlockWidgetBalloon : BlockWidget {
 
         ropeSprite.transform.up = Vector2.up;
         ropeSprite.transform.position = (Vector2)transform.position - new Vector2(0f, len * 0.5f);
+
+        mBalloonTrans.up = Vector2.up;
     }
 
     void UpdateRopeDisplayDynamic() {
@@ -260,6 +267,8 @@ public class BlockWidgetBalloon : BlockWidget {
             dirToBalloon /= dist;
 
             ropeSprite.transform.up = dirToBalloon;
+
+            mBalloonTrans.up = dirToBalloon;
 
             dist += ropeLengthOfs;
             

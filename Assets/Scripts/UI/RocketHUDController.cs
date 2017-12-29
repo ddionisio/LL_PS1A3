@@ -124,7 +124,6 @@ public class RocketHUDController : MonoBehaviour {
         var ctrl = GameRocketLaunchController.instance;
 
         var waitSecond = new WaitForSeconds(1f);
-        var waitABit = new WaitForSeconds(0.5f);
         
         AddConsoleText("launchSequence1"); //prep
 
@@ -154,7 +153,7 @@ public class RocketHUDController : MonoBehaviour {
         AddConsoleText("launchSequence8");
         yield return waitSecond;
         AddConsoleText("launchSequence9");
-        yield return waitABit;
+        yield return waitSecond;
 
         AddConsoleText("launchSequence10"); //engines are go!
 

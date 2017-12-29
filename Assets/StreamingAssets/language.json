@@ -83,6 +83,9 @@
 	"launchSequence11": "Lift-off!",
 	"launchSequence12": "Godspeed!",
 	
+	"complete": "COMPLETE",
+	"completeDesc": "Thank you for playing!",
+	
 	"test": "Test"
   }
 }

@@ -8,6 +8,7 @@ using System;
 public class BlockMatterExpandPanel : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler {
     [Header("Info")]
     public GameObject infoGO;
+    public float infoYOfsNoExpand;
     public Text infoMatterCountText;
     public Color infoMatterCountValidColor = Color.white;
     public Color infoMatterCountInvalidColor = Color.red;
@@ -49,7 +50,10 @@ public class BlockMatterExpandPanel : MonoBehaviour, IBeginDragHandler, IDragHan
 
     private bool mIsExpandShown;
     private bool mIsMoveMode;
-        
+
+    private RectTransform mInfoTrans;
+    private Vector2 mInfoDefaultAnchorPos;
+
     public void Show(Block block) {
         if(mBlock == block)
             return;
@@ -124,6 +128,9 @@ public class BlockMatterExpandPanel : MonoBehaviour, IBeginDragHandler, IDragHan
     void Awake() {
         mTrans = GetComponent<RectTransform>();
         mWorldAttach = GetComponent<UIScreenAttachToWorld>();
+
+        mInfoTrans = infoGO.GetComponent<RectTransform>();
+        mInfoDefaultAnchorPos = mInfoTrans.anchoredPosition;
 
         mIsExpandShown = true;
     }
@@ -247,6 +254,17 @@ public class BlockMatterExpandPanel : MonoBehaviour, IBeginDragHandler, IDragHan
 
             for(int i = 0; i < arrows.Length; i++)
                 arrows[i].gameObject.SetActive(mIsExpandShown);
+            
+            Vector2 anchorPos = mInfoTrans.anchoredPosition;
+
+            if(mIsExpandShown) {
+                anchorPos.y = mInfoDefaultAnchorPos.y;
+            }
+            else {
+                anchorPos.y = mInfoDefaultAnchorPos.y + infoYOfsNoExpand;
+            }
+
+            mInfoTrans.anchoredPosition = anchorPos;
         }
     }
 

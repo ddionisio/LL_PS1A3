@@ -19,10 +19,13 @@ public class GameStart : MonoBehaviour {
     }
 
     IEnumerator Start () {
+        if(HUD.instance.optionsRoot)
+            HUD.instance.optionsRoot.SetActive(false);
+
         //wait for language to be loaded
         while(!LoLLocalize.instance.isLoaded)
             yield return null;
-
+                
         //start title
         titleText.text = LoLLocalize.Get(titleStringRef);
         titleGO.SetActive(true);
@@ -30,6 +33,9 @@ public class GameStart : MonoBehaviour {
         //wait for LoL to load/initialize
         while(!LoLManager.instance.isReady)
             yield return null;
+
+        if(HUD.instance.optionsRoot)
+            HUD.instance.optionsRoot.SetActive(true);
 
         loadingGO.SetActive(false);
         readyGO.SetActive(true);

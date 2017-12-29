@@ -308,4 +308,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gameID: com.daviddionisio.LoLGame
   _progressMax: 8
-  _pauseModal: 
+  _pauseEnabled: 0
+  _pauseModal: pause
+  _pauseModalPopOnResume: 1

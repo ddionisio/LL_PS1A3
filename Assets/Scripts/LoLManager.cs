@@ -54,7 +54,11 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
     [SerializeField]
     int _progressMax;
     [SerializeField]
+    bool _pauseEnabled;
+    [SerializeField]
     string _pauseModal;
+    [SerializeField]
+    bool _pauseModalPopOnResume = true;
 
     private int mCurProgress;
 
@@ -320,7 +324,7 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
         // Either GameState.Paused or GameState.Resumed
         switch(gameState) {
             case GameState.Paused:
-                if(!mPaused) {
+                if(_pauseEnabled && !mPaused) {
                     mPaused = true;
 
                     if(!string.IsNullOrEmpty(_pauseModal)) {
@@ -335,10 +339,16 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
                 break;
 
             case GameState.Resumed:
-                if(mPaused) {
+                if(_pauseEnabled && mPaused) {
                     mPaused = false;
 
-                    if(string.IsNullOrEmpty(_pauseModal))
+                    if(!string.IsNullOrEmpty(_pauseModal)) {
+                        if(_pauseModalPopOnResume) {
+                            if(M8.UIModal.Manager.instance.ModalIsInStack(_pauseModal))
+                                M8.UIModal.Manager.instance.ModalCloseUpTo(_pauseModal, true);
+                        }
+                    }
+                    else
                         M8.SceneManager.instance.Resume();
                 }
                 break;
@@ -361,7 +371,7 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
 #if DEBUG_LOCAL || UNITY_EDITOR
     void LoadMockData() {
         mLangCode = LoLLocalize.instance.debugLanguageCode;
-                
+
         //apply language
         string langFilePath = LoLLocalize.instance.debugLanguagePath;
         if(File.Exists(langFilePath)) {
@@ -371,6 +381,8 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
 
             HandleLanguageDefs(langDefs[mLangCode].ToString());
         }
+        else
+            HandleLanguageDefs("");
         //
 
         //apply questions

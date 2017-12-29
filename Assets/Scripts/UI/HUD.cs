@@ -20,6 +20,8 @@ public class HUD : M8.SingletonBehaviour<HUD> {
     [Header("Misc HUDs")]
     public Transform miscContainer;
 
+    public GameObject optionsRoot;
+
     private Dictionary<string, GameObject> mMiscHUDs;
 
     public void HideAll() {

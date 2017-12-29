@@ -59,6 +59,10 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
     string _pauseModal;
     [SerializeField]
     bool _pauseModalPopOnResume = true;
+    [SerializeField]
+    bool _useFadeMusicScale;
+    [SerializeField]
+    float _fadeMusicScale = 1.0f;
 
     private int mCurProgress;
 
@@ -240,7 +244,10 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
     }
 
     public void ApplyVolumes(float sound, float music, bool save) {
-        ApplyVolumes(sound, music, mFadeVolume, save);
+        if(_useFadeMusicScale)
+            ApplyVolumes(sound, music, music * _fadeMusicScale, save);
+        else
+            ApplyVolumes(sound, music, mFadeVolume, save);
     }
 
     public void ApplyVolumes(float sound, float music, float fade, bool save) {
@@ -294,9 +301,13 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
 
         var settings = M8.UserData.GetInstance(userDataSettingsKey);
 
-        mMusicVolume = settings.GetFloat(settingsMusicVolumeKey, 0.3f);
-        mSoundVolume = settings.GetFloat(settingsSoundVolumeKey, 0.5f);
-        mFadeVolume = settings.GetFloat(settingsFadeVolumeKey, 0.1f);
+        const float musicDefault = 0.3f;
+        const float soundDefault = 0.5f;
+        const float fadeDefault = 0.1f;
+
+        mMusicVolume = settings.GetFloat(settingsMusicVolumeKey, musicDefault);
+        mSoundVolume = settings.GetFloat(settingsSoundVolumeKey, soundDefault);
+        mFadeVolume = settings.GetFloat(settingsFadeVolumeKey, _useFadeMusicScale ? musicDefault * _fadeMusicScale : fadeDefault);
 
         ApplyVolumes();
 

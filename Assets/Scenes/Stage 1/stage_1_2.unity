@@ -3591,8 +3591,11 @@ MonoBehaviour:
     m_Extent: {x: 19, y: 9, z: 0}
   _boundsStep: {x: 1, y: 1}
   _initialPalette:
+  - blockName: corkwood
+    amount: 9
+    capacityAdd: 0
   - blockName: wood
-    amount: 18
+    amount: 9
     capacityAdd: 0
   _paletteDefaultPoolCapacity: 8
 --- !u!4 &2087361657

@@ -923,7 +923,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4888042464463816, guid: 46e91ef104547c649973f64746bd1921, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -11
+      value: -11.2
       objectReference: {fileID: 0}
     - target: {fileID: 4888042464463816, guid: 46e91ef104547c649973f64746bd1921, type: 2}
       propertyPath: m_LocalPosition.z
@@ -1061,7 +1061,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh-3543296
+  m_Name: pb_Mesh-35422
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -1921,7 +1921,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh-3543350
+  m_Name: pb_Mesh-35486
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -2553,7 +2553,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4888042464463816, guid: 46e91ef104547c649973f64746bd1921, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -11
+      value: -11.2
       objectReference: {fileID: 0}
     - target: {fileID: 4888042464463816, guid: 46e91ef104547c649973f64746bd1921, type: 2}
       propertyPath: m_LocalPosition.z
@@ -4008,8 +4008,14 @@ MonoBehaviour:
     m_Extent: {x: 17, y: 9, z: 0}
   _boundsStep: {x: 1, y: 1}
   _initialPalette:
+  - blockName: corkwood
+    amount: 8
+    capacityAdd: 0
   - blockName: wood
-    amount: 20
+    amount: 8
+    capacityAdd: 0
+  - blockName: iron
+    amount: 4
     capacityAdd: 0
   _paletteDefaultPoolCapacity: 8
 --- !u!4 &2087361657

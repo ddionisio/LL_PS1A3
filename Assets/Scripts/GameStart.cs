@@ -22,9 +22,16 @@ public class GameStart : MonoBehaviour {
         if(HUD.instance.optionsRoot)
             HUD.instance.optionsRoot.SetActive(false);
 
+        //wait for scene to load
+        while(M8.SceneManager.instance.isLoading)
+            yield return null;
+
         //wait for language to be loaded
         while(!LoLLocalize.instance.isLoaded)
             yield return null;
+
+        //play music
+        LoLMusicPlaylist.instance.PlayStartMusic();
                 
         //start title
         titleText.text = LoLLocalize.Get(titleStringRef);

@@ -54,21 +54,21 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
     [SerializeField]
     int _progressMax;
     [SerializeField]
-    bool _pauseEnabled;
+    protected bool _pauseEnabled;
     [SerializeField]
-    string _pauseModal;
+    protected string _pauseModal;
     [SerializeField]
-    bool _pauseModalPopOnResume = true;
+    protected bool _pauseModalPopOnResume = true;
     [SerializeField]
     bool _useFadeMusicScale;
     [SerializeField]
     float _fadeMusicScale = 1.0f;
 
-    private int mCurProgress;
+    protected int mCurProgress;
 
-    private bool mPaused;
+    protected bool mPaused;
 
-    private string mLangCode;
+    protected string mLangCode;
 
     public string gameID { get { return _gameID; } }
 
@@ -125,21 +125,21 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
     public event OnCallback progressCallback;
     public event OnCallback completeCallback;
 
-    private float mMusicVolume;
-    private float mSoundVolume;
-    private float mFadeVolume;
+    protected float mMusicVolume;
+    protected float mSoundVolume;
+    protected float mFadeVolume;
 
-    private bool mIsQuestionsReceived;
-    private MultipleChoiceQuestionList mQuestionsList;
-    private List<QuestionAnswered> mQuestionsAnsweredList;
+    protected bool mIsQuestionsReceived;
+    protected MultipleChoiceQuestionList mQuestionsList;
+    protected List<QuestionAnswered> mQuestionsAnsweredList;
 
-    private int mCurQuestionIndex;
+    protected int mCurQuestionIndex;
 
-    private string mLastSoundBackgroundPath;
+    protected string mLastSoundBackgroundPath;
 
     private bool mIsReady;
 
-    public void PlaySound(string path, bool background, bool loop) {
+    public virtual void PlaySound(string path, bool background, bool loop) {
         if(background && !string.IsNullOrEmpty(mLastSoundBackgroundPath)) {
             LOLSDK.Instance.StopSound(mLastSoundBackgroundPath);
         }
@@ -150,11 +150,11 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
             mLastSoundBackgroundPath = path;
     }
 
-    public void SpeakText(string key) {
+    public virtual void SpeakText(string key) {
         LOLSDK.Instance.SpeakText(key);
     }
 
-    public void StopCurrentBackgroundSound() {
+    public virtual void StopCurrentBackgroundSound() {
         if(!string.IsNullOrEmpty(mLastSoundBackgroundPath)) {
             LOLSDK.Instance.StopSound(mLastSoundBackgroundPath);
             mLastSoundBackgroundPath = null;
@@ -175,7 +175,7 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
     /// <summary>
     /// This will move the current question index by 1
     /// </summary>
-    public QuestionAnswered AnswerCurrentQuestion(int alternativeIndex) {
+    public virtual QuestionAnswered AnswerCurrentQuestion(int alternativeIndex) {
         if(isQuestionsAllAnswered)
             return null;
 
@@ -225,22 +225,30 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
         mCurQuestionIndex = 0;
     }
 
-    public void ApplyScore(int score) {
+    public virtual void ApplyScore(int score) {
         LOLSDK.Instance.SubmitProgress(score, mCurProgress, _progressMax);
     }
 
-    public void ApplyProgress(int progress, int score) {
+    protected void ProgressCallback() {
+        if(progressCallback != null)
+            progressCallback(this);
+    }
+
+    public virtual void ApplyProgress(int progress, int score) {
 
         mCurProgress = Mathf.Clamp(progress, 0, _progressMax);
 
         ApplyScore(score);
 
-        if(progressCallback != null)
-            progressCallback(this);
+        ProgressCallback();
     }
 
-    public void ApplyVolumes() {
+    protected virtual void ApplyVolumes(float sound, float music, float fade) {
         LOLSDK.Instance.ConfigureSound(mSoundVolume, mMusicVolume, mFadeVolume);
+    }
+
+    public void ApplyCurrentVolumes() {
+        ApplyVolumes(mSoundVolume, mMusicVolume, mFadeVolume);
     }
 
     public void ApplyVolumes(float sound, float music, bool save) {
@@ -251,7 +259,7 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
     }
 
     public void ApplyVolumes(float sound, float music, float fade, bool save) {
-        LOLSDK.Instance.ConfigureSound(sound, music, fade);
+        ApplyVolumes(sound, music, fade);
 
         if(save) {
             mSoundVolume = sound;
@@ -268,19 +276,19 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
     /// <summary>
     /// Call this when player quits, or finishes
     /// </summary>
-    public void Complete() {
+    public virtual void Complete() {
         LOLSDK.Instance.CompleteGame();
 
         if(completeCallback != null)
             completeCallback(this);
     }
 
-    void Start() {
+    protected virtual void Start() {
         mLangCode = "en";
         mIsReady = false;
 
         // Create the WebGL (or mock) object
-#if DEBUG_LOCAL || UNITY_EDITOR
+#if UNITY_EDITOR
         ILOLSDK webGL = new LoLSDK.MockWebGL();
 #elif UNITY_WEBGL
 		ILOLSDK webGL = new LoLSDK.WebGL();
@@ -290,7 +298,7 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
         LOLSDK.Init(webGL, _gameID);
 
         // Register event handlers
-#if !(DEBUG_LOCAL || UNITY_EDITOR)
+#if !UNITY_EDITOR
         LOLSDK.Instance.StartGameReceived += new StartGameReceivedHandler(this.HandleStartGame);
         LOLSDK.Instance.GameStateChanged += new GameStateChangedHandler(this.HandleGameStateChange);
         LOLSDK.Instance.QuestionsReceived += new QuestionListReceivedHandler(this.HandleQuestions);
@@ -299,6 +307,18 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
 
         mCurProgress = 0;
 
+        SetupVolumes();
+
+        // Mock the platform-to-game messages when in the Unity editor.
+#if UNITY_EDITOR
+        LoadMockData();
+#endif
+
+        // Then, tell the platform the game is ready.
+        LOLSDK.Instance.GameIsReady();
+    }
+
+    protected void SetupVolumes() {
         var settings = M8.UserData.GetInstance(userDataSettingsKey);
 
         const float musicDefault = 0.3f;
@@ -309,19 +329,11 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
         mSoundVolume = settings.GetFloat(settingsSoundVolumeKey, soundDefault);
         mFadeVolume = settings.GetFloat(settingsFadeVolumeKey, _useFadeMusicScale ? musicDefault * _fadeMusicScale : fadeDefault);
 
-        ApplyVolumes();
-
-        // Mock the platform-to-game messages when in the Unity editor.
-#if DEBUG_LOCAL || UNITY_EDITOR
-        LoadMockData();
-#endif
-
-        // Then, tell the platform the game is ready.
-        LOLSDK.Instance.GameIsReady();
+        ApplyCurrentVolumes();
     }
 
     // Start the game here
-    void HandleStartGame(string json) {
+    protected void HandleStartGame(string json) {
         //SharedState.StartGameData = JSON.Parse(json);
 
         mIsReady = true;
@@ -331,7 +343,7 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
     }
 
     // Handle pause / resume
-    void HandleGameStateChange(GameState gameState) {
+    protected void HandleGameStateChange(GameState gameState) {
         // Either GameState.Paused or GameState.Resumed
         switch(gameState) {
             case GameState.Paused:
@@ -367,7 +379,7 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
     }
 
     // Store the questions and show them in order based on your game flow.
-    void HandleQuestions(MultipleChoiceQuestionList questionList) {
+    protected void HandleQuestions(MultipleChoiceQuestionList questionList) {
         mIsQuestionsReceived = true;
 
         mQuestionsList = questionList;
@@ -375,11 +387,11 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
     }
 
     // Use language to populate UI
-    void HandleLanguageDefs(string json) {
+    protected void HandleLanguageDefs(string json) {
         LoLLocalize.instance.Load(mLangCode, json);
     }
 
-#if DEBUG_LOCAL || UNITY_EDITOR
+#if UNITY_EDITOR
     void LoadMockData() {
         mLangCode = LoLLocalize.instance.debugLanguageCode;
 

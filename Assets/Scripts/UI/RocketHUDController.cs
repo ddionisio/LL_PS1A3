@@ -124,6 +124,8 @@ public class RocketHUDController : MonoBehaviour {
         var ctrl = GameRocketLaunchController.instance;
 
         var waitSecond = new WaitForSeconds(1f);
+
+        LoLMusicPlaylist.instance.Stop();
         
         AddConsoleText("launchSequence1"); //prep
 
@@ -160,6 +162,8 @@ public class RocketHUDController : MonoBehaviour {
         ctrl.LiftOff();
 
         yield return waitSecond;
+
+        LoLMusicPlaylist.instance.PlayStartMusic();
 
         AddConsoleText("launchSequence11"); //lift-off! we have a lift-off!
 

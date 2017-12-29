@@ -25,6 +25,8 @@ GameObject:
   - component: {fileID: 114133423949325756}
   - component: {fileID: 114936811060178804}
   - component: {fileID: 114575503479907716}
+  - component: {fileID: 114241867361012552}
+  - component: {fileID: 81628332179971036}
   m_Layer: 0
   m_Name: core
   m_TagString: Untagged
@@ -105,6 +107,13 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!81 &81628332179971036
+AudioListener:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1150101790038914}
+  m_Enabled: 1
 --- !u!114 &114133423949325756
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -135,6 +144,27 @@ MonoBehaviour:
   localStateCache: 0
   globalStartData: []
   startData: []
+--- !u!114 &114241867361012552
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1150101790038914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50bba549c63247e4c8497436df4fe3d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startMusicPath: Audio/epic-destiny.mp3
+  items:
+  - path: Audio/drunken-monkey-ukulele.mp3
+    duration: 351
+  - path: Audio/big-guy-walk.mp3
+    duration: 198
+  - path: Audio/hapiness-joy-and-fun.mp3
+    duration: 351
+  - path: Audio/whimsical-magic.mp3
+    duration: 228
 --- !u!114 &114468768111179502
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -306,7 +336,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c3e463886da8b54d882c0a188e52ec0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameID: com.daviddionisio.LoLGame
+  _gameID: com.daviddionisio.MightyChinChinPS1A3
   _progressMax: 8
   _pauseEnabled: 0
   _pauseModal: pause

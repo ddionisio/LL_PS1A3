@@ -12,7 +12,7 @@ public class LoLLocalize : Localize {
         }
     }
 
-#if DEBUG_LOCAL || UNITY_EDITOR
+#if UNITY_EDITOR
     public string debugLanguageCode = "en";
     public string debugLanguageRef = "language.json";
 
@@ -86,7 +86,7 @@ public class LoLLocalize : Localize {
     }
 
     public override string[] GetKeys() {
-#if DEBUG_LOCAL || UNITY_EDITOR
+#if UNITY_EDITOR
         if(mEntries == null)
             LoadFromReference();
 #endif
@@ -106,7 +106,7 @@ public class LoLLocalize : Localize {
     }
 
     public override bool IsLanguageFile(string filepath) {
-#if DEBUG_LOCAL || UNITY_EDITOR
+#if UNITY_EDITOR
         return filepath.Contains(debugLanguageRef);
 #else
         return false;
@@ -140,7 +140,7 @@ public class LoLLocalize : Localize {
         return mEntries.TryGetValue(key, out data);
     }
 
-#if DEBUG_LOCAL || UNITY_EDITOR
+#if UNITY_EDITOR
     private void LoadFromReference() {
         if(string.IsNullOrEmpty(debugLanguageRef))
             return;

@@ -11,6 +11,8 @@ public class CutsceneController : MonoBehaviour {
         public string takeExit;
     }
 
+    public bool startMusicPlaylist = true;
+
     public M8.Animator.AnimatorData animator;
     public string takeStart; //prep background
     public string takeInteractEnter; //'next' button enter
@@ -43,6 +45,10 @@ public class CutsceneController : MonoBehaviour {
         animator.Play(takeStart);
         while(animator.isPlaying)
             yield return null;
+
+        //music
+        if(startMusicPlaylist)
+            LoLMusicPlaylist.instance.Play();
 
         //start up the first page
         mCurPageInd = 0;

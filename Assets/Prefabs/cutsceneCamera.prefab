@@ -19,7 +19,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4853397534587642}
-  - component: {fileID: 81657103745588760}
   m_Layer: 0
   m_Name: cutsceneCamera
   m_TagString: Untagged
@@ -108,13 +107,6 @@ Camera:
   m_OcclusionCulling: 0
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &81657103745588760
-AudioListener:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1005505622194522}
-  m_Enabled: 1
 --- !u!114 &114519953980011082
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -4513,10 +4513,10 @@ MonoBehaviour:
   _boundsStep: {x: 1, y: 1}
   _initialPalette:
   - blockName: wood
-    amount: 7
+    amount: 6
     capacityAdd: 0
   - blockName: corkwood
-    amount: 7
+    amount: 6
     capacityAdd: 0
   - blockName: balloon
     amount: 4

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class GameInput : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler {
+public class GameInput : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler {
     [Header("Input")]
     public float dragScale = 0.3f;
     
@@ -45,5 +45,10 @@ public class GameInput : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
     void IEndDragHandler.OnEndDrag(PointerEventData eventData) {
         
+    }
+
+    void IPointerClickHandler.OnPointerClick(PointerEventData eventData) {
+        //deselect active block
+        GameMapController.instance.blockSelected = null;
     }
 }

@@ -10,6 +10,15 @@ public class GameFlowProxy : MonoBehaviour {
         M8.SceneManager.instance.LoadScene(toScene);
     }
 
+    public void ProgressBegin(string introScene) {
+        if(LoLManager.instance.curProgress == 0)
+            M8.SceneManager.instance.LoadScene(introScene);
+        else {
+            LoLMusicPlaylist.instance.PlayStartMusic();
+            GameFlowController.LoadCurrentProgressScene();
+        }
+    }
+
     public void ProgressStart() {
         GameFlowController.LoadCurrentProgressScene();
     }

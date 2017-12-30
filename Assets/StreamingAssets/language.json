@@ -7,6 +7,7 @@
   "en": {
 	"title": "<size=52>MIGHTY CHIN CHIN</size>\nand the\n<size=40>Properties of Matter</size>",
 	"start": "START",
+	"author": "Written by: David Dionisio",
     "welcome": "Welcome!",
 	"blockWoodName": "Wood",
 	"blockCorkwoodName": "Corkwood",
@@ -36,7 +37,7 @@
 	"dragScreenDesc": "Drag anywhere on the screen to move the view.",
 	
 	"introTitle1": "ALL THINGS MATTER",
-	"introDesc1": "Matters are things that have mass and volume.\n\nThese can be: solid, liquid, gas, or plasma.",
+	"introDesc1": "Matters are things that have mass and volume.\n\nThese are: solid, liquid, gas, or plasma.",
 	"introDesc_solid": "Solid",
 	"introDesc_liquid": "Liquid",
 	"introDesc_gas": "Gas",
@@ -44,7 +45,7 @@
 	
 	"introTitle2": "PHYSICAL PROPERTIES",
 	"introTitle2_example": "EXAMPLES",
-	"introDesc2": "Physical properties can be observed with your senses.\n\nYou can measure these properties with tools such as: weighing scale, beaker, thermometer.",
+	"introDesc2": "Physical properties can be observed with your senses.\n\nYou can measure them with tools: weighing scale, beaker, thermometer.",
 	"intro_ex_size": "Size",
 	"intro_ex_volume": "Volume",
 	"intro_ex_freezing": "Freezing Point",
@@ -52,7 +53,7 @@
 	"intro_ex_magnet": "Magnetic",
 	
 	"introTitle3": "CHEMICAL PROPERTIES",
-	"introDesc3": "Chemical properties can only be observed once matter undergoes a change.\n\nThe resulting matter becomes something else entirely.",
+	"introDesc3": "Chemical properties can only be observed once matter undergoes a change.\n\nThe resulting matter becomes completely different.",
 	"intro_ex_flammability": "Flammability",
 	"intro_ex_oxidation": "Oxidation",
 	

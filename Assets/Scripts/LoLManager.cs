@@ -65,6 +65,7 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
     float _fadeMusicScale = 1.0f;
 
     protected int mCurProgress;
+    protected int mCurScore;
 
     protected bool mPaused;
 
@@ -77,6 +78,7 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
     public int progressMax { get { return _progressMax; } set { _progressMax = value; } }
 
     public int curProgress { get { return mCurProgress; } }
+    public int curScore { get { return mCurScore; } }
 
     public float musicVolume { get { return mMusicVolume; } }
     public float soundVolume { get { return mSoundVolume; } }
@@ -235,6 +237,8 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
     }
 
     public virtual void ApplyScore(int score) {
+        mCurScore = score;
+
         LOLSDK.Instance.SubmitProgress(score, mCurProgress, _progressMax);
     }
 
@@ -343,10 +347,21 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
 
     // Start the game here
     protected void HandleStartGame(string json) {
-        //SharedState.StartGameData = JSON.Parse(json);
-
         mIsReady = true;
 
+        if(!string.IsNullOrEmpty(json)) {
+            JSONNode startGamePayload = JSON.Parse(json);
+            
+            // Capture the language code from the start payload. Use this to switch fontss
+            mLangCode = startGamePayload["languageCode"];
+
+            JSONNode lastProgress = startGamePayload["lastProgressPoint"];
+            if(lastProgress != null) {
+                mCurScore = lastProgress["score"];
+                mCurProgress = lastProgress["max"];
+            }
+        }
+                
         if(startCallback != null)
             startCallback(this);
     }
@@ -429,10 +444,7 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
         //apply start data
         string startDataFilePath = Path.Combine(Application.streamingAssetsPath, startGameJSONFilePath);
         if(File.Exists(startDataFilePath)) {
-            string startDataAsJSON = File.ReadAllText(startDataFilePath);
-            JSONNode startGamePayload = JSON.Parse(startDataAsJSON);
-            // Capture the language code from the start payload. Use this to switch fontss
-            mLangCode = startGamePayload["languageCode"];
+            string startDataAsJSON = File.ReadAllText(startDataFilePath);            
             HandleStartGame(startDataAsJSON);
         }
         else

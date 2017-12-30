@@ -359,7 +359,7 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
             JSONNode lastProgress = startGamePayload["lastProgressPoint"];
             if(lastProgress != null) {
                 mCurScore = lastProgress["score"];
-                mCurProgress = lastProgress["max"];
+                mCurProgress = lastProgress["currentProgress"];
             }
         }
         

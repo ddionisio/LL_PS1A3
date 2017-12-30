@@ -15,6 +15,9 @@ public class PalettePanel : MonoBehaviour {
 
     public Graphic toggleButton;
 
+    public string toggleSoundOpenPath;
+    public string toggleSoundClosePath;
+
     public bool isShown { get { return mIsShow; } }
     
     private M8.CacheList<PaletteItemWidget> mActiveWidgets = new M8.CacheList<PaletteItemWidget>(widgetCacheCapacity);
@@ -153,6 +156,8 @@ public class PalettePanel : MonoBehaviour {
 
                 //play edit mode exit
                 animator.Play(mTakeEditHideId);
+
+                LoLManager.instance.PlaySound(toggleSoundClosePath, false, false);
                 break;
 
             case GameMapController.Mode.Edit:
@@ -166,6 +171,8 @@ public class PalettePanel : MonoBehaviour {
 
                 //play edit mode enter
                 animator.Play(mTakeEditShowId);
+
+                LoLManager.instance.PlaySound(toggleSoundOpenPath, false, false);
                 break;
         }
     }

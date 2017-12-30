@@ -1597,6 +1597,10 @@ MonoBehaviour:
   victoryToPortalSpeed: 5
   victoryRotatePerSecond: 1080
   victoryScaleOutDelay: 0.65
+  soundSpawnPath: Audio/spawn.wav
+  soundExitPath: Audio/exit.wav
+  soundDeathPath: Audio/death.wav
+  soundJumpPath: Audio/jump.wav
 --- !u!114 &114223338977264014
 MonoBehaviour:
   m_ObjectHideFlags: 1

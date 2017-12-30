@@ -142,12 +142,21 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
     public virtual void PlaySound(string path, bool background, bool loop) {
         if(background && !string.IsNullOrEmpty(mLastSoundBackgroundPath)) {
             LOLSDK.Instance.StopSound(mLastSoundBackgroundPath);
+
+            Debug.Log("Stop Background: " + mLastSoundBackgroundPath);
         }
 
         LOLSDK.Instance.PlaySound(path, background, loop);
 
-        if(background)
+        if(background) {
+            Debug.Log("Played Background: " + path);
+
             mLastSoundBackgroundPath = path;
+        }
+    }
+
+    public virtual void StopSound(string path) {
+        LOLSDK.Instance.StopSound(path);
     }
 
     public virtual void SpeakText(string key) {

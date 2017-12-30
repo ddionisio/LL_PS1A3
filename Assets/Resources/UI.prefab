@@ -197,6 +197,7 @@ GameObject:
   - component: {fileID: 222480577887132948}
   - component: {fileID: 114251530915744574}
   - component: {fileID: 114723626146552776}
+  - component: {fileID: 114457362706195366}
   m_Layer: 5
   m_Name: proceedButton
   m_TagString: Untagged
@@ -819,6 +820,7 @@ GameObject:
   - component: {fileID: 222810558892396930}
   - component: {fileID: 114272438874362092}
   - component: {fileID: 114490634095840762}
+  - component: {fileID: 114700146662059180}
   m_Layer: 5
   m_Name: confirmButton
   m_TagString: Untagged
@@ -1467,6 +1469,7 @@ GameObject:
   - component: {fileID: 114869566477018060}
   - component: {fileID: 114185391145905422}
   - component: {fileID: 114155639363409864}
+  - component: {fileID: 114866858628249290}
   m_Layer: 5
   m_Name: retryButton
   m_TagString: Untagged
@@ -1635,6 +1638,7 @@ GameObject:
   - component: {fileID: 222939194699698064}
   - component: {fileID: 114159769644960300}
   - component: {fileID: 114211334196817270}
+  - component: {fileID: 114641477141710434}
   m_Layer: 5
   m_Name: buttonCancel
   m_TagString: Untagged
@@ -1704,6 +1708,7 @@ GameObject:
   - component: {fileID: 222766743567674206}
   - component: {fileID: 114135739137198210}
   - component: {fileID: 114636676159919212}
+  - component: {fileID: 114814010207115802}
   m_Layer: 5
   m_Name: closeButton
   m_TagString: Untagged
@@ -2245,6 +2250,7 @@ GameObject:
   - component: {fileID: 222961931377993522}
   - component: {fileID: 114469587846162888}
   - component: {fileID: 114665969380389846}
+  - component: {fileID: 114971345973086694}
   m_Layer: 5
   m_Name: cancelButton
   m_TagString: Untagged
@@ -2463,6 +2469,7 @@ GameObject:
   - component: {fileID: 114662562335120854}
   - component: {fileID: 114501313413708218}
   - component: {fileID: 114267258621375338}
+  - component: {fileID: 114564241351481644}
   m_Layer: 5
   m_Name: optionsButton
   m_TagString: Untagged
@@ -4795,6 +4802,17 @@ MonoBehaviour:
           m_StringArgument: retry
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 114866858628249290}
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114191502927425164
@@ -5049,6 +5067,17 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 114782927268363284}
         m_MethodName: Cancel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 114641477141710434}
+        m_MethodName: Play
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7855,6 +7884,20 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 0.65
   m_Text: CANCEL
+--- !u!114 &114457362706195366
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1039230226968172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 210e46a1230fadd44974d60bf6374f15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundPath: Audio/clickAccept.wav
+  isBackground: 0
+  isLoop: 0
 --- !u!114 &114458164190496612
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8289,6 +8332,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 114700146662059180}
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114498670872098274
@@ -8377,6 +8431,17 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: options
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 114564241351481644}
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
@@ -8862,6 +8927,9 @@ MonoBehaviour:
   launchConsoleText: {fileID: 114351696830022524}
   launchConsoleMaxLines: 4
   launchButton: {fileID: 114323740170563496}
+  soundConsoleBeepPath: Audio/consoleBeep.wav
+  soundRocketIgniteFirstPath: Audio/burnerLoop1.wav
+  soundRocketIgniteSecondPath: Audio/burnerLoop2.wav
 --- !u!114 &114559308589463946
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8900,6 +8968,20 @@ MonoBehaviour:
   componentName: RectTransform
   fieldName: 
   propertyName: sizeDelta
+--- !u!114 &114564241351481644
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1769706166202068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 210e46a1230fadd44974d60bf6374f15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundPath: Audio/click.wav
+  isBackground: 0
+  isLoop: 0
 --- !u!114 &114570677751835544
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9452,6 +9534,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 114814010207115802}
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114637012161204320
@@ -9535,6 +9628,20 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114641477141710434
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1473743670046162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 210e46a1230fadd44974d60bf6374f15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundPath: Audio/click.wav
+  isBackground: 0
+  isLoop: 0
 --- !u!114 &114643006295683482
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9886,6 +9993,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 114971345973086694}
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114667554650680798
@@ -9959,9 +10077,9 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: 91123bccfc22f93488d1e7e27f22d122, type: 3}
     m_FontSize: 16
     m_FontStyle: 1
-    m_BestFit: 0
-    m_MinSize: 10
-    m_MaxSize: 40
+    m_BestFit: 1
+    m_MinSize: 14
+    m_MaxSize: 16
     m_Alignment: 5
     m_AlignByGeometry: 0
     m_RichText: 0
@@ -10300,6 +10418,20 @@ MonoBehaviour:
   valString: 
   valObj: {fileID: 0}
   vect4: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &114700146662059180
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1255911040725658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 210e46a1230fadd44974d60bf6374f15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundPath: Audio/click.wav
+  isBackground: 0
+  isLoop: 0
 --- !u!114 &114701447723429650
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -10498,6 +10630,17 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 114946879673849290}
         m_MethodName: Proceed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 114457362706195366}
+        m_MethodName: Play
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -11285,6 +11428,20 @@ MonoBehaviour:
     m_VerticalOverflow: 1
     m_LineSpacing: 0.65
   m_Text: Drag anywhere on the screen to move the view.
+--- !u!114 &114814010207115802
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1524331269110832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 210e46a1230fadd44974d60bf6374f15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundPath: Audio/click.wav
+  isBackground: 0
+  isLoop: 0
 --- !u!114 &114824158874692924
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -11700,6 +11857,20 @@ MonoBehaviour:
   componentName: RectTransform
   fieldName: 
   propertyName: sizeDelta
+--- !u!114 &114866858628249290
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1459500493963390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 210e46a1230fadd44974d60bf6374f15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundPath: Audio/click.wav
+  isBackground: 0
+  isLoop: 0
 --- !u!114 &114866955044439022
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -12242,6 +12413,8 @@ MonoBehaviour:
   takeEditShow: editShow
   takeEditHide: editHide
   toggleButton: {fileID: 114836274769051310}
+  toggleSoundOpenPath: Audio/paletteOpen.mp3
+  toggleSoundClosePath: Audio/paletteClose.mp3
 --- !u!114 &114934228177735818
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -12305,6 +12478,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   exclusive: 1
   _root: {fileID: 0}
+  soundVictoryPath: Audio/victory.mp3
 --- !u!114 &114947022667394466
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -12543,6 +12717,20 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114971345973086694
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1721006970567042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 210e46a1230fadd44974d60bf6374f15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundPath: Audio/click.wav
+  isBackground: 0
+  isLoop: 0
 --- !u!114 &114971848144452626
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -14269,8 +14457,8 @@ RectTransform:
   m_Father: {fileID: 224255020940244010}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: -0.12031555, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -14797,8 +14985,8 @@ RectTransform:
   m_Father: {fileID: 224890879645280852}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0.074142456, y: 6}
   m_SizeDelta: {x: 17, y: 12.31}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -14815,8 +15003,8 @@ RectTransform:
   m_Father: {fileID: 224442972290708310}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: -0.12031555, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -16040,8 +16228,8 @@ RectTransform:
   m_Father: {fileID: 224349716524992050}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0.074142456, y: 6}
   m_SizeDelta: {x: 17, y: 12.31}
   m_Pivot: {x: 0.5, y: 0.5}

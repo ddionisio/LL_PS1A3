@@ -860,6 +860,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 212055181003317472, guid: 5ecef6a547de2b445aa90d60d961d168,
+        type: 2}
+      propertyPath: m_Color.a
+      value: 0.297
+      objectReference: {fileID: 0}
+    - target: {fileID: 212873126723286056, guid: 5ecef6a547de2b445aa90d60d961d168,
+        type: 2}
+      propertyPath: m_Color.a
+      value: 0.472
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5ecef6a547de2b445aa90d60d961d168, type: 2}
   m_IsPrefabParent: 0
@@ -2081,7 +2091,7 @@ Prefab:
     - target: {fileID: 114141958124755248, guid: 2fdfad41c5975254c8aa1a2a5410f5fc,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 224910626270129246, guid: 2fdfad41c5975254c8aa1a2a5410f5fc,
         type: 2}
@@ -2198,9 +2208,40 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 114141958124755248, guid: 2fdfad41c5975254c8aa1a2a5410f5fc,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114141958124755248, guid: 2fdfad41c5975254c8aa1a2a5410f5fc,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114141958124755248, guid: 2fdfad41c5975254c8aa1a2a5410f5fc,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 520992293}
+    - target: {fileID: 114141958124755248, guid: 2fdfad41c5975254c8aa1a2a5410f5fc,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 114141958124755248, guid: 2fdfad41c5975254c8aa1a2a5410f5fc,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2fdfad41c5975254c8aa1a2a5410f5fc, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &520992293 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114097263717845382, guid: 2fdfad41c5975254c8aa1a2a5410f5fc,
+    type: 2}
+  m_PrefabInternal: {fileID: 520992292}
+  m_Script: {fileID: 11500000, guid: 210e46a1230fadd44974d60bf6374f15, type: 3}
 --- !u!1 &551250020
 GameObject:
   m_ObjectHideFlags: 0
@@ -3342,6 +3383,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6ff5e5798a97754fbbea905020d87c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startMusicPlaylist: 1
   animator: {fileID: 972827096}
   takeStart: start
   takeInteractEnter: interactEnter

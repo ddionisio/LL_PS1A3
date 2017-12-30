@@ -130,8 +130,14 @@ public class BlockEditSelect : MonoBehaviour, IPointerDownHandler, IBeginDragHan
             HUD.instance.blockMatterExpandPanel.isMoveMode = false;
 
             //if placement is invalid, revert to original position
-            if(!block.EditIsPlacementValid())
+            if(!block.EditIsPlacementValid()) {
                 block.EditSetPosition(mDragStartPos);
+
+                LoLManager.instance.PlaySound(GameData.instance.soundBlockInvalidPath, false, false);
+            }
+            else {
+                LoLManager.instance.PlaySound(GameData.instance.soundBlockPlacePath, false, false);
+            }
         }
     }
 

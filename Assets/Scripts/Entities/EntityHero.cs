@@ -46,6 +46,12 @@ public class EntityHero : M8.EntityBase {
     public float victoryRotatePerSecond = 720f;
     public float victoryScaleOutDelay = 0.5f;
 
+    [Header("Audio")]
+    public string soundSpawnPath;
+    public string soundExitPath;
+    public string soundDeathPath;
+    public string soundJumpPath;
+
     public EntityHeroMoveController moveCtrl { get { return mMoveCtrl; } }
 
     public MoveState moveState {
@@ -332,6 +338,8 @@ public class EntityHero : M8.EntityBase {
 
         //mMoveCtrl.moveVertical = jumpMagnitude;
 
+        LoLManager.instance.PlaySound(soundJumpPath, false, false);
+
         yield return new WaitForSeconds(0.1f);
 
         while(true) {
@@ -359,6 +367,8 @@ public class EntityHero : M8.EntityBase {
         if(spawnStartCallback != null)
             spawnStartCallback();
 
+        LoLManager.instance.PlaySound(soundSpawnPath, false, false);
+
         //animations and stuff
         if(spawnAnim) {
             spawnAnim.gameObject.SetActive(true);
@@ -374,6 +384,8 @@ public class EntityHero : M8.EntityBase {
     }
 
     IEnumerator DoDead() {
+        LoLManager.instance.PlaySound(soundDeathPath, false, false);
+
         //animations and stuff
         if(deathAnim) {
             deathAnim.gameObject.SetActive(true);
@@ -412,6 +424,8 @@ public class EntityHero : M8.EntityBase {
             curT += Time.deltaTime;
             yield return null;
         }
+
+        LoLManager.instance.PlaySound(soundExitPath, false, false);
 
         //move towards victory
         var destAttachPt = AttachPoint.Get(victoryAttachPoint);

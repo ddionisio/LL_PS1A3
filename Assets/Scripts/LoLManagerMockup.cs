@@ -27,8 +27,11 @@ public class LoLManagerMockup : LoLManager {
     public override void PlaySound(string path, bool background, bool loop) {
         if(background && !string.IsNullOrEmpty(mLastSoundBackgroundPath)) {
             AudioSource bkgrndAudioSrc;
-            if(mAudioItems.TryGetValue(mLastSoundBackgroundPath, out bkgrndAudioSrc))
+            if(mAudioItems.TryGetValue(mLastSoundBackgroundPath, out bkgrndAudioSrc)) {
                 bkgrndAudioSrc.Stop();
+
+                Debug.Log("Stop Background: " + mLastSoundBackgroundPath);
+            }
             else
                 Debug.LogWarning("Last background path not found? " + mLastSoundBackgroundPath);
         }
@@ -40,8 +43,17 @@ public class LoLManagerMockup : LoLManager {
             audioSrc.Play();
         }
 
-        if(background)
+        if(background) {
+            Debug.Log("Played Background: " + path);
+
             mLastSoundBackgroundPath = path;
+        }
+    }
+
+    public override void StopSound(string path) {
+        AudioSource audioSrc;
+        if(mAudioItems.TryGetValue(path, out audioSrc))
+            audioSrc.Stop();
     }
 
     public override void SpeakText(string key) {

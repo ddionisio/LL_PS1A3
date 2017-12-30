@@ -16,6 +16,10 @@ public class GameData : M8.SingletonBehaviour<GameData> {
     public LayerMask blockInvalidMask;
     public float blockPickupDelay = 1.5f;
 
+    [Header("Audio")]
+    public string soundBlockPlacePath;
+    public string soundBlockInvalidPath;
+
     public int currentScore { get { return mCurScore; } set { mCurScore = value; } }
 
     private int mCurScore = 0;

@@ -259,7 +259,15 @@ public class PaletteItemWidget : MonoBehaviour, M8.IPoolSpawn, M8.IPoolDespawn, 
                     mGhostMatterCount += block.matterCount;
 
                     GameMapController.instance.PaletteBlockGhostDropped(block);
+
+                    LoLManager.instance.PlaySound(GameData.instance.soundBlockPlacePath, false, false);
                 }
+                else {
+                    LoLManager.instance.PlaySound(GameData.instance.soundBlockInvalidPath, false, false);
+                }
+            }
+            else {
+                LoLManager.instance.PlaySound(GameData.instance.soundBlockInvalidPath, false, false);
             }
         }
         

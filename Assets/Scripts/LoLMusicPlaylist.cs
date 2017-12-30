@@ -7,6 +7,7 @@ public class LoLMusicPlaylist : M8.SingletonBehaviour<LoLMusicPlaylist> {
     public struct Item {
         public string path;
         public float duration;
+        public bool disabled;
     }
 
     public string startMusicPath;
@@ -63,7 +64,7 @@ public class LoLMusicPlaylist : M8.SingletonBehaviour<LoLMusicPlaylist> {
         int index = 0;
         while(true) {
             var item = items[index];
-            if(!string.IsNullOrEmpty(item.path)) {
+            if(!item.disabled && !string.IsNullOrEmpty(item.path)) {
                 LoLManager.instance.PlaySound(item.path, true, true);
 
                 mLastTime = Time.realtimeSinceStartup;

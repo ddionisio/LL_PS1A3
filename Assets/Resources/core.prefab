@@ -158,13 +158,17 @@ MonoBehaviour:
   startMusicPath: Audio/epic-destiny.mp3
   items:
   - path: Audio/drunken-monkey-ukulele.mp3
-    duration: 351
+    duration: 234
+    disabled: 0
   - path: Audio/big-guy-walk.mp3
     duration: 198
+    disabled: 0
   - path: Audio/hapiness-joy-and-fun.mp3
-    duration: 351
+    duration: 234
+    disabled: 1
   - path: Audio/whimsical-magic.mp3
     duration: 228
+    disabled: 0
 --- !u!114 &114468768111179502
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -282,6 +286,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 34049
   blockPickupDelay: 0.7
+  soundBlockPlacePath: Audio/blockPlace.wav
+  soundBlockInvalidPath: Audio/error.wav
 --- !u!114 &114582526695810506
 MonoBehaviour:
   m_ObjectHideFlags: 1

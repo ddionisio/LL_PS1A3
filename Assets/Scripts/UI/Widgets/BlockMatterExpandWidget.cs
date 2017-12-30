@@ -18,7 +18,7 @@ public class BlockMatterExpandWidget : MonoBehaviour, IBeginDragHandler, IDragHa
     }
 
     public Dir dir;
-
+    
     public Block block { get { return mBlock; } set { mBlock = value; } }
 
     private Block mBlock;
@@ -162,8 +162,14 @@ public class BlockMatterExpandWidget : MonoBehaviour, IBeginDragHandler, IDragHa
             mIsDragging = false;
 
             //if invalid, revert
-            if(!mBlock.EditIsPlacementValid())
+            if(!mBlock.EditIsPlacementValid()) {
                 mBlock.EditExpand(-mTop, -mBottom, -mLeft, -mRight);
+
+                LoLManager.instance.PlaySound(GameData.instance.soundBlockInvalidPath, false, false);
+            }
+            else {
+                LoLManager.instance.PlaySound(GameData.instance.soundBlockPlacePath, false, false);
+            }
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ModalVictory : M8.UIModal.Controller, M8.UIModal.Interface.IOpen {
+    public string soundVictoryPath;
 
     public void Proceed() {
         Close();
@@ -28,5 +29,7 @@ public class ModalVictory : M8.UIModal.Controller, M8.UIModal.Interface.IOpen {
 
     void M8.UIModal.Interface.IOpen.Open() {
         HUD.instance.HideAllMisc();
+
+        //LoLManager.instance.PlaySound(soundVictoryPath, false, false);
     }
 }

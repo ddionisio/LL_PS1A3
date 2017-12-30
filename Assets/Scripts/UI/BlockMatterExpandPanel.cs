@@ -16,7 +16,7 @@ public class BlockMatterExpandPanel : MonoBehaviour, IBeginDragHandler, IDragHan
 
     [Header("Arrows")]
     public BlockMatterExpandWidget[] arrows;
-
+    
     public bool isActive { get { return gameObject.activeSelf; } }
 
     public bool isMoveMode {
@@ -205,8 +205,14 @@ public class BlockMatterExpandPanel : MonoBehaviour, IBeginDragHandler, IDragHan
         isMoveMode = false;
 
         //if placement is invalid, revert to original position
-        if(!mBlock.EditIsPlacementValid())
+        if(!mBlock.EditIsPlacementValid()) {
             mBlock.EditSetPosition(mDragStartPos);
+
+            LoLManager.instance.PlaySound(GameData.instance.soundBlockInvalidPath, false, false);
+        }
+        else {
+            LoLManager.instance.PlaySound(GameData.instance.soundBlockPlacePath, false, false);
+        }
     }
 
     private void UpdateInfo() {

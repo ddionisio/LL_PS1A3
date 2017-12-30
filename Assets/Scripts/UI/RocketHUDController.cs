@@ -27,6 +27,10 @@ public class RocketHUDController : MonoBehaviour {
     public int launchConsoleMaxLines = 4;
     public Button launchButton;
 
+    public string soundConsoleBeepPath;
+    public string soundRocketIgniteFirstPath;
+    public string soundRocketIgniteSecondPath;
+
     private int mValidCount;
 
     private System.Text.StringBuilder mConsoleStringBuffer = new System.Text.StringBuilder();
@@ -137,6 +141,8 @@ public class RocketHUDController : MonoBehaviour {
 
         ctrl.StartIgnition();
 
+        LoLManager.instance.PlaySound(soundRocketIgniteFirstPath, false, true);
+
         yield return waitSecond;
 
         AddConsoleText("launchSequence3"); //start countdown
@@ -144,22 +150,31 @@ public class RocketHUDController : MonoBehaviour {
         yield return waitSecond;
 
         //countdown
+        LoLManager.instance.PlaySound(soundConsoleBeepPath, false, false);
         AddConsoleText("launchSequence4");
         yield return waitSecond;
+        LoLManager.instance.PlaySound(soundConsoleBeepPath, false, false);
         AddConsoleText("launchSequence5");
         yield return waitSecond;
+        LoLManager.instance.PlaySound(soundConsoleBeepPath, false, false);
         AddConsoleText("launchSequence6");
         yield return waitSecond;
+        LoLManager.instance.PlaySound(soundConsoleBeepPath, false, false);
         AddConsoleText("launchSequence7");
         yield return waitSecond;
+        LoLManager.instance.PlaySound(soundConsoleBeepPath, false, false);
         AddConsoleText("launchSequence8");
         yield return waitSecond;
+        LoLManager.instance.PlaySound(soundConsoleBeepPath, false, false);
         AddConsoleText("launchSequence9");
         yield return waitSecond;
 
         AddConsoleText("launchSequence10"); //engines are go!
 
         ctrl.LiftOff();
+
+        LoLManager.instance.StopSound(soundRocketIgniteFirstPath);
+        LoLManager.instance.PlaySound(soundRocketIgniteSecondPath, false, true);
 
         yield return waitSecond;
 
@@ -171,10 +186,12 @@ public class RocketHUDController : MonoBehaviour {
         while(ctrl.isLiftingOff)
             yield return null;
 
+        LoLManager.instance.StopSound(soundRocketIgniteSecondPath);
+
         AddConsoleText("launchSequence12");
 
         yield return new WaitForSeconds(2.0f);
-
+                
         //go to ending
         if(GameFlowController.isInstantiated) {
             GameFlowController.ProgressAndLoadNextScene();

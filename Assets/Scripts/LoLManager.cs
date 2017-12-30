@@ -122,8 +122,7 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
             return mCurQuestionIndex;
         }
     }
-
-    public event OnCallback startCallback;
+    
     public event OnCallback progressCallback;
     public event OnCallback completeCallback;
 
@@ -299,14 +298,14 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
     protected virtual void Start() {
         mLangCode = "en";
         mIsReady = false;
-
+        
         // Create the WebGL (or mock) object
 #if UNITY_EDITOR
         ILOLSDK webGL = new LoLSDK.MockWebGL();
 #elif UNITY_WEBGL
 		ILOLSDK webGL = new LoLSDK.WebGL();
 #endif
-
+        
         // Initialize the object, passing in the WebGL
         LOLSDK.Init(webGL, _gameID);
 
@@ -319,14 +318,14 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
 #endif
 
         mCurProgress = 0;
-
+        
         SetupVolumes();
 
         // Mock the platform-to-game messages when in the Unity editor.
 #if UNITY_EDITOR
         LoadMockData();
 #endif
-
+        
         // Then, tell the platform the game is ready.
         LOLSDK.Instance.GameIsReady();
     }
@@ -347,6 +346,8 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
 
     // Start the game here
     protected void HandleStartGame(string json) {
+        Debug.Log("CHECK - Handle Start Game");
+
         mIsReady = true;
 
         if(!string.IsNullOrEmpty(json)) {
@@ -361,9 +362,8 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
                 mCurProgress = lastProgress["max"];
             }
         }
-                
-        if(startCallback != null)
-            startCallback(this);
+        
+        Debug.Log("CHECK - Done Handle Start Game");
     }
 
     // Handle pause / resume

@@ -25,7 +25,7 @@ public class GameStart : MonoBehaviour {
         //wait for scene to load
         while(M8.SceneManager.instance.isLoading)
             yield return null;
-
+        
         //wait for language to be loaded
         while(!LoLLocalize.instance.isLoaded)
             yield return null;
@@ -33,17 +33,17 @@ public class GameStart : MonoBehaviour {
         //start title
         titleText.text = LoLLocalize.Get(titleStringRef);
         titleGO.SetActive(true);
-
+        
         //wait for LoL to load/initialize
         while(!LoLManager.instance.isReady)
             yield return null;
-                
+        
         if(HUD.instance.optionsRoot)
             HUD.instance.optionsRoot.SetActive(true);
-
+        
         loadingGO.SetActive(false);
         readyGO.SetActive(true);
-
+        
         //play music
         LoLMusicPlaylist.instance.PlayStartMusic();
     }

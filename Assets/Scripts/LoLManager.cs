@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-using SimpleJSON;
+using fastJSON;
 
 using LoLSDK;
 
@@ -69,7 +69,7 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
 
     protected bool mPaused;
 
-    protected string mLangCode;
+    protected string mLangCode = "en";
 
     public string gameID { get { return _gameID; } }
 
@@ -139,23 +139,7 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
     protected string mLastSoundBackgroundPath;
 
     private bool mIsReady;
-    private string mStartData;
-
-    public void InitStartData() {
-        if(!string.IsNullOrEmpty(mStartData)) {
-            JSONNode startGamePayload = JSON.Parse(mStartData);
-
-            // Capture the language code from the start payload. Use this to switch fontss
-            mLangCode = startGamePayload["languageCode"];
-
-            JSONNode lastProgress = startGamePayload["lastProgressPoint"];
-            if(lastProgress != null) {
-                mCurScore = lastProgress["score"];
-                mCurProgress = lastProgress["currentProgress"];
-            }
-        }
-    }
-
+    
     public virtual void PlaySound(string path, bool background, bool loop) {
         if(background && !string.IsNullOrEmpty(mLastSoundBackgroundPath)) {
             LOLSDK.Instance.StopSound(mLastSoundBackgroundPath);
@@ -362,12 +346,32 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
 
     // Start the game here
     protected void HandleStartGame(string json) {
-        Debug.Log("CHECK - Handle Start Game");
-
-        mStartData = json;
         mIsReady = true;
 
-        Debug.Log("CHECK - Done Handle Start Game");
+        if(!string.IsNullOrEmpty(json)) {
+            //TODO: this is giving out an error in Test Harness, will uncomment later if it finally works
+            /*Dictionary<string, object> startGamePayload = JSON.Parse(json) as Dictionary<string, object>;
+
+            // Capture the language code from the start payload. Use this to switch fonts
+            object languageCodeObj;
+            if(startGamePayload.TryGetValue("languageCode", out languageCodeObj))
+                mLangCode = languageCodeObj.ToString();
+            else
+                mLangCode = "en"; //default
+
+            object lastProgressObj;
+            if(startGamePayload.TryGetValue("lastProgressPoint", out lastProgressObj) && lastProgressObj is Dictionary<string, object>) {
+                Dictionary<string, object> lastProgress = (Dictionary<string, object>)lastProgressObj;
+
+                object scoreObj;
+                if(lastProgress.TryGetValue("score", out scoreObj))
+                    mCurScore = System.Convert.ToInt32(scoreObj);
+
+                object curProgressObj;
+                if(lastProgress.TryGetValue("currentProgress", out curProgressObj))
+                    mCurProgress = System.Convert.ToInt32(curProgressObj);
+            }*/
+        }
     }
 
     // Handle pause / resume
@@ -428,9 +432,8 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
         if(File.Exists(langFilePath)) {
             string json = File.ReadAllText(langFilePath);
 
-            JSONNode langDefs = JSON.Parse(json);
-
-            HandleLanguageDefs(langDefs[mLangCode].ToString());
+            Dictionary<string, object> langDefs = JSON.Parse(json) as Dictionary<string, object>;            
+            HandleLanguageDefs(JSON.ToJSON(langDefs[mLangCode]));
         }
         else
             HandleLanguageDefs("");

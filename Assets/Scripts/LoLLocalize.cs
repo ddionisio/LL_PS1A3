@@ -52,14 +52,7 @@ public class LoLLocalize : Localize {
 
         Dictionary<string, object> defs;
         if(!string.IsNullOrEmpty(json)) {
-            try {
-                defs = JSON.Parse(json) as Dictionary<string, object>;
-            } catch(Exception e) {
-                Debug.LogWarning("Error parsing language json.");
-                Debug.LogWarning(e.ToString());
-
-                defs = new Dictionary<string, object>();
-            }
+            defs = JSON.Parse(json) as Dictionary<string, object>;
         }
         else
             defs = new Dictionary<string, object>();

@@ -29,10 +29,7 @@ public class GameStart : MonoBehaviour {
         //wait for language to be loaded
         while(!LoLLocalize.instance.isLoaded)
             yield return null;
-
-        //parse start data
-        LoLManager.instance.InitStartData();
-                                
+  
         //start title
         titleText.text = LoLLocalize.Get(titleStringRef);
         titleGO.SetActive(true);

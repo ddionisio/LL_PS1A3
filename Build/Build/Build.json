@@ -4,7 +4,6 @@
 "asmCodeUrl": "Build.asm.code.unityweb",
 "asmMemoryUrl": "Build.asm.memory.unityweb",
 "asmFrameworkUrl": "Build.asm.framework.unityweb",
-"asmSymbolsUrl": "Build.asm.symbols.unityweb",
 "graphicsAPI": ["WebGL 2.0", "WebGL 1.0"],
 "webglContextAttributes": {"preserveDrawingBuffer": false},
 "splashScreenStyle": "Dark",

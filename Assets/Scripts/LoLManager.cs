@@ -139,6 +139,22 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
     protected string mLastSoundBackgroundPath;
 
     private bool mIsReady;
+    private string mStartData;
+
+    public void InitStartData() {
+        if(!string.IsNullOrEmpty(mStartData)) {
+            JSONNode startGamePayload = JSON.Parse(mStartData);
+
+            // Capture the language code from the start payload. Use this to switch fontss
+            mLangCode = startGamePayload["languageCode"];
+
+            JSONNode lastProgress = startGamePayload["lastProgressPoint"];
+            if(lastProgress != null) {
+                mCurScore = lastProgress["score"];
+                mCurProgress = lastProgress["currentProgress"];
+            }
+        }
+    }
 
     public virtual void PlaySound(string path, bool background, bool loop) {
         if(background && !string.IsNullOrEmpty(mLastSoundBackgroundPath)) {
@@ -348,21 +364,9 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
     protected void HandleStartGame(string json) {
         Debug.Log("CHECK - Handle Start Game");
 
+        mStartData = json;
         mIsReady = true;
 
-        if(!string.IsNullOrEmpty(json)) {
-            JSONNode startGamePayload = JSON.Parse(json);
-            
-            // Capture the language code from the start payload. Use this to switch fontss
-            mLangCode = startGamePayload["languageCode"];
-
-            JSONNode lastProgress = startGamePayload["lastProgressPoint"];
-            if(lastProgress != null) {
-                mCurScore = lastProgress["score"];
-                mCurProgress = lastProgress["currentProgress"];
-            }
-        }
-        
         Debug.Log("CHECK - Done Handle Start Game");
     }
 

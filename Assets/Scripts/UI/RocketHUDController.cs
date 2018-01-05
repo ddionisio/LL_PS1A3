@@ -8,6 +8,7 @@ public class RocketHUDController : MonoBehaviour {
     public struct ChecklistItem {
         public string id;
         public Text textWidget;
+        public GameObject correctGO;
 
         private bool mIsConnected;
 
@@ -16,6 +17,9 @@ public class RocketHUDController : MonoBehaviour {
         public void UpdateConnected(bool connected, Color textColor) {
             mIsConnected = connected;
             textWidget.color = textColor;
+
+            if(correctGO)
+                correctGO.SetActive(connected);
         }
     }
 

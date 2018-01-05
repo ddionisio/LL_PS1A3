@@ -54,7 +54,6 @@ GameObject:
   - component: {fileID: 224805067458504280}
   - component: {fileID: 222052264045228288}
   - component: {fileID: 114660329650495120}
-  - component: {fileID: 114532176734321946}
   m_Layer: 5
   m_Name: speak
   m_TagString: Untagged
@@ -73,7 +72,7 @@ GameObject:
   - component: {fileID: 222864956221346090}
   - component: {fileID: 114005625583098490}
   - component: {fileID: 114258238545648280}
-  - component: {fileID: 114079852881640456}
+  - component: {fileID: 114062178262247504}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -94,7 +93,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.98823535, g: 0.6901961, b: 0.47450984, a: 1}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -113,8 +112,12 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0.65
-  m_Text: 
---- !u!114 &114079852881640456
+  m_Text: 'Matters are things that have mass and volume. These are: solid, liquid,
+    gas, plasma.
+
+
+    Click on any text for voice.'
+--- !u!114 &114062178262247504
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -122,9 +125,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1953014528799200}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7662fad8a432c5646a4f605263befd60, type: 3}
+  m_Script: {fileID: 11500000, guid: 2f5c8a68ba18af8428b83425ebc8b08a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hideOnClick: {fileID: 0}
 --- !u!114 &114258238545648280
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -136,7 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 053a561a000d402489b891a0bd9385de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  key: 
+  key: introDesc1
 --- !u!114 &114348341445761226
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -164,58 +168,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114532176734321946
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1797271367164340}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 0.8431373, b: 0.6, a: 1}
-    m_HighlightedColor: {r: 0.9705882, g: 0.7354977, b: 0.37110725, a: 1}
-    m_PressedColor: {r: 0.9058824, g: 0.49411768, b: 0.30588236, a: 1}
-    m_DisabledColor: {r: 0.9058824, g: 0.49411768, b: 0.30588236, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 114660329650495120}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 114079852881640456}
-        m_MethodName: Play
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
-      Culture=neutral, PublicKeyToken=null
 --- !u!114 &114660329650495120
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -228,8 +180,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_Color: {r: 1, g: 0.8431373, b: 0.6, a: 1}
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -293,7 +245,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 402, y: 0}
+  m_AnchoredPosition: {x: -110, y: 0}
   m_SizeDelta: {x: 260, y: 300}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!224 &224771350938905712

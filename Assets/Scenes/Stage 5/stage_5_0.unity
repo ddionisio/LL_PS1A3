@@ -221,6 +221,7 @@ GameObject:
   - component: {fileID: 172185438}
   - component: {fileID: 172185437}
   - component: {fileID: 172185439}
+  - component: {fileID: 172185440}
   m_Layer: 5
   m_Name: title
   m_TagString: Untagged
@@ -259,7 +260,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.98823535, g: 0.6901961, b: 0.47450984, a: 1}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -297,6 +298,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   key: stage_title_5
+--- !u!114 &172185440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 172185435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f5c8a68ba18af8428b83425ebc8b08a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hideOnClick: {fileID: 0}
 --- !u!1001 &275153912
 Prefab:
   m_ObjectHideFlags: 0

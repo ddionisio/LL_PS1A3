@@ -25,6 +25,8 @@ public class PaletteItemDragWidget : MonoBehaviour {
     }
 
     public void Deactivate() {
+        icon.sprite = null;
+
         gameObject.SetActive(false);
     }
 

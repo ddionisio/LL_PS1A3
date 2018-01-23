@@ -138,7 +138,14 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
 
     protected string mLastSoundBackgroundPath;
 
-    private bool mIsReady;
+    protected bool mIsReady;
+
+    //loading data, wait for true, then parse the jsons
+    private bool mIsGameStartHandled;
+    private string mGameStartJson;
+
+    private bool mIsLanguageHandled;
+    private string mLanguageJson;
     
     public virtual void PlaySound(string path, bool background, bool loop) {
         if(background && !string.IsNullOrEmpty(mLastSoundBackgroundPath)) {
@@ -295,10 +302,13 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
             completeCallback(this);
     }
 
-    protected virtual void Start() {
+    protected virtual IEnumerator Start() {
         mLangCode = "en";
         mIsReady = false;
-        
+
+        mIsGameStartHandled = false;
+        mIsLanguageHandled = false;
+
         // Create the WebGL (or mock) object
 #if UNITY_EDITOR
         ILOLSDK webGL = new LoLSDK.MockWebGL();
@@ -325,9 +335,55 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
 #if UNITY_EDITOR
         LoadMockData();
 #endif
-        
+
         // Then, tell the platform the game is ready.
         LOLSDK.Instance.GameIsReady();
+        
+        //wait for start and language to be handled
+        while(!(mIsGameStartHandled && mIsLanguageHandled))
+            yield return null;
+        
+        //parse start
+        if(!string.IsNullOrEmpty(mGameStartJson)) {
+            ParseGameStart(mGameStartJson);
+            mGameStartJson = null;
+        }
+        
+        //parse language
+        if(!string.IsNullOrEmpty(mLanguageJson)) {
+            ParseLanguage(mLanguageJson);
+            mLanguageJson = null;
+        }
+
+        mIsReady = true;
+    }
+
+    protected void ParseGameStart(string json) {
+        //TODO: this is giving out an error in Test Harness, will uncomment later if it finally works
+        Dictionary<string, object> startGamePayload = JSON.Parse(json) as Dictionary<string, object>;
+
+        // Capture the language code from the start payload. Use this to switch fonts
+        object languageCodeObj;
+        if(startGamePayload.TryGetValue("languageCode", out languageCodeObj))
+            mLangCode = languageCodeObj.ToString();
+        else
+            mLangCode = "en"; //default
+
+        object scoreObj;
+        if(startGamePayload.TryGetValue("score", out scoreObj))
+            mCurScore = System.Convert.ToInt32(scoreObj);
+        else
+            mCurScore = 0;
+
+        object curProgressObj;
+        if(startGamePayload.TryGetValue("currentProgress", out curProgressObj))
+            mCurProgress = System.Convert.ToInt32(curProgressObj);
+        else
+            mCurProgress = 0;
+    }
+
+    protected void ParseLanguage(string json) {
+        LoLLocalize.instance.Load(mLangCode, json);
     }
 
     protected void SetupVolumes() {
@@ -346,31 +402,9 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
 
     // Start the game here
     protected void HandleStartGame(string json) {
-        mIsReady = true;
-
-        if(!string.IsNullOrEmpty(json)) {
-            //TODO: this is giving out an error in Test Harness, will uncomment later if it finally works
-            /*Dictionary<string, object> startGamePayload = JSON.Parse(json) as Dictionary<string, object>;
-
-            // Capture the language code from the start payload. Use this to switch fonts
-            object languageCodeObj;
-            if(startGamePayload.TryGetValue("languageCode", out languageCodeObj))
-                mLangCode = languageCodeObj.ToString();
-            else
-                mLangCode = "en"; //default
-
-            object lastProgressObj;
-            if(startGamePayload.TryGetValue("lastProgressPoint", out lastProgressObj) && lastProgressObj is Dictionary<string, object>) {
-                Dictionary<string, object> lastProgress = (Dictionary<string, object>)lastProgressObj;
-
-                object scoreObj;
-                if(lastProgress.TryGetValue("score", out scoreObj))
-                    mCurScore = System.Convert.ToInt32(scoreObj);
-
-                object curProgressObj;
-                if(lastProgress.TryGetValue("currentProgress", out curProgressObj))
-                    mCurProgress = System.Convert.ToInt32(curProgressObj);
-            }*/
+        if(!mIsGameStartHandled) {
+            mGameStartJson = json;
+            mIsGameStartHandled = true;
         }
     }
 
@@ -420,23 +454,35 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
 
     // Use language to populate UI
     protected void HandleLanguageDefs(string json) {
-        LoLLocalize.instance.Load(mLangCode, json);
+        if(!mIsLanguageHandled) {
+            mLanguageJson = json;
+            mIsLanguageHandled = true;
+        }
     }
 
 #if UNITY_EDITOR
     void LoadMockData() {
         mLangCode = LoLLocalize.instance.debugLanguageCode;
 
+        //apply start data
+        string startDataFilePath = Path.Combine(Application.streamingAssetsPath, startGameJSONFilePath);
+        if(File.Exists(startDataFilePath)) {
+            mGameStartJson = File.ReadAllText(startDataFilePath);
+        }
+        else
+            mGameStartJson = "";
+        //
+
         //apply language
         string langFilePath = LoLLocalize.instance.debugLanguagePath;
         if(File.Exists(langFilePath)) {
             string json = File.ReadAllText(langFilePath);
 
-            Dictionary<string, object> langDefs = JSON.Parse(json) as Dictionary<string, object>;            
-            HandleLanguageDefs(JSON.ToJSON(langDefs[mLangCode]));
+            Dictionary<string, object> langDefs = JSON.Parse(json) as Dictionary<string, object>;
+            mLanguageJson = JSON.ToJSON(langDefs[mLangCode]);
         }
         else
-            HandleLanguageDefs("");
+            mLanguageJson = "";
         //
 
         //apply questions
@@ -447,16 +493,9 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
             HandleQuestions(qs);
         }
         //
-
-        //apply start data
-        string startDataFilePath = Path.Combine(Application.streamingAssetsPath, startGameJSONFilePath);
-        if(File.Exists(startDataFilePath)) {
-            string startDataAsJSON = File.ReadAllText(startDataFilePath);            
-            HandleStartGame(startDataAsJSON);
-        }
-        else
-            HandleStartGame("");
-        //
+                
+        mIsGameStartHandled = true;
+        mIsLanguageHandled = true;
     }
 #endif
 }

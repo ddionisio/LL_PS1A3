@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-using SimpleJSON;
+using fastJSON;
 
 public class LoLManagerMockup : LoLManager {
     [Header("Mockup")]
@@ -82,7 +82,7 @@ public class LoLManagerMockup : LoLManager {
         ProgressCallback();
     }
 
-    protected override void Start() {
+    protected override IEnumerator Start() {
         mLangCode = "en";
         mCurProgress = 0;
 
@@ -98,13 +98,23 @@ public class LoLManagerMockup : LoLManager {
         if(localizeText) {
             string json = localizeText.text;
 
-            JSONNode langDefs = JSON.Parse(json);
-
-            HandleLanguageDefs(langDefs[mLangCode].ToString());
+            Dictionary<string, object> langDefs = JSON.Parse(json) as Dictionary<string, object>;
+            ParseLanguage(JSON.ToJSON(langDefs[mLangCode]));
         }
-        else
-            HandleLanguageDefs("");
 
-        HandleStartGame("");
+        //ParseGameStart("");
+
+        mIsReady = true;
+
+        yield return null;
+    }
+
+    private void Update() {
+        if(Input.GetKeyDown(KeyCode.P)) {
+            if(mPaused)
+                HandleGameStateChange(LoLSDK.GameState.Resumed);
+            else
+                HandleGameStateChange(LoLSDK.GameState.Paused);
+        }
     }
 }

@@ -96,10 +96,14 @@ public class PalettePanel : MonoBehaviour {
                 GameMapController.instance.paletteUpdateCallback -= OnGamePaletteUpdate;
                 GameMapController.instance.modeChangeCallback -= OnGameModeChange;
                 GameMapController.instance.blockSelectedChangeCallback -= OnGameBlockSelectChanged;
-                
+
                 //clear up widgets
-                for(int i = 0; i < mActiveWidgets.Count; i++)
-                    widgetPool.Release(mActiveWidgets[i].gameObject);
+                for(int i = 0; i < mActiveWidgets.Count; i++) {
+                    if(mActiveWidgets[i]) {
+                        mActiveWidgets[i].releaseCallback -= OnWidgetRelease;
+                        widgetPool.Release(mActiveWidgets[i].gameObject);
+                    }
+                }
 
                 mActiveWidgets.Clear();
 

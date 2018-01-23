@@ -10,7 +10,7 @@ public class ModalVictory : M8.UIModal.Controller, M8.UIModal.Interface.IOpen {
 
         HUD.instance.HideAll();
 
-        if(GameFlowController.isInstantiated) {
+        if(GameStart.isStarted) {
             GameFlowController.ProgressAndLoadNextScene();
         }
         else {

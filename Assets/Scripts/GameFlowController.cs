@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameFlowController : M8.SingletonBehaviour<GameFlowController> {
-    public M8.SceneAssetPath startScene;
-    
+public class GameFlowController {
+
     public static void LoadCurrentProgressScene() {
         var nextScene = GameData.instance.GetSceneFromCurrentProgress();
 
@@ -19,14 +18,5 @@ public class GameFlowController : M8.SingletonBehaviour<GameFlowController> {
 
     public static void Complete() {
         LoLManager.instance.Complete();
-    }
-
-    protected override void OnInstanceInit() {
-        
-    }
-
-    void Start() {
-        //load start
-        startScene.Load();
     }
 }

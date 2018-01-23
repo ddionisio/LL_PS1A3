@@ -197,7 +197,7 @@ public class RocketHUDController : MonoBehaviour {
         yield return new WaitForSeconds(2.0f);
                 
         //go to ending
-        if(GameFlowController.isInstantiated) {
+        if(GameStart.isStarted) {
             GameFlowController.ProgressAndLoadNextScene();
         }
         else {

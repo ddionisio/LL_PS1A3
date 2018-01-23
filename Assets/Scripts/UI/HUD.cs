@@ -25,8 +25,9 @@ public class HUD : M8.SingletonBehaviour<HUD> {
     private Dictionary<string, GameObject> mMiscHUDs;
 
     public void HideAll() {
-        HUD.instance.blockMatterExpandPanel.Cancel();
-        HUD.instance.palettePanel.Show(false);
+        paletteItemDrag.Deactivate();
+        blockMatterExpandPanel.Cancel();
+        palettePanel.Show(false);
 
         retryButtonRoot.SetActive(false);
 
@@ -63,5 +64,17 @@ public class HUD : M8.SingletonBehaviour<HUD> {
                 childGO.SetActive(false);
             }
         }
+
+        M8.SceneManager.instance.sceneChangeStartCallback += OnSceneLoadStart;
+    }
+
+    protected override void OnInstanceDeinit() {
+        if(M8.SceneManager.instance) {
+            M8.SceneManager.instance.sceneChangeStartCallback -= OnSceneLoadStart;
+        }
+    }
+
+    void OnSceneLoadStart() {
+        HideAll();
     }
 }

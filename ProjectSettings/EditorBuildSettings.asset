@@ -11,7 +11,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/_InitMockup.unity
     guid: 30807138a7cc87b49922d587fc287a43
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/start.unity
     guid: f325dece3fe9a4b4ba61492c4bc27427
   - enabled: 1
@@ -26,7 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Stage 1/stage_1_2.unity
     guid: 2030735f4ef69c949987bfab8c9aae11
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Stage 1/stage_1_3.unity
     guid: 4ff560db4bd63b24da8cf33b04efb4c2
   - enabled: 1
@@ -38,7 +38,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Stage 2/stage_2_2.unity
     guid: 1ef35f6ab24f900409b46f2f38c5c69c
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Stage 2/stage_2_3.unity
     guid: 5bd5e8eab2dda7b4e97b3bc5920595b0
   - enabled: 1
@@ -50,7 +50,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Stage 3/stage_3_2.unity
     guid: de07f2acb1a7c404ab385830a0ac90e1
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Stage 3/stage_3_3.unity
     guid: c9f43e285de845a4f94067f8c2fb5c2e
   - enabled: 1
@@ -59,7 +59,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Stage 4/stage_4_1.unity
     guid: 873a5da63c910b243838b116c7e007f2
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Stage 4/stage_4_2.unity
     guid: d2c9731b027ebed49bea47f5edb47e70
   - enabled: 1
@@ -68,7 +68,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Stage 5/stage_5_1.unity
     guid: 8993e7ae870f554468bc042f4dd4ace1
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Stage 5/stage_5_2.unity
     guid: aaa73fbf3e3087848bee2e762627b379
   - enabled: 1

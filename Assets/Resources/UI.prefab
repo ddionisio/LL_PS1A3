@@ -2071,6 +2071,7 @@ GameObject:
   - component: {fileID: 4497497312563316}
   - component: {fileID: 114347980929366134}
   - component: {fileID: 114555257801585092}
+  - component: {fileID: 114816416140065830}
   m_Layer: 0
   m_Name: UI
   m_TagString: Untagged
@@ -4544,7 +4545,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.36862746, g: 0.32156864, b: 0.43137258, a: 0.628}
+  m_Color: {r: 0.36862746, g: 0.32156864, b: 0.43137258, a: 1}
   m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -11733,6 +11734,18 @@ MonoBehaviour:
   soundPath: Audio/click.wav
   isBackground: 0
   isLoop: 0
+--- !u!114 &114816416140065830
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1663263527737934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f63974507b4c7e4cbb09bcc3f217469, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dontDestroyOnLoad: 1
 --- !u!114 &114824158874692924
 MonoBehaviour:
   m_ObjectHideFlags: 1

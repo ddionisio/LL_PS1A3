@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class GameStart : MonoBehaviour {
+    public static bool isStarted = false;
+
     public GameObject loadingGO;
     public GameObject readyGO;
 
@@ -22,22 +24,20 @@ public class GameStart : MonoBehaviour {
         if(HUD.instance.optionsRoot)
             HUD.instance.optionsRoot.SetActive(false);
 
+        yield return null;
+
         //wait for scene to load
         while(M8.SceneManager.instance.isLoading)
             yield return null;
-        
-        //wait for language to be loaded
-        while(!LoLLocalize.instance.isLoaded)
-            yield return null;
-  
-        //start title
-        titleText.text = LoLLocalize.Get(titleStringRef);
-        titleGO.SetActive(true);
         
         //wait for LoL to load/initialize
         while(!LoLManager.instance.isReady)
             yield return null;
         
+        //start title
+        titleText.text = LoLLocalize.Get(titleStringRef);
+        titleGO.SetActive(true);
+                        
         if(HUD.instance.optionsRoot)
             HUD.instance.optionsRoot.SetActive(true);
         
@@ -46,5 +46,7 @@ public class GameStart : MonoBehaviour {
         
         //play music
         LoLMusicPlaylist.instance.PlayStartMusic();
+
+        isStarted = true;
     }
 }

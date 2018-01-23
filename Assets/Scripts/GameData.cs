@@ -15,6 +15,8 @@ public class GameData : M8.SingletonBehaviour<GameData> {
     public Vector2 blockSize = new Vector2(1f, 1f);
     public LayerMask blockInvalidMask;
     public float blockPickupDelay = 1.5f;
+    public AnimationCurve blockGhostPulseCurve;
+    public float blockGhostPulseDelay = 3f;
 
     [Header("Audio")]
     public string soundBlockPlacePath;

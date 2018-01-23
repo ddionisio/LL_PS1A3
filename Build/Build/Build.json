@@ -1,9 +1,11 @@
 {
-"TOTAL_MEMORY": 134217728,
+"companyName": "David Dionisio",
+"productName": "LL_PS1A3",
 "dataUrl": "Build.data.unityweb",
 "asmCodeUrl": "Build.asm.code.unityweb",
 "asmMemoryUrl": "Build.asm.memory.unityweb",
 "asmFrameworkUrl": "Build.asm.framework.unityweb",
+"TOTAL_MEMORY": 209715200,
 "graphicsAPI": ["WebGL 2.0", "WebGL 1.0"],
 "webglContextAttributes": {"preserveDrawingBuffer": false},
 "splashScreenStyle": "Dark",

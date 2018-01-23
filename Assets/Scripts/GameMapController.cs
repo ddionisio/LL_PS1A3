@@ -22,6 +22,8 @@ public class GameMapController : M8.SingletonBehaviour<GameMapController> {
                         break;
                     case Mode.Edit:
                         M8.SceneManager.instance.Pause();
+
+                        mLastGhostPulseTime = Time.realtimeSinceStartup;
                         break;
                 }
 
@@ -57,6 +59,13 @@ public class GameMapController : M8.SingletonBehaviour<GameMapController> {
         }
     }
 
+    public float curGhostPulseT {
+        get {
+            float t = Mathf.Clamp01((Time.realtimeSinceStartup - mLastGhostPulseTime) / GameData.instance.blockGhostPulseDelay);
+            return GameData.instance.blockGhostPulseCurve.Evaluate(t);
+        }
+    }
+
     public event System.Action<string, int, int> paletteUpdateCallback; //block name, new amount, delta
     public event System.Action<Mode> modeChangeCallback;
     public event System.Action<Block, Block> blockSelectedChangeCallback; //new block, previous block
@@ -72,6 +81,8 @@ public class GameMapController : M8.SingletonBehaviour<GameMapController> {
     private GameMapData mMapData;
 
     private EntityHero mPlayer;
+
+    private float mLastGhostPulseTime;
     
     public int PaletteCount(string blockName) {
         int count;
@@ -138,6 +149,17 @@ public class GameMapController : M8.SingletonBehaviour<GameMapController> {
             yield return null;
         
         mode = Mode.Edit;
+    }
+
+    void Update() {
+        switch(mMode) {
+            case Mode.Edit:
+                float curTime = Time.realtimeSinceStartup - mLastGhostPulseTime;
+                if(curTime > GameData.instance.blockGhostPulseDelay) {
+                    mLastGhostPulseTime = Time.realtimeSinceStartup;
+                }
+                break;
+        }
     }
 
     protected override void OnInstanceInit() {

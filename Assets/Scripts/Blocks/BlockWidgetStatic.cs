@@ -8,7 +8,9 @@ public class BlockWidgetStatic : BlockWidget {
     public SpriteRenderer sprite;
 
     [Range(0f, 1f)]
-    public float ghostAlpha = 0.6f;
+    public float ghostAlphaMin = 0.6f;
+    [Range(0f, 1f)]
+    public float ghostAlphaMax = 0.85f;
 
     public Color invalidColor = Color.red;
 
@@ -41,6 +43,15 @@ public class BlockWidgetStatic : BlockWidget {
     public override Rigidbody2D mainBody {
         get {
             return mBody;
+        }
+    }
+
+    public float ghostAlpha {
+        get {
+            if(!GameMapController.isInstantiated)
+                return ghostAlphaMin;
+
+            return Mathf.Lerp(ghostAlphaMin, ghostAlphaMax, GameMapController.instance.curGhostPulseT);
         }
     }
 
@@ -129,6 +140,20 @@ public class BlockWidgetStatic : BlockWidget {
 
         if(rootConnectActiveGO)
             rootConnectActiveGO.SetActive(false);
+    }
+
+    void Update() {
+        switch(mode) {
+            case Mode.Ghost:
+                //update color
+                if(mEditIsValid) {
+                    sprite.color = new Color(mSpriteDefaultColor.r, mSpriteDefaultColor.g, mSpriteDefaultColor.b, ghostAlpha);
+                }
+                else {
+                    sprite.color = new Color(invalidColor.r, invalidColor.g, invalidColor.b, ghostAlpha);
+                }
+                break;
+        }
     }
 
     void OnGameChangeMode(GameMapController.Mode mode) {

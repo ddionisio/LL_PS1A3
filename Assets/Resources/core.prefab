@@ -289,6 +289,31 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 34049
   blockPickupDelay: 0.7
+  blockGhostPulseCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 5.3835874
+      outSlope: 5.3835874
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.5
+      value: 1
+      inSlope: 0.0264311
+      outSlope: 0.0264311
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -5.4067087
+      outSlope: -5.4067087
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  blockGhostPulseDelay: 2.5
   soundBlockPlacePath: Audio/blockPlace.wav
   soundBlockInvalidPath: Audio/error.wav
 --- !u!114 &114582526695810506

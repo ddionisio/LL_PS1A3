@@ -222,6 +222,8 @@ MonoBehaviour:
   transferCap: 3
   transferScale: 0.5
   updateDelay: 0.2
+  displays: []
+  displaySpriteColorRefs: []
 --- !u!114 &114700719415644552
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -236,14 +238,15 @@ MonoBehaviour:
   activateOnStart: 0
   activator: {fileID: 0}
   density: 0.95
-  propertyFlags: 1
+  propertyFlags: 0
   deathDelay: 1.5
   solidActiveGO: []
   ghostActiveGO: []
   spriteBody: {fileID: 212840276724023280}
   spriteBodyBorderPixelOfs: 2.9
   spriteFrame: {fileID: 212573449115400610}
-  ghostAlpha: 0.8
+  ghostAlphaMin: 0.6
+  ghostAlphaMax: 0.85
   invalidColor: {r: 0.9705882, g: 0.24493444, b: 0.23551036, a: 1}
 --- !u!114 &114726099827192034
 MonoBehaviour:

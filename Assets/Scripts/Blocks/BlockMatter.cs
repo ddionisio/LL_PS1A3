@@ -15,7 +15,9 @@ public class BlockMatter : Block {
     public SpriteRenderer spriteFrame;
 
     [Range(0f, 1f)]
-    public float ghostAlpha;
+    public float ghostAlphaMin = 0.7f;
+    [Range(0f, 1f)]
+    public float ghostAlphaMax = 0.9f;
 
     public Color invalidColor = Color.red;
 
@@ -35,6 +37,15 @@ public class BlockMatter : Block {
             return new Bounds(center, size);
         }
     }
+
+    public float ghostAlpha {
+        get {
+            if(!GameMapController.isInstantiated)
+                return ghostAlphaMin;
+
+            return Mathf.Lerp(ghostAlphaMin, ghostAlphaMax, GameMapController.instance.curGhostPulseT);
+        }
+    }
     
     private Rigidbody2D mBody;
     private BoxCollider2D mColl;
@@ -43,9 +54,7 @@ public class BlockMatter : Block {
     private Color mSpriteFrameDefaultColor;
 
     private CellIndex mCellSize;
-
-    private Vector2 mEditStartPos;
-    private CellIndex mEditStartCell;
+    
     private bool mEditIsValid;
 
     private float mSpriteBodyBorderOfs;
@@ -118,8 +127,10 @@ public class BlockMatter : Block {
                 mSpriteBodyDefaultColor = spriteBody.color;
                 mSpriteFrameDefaultColor = spriteFrame.color;
 
-                spriteBody.color = new Color(mSpriteBodyDefaultColor.r, mSpriteBodyDefaultColor.g, mSpriteBodyDefaultColor.b, ghostAlpha);
-                spriteFrame.color = new Color(mSpriteFrameDefaultColor.r, mSpriteFrameDefaultColor.g, mSpriteFrameDefaultColor.b, ghostAlpha);
+                float a = ghostAlpha;
+
+                spriteBody.color = new Color(mSpriteBodyDefaultColor.r, mSpriteBodyDefaultColor.g, mSpriteBodyDefaultColor.b, a);
+                spriteFrame.color = new Color(mSpriteFrameDefaultColor.r, mSpriteFrameDefaultColor.g, mSpriteFrameDefaultColor.b, a);
 
                 mBody.simulated = false;
                 break;
@@ -162,6 +173,23 @@ public class BlockMatter : Block {
         mColl.density = density;
 
         mSpriteBodyBorderOfs = spriteBodyBorderPixelOfs / spriteBody.sprite.pixelsPerUnit;
+    }
+
+    void Update() {
+        switch(mode) {
+            case Mode.Ghost:
+                float alpha = ghostAlpha;
+                if(mEditIsValid) {
+                    spriteBody.color = new Color(mSpriteBodyDefaultColor.r, mSpriteBodyDefaultColor.g, mSpriteBodyDefaultColor.g, alpha);
+                    spriteFrame.color = new Color(mSpriteFrameDefaultColor.r, mSpriteFrameDefaultColor.g, mSpriteFrameDefaultColor.g, alpha);
+                }
+                else {
+                    var clr = new Color(invalidColor.r, invalidColor.g, invalidColor.g, alpha);
+                    spriteBody.color = clr;
+                    spriteFrame.color = clr;
+                }
+                break;
+        }
     }
 
     private void ApplyCurrentCellSize() {

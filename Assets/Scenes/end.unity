@@ -581,6 +581,8 @@ GameObject:
   - component: {fileID: 700542371}
   - component: {fileID: 700542373}
   - component: {fileID: 700542372}
+  - component: {fileID: 700542375}
+  - component: {fileID: 700542374}
   m_Layer: 5
   m_Name: thanksText
   m_TagString: Untagged
@@ -634,7 +636,7 @@ MonoBehaviour:
     m_MaxSize: 42
     m_Alignment: 4
     m_AlignByGeometry: 0
-    m_RichText: 1
+    m_RichText: 0
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
@@ -645,6 +647,30 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 700542370}
+--- !u!114 &700542374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 700542370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f5c8a68ba18af8428b83425ebc8b08a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hideOnClick: {fileID: 0}
+--- !u!114 &700542375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 700542370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 053a561a000d402489b891a0bd9385de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: completeDesc
 --- !u!1 &736276458
 GameObject:
   m_ObjectHideFlags: 0

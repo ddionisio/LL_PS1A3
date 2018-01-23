@@ -14,6 +14,7 @@ public class PaletteItemWidget : MonoBehaviour, M8.IPoolSpawn, M8.IPoolDespawn, 
     public Text blockNameText;
     public Text blockCountText;
     public GameObject selectActiveGO;
+    public GameObject disableGO;
 
     public string blockName { get { return mBlockName; } }
 
@@ -177,6 +178,9 @@ public class PaletteItemWidget : MonoBehaviour, M8.IPoolSpawn, M8.IPoolDespawn, 
         if(showIntro) {
             //animation
         }
+
+        if(disableGO)
+            disableGO.SetActive(false);
     }
 
     void M8.IPoolDespawn.OnDespawned() {
@@ -202,6 +206,9 @@ public class PaletteItemWidget : MonoBehaviour, M8.IPoolSpawn, M8.IPoolDespawn, 
     }
     
     void IBeginDragHandler.OnBeginDrag(PointerEventData eventData) {
+        if(!mGraphic.raycastTarget)
+            return;
+
         if(!mIsDragging) {
             mIsDragging = true;
 
@@ -244,10 +251,13 @@ public class PaletteItemWidget : MonoBehaviour, M8.IPoolSpawn, M8.IPoolDespawn, 
     }
 
     void IEndDragHandler.OnEndDrag(PointerEventData eventData) {
+        if(!mIsDragging)
+            return;
+
         //only put the block if it's in the game area, away from the panel
         if(!HUD.instance.paletteItemDrag.isShown) {
             //make sure its placement is valid
-            if(mBlockGhost.EditIsPlacementValid()) {
+            if(mBlockGhost && mBlockGhost.EditIsPlacementValid()) {
                 //make sure it's within camera bounds
                 var blockBounds = mBlockGhost.editBounds;
                 if(GameCamera.instance.isVisible(blockBounds)) {
@@ -372,7 +382,12 @@ public class PaletteItemWidget : MonoBehaviour, M8.IPoolSpawn, M8.IPoolDespawn, 
                     int _ghostCount = ghostMatterCount;
                     int amount = GameMapController.instance.PaletteCount(mBlockName);
 
-                    mGraphic.raycastTarget = _ghostCount < amount;
+                    bool active = _ghostCount < amount;
+
+                    mGraphic.raycastTarget = active;
+
+                    if(disableGO)
+                        disableGO.SetActive(!active);
                     break;
                 case GameMapController.Mode.Play:
                     mGraphic.raycastTarget = false;

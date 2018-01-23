@@ -11,9 +11,16 @@ public class GameInput : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     private BoxCollider2D mBoxColl;
 
     private Vector2 mDragLastPos;
+
+    private bool mIsDragging;
     
     void OnDestroy() {
         
+    }
+
+    void OnApplicationFocus(bool focus) {
+        if(!focus)
+            mIsDragging = false;
     }
 
     void Awake() {
@@ -28,11 +35,16 @@ public class GameInput : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     }
     
     void IBeginDragHandler.OnBeginDrag(PointerEventData eventData) {
+        mIsDragging = true;
+
         var gameCam = GameCamera.instance;
         mDragLastPos = gameCam.camera2D.unityCamera.ScreenToWorldPoint(eventData.position);
     }
 
     void IDragHandler.OnDrag(PointerEventData eventData) {
+        if(!mIsDragging)
+            return;
+
         var gameCam = GameCamera.instance;
         Vector2 curPos = gameCam.camera2D.unityCamera.ScreenToWorldPoint(eventData.position);
 
@@ -44,11 +56,12 @@ public class GameInput : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     }
 
     void IEndDragHandler.OnEndDrag(PointerEventData eventData) {
-        
+        mIsDragging = false;
     }
 
     void IPointerClickHandler.OnPointerClick(PointerEventData eventData) {
         //deselect active block
-        GameMapController.instance.blockSelected = null;
+        if(!mIsDragging)
+            GameMapController.instance.blockSelected = null;
     }
 }

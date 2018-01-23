@@ -37,7 +37,7 @@
 	"dragScreenDesc": "Drag anywhere on the screen to move the view.",
 	
 	"introTitle1": "ALL THINGS MATTER",
-	"introDesc1": "Matters are things that have mass and volume. These are: solid, liquid, gas, plasma.\n\nClick on any text for voice.",
+	"introDesc1": "Matter are things that have mass and volume. These are: solid, liquid, gas, plasma.\n\nPress on any text for voice.",
 	"introDesc_solid": "Solid",
 	"introDesc_liquid": "Liquid",
 	"introDesc_gas": "Gas",
@@ -63,6 +63,13 @@
 	"stage_title_4": "Highly Flammable",
 	"stage_title_5": "Conductive",
 	"stage_title_6": "To Infinity and Beyond",
+	
+	"stage_desc_1": "Size is a property of matter that determines how big or small something is. One such measurement is area, obtained by multiplying width and height.",
+	"stage_desc_2": "Weight determines how heavy or light an object is relative to gravity. You can compare and determine a solid matter's weight by using a balance scale.",
+	"stage_desc_3": "Buoyancy is the ability of an object to float in fluid or gas. The upward force exerted by the fluid allows the object to float.",
+	"stage_desc_4": "Flammability (or combustibility) is a chemical reaction that causes a matter to ignite in flames. An example of a flammable matter is wood.",
+	"stage_desc_5": "Conductivity is a property of matter that determines the ease of flow for electricity, heat, or sound. Metal is a great conduction for electricity.",
+	"stage_desc_6": "With enough fuel and oxygen funneled into a chamber, the shear amount of combustion can create enough force to lift a heavy object into outer space.",
 	
 	"victory": "VICTORY",
 	

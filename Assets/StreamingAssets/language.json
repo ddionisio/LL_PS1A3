@@ -94,6 +94,10 @@
 	"complete": "COMPLETE",
 	"completeDesc": "Thank you for playing!",
 	
+	"hints": "HINTS",
+	"hintReveal": "REVEAL HINT",
+	"hintRevealDesc": "Revealing this hint will cause you some bonus points!",
+	
 	"test": "Test"
   }
 }

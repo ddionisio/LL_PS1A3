@@ -309,6 +309,9 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
         mIsGameStartHandled = false;
         mIsLanguageHandled = false;
 
+        //force run in background as requirement
+        Application.runInBackground = false;
+
         // Create the WebGL (or mock) object
 #if UNITY_EDITOR
         ILOLSDK webGL = new LoLSDK.MockWebGL();
@@ -322,7 +325,7 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
         // Register event handlers
 #if !UNITY_EDITOR
         LOLSDK.Instance.StartGameReceived += new StartGameReceivedHandler(this.HandleStartGame);
-        LOLSDK.Instance.GameStateChanged += new GameStateChangedHandler(this.HandleGameStateChange);
+        //LOLSDK.Instance.GameStateChanged += new GameStateChangedHandler(this.HandleGameStateChange); //disabled until further notice
         LOLSDK.Instance.QuestionsReceived += new QuestionListReceivedHandler(this.HandleQuestions);
         LOLSDK.Instance.LanguageDefsReceived += new LanguageDefsReceivedHandler(this.HandleLanguageDefs);
 #endif
@@ -389,9 +392,9 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
     protected void SetupVolumes() {
         var settings = M8.UserData.GetInstance(userDataSettingsKey);
 
-        const float musicDefault = 0.3f;
-        const float soundDefault = 0.5f;
-        const float fadeDefault = 0.1f;
+        const float musicDefault = 0.5f;
+        const float soundDefault = 0.6f;
+        const float fadeDefault = 0.2f;
 
         mMusicVolume = settings.GetFloat(settingsMusicVolumeKey, musicDefault);
         mSoundVolume = settings.GetFloat(settingsSoundVolumeKey, soundDefault);

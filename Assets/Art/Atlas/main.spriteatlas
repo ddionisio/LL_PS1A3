@@ -108,6 +108,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: df7204954bdc5d24aa8774eda120b6dd, type: 3}
   - {fileID: 21300000, guid: 194b3f369ed97194d869055313cbaaf1, type: 3}
   - {fileID: 21300000, guid: b2f0ceb758908be4bbc9c8d7e6a31310, type: 3}
+  - {fileID: 21300000, guid: d58ea5dd7b2cd834bab80f9a60a12cd6, type: 3}
   - {fileID: 21300000, guid: 9b6289659dbef8a4aa779b6fb6e1daf7, type: 3}
   - {fileID: 21300000, guid: 54ac4c5043107c24395579ec0c58610e, type: 3}
   - {fileID: 21300000, guid: 223366c4d2db50645baca7582e2c9432, type: 3}
@@ -243,6 +244,7 @@ SpriteAtlas:
   - optionButton
   - palettePanelExpandButton
   - tutorialArrow
+  - hintButton
   - levelProgressHighlight
   - circleGlow
   - blockAluminumIcon

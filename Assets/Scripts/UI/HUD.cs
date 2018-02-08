@@ -15,13 +15,13 @@ public class HUD : M8.SingletonBehaviour<HUD> {
     [Header("Screen HUDs")]
     public PalettePanel palettePanel;
     public PaletteItemDragWidget paletteItemDrag;
+    public HintButton hintButton;
     public GameObject retryButtonRoot;
+    public GameObject optionsRoot;
 
     [Header("Misc HUDs")]
     public Transform miscContainer;
-
-    public GameObject optionsRoot;
-
+        
     private Dictionary<string, GameObject> mMiscHUDs;
 
     public void HideAll() {
@@ -30,6 +30,8 @@ public class HUD : M8.SingletonBehaviour<HUD> {
         palettePanel.Show(false);
 
         retryButtonRoot.SetActive(false);
+
+        hintButton.Hide();
 
         HideAllMisc();
     }

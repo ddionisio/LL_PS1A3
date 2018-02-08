@@ -28,6 +28,30 @@ public class GameData : M8.SingletonBehaviour<GameData> {
     
     private Dictionary<string, BlockInfo> mBlockInfos;
 
+    private Dictionary<string, int> mHintCounters = new Dictionary<string, int>();
+
+    public int GetHintCounter(string id) {
+        int count;
+        if(mHintCounters.TryGetValue(id, out count))
+            return count;
+
+        return 0;
+    }
+
+    public void SetHintCounter(string id, int count) {
+        if(mHintCounters.ContainsKey(id))
+            mHintCounters[id] = count;
+        else
+            mHintCounters.Add(id, count);
+    }
+
+    public void IncrementHintCounter(string id) {
+        if(mHintCounters.ContainsKey(id))
+            mHintCounters[id]++;
+        else
+            mHintCounters.Add(id, 1);
+    }
+
     public int GetProgressFromCurrentScene() {
         var sceneDat = M8.SceneManager.instance.curScene;
 

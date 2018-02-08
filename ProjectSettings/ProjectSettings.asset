@@ -129,6 +129,36 @@ PlayerSettings:
   bundleVersion: 1.0
   preloadedAssets:
   - {fileID: 4343727234628468602, guid: 9688cfd7021d9264c8f2163ab151613f, type: 2}
+  - {fileID: 4343727234628468602, guid: a28959289dca29a42a2d51e9e5f3627b, type: 2}
+  - {fileID: 4343727234628468602, guid: fa11dfa74feb75a41ae2b4faf7faaf87, type: 2}
+  - {fileID: 4343727234628468602, guid: 9f5b618fed084c54bbb230f6c70be0c2, type: 2}
+  - {fileID: 4343727234628468602, guid: 17d20ad3eecf7d641bf593c857030133, type: 2}
+  - {fileID: 4343727234628468602, guid: 1d275d3cbf8c91f4682ef1710a587092, type: 2}
+  - {fileID: 2800000, guid: 19f20e4e6fd94f1458b104b7eb5831eb, type: 3}
+  - {fileID: 2100000, guid: 97618e5430a2adb449f2e7161bb895ad, type: 2}
+  - {fileID: 2800000, guid: 26ab650f0d8319b44854c9b6171e3d12, type: 3}
+  - {fileID: 2800000, guid: 139a474d63ccc1340be41b64092876ef, type: 3}
+  - {fileID: 2800000, guid: 7a2edf858dae9664da14b4a77b39852a, type: 3}
+  - {fileID: 2100000, guid: f578f34162980c6458781cbe18af975b, type: 2}
+  - {fileID: 2800000, guid: 98ff0450532274f4cac07bf27e2e5a8a, type: 3}
+  - {fileID: 2800000, guid: 1fab7d2e407f02040a5d606abc6140a9, type: 3}
+  - {fileID: 2800000, guid: a36cb1b292db255449978433c5028b5c, type: 3}
+  - {fileID: 2800000, guid: b3c1c2958e1828d4d8907bcf9b060861, type: 3}
+  - {fileID: 2800000, guid: d3a6829131bf63b4da2cc88df12be85c, type: 3}
+  - {fileID: 2100000, guid: 6a9e875171525e74e959f4ed40602c64, type: 2}
+  - {fileID: 2100000, guid: f11bd902cad200c4f8da71bf2cc915b0, type: 2}
+  - {fileID: 2100000, guid: 0edd909395590ef4b9b9f51a729247b0, type: 2}
+  - {fileID: 2100000, guid: ac14a62353daa014dafc0c8e589a13c0, type: 2}
+  - {fileID: 2100000, guid: c6da3a60f1dba7b448db9c758bd12859, type: 2}
+  - {fileID: 2800000, guid: ac2181ed360eaab40bfd4dc0a2f43d38, type: 3}
+  - {fileID: 2100000, guid: 65acaea4521d27f458df5d784c1f59af, type: 2}
+  - {fileID: 2800000, guid: 3aa3a7e9099908242814f3fa549131a8, type: 3}
+  - {fileID: 2800000, guid: bcf0594e2dbd50947b23525731392d7e, type: 3}
+  - {fileID: 2100000, guid: bf7fe2eae47f02a4cb1ed13b979d57b8, type: 2}
+  - {fileID: 2100000, guid: bed3aa5e89fad9e4b81f330a7cdba34c, type: 2}
+  - {fileID: 2100000, guid: 44961060eeda32544a36c499f7ab1477, type: 2}
+  - {fileID: 2100000, guid: b98c523989188c0458d4b45d34ffafae, type: 2}
+  - {fileID: 2100000, guid: 704f144761f858a45a8ad4b8966ec33c, type: 2}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -547,7 +577,7 @@ PlayerSettings:
   splashScreenBackgroundSourceLandscape: {fileID: 0}
   splashScreenBackgroundSourcePortrait: {fileID: 0}
   spritePackerPolicy: 
-  webGLMemorySize: 200
+  webGLMemorySize: 64
   webGLExceptionSupport: 1
   webGLNameFilesAsHashes: 0
   webGLDataCaching: 0

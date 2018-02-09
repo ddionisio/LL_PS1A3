@@ -314,6 +314,9 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 0
   blockGhostPulseDelay: 2.5
+  showHintDelay: 100
+  scorePerLevel: 2000
+  scoreHintPenalty: 500
   soundBlockPlacePath: Audio/blockPlace.wav
   soundBlockInvalidPath: Audio/error.wav
 --- !u!114 &114582526695810506

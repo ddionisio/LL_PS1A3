@@ -48,6 +48,38 @@ public class HUD : M8.SingletonBehaviour<HUD> {
         return go;
     }
 
+    //show hint if it's visible based on current stage and its visible flag
+    public void ShowHintButton() {
+        string curSceneName = M8.SceneManager.instance.curScene.name;
+
+        if(GameData.instance.IsHintVisible(curSceneName)) {
+            int pageCount = ModalHint.GetPageCount(curSceneName);
+            if(pageCount > 0)
+                hintButton.Show();
+        }
+    }
+
+    //set hint to visible for the current stage
+    public void EnableHintButton() {
+        string curSceneName = M8.SceneManager.instance.curScene.name;
+        int pageCount = ModalHint.GetPageCount(curSceneName);
+        if(pageCount > 0) {
+            GameData.instance.SetHintVisible(curSceneName, true);
+            hintButton.Show();
+        }
+    }
+
+    public bool CanShowHintButton() {
+        string curSceneName = M8.SceneManager.instance.curScene.name;
+        int pageCount = ModalHint.GetPageCount(curSceneName);
+        if(pageCount > 0) {
+            //make sure it's not visible yet
+            return !GameData.instance.IsHintVisible(curSceneName);
+        }
+
+        return false;
+    }
+
     protected override void OnInstanceInit() {
         //default turned off
         blockMatterExpandPanel.gameObject.SetActive(false);

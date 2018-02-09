@@ -7,6 +7,8 @@ public class HintButton : MonoBehaviour {
     private M8.GenericParams mModalParms = new M8.GenericParams();
 
     public void OpenHint() {
+        mModalParms[ModalHint.parmLevelName] = M8.SceneManager.instance.curScene.name;
+
         M8.UIModal.Manager.instance.ModalOpen(Modals.hint, mModalParms);
     }
 
@@ -31,7 +33,5 @@ public class HintButton : MonoBehaviour {
 
     void OnSceneChanged() {
         Hide(); //let game controller activate
-
-        mModalParms[ModalHint.parmLevelName] = M8.SceneManager.instance.curScene.name;
     }
 }

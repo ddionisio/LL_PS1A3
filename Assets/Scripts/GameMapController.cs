@@ -143,12 +143,16 @@ public class GameMapController : M8.SingletonBehaviour<GameMapController> {
         if(HUD.instance) {
             HUD.instance.palettePanel.Show(true);
             HUD.instance.retryButtonRoot.SetActive(true);
+            HUD.instance.ShowHintButton();
         }
 
         while(M8.SceneManager.instance.isLoading)
             yield return null;
         
         mode = Mode.Edit;
+
+        if(HUD.instance.CanShowHintButton())
+            StartCoroutine(DoShowHintButton());
     }
 
     void Update() {
@@ -199,5 +203,18 @@ public class GameMapController : M8.SingletonBehaviour<GameMapController> {
         //make sure to hide game HUD elements
         if(HUD.instance)
             HUD.instance.HideAll();
+    }
+
+    IEnumerator DoShowHintButton() {
+        float timeElapsed = 0f;
+        float delay = GameData.instance.showHintDelay;
+        float lastTime = Time.realtimeSinceStartup;
+        while(timeElapsed < delay) {            
+            yield return null;
+            timeElapsed += Time.realtimeSinceStartup - lastTime;
+            lastTime = Time.realtimeSinceStartup;
+        }
+
+        HUD.instance.EnableHintButton();
     }
 }

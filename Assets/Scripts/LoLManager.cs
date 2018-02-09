@@ -78,7 +78,7 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
     public int progressMax { get { return _progressMax; } set { _progressMax = value; } }
 
     public int curProgress { get { return mCurProgress; } }
-    public int curScore { get { return mCurScore; } }
+    public int curScore { get { return mCurScore; } set { mCurScore = value; } }
 
     public float musicVolume { get { return mMusicVolume; } }
     public float soundVolume { get { return mSoundVolume; } }
@@ -241,23 +241,26 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
     public void ResetCurrentQuestionIndex() {
         mCurQuestionIndex = 0;
     }
-
-    public virtual void ApplyScore(int score) {
-        mCurScore = score;
-
-        LOLSDK.Instance.SubmitProgress(score, mCurProgress, _progressMax);
-    }
-
+    
     protected void ProgressCallback() {
         if(progressCallback != null)
             progressCallback(this);
+    }
+
+    public void ApplyCurrentProgress() {
+        ApplyProgress(mCurProgress, mCurScore);
+    }
+
+    public void ApplyProgress(int progress) {
+
+        ApplyProgress(progress, mCurScore);
     }
 
     public virtual void ApplyProgress(int progress, int score) {
 
         mCurProgress = Mathf.Clamp(progress, 0, _progressMax);
 
-        ApplyScore(score);
+        LOLSDK.Instance.SubmitProgress(score, mCurProgress, _progressMax);
 
         ProgressCallback();
     }

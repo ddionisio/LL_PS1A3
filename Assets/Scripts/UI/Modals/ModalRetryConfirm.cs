@@ -8,6 +8,13 @@ public class ModalRetryConfirm : M8.UIModal.Controller, M8.UIModal.Interface.IPu
 
     public void Confirm() {
         Close();
+
+        //show hint after reloading
+        string curSceneName = M8.SceneManager.instance.curScene.name;
+        if(ModalHint.GetPageCount(curSceneName) > 0) {
+            GameData.instance.SetHintVisible(curSceneName, true);
+        }
+
         M8.SceneManager.instance.Reload();
     }
 

@@ -96,7 +96,15 @@
 	
 	"hints": "HINTS",
 	"hintReveal": "REVEAL HINT",
-	"hintRevealDesc": "Revealing this hint will cause you some bonus points!",
+	"hintRevealDesc": "Revealing this hint will cause you some points!",
+	
+	"victoryScoreResult": "Score:",
+	"victoryCompleteResult": "Level Complete:",
+	"victoryHintResult": "Hints Penalty:",
+	"victoryNewScoreResult": "NEW SCORE:",
+	
+	"scoreTitle": "SCORE",
+	"scoreFinalTitle": "FINAL SCORE",
 	
 	"test": "Test"
   }

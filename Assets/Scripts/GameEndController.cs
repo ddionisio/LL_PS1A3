@@ -25,11 +25,13 @@ public class GameEndController : MonoBehaviour {
         } while(animator.isPlaying);
 
         //auto end
-        yield return new WaitForSeconds(autoEndDelay);
+        if(autoEndDelay > 0f) {
+            yield return new WaitForSeconds(autoEndDelay);
 
-        completeButton.interactable = false;
+            completeButton.interactable = false;
 
-        GameFlowController.Complete();
+            GameFlowController.Complete();
+        }
     }
 	
 }

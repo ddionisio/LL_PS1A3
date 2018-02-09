@@ -17,18 +17,44 @@ public class GameData : M8.SingletonBehaviour<GameData> {
     public float blockPickupDelay = 1.5f;
     public AnimationCurve blockGhostPulseCurve;
     public float blockGhostPulseDelay = 3f;
+    public float showHintDelay = 135f; //show hints if the current gameplay time has passed
+    public int scorePerLevel = 2000;
+    public int scoreHintPenalty = 500;
 
     [Header("Audio")]
     public string soundBlockPlacePath;
     public string soundBlockInvalidPath;
 
-    public int currentScore { get { return mCurScore; } set { mCurScore = value; } }
+    public int currentScore {
+        get {
+            if(!LoLManager.isInstantiated)
+                return 0;
 
-    private int mCurScore = 0;
+            return LoLManager.instance.curScore;
+        }
+
+        set {
+            if(LoLManager.isInstantiated)
+                LoLManager.instance.curScore = value;
+        }
+    }
     
     private Dictionary<string, BlockInfo> mBlockInfos;
 
     private Dictionary<string, int> mHintCounters = new Dictionary<string, int>();
+    private Dictionary<string, bool> mHintVisible = new Dictionary<string, bool>();
+
+    public bool IsHintVisible(string id) {
+        bool visible;
+        return mHintVisible.TryGetValue(id, out visible) && visible;
+    }
+
+    public void SetHintVisible(string id, bool visible) {
+        if(mHintVisible.ContainsKey(id))
+            mHintVisible[id] = visible;
+        else
+            mHintVisible.Add(id, visible);
+    }
 
     public int GetHintCounter(string id) {
         int count;

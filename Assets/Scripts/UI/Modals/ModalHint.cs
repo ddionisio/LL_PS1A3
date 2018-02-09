@@ -97,6 +97,24 @@ public class ModalHint : M8.UIModal.Controller, M8.UIModal.Interface.IPush {
 
     private int mUnlockIndex;
 
+    public static int GetPageCount(string name) {
+        int count = 0;
+
+        if(M8.UIModal.Manager.isInstantiated) {
+            var modalHint = M8.UIModal.Manager.instance.ModalGetController<ModalHint>(Modals.hint);
+
+            if(modalHint.mPages == null)
+                modalHint.InitPages();
+
+            PageData pageDat;
+            if(modalHint.mPages.TryGetValue(name, out pageDat)) {
+                count = pageDat.pages.Length;
+            }
+        }
+
+        return count;
+    }
+
     public void OpenPage(int index) {
         if(mCurPage == null)
             return;
@@ -127,15 +145,8 @@ public class ModalHint : M8.UIModal.Controller, M8.UIModal.Interface.IPush {
 
     void Awake() {
         //generate pages
-        mPages = new Dictionary<string, PageData>();
-
-        for(int i = 0; i < pagesRoot.childCount; i++) {
-            var child = pagesRoot.GetChild(i);
-
-            var newPage = new PageData(child);
-
-            mPages.Add(newPage.name, newPage);
-        }
+        if(mPages == null)
+            InitPages();
     }
 
     void M8.UIModal.Interface.IPush.Push(M8.GenericParams parms) {
@@ -179,5 +190,18 @@ public class ModalHint : M8.UIModal.Controller, M8.UIModal.Interface.IPush {
             OpenPage(0);
         else
             OpenPage(-1);
+    }
+
+    private void InitPages() {
+        //generate pages
+        mPages = new Dictionary<string, PageData>();
+
+        for(int i = 0; i < pagesRoot.childCount; i++) {
+            var child = pagesRoot.GetChild(i);
+
+            var newPage = new PageData(child);
+
+            mPages.Add(newPage.name, newPage);
+        }
     }
 }

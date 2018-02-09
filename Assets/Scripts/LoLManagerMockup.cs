@@ -68,17 +68,11 @@ public class LoLManagerMockup : LoLManager {
             mLastSoundBackgroundPath = null;
         }
     }
-
-    public override void ApplyScore(int score) {
-        
-    }
-
+    
     public override void ApplyProgress(int progress, int score) {
 
         mCurProgress = Mathf.Clamp(progress, 0, progressMax);
-
-        ApplyScore(score);
-
+        
         ProgressCallback();
     }
 

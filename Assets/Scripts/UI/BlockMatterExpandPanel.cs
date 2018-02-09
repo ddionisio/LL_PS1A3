@@ -16,7 +16,18 @@ public class BlockMatterExpandPanel : MonoBehaviour, IBeginDragHandler, IDragHan
 
     [Header("Arrows")]
     public BlockMatterExpandWidget[] arrows;
-    
+
+    [Header("Measure")]
+    public GameObject horzRoot;
+    public Text horzLabel;
+    public GameObject[] horzDoodads;
+
+    public GameObject vertRoot;
+    public Text vertLabel;
+    public GameObject[] vertDoodads;
+
+    public Text areaLabel;
+
     public bool isActive { get { return gameObject.activeSelf; } }
 
     public bool isMoveMode {
@@ -53,6 +64,9 @@ public class BlockMatterExpandPanel : MonoBehaviour, IBeginDragHandler, IDragHan
 
     private RectTransform mInfoTrans;
     private Vector2 mInfoDefaultAnchorPos;
+
+    private int mLastRow = -1;
+    private int mLastCol = -1;
 
     public void Show(Block block) {
         if(mBlock == block)
@@ -245,13 +259,47 @@ public class BlockMatterExpandPanel : MonoBehaviour, IBeginDragHandler, IDragHan
         var blockBounds = mBlock.editBounds;
 
         var cam = GameCamera.instance.camera2D.unityCamera;
-        
+
         var minScreenSpace = cam.WorldToScreenPoint(blockBounds.min);
         var maxScreenSpace = cam.WorldToScreenPoint(blockBounds.max);
 
         mTrans.sizeDelta = new Vector2(Mathf.Abs(maxScreenSpace.x - minScreenSpace.x), Mathf.Abs(maxScreenSpace.y - minScreenSpace.y));
 
         mWorldAttach.position = blockBounds.center;
+
+        int numCol = mBlock.cellSize.col;
+        int numRow = mBlock.cellSize.row;
+
+        bool isAreaChange = false;
+
+        if(mLastCol != numCol) {
+            mLastCol = numCol;
+            isAreaChange = true;
+
+            horzLabel.text = numCol.ToString();
+
+            for(int i = 0; i < horzDoodads.Length; i++)
+                horzDoodads[i].SetActive(numCol > 1);
+        }
+
+        if(mLastRow != numRow) {
+            mLastRow = numRow;
+            isAreaChange = true;
+
+            vertLabel.text = numRow.ToString();
+
+            for(int i = 0; i < vertDoodads.Length; i++)
+                vertDoodads[i].SetActive(numRow > 1);
+        }
+
+        if(isAreaChange) {
+            if(mIsExpandShown && numCol > 1 && numRow > 1) {
+                areaLabel.gameObject.SetActive(true);
+                areaLabel.text = (numCol * numRow).ToString();
+            }
+            else
+                areaLabel.gameObject.SetActive(false);
+        }
     }
 
     private void ShowExpand(bool show) {
@@ -260,7 +308,24 @@ public class BlockMatterExpandPanel : MonoBehaviour, IBeginDragHandler, IDragHan
 
             for(int i = 0; i < arrows.Length; i++)
                 arrows[i].gameObject.SetActive(mIsExpandShown);
-            
+
+            horzRoot.SetActive(mIsExpandShown);
+            vertRoot.SetActive(mIsExpandShown);
+
+            if(mIsExpandShown && mBlock != null) {
+                int numCol = mBlock.cellSize.col;
+                int numRow = mBlock.cellSize.row;
+
+                if(numCol > 1 && numRow > 1) {
+                    areaLabel.gameObject.SetActive(true);
+                    areaLabel.text = (numCol * numRow).ToString();
+                }
+                else
+                    areaLabel.gameObject.SetActive(false);
+            }
+            else
+                areaLabel.gameObject.SetActive(false);
+
             Vector2 anchorPos = mInfoTrans.anchoredPosition;
 
             if(mIsExpandShown) {
@@ -276,6 +341,8 @@ public class BlockMatterExpandPanel : MonoBehaviour, IBeginDragHandler, IDragHan
 
     private void SetBlock(Block b) {
         mBlock = b;
+        mLastCol = -1;
+        mLastRow = -1;
 
         mBlock.dimensionChangedCallback += OnBlockDimensionChanged;
         mBlock.modeChangedCallback += OnBlockModeChanged;

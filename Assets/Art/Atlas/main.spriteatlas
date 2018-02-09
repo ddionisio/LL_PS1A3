@@ -173,10 +173,13 @@ SpriteAtlas:
   - {fileID: 21300000, guid: bf49c032bb702864eb4c7c142adb34f3, type: 3}
   - {fileID: 21300000, guid: e1f2ec46776e58046b470eeec30bba82, type: 3}
   - {fileID: 21300000, guid: d55f8ac932e44e849a8ee70c4f18869b, type: 3}
+  - {fileID: 21300000, guid: 3e243a6ec1736de41bee9715b0710c1d, type: 3}
   - {fileID: 21300000, guid: 05df5d19f59f8d7428544a19c1a01e85, type: 3}
   - {fileID: 21300000, guid: ad9703b4e6bfef44da21365f39cc8724, type: 3}
+  - {fileID: 21300006, guid: 02cb7109eec577d45a27167e2308de23, type: 3}
   - {fileID: 21300000, guid: 02cb7109eec577d45a27167e2308de23, type: 3}
   - {fileID: 21300002, guid: 02cb7109eec577d45a27167e2308de23, type: 3}
+  - {fileID: 21300004, guid: 02cb7109eec577d45a27167e2308de23, type: 3}
   m_PackedSpriteNamesToIndex:
   - shell
   - scaleTop
@@ -310,9 +313,12 @@ SpriteAtlas:
   - circleGlowSmall
   - blockBlank
   - blockFrame
+  - windParticleFX
   - scaleStub
   - heaterBase
+  - blank4x4_bottomLeft
   - blank4x4_bottom
   - blank4x4
+  - blank4x4_topLeft
   m_Tag: main
   m_IsVariant: 0

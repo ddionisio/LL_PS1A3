@@ -16,6 +16,7 @@ public class SpriteColliderAnchor : MonoBehaviour {
 
     public Collider2D toCollider;
     public Anchor anchor;
+    public Vector2 offset;
 
 #if UNITY_EDITOR
     private SpriteRenderer mSpriteRender;
@@ -32,8 +33,8 @@ public class SpriteColliderAnchor : MonoBehaviour {
 
         switch(anchor) {
             case Anchor.Bottom:
-                toPos.x = collBounds.min.x;
-                toPos.y = collBounds.min.y;
+                toPos.x = collBounds.min.x + offset.x;
+                toPos.y = collBounds.min.y + offset.y;
 
                 toSize.x = mSpriteRender.drawMode == SpriteDrawMode.Simple ? collBounds.size.x / (mSpriteRender.sprite.rect.size.x / mSpriteRender.sprite.pixelsPerUnit) : collBounds.size.x;
                 break;

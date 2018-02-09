@@ -3872,7 +3872,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1916475728
+  randomSeed: -2127376865
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -4837,8 +4837,8 @@ ParticleSystem:
         m_NumColorKeys: 2
         m_NumAlphaKeys: 2
   UVModule:
-    enabled: 0
-    mode: 0
+    enabled: 1
+    mode: 1
     frameOverTime:
       serializedVersion: 2
       minMaxState: 1
@@ -4931,7 +4931,7 @@ ParticleSystem:
     flipV: 0
     randomRow: 1
     sprites:
-    - sprite: {fileID: 0}
+    - sprite: {fileID: 21300000, guid: 3e243a6ec1736de41bee9715b0710c1d, type: 3}
   VelocityModule:
     enabled: 0
     x:
@@ -7200,7 +7200,7 @@ ParticleSystemRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 2100000, guid: 704f144761f858a45a8ad4b8966ec33c, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -8919,11 +8919,6 @@ Prefab:
     - target: {fileID: 4020466510312618, guid: cd1384428e12f1045bd8021fa1a66da8, type: 2}
       propertyPath: m_RootOrder
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114384800968059630, guid: cd1384428e12f1045bd8021fa1a66da8,
-        type: 2}
-      propertyPath: force
-      value: 25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cd1384428e12f1045bd8021fa1a66da8, type: 2}

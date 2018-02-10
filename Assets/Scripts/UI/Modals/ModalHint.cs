@@ -94,9 +94,7 @@ public class ModalHint : M8.UIModal.Controller, M8.UIModal.Interface.IPush {
     private PageData mCurPage;
 
     private int mHintCounter;
-
-    private int mUnlockIndex;
-
+        
     public static int GetPageCount(string name) {
         int count = 0;
 
@@ -164,6 +162,8 @@ public class ModalHint : M8.UIModal.Controller, M8.UIModal.Interface.IPush {
                 return;
             }
         }
+
+        mCurPage.Show();
 
         int hintButtonCount = mCurPage.pages.Length;
 

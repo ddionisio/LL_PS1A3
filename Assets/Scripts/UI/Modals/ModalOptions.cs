@@ -24,6 +24,7 @@ public class ModalOptions : M8.UIModal.Controller, M8.UIModal.Interface.IPush, M
     private float mLastMusicVolume;
     private float mLastSoundVolume;
     private string mLastMusicPlayingPath;
+    private bool mLastMusicIsLoop;
 
     void OnDestroy() {
         //fail-safe
@@ -60,6 +61,7 @@ public class ModalOptions : M8.UIModal.Controller, M8.UIModal.Interface.IPush, M
             //save music path playing
             if(toggleRefreshMusic) {
                 mLastMusicPlayingPath = LoLManager.instance.lastSoundBackgroundPath;
+                mLastMusicIsLoop = LoLManager.instance.lastSoundBackgroundIsLoop;
 
                 LoLManager.instance.StopCurrentBackgroundSound();
             }
@@ -74,8 +76,11 @@ public class ModalOptions : M8.UIModal.Controller, M8.UIModal.Interface.IPush, M
 
             //play back last music if there's no music playing
             if(toggleRefreshMusic) {
-                if(!string.IsNullOrEmpty(mLastMusicPlayingPath) && string.IsNullOrEmpty(LoLManager.instance.lastSoundBackgroundPath)) {
-                    LoLManager.instance.PlaySound(mLastMusicPlayingPath, true, true);
+                if(!string.IsNullOrEmpty(LoLManager.instance.lastSoundBackgroundPath)) {
+                    LoLManager.instance.PlaySound(LoLManager.instance.lastSoundBackgroundPath, true, LoLManager.instance.lastSoundBackgroundIsLoop);
+                }
+                else if(!string.IsNullOrEmpty(mLastMusicPlayingPath)) {
+                    LoLManager.instance.PlaySound(mLastMusicPlayingPath, true, mLastMusicIsLoop);
                 }
 
                 mLastMusicPlayingPath = null;

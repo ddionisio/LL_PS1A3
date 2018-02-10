@@ -134,6 +134,7 @@ PlayerSettings:
   - {fileID: 4343727234628468602, guid: 9f5b618fed084c54bbb230f6c70be0c2, type: 2}
   - {fileID: 4343727234628468602, guid: 17d20ad3eecf7d641bf593c857030133, type: 2}
   - {fileID: 4343727234628468602, guid: 1d275d3cbf8c91f4682ef1710a587092, type: 2}
+  - {fileID: 4343727234628468602, guid: 58c1fb42cc296e749a53e88c84854f82, type: 2}
   - {fileID: 2800000, guid: 19f20e4e6fd94f1458b104b7eb5831eb, type: 3}
   - {fileID: 2100000, guid: 97618e5430a2adb449f2e7161bb895ad, type: 2}
   - {fileID: 2800000, guid: 26ab650f0d8319b44854c9b6171e3d12, type: 3}

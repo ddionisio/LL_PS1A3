@@ -72,6 +72,12 @@ public class LoLMusicPlaylist : M8.SingletonBehaviour<LoLMusicPlaylist> {
         while(true) {
             var item = items[index];
             if(!item.disabled && !string.IsNullOrEmpty(item.path)) {
+                LoLManager.instance.PlaySound(item.path, true, true);
+
+                mLastTime = Time.realtimeSinceStartup;
+                while(Time.realtimeSinceStartup - mLastTime < item.duration)
+                    yield return null;
+
                 while(mIsOutOfFocus)
                     yield return null;
 
@@ -79,12 +85,6 @@ public class LoLMusicPlaylist : M8.SingletonBehaviour<LoLMusicPlaylist> {
                     yield return null;
 
                 yield return null; //one more for good measure
-
-                LoLManager.instance.PlaySound(item.path, true, true);
-
-                mLastTime = Time.realtimeSinceStartup;
-                while(Time.realtimeSinceStartup - mLastTime < item.duration)
-                    yield return null;
             }
 
             index++;

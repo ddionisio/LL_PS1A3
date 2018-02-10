@@ -111,6 +111,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: d58ea5dd7b2cd834bab80f9a60a12cd6, type: 3}
   - {fileID: 21300000, guid: 9b6289659dbef8a4aa779b6fb6e1daf7, type: 3}
   - {fileID: 21300000, guid: 54ac4c5043107c24395579ec0c58610e, type: 3}
+  - {fileID: 21300000, guid: 5e4c0d0482b7f1942b8f7532dfcd4c59, type: 3}
   - {fileID: 21300000, guid: 223366c4d2db50645baca7582e2c9432, type: 3}
   - {fileID: 21300000, guid: b95e27d683b6d79478ab6d875afe8815, type: 3}
   - {fileID: 21300000, guid: cb80fcee4ffd13c43a43e0b5ee788c9b, type: 3}
@@ -251,6 +252,7 @@ SpriteAtlas:
   - hintButton
   - levelProgressHighlight
   - circleGlow
+  - paletteItemSelectHighlight
   - blockAluminumIcon
   - blockIronIcon
   - blockOxidizerIcon

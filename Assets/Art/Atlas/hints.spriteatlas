@@ -34,16 +34,16 @@ SpriteAtlas:
   m_PackedSprites:
   - {fileID: 21300000, guid: 17b6d729f1fc5cf438d6e745fb43c4b6, type: 3}
   - {fileID: 21300000, guid: 80df98e22d977544a92d802cd5a1bce9, type: 3}
-  - {fileID: 21300000, guid: 95bb9b5b77d6eed44ba1527e68d6fe1c, type: 3}
   - {fileID: 21300000, guid: d7ce214929ff337488beec64b0c3433a, type: 3}
+  - {fileID: 21300000, guid: 95bb9b5b77d6eed44ba1527e68d6fe1c, type: 3}
   - {fileID: 21300000, guid: 3cacc8c8525d1fb4c8c075a75111e9be, type: 3}
   - {fileID: 21300000, guid: ac6b31d6a88294d46b5ac225d99da8d0, type: 3}
   - {fileID: 21300000, guid: 025b63d56852a8144a57464a8d7d3c57, type: 3}
   m_PackedSpriteNamesToIndex:
   - hints_stage_1_2
   - hints_stage_3_2
-  - hints_stage_3_1
   - hints_stage_4_1
+  - hints_stage_3_1
   - hints_stage_5_1
   - hints_stage_2_1
   - hints_stage_2_2

@@ -97,6 +97,7 @@
 	"hints": "HINTS",
 	"hintReveal": "REVEAL HINT",
 	"hintRevealDesc": "Revealing this hint will cause you some points!",
+	"hintButtonDesc": "Press this for hints!",
 	
 	"victoryScoreResult": "Score:",
 	"victoryCompleteResult": "Level Complete:",

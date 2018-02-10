@@ -131,8 +131,9 @@ public class GameMapController : M8.SingletonBehaviour<GameMapController> {
         GameCamera.instance.MoveTo(player.transform.position);
 
         mode = Mode.Play; //just in case
-                
+
         //show victory modal
+        M8.UIModal.Manager.instance.ModalCloseAll();
         M8.UIModal.Manager.instance.ModalOpen(Modals.victory);
     }
 

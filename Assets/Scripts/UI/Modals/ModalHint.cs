@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ModalHint : M8.UIModal.Controller, M8.UIModal.Interface.IPush {
+public class ModalHint : M8.UIModal.Controller, M8.UIModal.Interface.IPush, M8.UIModal.Interface.IPop {
     public const string parmLevelName = "lvl";
 
     [System.Serializable]
@@ -94,7 +94,9 @@ public class ModalHint : M8.UIModal.Controller, M8.UIModal.Interface.IPush {
     private PageData mCurPage;
 
     private int mHintCounter;
-        
+
+    private bool mIsPaused;
+
     public static int GetPageCount(string name) {
         int count = 0;
 
@@ -141,6 +143,11 @@ public class ModalHint : M8.UIModal.Controller, M8.UIModal.Interface.IPush {
         GameData.instance.SetHintCounter(mCurPage.name, mHintCounter);
     }
 
+    void OnDestroy() {
+        //fail-safe
+        Pause(false);
+    }
+
     void Awake() {
         //generate pages
         if(mPages == null)
@@ -148,6 +155,8 @@ public class ModalHint : M8.UIModal.Controller, M8.UIModal.Interface.IPush {
     }
 
     void M8.UIModal.Interface.IPush.Push(M8.GenericParams parms) {
+        Pause(true);
+
         if(mCurPage != null) {
             mCurPage.Hide();
             mCurPage = null;
@@ -192,6 +201,10 @@ public class ModalHint : M8.UIModal.Controller, M8.UIModal.Interface.IPush {
             OpenPage(-1);
     }
 
+    void M8.UIModal.Interface.IPop.Pop() {
+        Pause(false);
+    }
+
     private void InitPages() {
         //generate pages
         mPages = new Dictionary<string, PageData>();
@@ -202,6 +215,19 @@ public class ModalHint : M8.UIModal.Controller, M8.UIModal.Interface.IPush {
             var newPage = new PageData(child);
 
             mPages.Add(newPage.name, newPage);
+        }
+    }
+
+    void Pause(bool pause) {
+        if(mIsPaused != pause) {
+            mIsPaused = pause;
+
+            if(M8.SceneManager.instance) {
+                if(mIsPaused)
+                    M8.SceneManager.instance.Pause();
+                else
+                    M8.SceneManager.instance.Resume();
+            }
         }
     }
 }

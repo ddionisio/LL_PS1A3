@@ -30,21 +30,23 @@ public class LoLManagerMockup : LoLManager {
             if(mAudioItems.TryGetValue(mLastSoundBackgroundPath, out bkgrndAudioSrc)) {
                 bkgrndAudioSrc.Stop();
 
-                Debug.Log("Stop Background: " + mLastSoundBackgroundPath);
+                //Debug.Log("Stop Background: " + mLastSoundBackgroundPath);
             }
             else
                 Debug.LogWarning("Last background path not found? " + mLastSoundBackgroundPath);
         }
 
-        AudioSource audioSrc;
-        if(mAudioItems.TryGetValue(path, out audioSrc)) {
-            audioSrc.volume = background ? mMusicVolume : mSoundVolume;
-            audioSrc.loop = loop;
-            audioSrc.Play();
+        if(!_ignorePlaySoundOnMute || (background ? mMusicVolume > 0f : mSoundVolume > 0f)) {
+            AudioSource audioSrc;
+            if(mAudioItems.TryGetValue(path, out audioSrc)) {
+                audioSrc.volume = background ? mMusicVolume : mSoundVolume;
+                audioSrc.loop = loop;
+                audioSrc.Play();
+            }
         }
 
         if(background) {
-            Debug.Log("Played Background: " + path);
+            //Debug.Log("Played Background: " + path);
 
             mLastSoundBackgroundPath = path;
         }
@@ -54,6 +56,9 @@ public class LoLManagerMockup : LoLManager {
         AudioSource audioSrc;
         if(mAudioItems.TryGetValue(path, out audioSrc))
             audioSrc.Stop();
+
+        if(mLastSoundBackgroundPath == path)
+            mLastSoundBackgroundPath = null;
     }
 
     public override void SpeakText(string key) {

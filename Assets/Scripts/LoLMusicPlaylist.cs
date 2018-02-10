@@ -18,6 +18,7 @@ public class LoLMusicPlaylist : M8.SingletonBehaviour<LoLMusicPlaylist> {
     private float mLastTime;
 
     private float mOutOfFocusDiffTime;
+    private bool mIsOutOfFocus;
 
     public void PlayStartMusic() {
         Stop();
@@ -45,12 +46,18 @@ public class LoLMusicPlaylist : M8.SingletonBehaviour<LoLMusicPlaylist> {
     }
 
     private void OnApplicationFocus(bool focus) {
+        mIsOutOfFocus = !focus;
+
         if(focus) {
             mLastTime = Time.realtimeSinceStartup - mOutOfFocusDiffTime;
         }
         else {
             mOutOfFocusDiffTime = Time.realtimeSinceStartup - mLastTime;
         }
+    }
+
+    void OnEnable() {
+        mIsOutOfFocus = !Application.isFocused;
     }
 
     void OnDisable() {
@@ -65,6 +72,14 @@ public class LoLMusicPlaylist : M8.SingletonBehaviour<LoLMusicPlaylist> {
         while(true) {
             var item = items[index];
             if(!item.disabled && !string.IsNullOrEmpty(item.path)) {
+                while(mIsOutOfFocus)
+                    yield return null;
+
+                while(LoLManager.instance.musicVolume <= 0f)
+                    yield return null;
+
+                yield return null; //one more for good measure
+
                 LoLManager.instance.PlaySound(item.path, true, true);
 
                 mLastTime = Time.realtimeSinceStartup;

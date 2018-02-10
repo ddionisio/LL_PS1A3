@@ -183,19 +183,23 @@ public class ConductiveController : MonoBehaviour {
         if(block) {
             block.modeChangedCallback -= OnBlockChangeMode;
         }
-
-        if(GameMapController.isInstantiated) {
-            GameMapController.instance.modeChangeCallback -= OnGameChangeMode;
-        }
     }
 
     void OnDisable() {
+        if(GameMapController.isInstantiated) {
+            GameMapController.instance.modeChangeCallback -= OnGameChangeMode;
+        }
+
         ClearConnections();
     }
 
     void OnEnable() {
         mLastUpdateTime = Time.time;
         mCurEnergy = energyInitial;
+
+        if(GameMapController.isInstantiated) {
+            GameMapController.instance.modeChangeCallback += OnGameChangeMode;
+        }
     }
 
     void Awake() {
@@ -206,9 +210,7 @@ public class ConductiveController : MonoBehaviour {
         }
         else
             mIsTriggerActive = true; //activate trigger on start
-
-        GameMapController.instance.modeChangeCallback += OnGameChangeMode;
-
+                
         mCollContacts = new Collider2D[connectCapacity];
         mReceivers = new M8.CacheList<Contact>(connectCapacity);
 

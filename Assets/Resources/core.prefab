@@ -380,3 +380,4 @@ MonoBehaviour:
   _pauseModalPopOnResume: 1
   _useFadeMusicScale: 1
   _fadeMusicScale: 1
+  _ignorePlaySoundOnMute: 1

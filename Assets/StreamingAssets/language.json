@@ -105,6 +105,10 @@
 	
 	"scoreTitle": "SCORE",
 	"scoreFinalTitle": "FINAL SCORE",
+	"on": "ON",
+	"off": "OFF",
+	
+	"hint_stage_1_2_1": "",
 	
 	"test": "Test"
   }

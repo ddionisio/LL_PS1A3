@@ -359,9 +359,7 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
 #endif
 
         mCurProgress = 0;
-        
-        SetupVolumes();
-
+                
         // Mock the platform-to-game messages when in the Unity editor.
 #if UNITY_EDITOR
         LoadMockData();
@@ -385,6 +383,8 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
             ParseLanguage(mLanguageJson);
             mLanguageJson = null;
         }
+
+        SetupVolumes();
 
         mIsReady = true;
     }

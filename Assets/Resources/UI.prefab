@@ -5653,6 +5653,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f5c8a68ba18af8428b83425ebc8b08a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  autoPlay: 1
+  autoPlayDelay: 0.5
   hideOnClick: {fileID: 0}
 --- !u!114 &114036563525097258
 MonoBehaviour:
@@ -5787,7 +5789,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.7686275, g: 0.3803922, b: 0.227451, a: 1}
+  m_Color: {r: 0.98823535, g: 0.6901961, b: 0.47450984, a: 1}
   m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -6712,6 +6714,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f5c8a68ba18af8428b83425ebc8b08a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  autoPlay: 1
+  autoPlayDelay: 1
   hideOnClick: {fileID: 0}
 --- !u!114 &114115168914510614
 MonoBehaviour:
@@ -7219,7 +7223,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.3254902, g: 0.24705884, b: 0.3254902, a: 1}
+  m_Color: {r: 0.43137258, g: 0.34117648, b: 0.4156863, a: 1}
   m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -7471,7 +7475,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.3254902, g: 0.24705884, b: 0.3254902, a: 1}
+  m_Color: {r: 0.43137258, g: 0.34117648, b: 0.4156863, a: 1}
   m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -7867,6 +7871,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f5c8a68ba18af8428b83425ebc8b08a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  autoPlay: 0
+  autoPlayDelay: 0
   hideOnClick: {fileID: 0}
 --- !u!114 &114211334196817270
 MonoBehaviour:
@@ -8216,6 +8222,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f5c8a68ba18af8428b83425ebc8b08a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  autoPlay: 0
+  autoPlayDelay: 0
   hideOnClick: {fileID: 0}
 --- !u!114 &114232841471890102
 MonoBehaviour:
@@ -8451,6 +8459,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f5c8a68ba18af8428b83425ebc8b08a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  autoPlay: 1
+  autoPlayDelay: 0.5
   hideOnClick: {fileID: 0}
 --- !u!114 &114244232904327670
 MonoBehaviour:
@@ -9321,6 +9331,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f5c8a68ba18af8428b83425ebc8b08a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  autoPlay: 1
+  autoPlayDelay: 0.5
   hideOnClick: {fileID: 0}
 --- !u!114 &114290398805066140
 MonoBehaviour:
@@ -9333,6 +9345,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f5c8a68ba18af8428b83425ebc8b08a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  autoPlay: 1
+  autoPlayDelay: 0.5
   hideOnClick: {fileID: 0}
 --- !u!114 &114290851798349284
 MonoBehaviour:
@@ -10448,6 +10462,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f5c8a68ba18af8428b83425ebc8b08a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  autoPlay: 0
+  autoPlayDelay: 0
   hideOnClick: {fileID: 0}
 --- !u!114 &114354326097976918
 MonoBehaviour:
@@ -10623,6 +10639,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f5c8a68ba18af8428b83425ebc8b08a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  autoPlay: 1
+  autoPlayDelay: 0.5
   hideOnClick: {fileID: 0}
 --- !u!114 &114375309366034638
 MonoBehaviour:
@@ -10698,6 +10716,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f5c8a68ba18af8428b83425ebc8b08a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  autoPlay: 0
+  autoPlayDelay: 0
   hideOnClick: {fileID: 0}
 --- !u!114 &114379641856659804
 MonoBehaviour:
@@ -11073,6 +11093,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f5c8a68ba18af8428b83425ebc8b08a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  autoPlay: 1
+  autoPlayDelay: 9
   hideOnClick: {fileID: 0}
 --- !u!114 &114413200761847578
 MonoBehaviour:
@@ -11085,6 +11107,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f5c8a68ba18af8428b83425ebc8b08a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  autoPlay: 1
+  autoPlayDelay: 0.5
   hideOnClick: {fileID: 0}
 --- !u!114 &114416064842655722
 MonoBehaviour:
@@ -11362,6 +11386,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f5c8a68ba18af8428b83425ebc8b08a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  autoPlay: 1
+  autoPlayDelay: 0.5
   hideOnClick: {fileID: 0}
 --- !u!114 &114430929891221736
 MonoBehaviour:
@@ -11397,6 +11423,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f5c8a68ba18af8428b83425ebc8b08a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  autoPlay: 0
+  autoPlayDelay: 0
   hideOnClick: {fileID: 0}
 --- !u!114 &114432365771226688
 MonoBehaviour:
@@ -12140,6 +12168,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f5c8a68ba18af8428b83425ebc8b08a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  autoPlay: 1
+  autoPlayDelay: 0.3
   hideOnClick: {fileID: 0}
 --- !u!114 &114486383933068270
 MonoBehaviour:
@@ -12596,6 +12626,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f5c8a68ba18af8428b83425ebc8b08a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  autoPlay: 1
+  autoPlayDelay: 0.6
   hideOnClick: {fileID: 0}
 --- !u!114 &114514516497770912
 MonoBehaviour:
@@ -13047,7 +13079,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.7686275, g: 0.3803922, b: 0.227451, a: 1}
+  m_Color: {r: 0.98823535, g: 0.6901961, b: 0.47450984, a: 1}
   m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -13415,6 +13447,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f5c8a68ba18af8428b83425ebc8b08a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  autoPlay: 0
+  autoPlayDelay: 0
   hideOnClick: {fileID: 0}
 --- !u!114 &114574683879526342
 MonoBehaviour:
@@ -13567,6 +13601,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f5c8a68ba18af8428b83425ebc8b08a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  autoPlay: 1
+  autoPlayDelay: 0.3
   hideOnClick: {fileID: 0}
 --- !u!114 &114594673113408848
 MonoBehaviour:
@@ -13832,6 +13868,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f5c8a68ba18af8428b83425ebc8b08a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  autoPlay: 1
+  autoPlayDelay: 5
   hideOnClick: {fileID: 0}
 --- !u!114 &114621897404654564
 MonoBehaviour:
@@ -14771,6 +14809,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f5c8a68ba18af8428b83425ebc8b08a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  autoPlay: 1
+  autoPlayDelay: 0.5
   hideOnClick: {fileID: 0}
 --- !u!114 &114672646310279314
 MonoBehaviour:
@@ -15716,6 +15756,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f5c8a68ba18af8428b83425ebc8b08a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  autoPlay: 1
+  autoPlayDelay: 0.5
   hideOnClick: {fileID: 0}
 --- !u!114 &114732190724129058
 MonoBehaviour:
@@ -16408,6 +16450,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f5c8a68ba18af8428b83425ebc8b08a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  autoPlay: 1
+  autoPlayDelay: 0.5
   hideOnClick: {fileID: 0}
 --- !u!114 &114782442121583048
 MonoBehaviour:
@@ -17100,6 +17144,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f5c8a68ba18af8428b83425ebc8b08a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  autoPlay: 0
+  autoPlayDelay: 0
   hideOnClick: {fileID: 0}
 --- !u!114 &114836274769051310
 MonoBehaviour:
@@ -17292,6 +17338,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f5c8a68ba18af8428b83425ebc8b08a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  autoPlay: 1
+  autoPlayDelay: 0.5
   hideOnClick: {fileID: 0}
 --- !u!114 &114851617385625124
 MonoBehaviour:
@@ -18930,6 +18978,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f5c8a68ba18af8428b83425ebc8b08a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  autoPlay: 0
+  autoPlayDelay: 0
   hideOnClick: {fileID: 0}
 --- !u!114 &114977515157043884
 MonoBehaviour:
@@ -25297,7 +25347,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -96, y: -90.399994}
+  m_AnchoredPosition: {x: -96, y: 19.5}
   m_SizeDelta: {x: 89, y: 61}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!224 &224925135780207282

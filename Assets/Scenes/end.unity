@@ -4116,6 +4116,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f5c8a68ba18af8428b83425ebc8b08a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  autoPlay: 1
+  autoPlayDelay: 0.5
   hideOnClick: {fileID: 0}
 --- !u!114 &700542375
 MonoBehaviour:

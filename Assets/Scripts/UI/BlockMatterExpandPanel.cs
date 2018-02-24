@@ -68,6 +68,8 @@ public class BlockMatterExpandPanel : MonoBehaviour, IBeginDragHandler, IDragHan
     private int mLastRow = -1;
     private int mLastCol = -1;
 
+    private M8.GenericParams mInfoParms = new M8.GenericParams();
+
     public void Show(Block block) {
         if(mBlock == block)
             return;
@@ -128,6 +130,14 @@ public class BlockMatterExpandPanel : MonoBehaviour, IBeginDragHandler, IDragHan
                 M8.PoolController.ReleaseAuto(_block.gameObject);*/
 
             GameMapController.instance.PaletteBlockCancel(blockName);
+        }
+    }
+
+    public void Info() {
+        if(mBlock) {
+            mInfoParms[ModalInfo.parmBlockName] = mBlock.blockName;
+
+            M8.UIModal.Manager.instance.ModalOpen(Modals.info, mInfoParms);
         }
     }
 

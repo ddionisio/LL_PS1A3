@@ -4,4 +4,5 @@ public struct Modals {
     public const string retry = "retry";
     public const string victory = "victory";
     public const string hint = "hint";
+    public const string info = "info";
 }

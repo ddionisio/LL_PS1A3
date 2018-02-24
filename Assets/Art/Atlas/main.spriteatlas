@@ -129,6 +129,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: b5f1f248fc842084cb79fa132167e30b, type: 3}
   - {fileID: 21300000, guid: 2154a69bc7b0e4c44817852a2b68cca9, type: 3}
   - {fileID: 21300000, guid: 6f7ecf39209dff94086d81b4de5dc0a2, type: 3}
+  - {fileID: 21300000, guid: fe282b0e4c1e83d47a2498031604f286, type: 3}
   - {fileID: 21300000, guid: 28dad2790c61a7d4aa3414a4c164e586, type: 3}
   - {fileID: 21300000, guid: 84114a94fe6070e4ba99dae56f5b458e, type: 3}
   - {fileID: 21300000, guid: 8102fa74a75a4c146bfc692f79d0cf5b, type: 3}
@@ -270,6 +271,7 @@ SpriteAtlas:
   - tutorialHandPointDown
   - ground3_top
   - circleXButton
+  - circleInfoButton
   - circleArrowButton
   - pumpLinkOutput
   - panelElectric

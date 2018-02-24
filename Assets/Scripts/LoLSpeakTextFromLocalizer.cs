@@ -17,7 +17,7 @@ public class LoLSpeakTextFromLocalizer : MonoBehaviour {
     }
 
     void OnApplicationFocus(bool focus) {
-
+        mIsFocus = focus;
     }
 
     void OnEnable() {

@@ -5,7 +5,7 @@ SpriteAtlas:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: hints
+  m_Name: hints_infos
   m_EditorData:
     textureSettings:
       serializedVersion: 2
@@ -29,6 +29,7 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: cf54df70aeaef1442ba504b2ff309c3d, type: 3}
+    - {fileID: 102900000, guid: 4fc4f4c6e8f29ea4b9315d6dc647d10e, type: 3}
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
@@ -39,6 +40,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 3cacc8c8525d1fb4c8c075a75111e9be, type: 3}
   - {fileID: 21300000, guid: ac6b31d6a88294d46b5ac225d99da8d0, type: 3}
   - {fileID: 21300000, guid: 025b63d56852a8144a57464a8d7d3c57, type: 3}
+  - {fileID: 21300000, guid: dfd0e4481bd249e4bae826e1c3b82a4a, type: 3}
   m_PackedSpriteNamesToIndex:
   - hints_stage_1_2
   - hints_stage_3_2
@@ -47,5 +49,6 @@ SpriteAtlas:
   - hints_stage_5_1
   - hints_stage_2_1
   - hints_stage_2_2
-  m_Tag: hints
+  - wood
+  m_Tag: hints_infos
   m_IsVariant: 0

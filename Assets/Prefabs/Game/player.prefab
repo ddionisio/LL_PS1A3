@@ -760,7 +760,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1273378667740278}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3, y: -2.4, z: 0}
+  m_LocalPosition: {x: -1.99, y: -2.43, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4895175753542526}
@@ -1598,7 +1598,7 @@ MonoBehaviour:
   victoryRotatePerSecond: 1080
   victoryScaleOutDelay: 0.65
   soundSpawnPath: Audio/spawn.wav
-  soundExitPath: Audio/exit.wav
+  soundExitPath: Audio/exit.mp3
   soundDeathPath: Audio/death.wav
   soundJumpPath: Audio/jump.wav
 --- !u!114 &114223338977264014

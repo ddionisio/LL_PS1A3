@@ -126,11 +126,11 @@
 	"corkwood_info_desc": "Cork is an organic material made from the bark tissue of trees, mostly from cork oak. These materials are very light, elastic, and are highly resistant to fire.",
 	
 	"iron_info_buoyancy": "Sinks under water.",
-	"iron_info_melting_point": "Melting point: 1,538 degrees Celsius.",
+	"iron_info_melting_point": "Melts at 1,538 degrees Celsius.",
 	"iron_info_conductivity": "Good conductivity.",
 	"iron_info_desc": "Iron is a metallic material commonly found in the Earth's crust. They are also found in your body such as the red blood cell, which helps transport oxygen. Iron can also be magnetized to attract other metals.",
 	
-	"aluminum_info_melting_point": "Melting point: 660.3 degrees Celsius.",
+	"aluminum_info_melting_point": "Melts at 660.3 degrees Celsius.",
 	"aluminum_info_conductivity": "Very good conductivity.",	
 	"aluminum_info_desc": "Aluminum, like iron, is a metallic material commonly found in the Earth's crust. Unlike iron, it is much lighter, and highly resistant to corrosion. Because of this, aluminum is widely used for: packaging, containment, utensils.",
 	
@@ -141,9 +141,9 @@
 	"rubber_info_bouncy": "Highly elastic.",
 	"rubber_info_desc": "Natural rubber is an organic material commonly extracted from rubber trees. Rubber is tough, waterproof, and has the ability to stretch far. Its elasticity allows for some bouncy fun.",
 	
-	"fuelTank_info_desc": "",
-	"oxidizerTank_info_desc": "",
-	"combustionChamber_info_desc": "",
+	"fuelTank_info_desc": "Fuel is a material used to generate energy through chemical reaction. This particular rocket uses liquid fuel known as kerosene. Mixing this with oxidizer will cause a high energy explosion.",
+	"oxidizerTank_info_desc": "Oxidizer is a material used to mix with other materials to create a chemical reaction. For rockets, liquid oxygen is mixed with fuel to cause ignition.",
+	"combustionChamber_info_desc": "The combustion chamber is where fuel and oxidizer are mixed together, causing a combustion. The resulting energy is then funneled to the nozzle.\n\nOnce the energy flows outside, its force pushes on the ground. This will create an opposing force, causing the rocket to move upwards.",
 	
 	"test": "Test"
   }

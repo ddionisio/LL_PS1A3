@@ -532,6 +532,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f5c8a68ba18af8428b83425ebc8b08a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  group: intro_1
   autoPlay: 0
   autoPlayDelay: 0
   hideOnClick: {fileID: 978994034}
@@ -634,6 +635,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f5c8a68ba18af8428b83425ebc8b08a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  group: intro_2
   autoPlay: 1
   autoPlayDelay: 4
   hideOnClick: {fileID: 0}
@@ -1162,6 +1164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f5c8a68ba18af8428b83425ebc8b08a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  group: intro_2
   autoPlay: 1
   autoPlayDelay: 7
   hideOnClick: {fileID: 0}
@@ -1264,6 +1267,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f5c8a68ba18af8428b83425ebc8b08a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  group: intro_2
   autoPlay: 1
   autoPlayDelay: 1
   hideOnClick: {fileID: 0}
@@ -1434,6 +1438,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f5c8a68ba18af8428b83425ebc8b08a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  group: intro_2
   autoPlay: 1
   autoPlayDelay: 0.35
   hideOnClick: {fileID: 0}
@@ -2659,6 +2664,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f5c8a68ba18af8428b83425ebc8b08a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  group: intro_2
   autoPlay: 1
   autoPlayDelay: 5.5
   hideOnClick: {fileID: 0}
@@ -2850,6 +2856,11 @@ Prefab:
         type: 2}
       propertyPath: autoPlayDelay
       value: 2.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 114062178262247504, guid: 14b1a158dea8e924aa0b6cd46c78a782,
+        type: 2}
+      propertyPath: group
+      value: intro_2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 14b1a158dea8e924aa0b6cd46c78a782, type: 2}
@@ -3129,6 +3140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f5c8a68ba18af8428b83425ebc8b08a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  group: intro_3
   autoPlay: 1
   autoPlayDelay: 0.4
   hideOnClick: {fileID: 0}
@@ -3346,6 +3358,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f5c8a68ba18af8428b83425ebc8b08a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  group: intro_1
   autoPlay: 0
   autoPlayDelay: 0
   hideOnClick: {fileID: 978994034}
@@ -3517,6 +3530,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f5c8a68ba18af8428b83425ebc8b08a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  group: intro_1
   autoPlay: 1
   autoPlayDelay: 1
   hideOnClick: {fileID: 978994034}
@@ -3654,6 +3668,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f5c8a68ba18af8428b83425ebc8b08a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  group: intro_2
   autoPlay: 1
   autoPlayDelay: 0.4
   hideOnClick: {fileID: 0}
@@ -4244,6 +4259,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f5c8a68ba18af8428b83425ebc8b08a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  group: intro_2
   autoPlay: 1
   autoPlayDelay: 2.5
   hideOnClick: {fileID: 0}
@@ -4618,6 +4634,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f5c8a68ba18af8428b83425ebc8b08a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  group: intro_3
   autoPlay: 1
   autoPlayDelay: 2.5
   hideOnClick: {fileID: 0}
@@ -6308,6 +6325,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f5c8a68ba18af8428b83425ebc8b08a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  group: intro_3
   autoPlay: 1
   autoPlayDelay: 0.35
   hideOnClick: {fileID: 0}
@@ -7363,6 +7381,11 @@ Prefab:
       propertyPath: m_AnchoredPosition.y
       value: 0.9999938
       objectReference: {fileID: 0}
+    - target: {fileID: 114062178262247504, guid: 14b1a158dea8e924aa0b6cd46c78a782,
+        type: 2}
+      propertyPath: group
+      value: intro_1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 14b1a158dea8e924aa0b6cd46c78a782, type: 2}
   m_IsPrefabParent: 0
@@ -7788,6 +7811,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f5c8a68ba18af8428b83425ebc8b08a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  group: intro_3
   autoPlay: 1
   autoPlayDelay: 1
   hideOnClick: {fileID: 0}
@@ -7914,6 +7938,11 @@ Prefab:
         type: 2}
       propertyPath: autoPlayDelay
       value: 2.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 114062178262247504, guid: 14b1a158dea8e924aa0b6cd46c78a782,
+        type: 2}
+      propertyPath: group
+      value: intro_3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 14b1a158dea8e924aa0b6cd46c78a782, type: 2}

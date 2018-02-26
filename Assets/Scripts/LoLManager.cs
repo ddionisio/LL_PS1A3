@@ -8,7 +8,7 @@ using fastJSON;
 using LoLSDK;
 
 public class LoLManager : M8.SingletonBehaviour<LoLManager> {
-    public const float musicVolumeDefault = 0.5f;
+    public const float musicVolumeDefault = 0.4f;
     public const float soundVolumeDefault = 0.6f;
     public const float fadeVolumeDefault = 0.2f;
 
@@ -52,6 +52,7 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
 
     public delegate void OnChanged(LoLManager mgr, int delta);
     public delegate void OnCallback(LoLManager mgr);
+    public delegate void OnSpeakCallback(LoLManager mgr, string key, string group);
 
     [SerializeField]
     string _gameID = "com.daviddionisio.LoLGame";
@@ -143,6 +144,7 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
     
     public event OnCallback progressCallback;
     public event OnCallback completeCallback;
+    public event OnSpeakCallback speakCallback;
 
     protected float mMusicVolume;
     protected float mSoundVolume;
@@ -191,9 +193,17 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
             mLastSoundBackgroundPath = null;
     }
 
-    public virtual void SpeakText(string key) {
-        if(!_ignorePlaySoundOnMute || mSoundVolume > 0f)
+    public virtual void SpeakText(string key, string group) {
+        if(!_ignorePlaySoundOnMute || mSoundVolume > 0f) {
             LOLSDK.Instance.SpeakText(key);
+
+            SpeakCalled(key, group);
+        }
+    }
+
+    protected void SpeakCalled(string key, string group) {
+        if(speakCallback != null)
+            speakCallback(this, key, group);
     }
 
     public virtual void StopCurrentBackgroundSound() {
@@ -385,6 +395,8 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
         }
 
         SetupVolumes();
+
+        yield return null;
 
         mIsReady = true;
     }

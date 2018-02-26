@@ -4882,7 +4882,7 @@ MonoBehaviour:
   - blockName: rubber
     amount: 4
     capacityAdd: 0
-  - blockName: iron
+  - blockName: aluminum
     amount: 6
     capacityAdd: 0
   _paletteDefaultPoolCapacity: 8

@@ -41,6 +41,16 @@ SpriteAtlas:
   - {fileID: 21300000, guid: ac6b31d6a88294d46b5ac225d99da8d0, type: 3}
   - {fileID: 21300000, guid: 025b63d56852a8144a57464a8d7d3c57, type: 3}
   - {fileID: 21300000, guid: dfd0e4481bd249e4bae826e1c3b82a4a, type: 3}
+  - {fileID: 21300000, guid: 3284a3550ffbe6045bb9d6fc09acf4fe, type: 3}
+  - {fileID: 21300000, guid: c8dfed2fc88c49447bff6ebd8e6b9a08, type: 3}
+  - {fileID: 21300000, guid: b074d81506fc7ef44b24c104df832344, type: 3}
+  - {fileID: 21300000, guid: 5de525e962771ab4db7227c923033e1f, type: 3}
+  - {fileID: 21300000, guid: ea2e4a65fdf204840b8a9a40e928d259, type: 3}
+  - {fileID: 21300000, guid: de32bcfbd05582d438de1776f4a3a89c, type: 3}
+  - {fileID: 21300000, guid: 705662546ce50234384bf648765d6455, type: 3}
+  - {fileID: 21300000, guid: 470ff700eca949f49ba3e9cf59cc3e89, type: 3}
+  - {fileID: 21300000, guid: 3fe8f8d1c79961d47ba51d655a6a27ea, type: 3}
+  - {fileID: 21300000, guid: d263badf6cde65644bf0fa3d1f819664, type: 3}
   m_PackedSpriteNamesToIndex:
   - hints_stage_1_2
   - hints_stage_3_2
@@ -50,5 +60,15 @@ SpriteAtlas:
   - hints_stage_2_1
   - hints_stage_2_2
   - wood
+  - corkwood
+  - aluminum
+  - rubber
+  - iron
+  - concrete
+  - icon_buoyancy_float
+  - icon_buoyancy_sink
+  - icon_flammability
+  - icon_bounce
+  - icon_electric
   m_Tag: hints_infos
   m_IsVariant: 0

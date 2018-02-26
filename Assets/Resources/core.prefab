@@ -379,5 +379,5 @@ MonoBehaviour:
   _pauseModal: pause
   _pauseModalPopOnResume: 1
   _useFadeMusicScale: 1
-  _fadeMusicScale: 1
+  _fadeMusicScale: 0.8
   _ignorePlaySoundOnMute: 1

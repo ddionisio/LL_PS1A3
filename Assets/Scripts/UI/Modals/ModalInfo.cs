@@ -10,6 +10,7 @@ public class ModalInfo : M8.UIModal.Controller, M8.UIModal.Interface.IPush, M8.U
     public Text titleLabel;
     public bool titleAutoSpeech = true;
     public float titleAutoSpeechDelay = 0.3f;
+    public string titleAutoSpeechGroup = "info_auto";
 
     [Header("Pages")]
     public Transform pagesRoot;
@@ -25,7 +26,7 @@ public class ModalInfo : M8.UIModal.Controller, M8.UIModal.Interface.IPush, M8.U
 
     public void PlayTitleSpeech() {
         if(!string.IsNullOrEmpty(mBlockTextRef))
-            LoLManager.instance.SpeakText(mBlockTextRef);
+            LoLManager.instance.SpeakText(mBlockTextRef, titleAutoSpeechGroup);
     }
 
     void OnApplicationFocus(bool focus) {

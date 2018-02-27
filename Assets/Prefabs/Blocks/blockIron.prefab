@@ -349,7 +349,7 @@ MonoBehaviour:
   amountCapacityPerMass: 2
   amountIsFixed: 0
   absorptionScale: 1
-  transferCap: 0.2
+  transferCap: 0.3
   transferScale: 0.25
   updateDelay: 0.2
   displays:

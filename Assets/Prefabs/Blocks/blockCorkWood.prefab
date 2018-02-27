@@ -357,17 +357,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   amountStart: 0
-  amountCapacityPerMass: 1
+  amountCapacityPerMass: 6
   amountIsFixed: 0
-  absorptionScale: 0.75
-  transferCap: 2
-  transferScale: 0.5
+  absorptionScale: 0.2
+  transferCap: 1
+  transferScale: 0.2
   updateDelay: 0.2
   displays:
-  - t: 0.6
+  - t: 0.7
     activeGO: {fileID: 1517397249771734}
     color: {r: 1, g: 0.83921576, b: 0.70980394, a: 1}
-  - t: 0.8
+  - t: 0.9
     activeGO: {fileID: 1126956526993658}
     color: {r: 0.627451, g: 0.15294118, b: 0.19607845, a: 1}
   - t: 1
@@ -7143,8 +7143,8 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 2016273273
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_RenderMode: 0
   m_SortMode: 0

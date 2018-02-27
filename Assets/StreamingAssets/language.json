@@ -114,7 +114,7 @@
 	"hint_stage_2_2_1": "Use light materials as a platform to cross the first windy field.\n\nBlock the second windy field with heavy materials to avoid certain doom.",
 	"hint_stage_3_1_1": "Make use of materials that can float on water as a platform to cross.\n\nPlacing solid matter into liquid matter adds to its volume. Make use of this fact to allow a platform to float higher.",
 	"hint_stage_3_2_1": "Same as before: make use of materials that can float on water as a platform to cross.\n\nUse materials that sink as a base support to reach higher ground.\n\nRubber has an elastic property that allows for powerful jumps.",
-	"hint_stage_4_1_1": "Iron has a good heat capacity to minimize the fiery temperature.\n\nPlace some iron blocks on top of the burning surface.\n\nThen place wood platforms on top of the iron blocks to cross to victory.",
+	"hint_stage_4_1_1": "Place some iron blocks on top of the hot surface to minimize the fiery temperature.\n\nThen place wooden platforms on top of the iron blocks to cross to victory.\n\nRemember that some wooden materials are more fire resistant than others.",
 	"hint_stage_5_1_1": "Find the material capable of conducting electricity, and use that as a wire for the wind machine.\n\nMake use of the other materials to block the electricity, and as a platform to reach the goal.",
 	
 	"wood_info_buoyancy": "Can float on water.",

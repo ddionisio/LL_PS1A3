@@ -182,7 +182,8 @@ public class TutorialPaletteDragToWorld : MonoBehaviour {
             arrowLine.position = mPointStartPos;
 
             var arrowLineSize = arrowLine.sizeDelta;
-            arrowLineSize.y = dist;
+            //HACK: need to properly scale size to ui world space
+            arrowLineSize.y = dist * (576f / Screen.height);
             arrowLine.sizeDelta = arrowLineSize;
 
             arrowLine.up = up;

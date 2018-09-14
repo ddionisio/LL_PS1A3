@@ -273,7 +273,8 @@ public class BlockMatterExpandPanel : MonoBehaviour, IBeginDragHandler, IDragHan
         var minScreenSpace = cam.WorldToScreenPoint(blockBounds.min);
         var maxScreenSpace = cam.WorldToScreenPoint(blockBounds.max);
 
-        mTrans.sizeDelta = new Vector2(Mathf.Abs(maxScreenSpace.x - minScreenSpace.x), Mathf.Abs(maxScreenSpace.y - minScreenSpace.y));
+        //HACK: need to properly scale size to ui world space
+        mTrans.sizeDelta = new Vector2(Mathf.Abs(maxScreenSpace.x - minScreenSpace.x) * (576f / Screen.height), Mathf.Abs(maxScreenSpace.y - minScreenSpace.y) * (576f / Screen.height));
 
         mWorldAttach.position = blockBounds.center;
 

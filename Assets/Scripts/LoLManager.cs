@@ -351,7 +351,7 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
         Application.runInBackground = false;
 
         // Create the WebGL (or mock) object
-#if UNITY_EDITOR
+#if UNITY_EDITOR || UNITY_ANDROID
         ILOLSDK webGL = new LoLSDK.MockWebGL();
 #elif UNITY_WEBGL
 		ILOLSDK webGL = new LoLSDK.WebGL();

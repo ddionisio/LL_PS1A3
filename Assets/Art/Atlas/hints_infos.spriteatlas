@@ -3,10 +3,11 @@
 --- !u!687078895 &4343727234628468602
 SpriteAtlas:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: hints_infos
   m_EditorData:
+    serializedVersion: 2
     textureSettings:
       serializedVersion: 2
       anisoLevel: 1
@@ -18,8 +19,19 @@ SpriteAtlas:
       readable: 0
       crunchedCompression: 0
       sRGB: 1
-    platformSettings: []
-    packingParameters:
+    platformSettings:
+    - serializedVersion: 2
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 2048
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 2
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+    packingSettings:
       serializedVersion: 2
       padding: 4
       blockOffset: 1
@@ -33,42 +45,42 @@ SpriteAtlas:
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
-  - {fileID: 21300000, guid: d7ce214929ff337488beec64b0c3433a, type: 3}
-  - {fileID: 21300000, guid: 17b6d729f1fc5cf438d6e745fb43c4b6, type: 3}
-  - {fileID: 21300000, guid: 80df98e22d977544a92d802cd5a1bce9, type: 3}
-  - {fileID: 21300000, guid: 95bb9b5b77d6eed44ba1527e68d6fe1c, type: 3}
-  - {fileID: 21300000, guid: 3cacc8c8525d1fb4c8c075a75111e9be, type: 3}
-  - {fileID: 21300000, guid: ac6b31d6a88294d46b5ac225d99da8d0, type: 3}
-  - {fileID: 21300000, guid: 025b63d56852a8144a57464a8d7d3c57, type: 3}
-  - {fileID: 21300000, guid: dfd0e4481bd249e4bae826e1c3b82a4a, type: 3}
-  - {fileID: 21300000, guid: 3284a3550ffbe6045bb9d6fc09acf4fe, type: 3}
-  - {fileID: 21300000, guid: c8dfed2fc88c49447bff6ebd8e6b9a08, type: 3}
-  - {fileID: 21300000, guid: b074d81506fc7ef44b24c104df832344, type: 3}
-  - {fileID: 21300000, guid: 5de525e962771ab4db7227c923033e1f, type: 3}
-  - {fileID: 21300000, guid: ea2e4a65fdf204840b8a9a40e928d259, type: 3}
-  - {fileID: 21300000, guid: de32bcfbd05582d438de1776f4a3a89c, type: 3}
-  - {fileID: 21300000, guid: 705662546ce50234384bf648765d6455, type: 3}
   - {fileID: 21300000, guid: 470ff700eca949f49ba3e9cf59cc3e89, type: 3}
   - {fileID: 21300000, guid: 3fe8f8d1c79961d47ba51d655a6a27ea, type: 3}
+  - {fileID: 21300000, guid: 80df98e22d977544a92d802cd5a1bce9, type: 3}
+  - {fileID: 21300000, guid: 705662546ce50234384bf648765d6455, type: 3}
+  - {fileID: 21300000, guid: b074d81506fc7ef44b24c104df832344, type: 3}
+  - {fileID: 21300000, guid: 3284a3550ffbe6045bb9d6fc09acf4fe, type: 3}
+  - {fileID: 21300000, guid: ea2e4a65fdf204840b8a9a40e928d259, type: 3}
+  - {fileID: 21300000, guid: 025b63d56852a8144a57464a8d7d3c57, type: 3}
+  - {fileID: 21300000, guid: ac6b31d6a88294d46b5ac225d99da8d0, type: 3}
+  - {fileID: 21300000, guid: dfd0e4481bd249e4bae826e1c3b82a4a, type: 3}
+  - {fileID: 21300000, guid: 3cacc8c8525d1fb4c8c075a75111e9be, type: 3}
+  - {fileID: 21300000, guid: 17b6d729f1fc5cf438d6e745fb43c4b6, type: 3}
+  - {fileID: 21300000, guid: d7ce214929ff337488beec64b0c3433a, type: 3}
+  - {fileID: 21300000, guid: 5de525e962771ab4db7227c923033e1f, type: 3}
+  - {fileID: 21300000, guid: 95bb9b5b77d6eed44ba1527e68d6fe1c, type: 3}
+  - {fileID: 21300000, guid: de32bcfbd05582d438de1776f4a3a89c, type: 3}
+  - {fileID: 21300000, guid: c8dfed2fc88c49447bff6ebd8e6b9a08, type: 3}
   - {fileID: 21300000, guid: d263badf6cde65644bf0fa3d1f819664, type: 3}
   m_PackedSpriteNamesToIndex:
-  - hints_stage_4_1
-  - hints_stage_1_2
-  - hints_stage_3_2
-  - hints_stage_3_1
-  - hints_stage_5_1
-  - hints_stage_2_1
-  - hints_stage_2_2
-  - wood
-  - corkwood
-  - aluminum
-  - rubber
-  - iron
-  - concrete
-  - icon_buoyancy_float
-  - icon_buoyancy_sink
   - icon_flammability
   - icon_bounce
+  - hints_stage_3_2
+  - icon_buoyancy_sink
+  - rubber
+  - corkwood
+  - concrete
+  - hints_stage_2_2
+  - hints_stage_2_1
+  - wood
+  - hints_stage_5_1
+  - hints_stage_1_2
+  - hints_stage_4_1
+  - iron
+  - hints_stage_3_1
+  - icon_buoyancy_float
+  - aluminum
   - icon_electric
   m_Tag: hints_infos
   m_IsVariant: 0

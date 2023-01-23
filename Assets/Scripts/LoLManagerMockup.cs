@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-using fastJSON;
-
 public class LoLManagerMockup : LoLManager {
     [Header("Mockup")]
     public GameObject audioRoot;
@@ -97,8 +95,8 @@ public class LoLManagerMockup : LoLManager {
         if(localizeText) {
             string json = localizeText.text;
 
-            Dictionary<string, object> langDefs = JSON.Parse(json) as Dictionary<string, object>;
-            ParseLanguage(JSON.ToJSON(langDefs[mLangCode]));
+            Dictionary<string, object> langDefs = MiniJSON.Json.Deserialize(json) as Dictionary<string, object>;
+            ParseLanguage(MiniJSON.Json.Serialize(langDefs[mLangCode]));
         }
 
         //ParseGameStart("");

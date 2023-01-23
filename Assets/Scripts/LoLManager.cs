@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-using fastJSON;
-
 using LoLSDK;
 
 public class LoLManager : M8.SingletonBehaviour<LoLManager> {
@@ -403,7 +401,7 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
 
     protected void ParseGameStart(string json) {
         //TODO: this is giving out an error in Test Harness, will uncomment later if it finally works
-        Dictionary<string, object> startGamePayload = JSON.Parse(json) as Dictionary<string, object>;
+        Dictionary<string, object> startGamePayload = MiniJSON.Json.Deserialize(json) as Dictionary<string, object>;
 
         // Capture the language code from the start payload. Use this to switch fonts
         object languageCodeObj;
@@ -517,8 +515,8 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
         if(File.Exists(langFilePath)) {
             string json = File.ReadAllText(langFilePath);
 
-            Dictionary<string, object> langDefs = JSON.Parse(json) as Dictionary<string, object>;
-            mLanguageJson = JSON.ToJSON(langDefs[mLangCode]);
+            Dictionary<string, object> langDefs = MiniJSON.Json.Deserialize(json) as Dictionary<string, object>;
+            mLanguageJson = MiniJSON.Json.Serialize(langDefs[mLangCode]);
         }
         else
             mLanguageJson = "";

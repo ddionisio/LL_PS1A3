@@ -1,3 +1,13 @@
 Mighty Chin Chin and the Properties of Matter
 
 The Mighty Chin Chin needs your help!  By mastering the properties of matter, you shall be the guiding hand that topples the mightiest of trials that impede our intrepid hero.  Go forth with the Mighty Chin Chin on this great adventure, and Godspeed!
+
+Controls:
+Use the touchpad or mouse for interactions.
+
+To drag/drop an item – press and hold the item of interest using the touchpad or mouse. While pressing, slide towards where you want to drop the item, and then release the touchpad or mouse left button.
+
+Hints:
+The game encourages students to experiment with different matters by observing their behavior in a simulated space. 
+
+If a level appears to be too difficult, a hint system will eventually appear to help solve the puzzle.

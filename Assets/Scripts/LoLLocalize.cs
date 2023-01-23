@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using M8;
 using UnityEngine;
-using fastJSON;
 
 public class LoLLocalize : Localize {
     public static new LoLLocalize instance {
@@ -52,7 +51,7 @@ public class LoLLocalize : Localize {
 
         Dictionary<string, object> defs;
         if(!string.IsNullOrEmpty(json)) {
-            defs = JSON.Parse(json) as Dictionary<string, object>;
+            defs = MiniJSON.Json.Deserialize(json) as Dictionary<string, object>;
         }
         else
             defs = new Dictionary<string, object>();
@@ -142,9 +141,9 @@ public class LoLLocalize : Localize {
 
         string json = System.IO.File.ReadAllText(filepath);
 
-        var defs = JSON.Parse(json) as Dictionary<string, object>;
+        var defs = MiniJSON.Json.Deserialize(json) as Dictionary<string, object>;
 
-        Load(debugLanguageCode, JSON.ToJSON(defs[debugLanguageCode]));
+        Load(debugLanguageCode, MiniJSON.Json.Serialize(defs[debugLanguageCode]));
     }
 #endif
 }
